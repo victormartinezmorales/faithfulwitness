@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/send-email.js": {
+      "maxDuration": 30
+    },
+    "api/submit.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ]
+}

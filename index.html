@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faithful Witness – Discernment Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #2D3A6B;
+    --navy-light: #3d4e8a;
+    --navy-dark: #1e2748;
+    --gold: #B8942A;
+    --gold-light: #d4ab3a;
+    --gold-pale: #f7f0dc;
+    --gold-bg: #fdf8ee;
+    --cream: #faf8f4;
+    --warm-white: #ffffff;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #7a7a9a;
+    --border: #e8e4f0;
+    --border-light: #f0edf8;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --shadow: 0 4px 24px rgba(45,58,107,0.10);
+    --shadow-sm: 0 2px 8px rgba(45,58,107,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 36px;
+    height: 36px;
+  }
+  .nav-title {
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .nav-title span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .nav-coalition {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ─── SCREENS ─── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ─── WELCOME ─── */
+  .welcome-hero {
+    background: var(--navy);
+    padding: 4rem 1.5rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .welcome-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(184,148,42,0.12);
+  }
+  .welcome-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 0.85rem 2.2rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+    padding: 0.75rem 1.8rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--navy); color: #fff; }
+
+  .welcome-cards {
+    padding: 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .what-you-gain-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .what-you-gain-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+  .gain-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+  }
+  .gain-title {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+  }
+  .gain-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; }
+
+  .welcome-journey {
+    background: var(--warm-white);
+    margin: 0 1.5rem 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .journey-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .journey-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+  @media (max-width: 600px) {
+    .journey-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  .journey-step {
+    background: var(--cream);
+    border-radius: var(--radius);
+    padding: 0.85rem 0.75rem;
+    text-align: center;
+  }
+  .journey-step.active-step { background: var(--navy); }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem;
+  }
+  .journey-step.active-step .step-num { background: var(--gold); }
+  .step-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    line-height: 1.3;
+  }
+  .journey-step.active-step .step-name { color: rgba(255,255,255,0.9); }
+
+  .welcome-cta {
+    text-align: center;
+    padding: 1.5rem 1.5rem 3rem;
+  }
+  .time-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+  }
+
+  /* ─── ASSESSMENT ─── */
+  .assessment-header {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+  }
+  .progress-bar-wrap {
+    height: 4px;
+    background: var(--border-light);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .section-chip {
+    display: inline-block;
+    background: var(--gold-bg);
+    color: var(--gold);
+    border: 1px solid #e8d09a;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 50px;
+  }
+
+  .q-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 1.5rem;
+  }
+  .q-section-header {
+    margin-bottom: 1.75rem;
+  }
+  .q-section-title {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    color: var(--navy);
+    margin: 0.5rem 0 0.4rem;
+    line-height: 1.3;
+  }
+  .q-section-desc { font-size: 0.9rem; color: var(--text-secondary); }
+
+  .question-block {
+    margin-bottom: 2rem;
+  }
+  .q-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .q-sub { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; display: block; margin-top: 3px; }
+
+  .options-grid {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .option-btn {
+    background: var(--warm-white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.85rem 1.1rem;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: all 0.18s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.45;
+  }
+  .option-btn:hover {
+    border-color: var(--gold-light);
+    background: var(--gold-bg);
+    color: var(--text-primary);
+  }
+  .option-btn.selected {
+    border-color: var(--navy);
+    background: #f0f2f9;
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .option-btn.selected .opt-dot {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .opt-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .opt-dot::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .option-btn.selected .opt-dot::after { opacity: 1; }
+
+  .scale-options {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .scale-btn {
+    flex: 1;
+    background: var(--warm-white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem 0.4rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-align: center;
+    transition: all 0.18s;
+    line-height: 1.3;
+  }
+  .scale-btn:hover { border-color: var(--gold-light); color: var(--text-primary); }
+  .scale-btn.selected {
+    border-color: var(--navy);
+    background: #f0f2f9;
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    padding: 0 2px;
+  }
+
+  .multi-options { display: grid; gap: 0.5rem; }
+  .multi-btn {
+    background: var(--warm-white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .multi-btn:hover { border-color: var(--gold-light); background: var(--gold-bg); }
+  .multi-btn.selected {
+    border-color: var(--navy);
+    background: #f0f2f9;
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .check-box {
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .multi-btn.selected .check-box {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .check-box::after {
+    content: '';
+    width: 9px; height: 5px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg) translate(1px, -1px);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .multi-btn.selected .check-box::after { opacity: 1; }
+
+  .nav-buttons {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--warm-white);
+    border-top: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 50;
+  }
+  .btn-back {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-back:hover { border-color: var(--navy); color: var(--navy); }
+  .btn-next {
+    flex: 1;
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    padding: 0.85rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-next:hover { background: var(--navy-light); }
+  .btn-next:disabled {
+    background: var(--border);
+    color: var(--text-muted);
+    cursor: not-allowed;
+  }
+
+  /* ─── LOADING ─── */
+  #screen-loading {
+    min-height: 60vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  #screen-loading.active { display: flex; }
+  .loading-icon {
+    width: 64px; height: 64px;
+    border: 3px solid var(--border-light);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-title {
+    font-family: 'Lora', serif;
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .loading-steps {
+    list-style: none;
+    margin-top: 1.25rem;
+    text-align: left;
+    display: inline-block;
+  }
+  .loading-steps li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .loading-steps li.done { color: var(--gold); }
+  .loading-steps li.done::before { content: '✓'; font-weight: 600; }
+  .loading-steps li:not(.done)::before { content: '·'; font-size: 1.4rem; line-height: 0; margin-top: 2px; }
+
+  /* ─── RESULTS ─── */
+  .results-hero {
+    background: var(--navy);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+  .profile-badge {
+    display: inline-block;
+    background: rgba(184,148,42,0.2);
+    border: 1px solid rgba(184,148,42,0.4);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 50px;
+    margin-bottom: 0.75rem;
+  }
+  .results-name {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    color: #fff;
+    margin-bottom: 0.35rem;
+  }
+  .results-tagline {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .results-body {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 1.75rem 1.5rem 3rem;
+  }
+
+  .narrative-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .narrative-card::before {
+    content: '"';
+    position: absolute;
+    top: -12px; left: 20px;
+    font-family: 'Lora', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.25;
+  }
+  .narrative-text {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    font-style: italic;
+  }
+  .narrative-text p { margin-bottom: 1rem; }
+  .narrative-text p:last-child { margin-bottom: 0; }
+  .narrative-source {
+    margin-top: 1rem;
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .one-on-one-card {
+    background: var(--warm-white);
+    border: 1.5px solid var(--gold);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+  .one-on-one-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--gold-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .one-on-one-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 3px;
+  }
+  .one-on-one-title {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+    line-height: 1.35;
+  }
+  .one-on-one-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.85rem;
+  }
+  .one-on-one-secondary {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+  }
+
+  .dimension-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (max-width: 400px) {
+    .dimension-grid { grid-template-columns: 1fr; }
+  }
+  .dim-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+  }
+  .dim-name {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+  .dim-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .dim-bar-wrap {
+    height: 4px;
+    background: var(--border-light);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+  }
+  .dim-bar {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .section-title-sm {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .resource-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    text-decoration: none;
+    transition: box-shadow 0.18s, border-color 0.18s;
+    cursor: pointer;
+  }
+  .resource-card:hover {
+    border-color: var(--gold-light);
+    box-shadow: var(--shadow-sm);
+  }
+  .resource-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--gold-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .resource-type {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+  .resource-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .resource-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .resource-org {
+    font-size: 11px;
+    color: var(--navy);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  .next-step-card {
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+  .next-step-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.75rem;
+  }
+  .next-step-title {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+  .next-step-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+  .btn-gold {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.75rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  /* ─── STAGE SHELLS ─── */
+  .stage-shell {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+  }
+  .stage-hero-banner {
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+  .stage-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+  .stage-name {
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .stage-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+  .coming-soon-card {
+    background: var(--warm-white);
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .cs-icon {
+    width: 52px; height: 52px;
+    background: var(--gold-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 22px;
+  }
+  .cs-title {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .cs-desc { font-size: 0.9rem; color: var(--text-secondary); max-width: 360px; margin: 0 auto; }
+
+  .preview-modules {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .module-preview {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0.6;
+  }
+  .module-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .module-info { flex: 1; }
+  .module-name { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); }
+  .module-sub { font-size: 0.8rem; color: var(--text-muted); }
+  .module-lock {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Stage nav bar */
+  .stage-tab-bar {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    overflow-x: auto;
+    padding: 0 1rem;
+    gap: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .stage-tab-bar::-webkit-scrollbar { display: none; }
+  .stage-tab {
+    padding: 1rem 1.1rem;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2.5px solid transparent;
+    white-space: nowrap;
+    transition: all 0.18s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .stage-tab:hover { color: var(--navy); }
+  .stage-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .stage-tab.completed { color: var(--gold); }
+
+  .inline-block { display: inline-block; }
+  .text-center { text-align: center; }
+  .mt-1 { margin-top: 0.75rem; }
+  .mb-1 { margin-bottom: 0.75rem; }
+
+  /* error */
+  .error-note {
+    background: #fff5f5;
+    border: 1px solid #ffc9c9;
+    color: #c0392b;
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+    font-size: 0.88rem;
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#" onclick="goToScreen('welcome')">
+    <img src="https://faithfulwitness.us/wp-content/themes/faithful-witness-child/assets/images/logo-nav.png" 
+         alt="Faithful Witness Campaign" 
+         style="height:36px; width:auto;">
+    <div class="nav-title">
+      Faithful Witness
+      <span>Campaign</span>
+    </div>
+  </a>
+  <div class="nav-coalition" id="nav-coalition">CCDA · NaLEC · World Relief · Undivided</div>
+</nav>
+
+<!-- STAGE TAB BAR (hidden initially) -->
+<div class="stage-tab-bar" id="stage-tabs" style="display:none">
+  <button class="stage-tab active" onclick="showStage(1)" id="tab-1">1. Assessment</button>
+  <button class="stage-tab" onclick="showStage(2)" id="tab-2">2. Formation</button>
+  <button class="stage-tab" onclick="showStage(3)" id="tab-3">3. Discernment</button>
+  <button class="stage-tab" onclick="showStage(4)" id="tab-4">4. Next Steps</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN: WELCOME
+══════════════════════════════════════════ -->
+<div id="screen-welcome" class="screen active">
+  <div class="welcome-hero">
+    <div class="hero-eyebrow">The Faithful Witness Discernment Experience</div>
+    <h1 class="hero-title">Discover Your Faithful<br>Response to Immigration</h1>
+    <p class="hero-sub">A guided, prayerful journey to help you discern how God may be inviting you to respond—based on your story, your context, and your calling.</p>
+    <button class="btn-primary" onclick="goToScreen('assessment')">Begin the Journey</button>
+    <p class="time-note">About 8–10 minutes · Personalized to you</p>
+  </div>
+
+  <div class="welcome-cards">
+    <div class="what-you-gain-card">
+      <div class="gain-label">Clarity</div>
+      <div class="gain-title">Grounded Understanding</div>
+      <div class="gain-desc">Move beyond headlines and assumptions toward something deeper and more faithful.</div>
+    </div>
+    <div class="what-you-gain-card">
+      <div class="gain-label">Conviction</div>
+      <div class="gain-title">Rooted in Scripture</div>
+      <div class="gain-desc">A response shaped by the way of Jesus—not reaction, but thoughtful reflection.</div>
+    </div>
+    <div class="what-you-gain-card">
+      <div class="gain-label">Direction</div>
+      <div class="gain-title">Personal Calling</div>
+      <div class="gain-desc">Discover how you are uniquely wired to engage based on your gifts and context.</div>
+    </div>
+    <div class="what-you-gain-card">
+      <div class="gain-label">Action</div>
+      <div class="gain-title">Concrete Next Steps</div>
+      <div class="gain-desc">Leave with specific, realistic steps you can take immediately and sustainably.</div>
+    </div>
+  </div>
+
+  <div class="welcome-journey" style="margin: 0 1.5rem 1.5rem; max-width: 860px; margin-left: auto; margin-right: auto;">
+    <div class="journey-label">Your Journey — Four Stages</div>
+    <div class="journey-steps">
+      <div class="journey-step active-step">
+        <div class="step-num">1</div>
+        <div class="step-name">Reflection &amp; Assessment</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">2</div>
+        <div class="step-name">Guided Formation</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">3</div>
+        <div class="step-name">Discernment</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">4</div>
+        <div class="step-name">Personalized Next Steps</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="welcome-cta">
+    <button class="btn-primary" onclick="goToScreen('assessment')">Begin the Journey →</button>
+    <p class="time-note">No account required · Your responses are private</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN: ASSESSMENT
+══════════════════════════════════════════ -->
+<div id="screen-assessment" class="screen">
+  <div class="assessment-header">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width: 6%"></div>
+    </div>
+    <div class="progress-meta">
+      <span id="progress-label">Section 1 of 8</span>
+      <span id="progress-pct">6%</span>
+    </div>
+  </div>
+
+  <div class="q-container">
+    <!-- SECTION 0: Intro / Name -->
+    <div id="section-0" class="q-section">
+      <div class="q-section-header">
+        <div class="section-chip">Welcome</div>
+        <h2 class="q-section-title">Let's begin with a moment of reflection.</h2>
+        <p class="q-section-desc">This experience is not a test. There are no right or wrong answers—only honest ones. Take a breath, and answer as you truly are today.</p>
+      </div>
+      <div class="question-block">
+        <label class="q-label" for="q-name">What's your first name? <span class="q-sub">So we can personalize your experience.</span></label>
+        <input type="text" id="q-name" placeholder="Your first name" style="width:100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; color: var(--text-primary); background: var(--warm-white);">
+      </div>
+    </div>
+
+    <!-- SECTION 1: Exposure -->
+    <div id="section-1" class="q-section" style="display:none">
+      <div class="q-section-header">
+        <div class="section-chip">Exposure</div>
+        <h2 class="q-section-title">Your real-life connection to immigration</h2>
+        <p class="q-section-desc">Personal experience shapes how we understand and engage with any issue.</p>
+      </div>
+      <div class="question-block">
+        <div class="q-label">How would you describe your personal experience with immigrants or immigration?</div>
+        <div class="options-grid" id="q-exposure">
+          <button class="option-btn" data-val="none" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I have had little to no direct interaction with immigrants</button>
+          <button class="option-btn" data-val="indirect" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I've had some indirect exposure—through news, church, or community—but limited personal connection</button>
+          <button class="option-btn" data-val="relational" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I have meaningful relationships with immigrants in my life</button>
+          <button class="option-btn" data-val="deep" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I am regularly involved with immigrant communities through work, ministry, or relationships</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Understanding -->
+    <div id="section-2" class="q-section" style="display:none">
+      <div class="q-section-header">
+        <div class="section-chip">Understanding</div>
+        <h2 class="q-section-title">Your sense of knowledge and clarity</h2>
+        <p class="q-section-desc">Be honest with yourself—this helps us meet you where you are.</p>
+      </div>
+      <div class="question-block">
+        <div class="q-label">How informed do you feel about immigration as an issue—its realities, complexities, and human dimensions?</div>
+        <div class="scale-options" id="q-understanding">
+          <button class="scale-btn" data-val="1" onclick="selectScale(this,'q-understanding')">Not very<br>informed</button>
+          <button class="scale-btn" data-val="2" onclick="selectScale(this,'q-understanding')">Slightly<br>informed</button>
+          <button class="scale-btn" data-val="3" onclick="selectScale(this,'q-understanding')">Somewhat<br>informed</button>
+          <button class="scale-btn" data-val="4" onclick="selectScale(this,'q-understanding')">Fairly<br>informed</button>
+          <button class="scale-btn" data-val="5" onclick="selectScale(this,'q-understanding')">Very<br>informed</button>
+        </div>
+      </div>
+      <div class="question-block" style="margin-top: 1.5rem">
+        <div class="q-label">How confident do you feel that your understanding is accurate and complete?</div>
+        <div class="scale-options" id="q-confidence">
+          <button class="scale-btn" data-val="1" onclick="selectScale(this,'q-confidence')">Not at all<br>confident</button>
+          <button class="scale-btn" data-val="2" onclick="selectScale(this,'q-confidence')">Slightly<br>confident</button>
+          <button class="scale-btn" data-val="3" onclick="selectScale(this,'q-confidence')">Somewhat<br>confident</button>
+          <button class="scale-btn" data-val="4" onclick="selectScale(this,'q-confidence')">Fairly<br>confident</button>
+          <button class="scale-btn" data-val="5" onclick="selectScale(this,'q-confidence')">Very<br>confident</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Perspective -->
+    <div id="section-3" class="q-section" style="display:none">
+      <div class="q-section-header">
+        <div class="section-chip">Perspective</div>
+        <h2 class="q-section-title">How you currently think about immigration</h2>
+        <p class="q-section-desc">There's no "correct" view here. We want to understand where you genuinely are.</p>
+      </div>
+      <div class="question-block">
+        <div class="q-label">When you think about immigration, which of the following best describes your perspective?</div>
+        <div class="options-grid" id="q-perspective">
+          <button class="option-btn" data-val="order" onclick="selectOption(this,'q-perspective')"><div class="opt-dot"></div>I tend to emphasize the importance of order, rule of law, and national security</button>
+          <button class="option-btn" data-val="compassion" onclick="selectOption(this,'q-perspective')"><div class="opt-dot"></div>I tend to emphasize compassion, hospitality, and the dignity of every person</button>
+          <button class="option-btn" data-val="tension" onclick="selectOption(this,'q-perspective')"><div class="opt-dot"></div>I feel the tension between both—and I'm not sure how to hold them together</button>
+          <button class="option-btn" data-val="unformed" onclick="selectOption(this,'q-perspective')"><div class="opt-dot"></div>I'm honestly not sure—I haven't formed a clear perspective yet</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Posture -->
+    <div id="section-4" class="q-section" style="display:none">
+      <div class="q-section-header">
+        <div class="section-chip">Posture</div>
+        <h2 class="q-section-title">Your openness to engaging this topic</h2>
+        <p class="q-section-desc">Honest self-awareness here is a gift to your own growth.</p>
+      </div>
+      <div class="question-block">
+        <div class="q-label">How open do you feel to exploring immigration as a matter of Christian discipleship?</div>
+        <div class="options-grid" id="q-posture">
+          <button class="option-btn" data-val="resistant" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>Honestly, I feel some resistance—this topic feels divisive or uncomfortable to me</button>
+          <button class="option-btn" data-val="cautious" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm cautious—I want to engage but I'm not sure where this might lead</button>
+          <button class="option-btn" data-val="open" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm genuinely open—I want to understand what faithful engagement looks like</button>
+          <button class="option-btn" data-val="eager" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm eager—this matters deeply to me and I want to go deeper</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: Readiness -->
+    <div id="section-5" class="q-section" style="display:none">
+      <div class="q-section-header">
+        <div class="section-chip">Readiness</div>
+        <h2 class="q-section-title">Where you are in your engagement journey</h2>
+        <p class="q-section-desc">Everyone starts somewhere. What matters is taking the next faithful step from where you are.</p>
+      </div>
+      <div class="question-block">
+        <div class="q-label">Which best describes where you are in responding to immigration right now?</div>
+        <div class="options-grid" id="q-readiness">
+          <button class="option-btn" data-val="exploring" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm exploring—I'm still learning and figuring out what I think</button>
+          <button class="option-btn" data-val="considering" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm considering—I care about this but haven't taken concrete steps yet</button>
+          <button class="option-btn" data-val="ready" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm ready—I want to act but I need clarity on what to do</button>
+          <button class="option-btn" data-val="active" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm already active—I'm engaged but want to grow in depth and faithfulness</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: Motivation + Gifting -->
+    <div id="section-6" class="q-section" style="display:none">
+      <div class="q-section-header">
+        <div class="section-chip">Motivation &amp; Gifting</div>
+        <h2 class="q-section-title">What drives you and how you're wired</h2>
+        <p class="q-section-desc">Your unique combination of motivation and gifts shapes the most meaningful path forward.</p>
+      </div>
+      <div class="question-block">
+        <div class="q-label">What most drives your interest in engaging with immigration? <span class="q-sub">Choose all that apply.</span></div>
+        <div class="multi-options" id="q-motivation">
+          <button class="multi-btn" data-val="faith" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>My faith—I believe following Jesus calls me to care about this</button>
+          <button class="multi-btn" data-val="compassion" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Compassion—I feel moved by the suffering and stories I've encountered</button>
+          <button class="multi-btn" data-val="justice" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Justice—I want to address systems and policies that cause harm</button>
+          <button class="multi-btn" data-val="community" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Community—people in my church or neighborhood are directly affected</button>
+          <button class="multi-btn" data-val="curiosity" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Curiosity—I want to understand this better before I know how I feel</button>
+        </div>
+      </div>
+      <div class="question-block" style="margin-top:1.5rem">
+        <div class="q-label">How are you most naturally wired to respond to things you care about? <span class="q-sub">Choose your top 1–2.</span></div>
+        <div class="multi-options" id="q-gifting">
+          <button class="multi-btn" data-val="relational" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Relationally—I build relationships and show up personally for people</button>
+          <button class="multi-btn" data-val="service" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Practically—I like to serve, help, and meet tangible needs</button>
+          <button class="multi-btn" data-val="advocacy" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Through advocacy—I speak up, write, and engage public conversation</button>
+          <button class="multi-btn" data-val="leadership" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Through leading—I organize, build teams, and develop initiatives</button>
+          <button class="multi-btn" data-val="learning" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Through learning and teaching—I go deep and help others understand</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 7: Context -->
+    <div id="section-7" class="q-section" style="display:none">
+      <div class="q-section-header">
+        <div class="section-chip">Your Context</div>
+        <h2 class="q-section-title">A little about your community and background</h2>
+        <p class="q-section-desc">This helps us understand patterns and connect you to relevant opportunities. All optional.</p>
+      </div>
+      <div class="question-block">
+        <div class="q-label">What type of church or faith community are you part of?</div>
+        <div class="options-grid" id="q-church-type">
+          <button class="option-btn" data-val="suburban" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Suburban church</button>
+          <button class="option-btn" data-val="urban" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Urban church</button>
+          <button class="option-btn" data-val="rural" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Rural church</button>
+          <button class="option-btn" data-val="multisite" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Multi-site or regional church</button>
+          <button class="option-btn" data-val="none" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Not currently connected to a church</button>
+        </div>
+      </div>
+      <!-- region question removed — zip code captures this on the email screen -->
+      <div class="question-block" style="margin-top:1.5rem">
+        <div class="q-label">Do you have a personal connection to immigration?</div>
+        <div class="options-grid" id="q-immig-connection">
+          <button class="option-btn" data-val="immigrant" onclick="selectOption(this,'q-immig-connection')"><div class="opt-dot"></div>I am an immigrant or have been a refugee</button>
+          <button class="option-btn" data-val="family" onclick="selectOption(this,'q-immig-connection')"><div class="opt-dot"></div>My family immigrated to this country</button>
+          <button class="option-btn" data-val="none" onclick="selectOption(this,'q-immig-connection')"><div class="opt-dot"></div>No direct personal connection</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /q-container -->
+
+  <div class="nav-buttons">
+    <button class="btn-back" id="btn-back" onclick="prevSection()" style="display:none">Back</button>
+    <button class="btn-next" id="btn-next" onclick="nextSection()">Continue →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN: EMAIL CAPTURE
+══════════════════════════════════════════ -->
+<div id="screen-email" class="screen">
+  <div style="max-width:520px; margin:0 auto; padding:2.5rem 1.5rem 3rem;">
+
+    <div style="text-align:center; margin-bottom:2rem;">
+      <div style="width:56px;height:56px;border-radius:50%;background:var(--gold-bg);border:1.5px solid #e8d09a;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 1rem;">✉️</div>
+      <h2 style="font-family:'Lora',serif;font-size:1.5rem;color:var(--navy);margin-bottom:0.5rem;line-height:1.3;">We'd love to send you your results</h2>
+      <p style="font-size:0.92rem;color:var(--text-secondary);max-width:380px;margin:0 auto;line-height:1.65;">Your personal reflection, profile, and curated resources — delivered to your inbox so you can return to them anytime.</p>
+    </div>
+
+    <div style="background:var(--warm-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;">
+
+      <div style="margin-bottom:1.25rem;">
+        <label style="display:block;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">First name</label>
+        <input type="text" id="email-name" placeholder="Your first name" style="width:100%;padding:0.8rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text-primary);background:var(--cream);outline:none;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+
+      <div style="margin-bottom:1.25rem;">
+        <label style="display:block;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">Email address <span style="color:var(--gold)">*</span></label>
+        <input type="email" id="email-address" placeholder="you@example.com" style="width:100%;padding:0.8rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text-primary);background:var(--warm-white);outline:none;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:block;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">Zip code <span style="font-size:12px;font-weight:400;color:var(--text-muted)">(helps us connect you to local opportunities)</span></label>
+        <input type="text" id="email-zip" placeholder="e.g. 45202" maxlength="5" style="width:100%;padding:0.8rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text-primary);background:var(--cream);outline:none;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+
+      <div style="background:var(--gold-bg);border:1.5px solid #e8d09a;border-radius:var(--radius);padding:1rem 1.1rem;margin-bottom:1.5rem;cursor:pointer;" id="next-step-toggle" onclick="toggleNextStep()">
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <div id="next-step-check" style="width:20px;height:20px;border-radius:5px;border:2px solid var(--gold);background:transparent;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.18s;"></div>
+          <div>
+            <div style="font-size:0.92rem;font-weight:500;color:var(--navy);line-height:1.35;margin-bottom:2px;">I'm ready to take my next step</div>
+            <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.5;">A Faithful Witness guide will reach out to help me move forward with clarity and support.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#eef1fb;border:1.5px solid #c5cdf0;border-radius:var(--radius);padding:1rem 1.1rem;margin-bottom:1.25rem;cursor:pointer;" id="campaign-toggle" onclick="toggleCampaign()">
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <div id="campaign-check" style="width:20px;height:20px;border-radius:5px;border:2px solid var(--navy);background:transparent;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.18s;"></div>
+          <div>
+            <div style="font-size:0.92rem;font-weight:500;color:var(--navy);line-height:1.35;margin-bottom:2px;">Keep me informed about Faithful Witness resources and opportunities</div>
+            <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.5;">I'd like to receive occasional updates, resources, and next steps from the Faithful Witness Campaign.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="email-error" style="display:none;background:#fff5f5;border:1px solid #ffc9c9;color:#c0392b;border-radius:var(--radius);padding:0.75rem 1rem;font-size:0.85rem;margin-bottom:1rem;">Please enter a valid email address to continue.</div>
+
+      <button onclick="submitEmail()" style="width:100%;background:var(--navy);color:#fff;border:none;padding:0.9rem;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--navy-light)'" onmouseout="this.style.background='var(--navy)'">Send My Results →</button>
+
+      <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:0.85rem;">We respect your privacy. No spam, ever. You can unsubscribe anytime.</p>
+    </div>
+
+    <div style="text-align:center;margin-top:1.25rem;">
+      <button onclick="skipEmail()" style="background:none;border:none;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--text-muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px;">Skip — show my results without emailing</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN: LOADING
+══════════════════════════════════════════ -->
+<div id="screen-loading" class="screen">
+  <div class="loading-icon"></div>
+  <h2 class="loading-title">Preparing your personal reflection…</h2>
+  <p style="font-size:0.9rem; color:var(--text-muted);">We're drawing on everything you shared to write something just for you.</p>
+  <ul class="loading-steps" id="loading-steps">
+    <li id="ls-1">Reviewing your responses</li>
+    <li id="ls-2">Identifying your profile and patterns</li>
+    <li id="ls-3">Crafting your personal summary</li>
+    <li id="ls-4">Matching resources to your journey</li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN: RESULTS (Stage 1)
+══════════════════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="results-hero">
+    <div class="profile-badge" id="result-badge">Your Profile</div>
+    <h2 class="results-name" id="result-profile-name">Thoughtful Explorer</h2>
+    <p class="results-tagline" id="result-tagline">You're in a meaningful place—open, curious, and ready to go deeper.</p>
+  </div>
+
+  <div class="results-body">
+
+    <div class="narrative-card">
+      <div class="narrative-text" id="narrative-text">
+        <p>Your reflection is being prepared...</p>
+      </div>
+      <div class="narrative-source">
+        <span style="color:var(--text-muted); font-size:12px; font-style:normal;">Based on what you shared, here is what we see in you · Not a label—a starting point</span>
+      </div>
+    </div>
+
+    <div class="dimension-grid" id="dimension-grid"></div>
+
+    <div style="margin-bottom:1.5rem">
+      <h3 class="section-title-sm">Resources for Where You Are</h3>
+      <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1rem">Curated from the Faithful Witness library based on your profile and motivations.</p>
+      <div id="resources-list"></div>
+    </div>
+
+    <div class="next-step-card">
+      <div class="next-step-label">Your Next Step</div>
+      <h3 class="next-step-title" id="next-step-title">Continue to Guided Formation</h3>
+      <p class="next-step-desc" id="next-step-desc">You've completed the first stage of your Discernment Experience. The next stage, Guided Formation, will help you engage Scripture, encounter real stories, and develop a posture aligned with the way of Jesus.</p>
+      <button class="btn-gold" onclick="showStageShell(2); showStageTabs()">Continue to Stage 2 →</button>
+    </div>
+
+    <div id="one-on-one-prominent" style="display:none">
+      <div class="one-on-one-card">
+        <div class="one-on-one-icon">🤝</div>
+        <div>
+          <div class="one-on-one-label">Personal Guidance</div>
+          <h3 class="one-on-one-title">Connect with a Faithful Witness Guide</h3>
+          <p class="one-on-one-desc">You're ready to move. A trained guide can sit with you—helping you clarify your next steps, connect to the right opportunities, and move forward with confidence. This conversation is free, relational, and tailored entirely to you.</p>
+          <button class="btn-gold" onclick="alert('1:1 scheduling will be integrated here — e.g. Calendly or a contact form.')">Schedule a Conversation →</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="one-on-one-secondary" style="display:none">
+      <div class="one-on-one-secondary">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🤝</div>
+        <div style="flex:1">
+          <div style="font-size:0.88rem;font-weight:500;color:var(--navy)">Want a guide for this journey?</div>
+          <div style="font-size:0.82rem;color:var(--text-muted)">A Faithful Witness guide can walk alongside you at any point.</div>
+        </div>
+        <button class="btn-secondary" style="font-size:0.82rem;padding:0.5rem 1rem;white-space:nowrap" onclick="alert('1:1 scheduling will be integrated here.')">Connect</button>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding-top: 0.5rem;">
+      <p style="font-size:0.9rem; color:var(--text-secondary); max-width:400px; margin: 0 auto 0.85rem;">Know someone—a friend, a small group, a congregation—who needs this journey? You can be the one who opens the door for them.</p>
+      <button class="btn-secondary" style="font-size:0.9rem; padding: 0.65rem 1.5rem;">Share This Experience</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN: STAGE 2 SHELL
+══════════════════════════════════════════ -->
+<div id="screen-stage2" class="screen">
+  <div class="stage-shell">
+    <div class="stage-hero-banner">
+      <div class="stage-num">Stage 2 of 4</div>
+      <h2 class="stage-name">Guided Formation</h2>
+      <p class="stage-desc">Shape how you understand immigration and how you posture yourself toward it as a follower of Jesus—through Scripture, story, and reflection.</p>
+    </div>
+    <div class="coming-soon-card">
+      <div class="cs-icon">📖</div>
+      <h3 class="cs-title">Content Coming Soon</h3>
+      <p class="cs-desc">Formation modules are being developed with biblical scholars and practitioners. This stage will include Scripture study, theological framework, and real immigrant stories.</p>
+    </div>
+    <div class="preview-modules">
+      <div class="module-preview">
+        <div class="module-num">1</div>
+        <div class="module-info">
+          <div class="module-name">The Image of God & the Stranger</div>
+          <div class="module-sub">Biblical foundation · ~20 min</div>
+        </div>
+        <div class="module-lock">🔒</div>
+      </div>
+      <div class="module-preview">
+        <div class="module-num">2</div>
+        <div class="module-info">
+          <div class="module-name">The People of God as a Migrating People</div>
+          <div class="module-sub">Narrative theology · ~20 min</div>
+        </div>
+        <div class="module-lock">🔒</div>
+      </div>
+      <div class="module-preview">
+        <div class="module-num">3</div>
+        <div class="module-info">
+          <div class="module-name">Real Stories: Encountering Our Neighbors</div>
+          <div class="module-sub">Humanization & proximity · ~25 min</div>
+        </div>
+        <div class="module-lock">🔒</div>
+      </div>
+      <div class="module-preview">
+        <div class="module-num">4</div>
+        <div class="module-info">
+          <div class="module-name">Justice, Mercy & the Way of Jesus</div>
+          <div class="module-sub">Theological & cultural clarity · ~20 min</div>
+        </div>
+        <div class="module-lock">🔒</div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <button class="btn-primary" onclick="showStageShell(3)">Preview Stage 3: Discernment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN: STAGE 3 SHELL
+══════════════════════════════════════════ -->
+<div id="screen-stage3" class="screen">
+  <div class="stage-shell">
+    <div class="stage-hero-banner">
+      <div class="stage-num">Stage 3 of 4</div>
+      <h2 class="stage-name">Discernment</h2>
+      <p class="stage-desc">Move from general conviction to personal calling. Identify how you are uniquely invited to respond to immigration as a follower of Jesus.</p>
+    </div>
+    <div class="coming-soon-card">
+      <div class="cs-icon">🙏</div>
+      <h3 class="cs-title">Content Coming Soon</h3>
+      <p class="cs-desc">This guided discernment experience will help you reflect on your formation, identify your passions and gifts, and hear from God about your specific next faithful step.</p>
+    </div>
+    <div class="preview-modules">
+      <div class="module-preview">
+        <div class="module-num">1</div>
+        <div class="module-info">
+          <div class="module-name">Reflecting on What Has Shifted</div>
+          <div class="module-sub">Formation review · ~10 min</div>
+        </div>
+        <div class="module-lock">🔒</div>
+      </div>
+      <div class="module-preview">
+        <div class="module-num">2</div>
+        <div class="module-info">
+          <div class="module-name">Understanding Your Unique Wiring</div>
+          <div class="module-sub">Gifts, passions & context · ~15 min</div>
+        </div>
+        <div class="module-lock">🔒</div>
+      </div>
+      <div class="module-preview">
+        <div class="module-num">3</div>
+        <div class="module-info">
+          <div class="module-name">Listening & Prayer</div>
+          <div class="module-sub">Guided prayerful reflection · ~10 min</div>
+        </div>
+        <div class="module-lock">🔒</div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <button class="btn-primary" onclick="showStageShell(4)">Preview Stage 4: Next Steps →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN: STAGE 4 SHELL
+══════════════════════════════════════════ -->
+<div id="screen-stage4" class="screen">
+  <div class="stage-shell">
+    <div class="stage-hero-banner">
+      <div class="stage-num">Stage 4 of 4</div>
+      <h2 class="stage-name">Personalized Next Steps</h2>
+      <p class="stage-desc">Guided into clear, supported action—connected to the right opportunities, people, and pathways for faithful engagement.</p>
+    </div>
+
+    <h3 class="section-title-sm" style="margin-bottom:1rem">How Your Next Steps Are Shaped</h3>
+    <div style="display:grid; gap:0.75rem; margin-bottom:1.5rem">
+      <div style="background:var(--warm-white); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; display:flex; gap:0.85rem; align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">✦</div>
+        <div>
+          <div style="font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:2px">Personalized Recommendations</div>
+          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">2–3 curated next steps matched to your profile, motivations, gifting, and readiness level.</div>
+        </div>
+      </div>
+      <div style="background:var(--warm-white); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; display:flex; gap:0.85rem; align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">👤</div>
+        <div>
+          <div style="font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:2px">Guided 1:1 Conversation</div>
+          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">Connect with a trained guide who can help you clarify, confirm, and take your specific next step with confidence.</div>
+        </div>
+      </div>
+      <div style="background:var(--warm-white); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; display:flex; gap:0.85rem; align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🌐</div>
+        <div>
+          <div style="font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:2px">Ecosystem Connection</div>
+          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">Pathways into trusted partner organizations—World Relief, CCDA, NaLEC, Undivided, and local opportunities near you.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="coming-soon-card">
+      <div class="cs-icon">🗺️</div>
+      <h3 class="cs-title">Full Personalization Coming Soon</h3>
+      <p class="cs-desc">This stage will generate fully tailored recommendations once you've completed Stages 2 and 3. Your profile from Stage 1 is already informing what will appear here.</p>
+    </div>
+
+    <div style="text-align:center">
+      <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:1rem">Ready to move forward in your journey?</p>
+      <button class="btn-primary" onclick="goToScreen('welcome')">Explore the Full Campaign →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── STATE ───
+const answers = {};
+let currentSection = 0;
+const totalSections = 8;
+
+// ─── NAVIGATION ───
+function goToScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('screen-' + id);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+}
+
+function showStageTabs() {
+  document.getElementById('stage-tabs').style.display = 'flex';
+  updateTabs();
+}
+
+function updateTabs() {
+  [1,2,3,4].forEach(i => {
+    const t = document.getElementById('tab-'+i);
+    t.classList.remove('active','completed');
+  });
+}
+
+function showStage(n) {
+  [1,2,3,4].forEach(i => {
+    const t = document.getElementById('tab-'+i);
+    t.classList.remove('active');
+  });
+  document.getElementById('tab-'+n).classList.add('active');
+  if (n === 1) {
+    goToScreen('results');
+  } else {
+    goToScreen('stage'+n);
+  }
+}
+
+function showStageShell(n) {
+  showStageTabs();
+  [1,2,3,4].forEach(i => document.getElementById('tab-'+i).classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  goToScreen('stage'+n);
+}
+
+// ─── ASSESSMENT SECTIONS ───
+function showSection(n) {
+  document.querySelectorAll('.q-section').forEach(s => s.style.display = 'none');
+  const el = document.getElementById('section-' + n);
+  if (el) el.style.display = 'block';
+  const pct = Math.round(((n + 1) / totalSections) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-label').textContent = 'Section ' + (n + 1) + ' of ' + totalSections;
+  document.getElementById('btn-back').style.display = n > 0 ? 'block' : 'none';
+  document.getElementById('btn-next').textContent = n === totalSections - 1 ? 'See My Results →' : 'Continue →';
+  window.scrollTo(0, 0);
+}
+
+function nextSection() {
+  if (currentSection === totalSections - 1) {
+    // Pre-fill name from assessment
+    const assessName = document.getElementById('q-name').value;
+    if (assessName) document.getElementById('email-name').value = assessName;
+    goToScreen('email');
+    return;
+  }
+  currentSection++;
+  showSection(currentSection);
+}
+
+// ─── NEXT STEP TOGGLE ───
+let nextStepChecked = false;
+let campaignOptIn = false;
+function toggleCampaign() {
+  campaignOptIn = !campaignOptIn;
+  const box = document.getElementById('campaign-check');
+  if (campaignOptIn) {
+    box.style.background = 'var(--navy)';
+    box.style.borderColor = 'var(--navy)';
+    box.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else {
+    box.style.background = 'transparent';
+    box.style.borderColor = 'var(--navy)';
+    box.innerHTML = '';
+  }
+}
+
+function toggleNextStep() {
+  nextStepChecked = !nextStepChecked;
+  const box = document.getElementById('next-step-check');
+  if (nextStepChecked) {
+    box.style.background = 'var(--gold)';
+    box.style.borderColor = 'var(--gold)';
+    box.innerHTML = '<svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else {
+    box.style.background = 'transparent';
+    box.style.borderColor = 'var(--gold)';
+    box.innerHTML = '';
+  }
+}
+
+// ─── ZIP TO REGION ───
+function zipToRegion(zip) {
+  const n = parseInt(zip, 10);
+  if (isNaN(n)) return 'unknown';
+  if ((n >= 1000 && n <= 2999) || (n >= 6000 && n <= 6999) || (n >= 10000 && n <= 14999)) return 'northeast';
+  if ((n >= 20000 && n <= 29999) || (n >= 30000 && n <= 34999)) return 'southeast';
+  if ((n >= 35000 && n <= 45999) || (n >= 46000 && n <= 49999) || (n >= 50000 && n <= 56999) || (n >= 57000 && n <= 58999) || (n >= 60000 && n <= 62999) || (n >= 63000 && n <= 65999)) return 'midwest';
+  if ((n >= 75000 && n <= 79999) || (n >= 80000 && n <= 84999) || (n >= 85000 && n <= 86999) || (n >= 87000 && n <= 88999) || (n >= 89000 && n <= 89999) || (n >= 90000 && n <= 96199)) return 'west';
+  return 'unknown';
+}
+
+// ─── EMAIL SUBMIT ───
+function submitEmail() {
+  const emailVal = document.getElementById('email-address').value.trim();
+  const nameVal = document.getElementById('email-name').value.trim();
+  const zipVal = document.getElementById('email-zip').value.trim();
+  const errEl = document.getElementById('email-error');
+
+  if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  // Store for use in results / email
+  answers['user-email'] = emailVal;
+  answers['user-zip'] = zipVal;
+  answers['user-ready'] = nextStepChecked;
+  answers['campaign-optin'] = campaignOptIn;
+  if (zipVal) answers['q-region'] = zipToRegion(zipVal);
+  if (nameVal) document.getElementById('q-name').value = nameVal;
+
+  startLoading();
+}
+
+function skipEmail() {
+  startLoading();
+}
+
+function prevSection() {
+  if (currentSection > 0) {
+    currentSection--;
+    showSection(currentSection);
+  }
+}
+
+// ─── OPTION SELECTION ───
+function selectOption(btn, groupId) {
+  document.querySelectorAll('#' + groupId + ' .option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[groupId] = btn.dataset.val;
+}
+
+function selectScale(btn, groupId) {
+  document.querySelectorAll('#' + groupId + ' .scale-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[groupId] = btn.dataset.val;
+}
+
+function toggleMulti(btn, groupId) {
+  btn.classList.toggle('selected');
+  const vals = [];
+  document.querySelectorAll('#' + groupId + ' .multi-btn.selected').forEach(b => vals.push(b.dataset.val));
+  answers[groupId] = vals;
+}
+
+// ─── LOADING ───
+async function startLoading() {
+  goToScreen('loading');
+  const steps = ['ls-1','ls-2','ls-3','ls-4'];
+  for (let i = 0; i < steps.length; i++) {
+    await delay(900);
+    document.getElementById(steps[i]).classList.add('done');
+  }
+  await generateProfile();
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ─── PROFILE LOGIC ───
+function computeProfile() {
+  const exposure = answers['q-exposure'] || 'indirect';
+  const posture = answers['q-posture'] || 'open';
+  const readiness = answers['q-readiness'] || 'considering';
+  const perspective = answers['q-perspective'] || 'tension';
+
+  if (posture === 'resistant' || posture === 'cautious') {
+    return { name: 'Careful Seeker', tagline: 'You\'re approaching this with honesty and care—that is a faithful place to begin.', profile: 'exploring' };
+  }
+  if (readiness === 'exploring' || readiness === 'considering') {
+    if (exposure === 'none' || exposure === 'indirect') {
+      return { name: 'Open Explorer', tagline: 'You\'re in a meaningful place—open, curious, and ready to go deeper.', profile: 'exploring' };
+    }
+    return { name: 'Thoughtful Learner', tagline: 'You have some connection to this reality. Now you\'re ready to understand it more deeply.', profile: 'processing' };
+  }
+  if (readiness === 'ready') {
+    return { name: 'Ready Responder', tagline: 'You\'re prepared to act—and this experience will help you act with clarity and conviction.', profile: 'responding' };
+  }
+  if (readiness === 'active') {
+    return { name: 'Faithful Witness', tagline: 'You\'re already engaged. This journey will help you go deeper and lead others well.', profile: 'mobilizing' };
+  }
+  return { name: 'Thoughtful Seeker', tagline: 'You\'re in an important place of formation—and that matters deeply.', profile: 'processing' };
+}
+
+function getDimensions() {
+  const exposureMap = { none: 15, indirect: 35, relational: 70, deep: 95 };
+  const postureMap = { resistant: 15, cautious: 40, open: 75, eager: 95 };
+  const readinessMap = { exploring: 20, considering: 45, ready: 70, active: 90 };
+  const understandingMap = { '1': 15, '2': 35, '3': 55, '4': 75, '5': 90 };
+
+  return [
+    { name: 'Proximity', value: exposureLabels[answers['q-exposure']] || 'Indirect', pct: exposureMap[answers['q-exposure']] || 35 },
+    { name: 'Openness', value: postureLabels[answers['q-posture']] || 'Open', pct: postureMap[answers['q-posture']] || 75 },
+    { name: 'Readiness', value: readinessLabels[answers['q-readiness']] || 'Considering', pct: readinessMap[answers['q-readiness']] || 45 },
+    { name: 'Knowledge', value: 'Level ' + (answers['q-understanding'] || '3') + ' of 5', pct: understandingMap[answers['q-understanding']] || 55 },
+  ];
+}
+
+const exposureLabels = { none: 'Minimal', indirect: 'Indirect', relational: 'Relational', deep: 'Immersed' };
+const postureLabels = { resistant: 'Cautious', cautious: 'Careful', open: 'Open', eager: 'Eager' };
+const readinessLabels = { exploring: 'Exploring', considering: 'Considering', ready: 'Ready', active: 'Active' };
+
+// ─── PROFILE GENERATION ───
+async function generateProfile() {
+  const name = document.getElementById('q-name').value || 'friend';
+  const { name: profileName, tagline, profile } = computeProfile();
+  const narrativeHTML = getFallbackNarrative(name, profile);
+
+  // ── Submit to database ──
+  try {
+    await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:          name,
+        email:         answers['user-email']        || null,
+        zip:           answers['user-zip']           || null,
+        profileName:   profileName,
+        profileType:   profile,
+        exposure:      answers['q-exposure']         || null,
+        posture:       answers['q-posture']          || null,
+        readiness:     answers['q-readiness']        || null,
+        understanding: answers['q-understanding']    || null,
+        motivation:    (answers['q-motivation'] || []).join(','),
+        gifting:       (answers['q-gifting']    || []).join(','),
+        churchContext: answers['q-church-type']      || null,
+        readyFlag:     answers['user-ready']         || false,
+        campaignOptIn: campaignOptIn,
+        rawAnswers:    answers
+      })
+    });
+  } catch (err) {
+    // Silently fail — never block the user experience
+    console.error('Submission error:', err);
+  }
+
+  // ── Send results email via Resend (non-blocking) ──
+  if (answers['user-email']) {
+    const emailPayload = {
+      name,
+      email:       answers['user-email'],
+      profileName,
+      profileType: profile,
+      narrativeHTML,
+      resources:   getRecommendedResources(profile),
+      continueUrl: `https://faithful-witness.vercel.app?profile=${profile}&stage=2`
+    };
+    // Fire and forget — don't await, don't block the user experience
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(emailPayload)
+    })
+    .then(r => r.json())
+    .then(result => console.log('Email result:', result))
+    .catch(err => console.error('Email error:', err));
+  }
+
+  renderResults(name, profileName, tagline, narrativeHTML, profile);
+}
+
+function buildPrompt(name, profile) {
+  const motivations = (answers['q-motivation'] || []).join(', ') || 'faith and curiosity';
+  const gifting = (answers['q-gifting'] || []).join(', ') || 'relational';
+  const exposure = answers['q-exposure'] || 'indirect';
+  const posture = answers['q-posture'] || 'open';
+  const perspective = answers['q-perspective'] || 'tension';
+  const readiness = answers['q-readiness'] || 'considering';
+  const churchType = answers['q-church-type'] || 'not specified';
+  const immigConn = answers['q-immig-connection'] || 'none';
+
+  return `You are a wise, warm Christian leader writing a personalized reflection summary for someone who has just completed a spiritual discernment assessment about immigration. Your writing should feel like it was written by a pastor who knows this person deeply — encouraging, non-judgmental, grounded in faith, and pointing them forward.
+
+Write 3 short paragraphs (no headers, no bullet points) for ${name}. Here is what they shared:
+
+- Profile type: ${profile} (exploring / processing / responding / mobilizing)
+- Exposure to immigrants: ${exposure}
+- Posture/openness: ${posture}
+- Perspective on immigration: ${perspective}
+- Readiness to act: ${readiness}
+- Motivations: ${motivations}
+- Gifting/wiring: ${gifting}
+- Church context: ${churchType}
+- Personal immigration connection: ${immigConn}
+
+Guidelines:
+- Begin the first paragraph by naming where they are RIGHT NOW in a way that feels seen and affirmed, not evaluated.
+- Second paragraph: reflect what seems to be stirring in them — connect their motivations and gifting to what God might be doing.
+- Third paragraph: a gentle, encouraging word about what this journey holds for them — ending with a sense of hope and invitation.
+- If the profile is 'mobilizing' or 'responding': the third paragraph should be activating and leader-focused. Name the opportunity they have to not just engage themselves, but to walk alongside others — to be the person who opens this door for their community, church, or small group. Make it feel like a calling, not a task.
+- Tone: warm, pastoral, grounded. Not preachy. Not therapeutic. Not generic. Like a wise friend who also happens to know Scripture and the immigrant experience.
+- Do NOT use the person's name more than once (in the first paragraph).
+- Do NOT be preachy or guilt-inducing. Do NOT make political statements.
+- Keep it under 220 words total.`;
+}
+
+function getFallbackNarrative(name, profile) {
+  const narratives = {
+    exploring: `<p>${name}, you're in a meaningful and honest place right now. You've shown up with openness—willing to explore something that many people quietly wonder about but rarely engage with deeply. That matters. Beginning with curiosity and a humble heart is exactly the right foundation.</p><p>Something is clearly stirring in you. Your motivations point to a genuine desire to understand—not just as an intellectual exercise, but as part of what it means to follow Jesus faithfully. That combination of faith and open-heartedness is exactly what this journey is designed to meet.</p><p>This experience will help you find your footing—offering you Scripture, real stories, and space to discern what your own faithful response might look like. You don't have to have it figured out to begin. You just have to be willing. And you already are.</p>`,
+    processing: `<p>You're carrying something real, ${name}. There's an awareness in you—a sense that this issue matters, that it has human faces, and that your faith should have something to say about it. The fact that you feel some tension isn't a problem. It's often exactly where formation happens.</p><p>What you've shared points to someone who is motivated by more than information—you want to respond in a way that's genuinely faithful. That desire is a gift, and this experience is designed to help you move from that stirring toward clarity.</p><p>Stay with the process. The formation and discernment ahead will give you something you can actually hold onto—a conviction that is yours, not borrowed, and a next step that fits your life and your calling.</p>`,
+    responding: `<p>You're ready, ${name}, and that readiness is worth naming. Something in you has moved from awareness to conviction, and now you're looking for direction. That's a meaningful threshold—and arriving here with intentionality is a sign that your next step is going to matter.</p><p>Your gifts and motivations are pointing you somewhere specific. The formation ahead will help you understand not just what to do, but why—and how your unique wiring fits into something larger than any individual action. You don't have to wait to be more prepared than you already are.</p><p>The journey ahead will shape you as you move. And when you take that step, you won't be taking it alone—there are people ready to walk alongside you and connect you to where you're needed most.</p>`,
+    mobilizing: `<p>${name}, you're not just engaged—you're positioned to lead. What you've shared points to someone who has moved through the early questions and arrived somewhere with conviction, capacity, and genuine desire to see the Church respond faithfully to immigration. That is rare, and it matters.</p><p>What lies ahead for you isn't simply more learning. It's a call to become a guide for others who are just beginning this journey. The people in your church, your community, your network—many of them are where you once were: aware, perhaps unsettled, but unsure of how to engage. You can be the one who walks alongside them, not pointing from a distance, but going first and inviting others to follow.</p><p>This experience was designed for people like you to complete, to own, and ultimately to champion. Consider how you might open this door for someone else—a friend, a small group, a congregation. The most powerful next step isn't just your own faithful action. It's helping others find theirs.</p>`
+  };
+  return narratives[profile] || narratives['exploring'];
+}
+
+// ─── RESOURCES ───
+const allResources = [
+  { title: '7-Day Prayer Guide: Love Your Neighbors', type: 'Prayer Guide', org: 'Faithful Witness', icon: '🙏', tags: ['faith','compassion','exploring','processing'], url: 'https://faithfulwitness.us/resources/love-your-neighbors-7-day-prayer-guide/' },
+  { title: 'Equipped to Act: Understanding Immigration in Uncertain Times', type: 'Toolkit', org: 'World Relief', icon: '📋', tags: ['justice','exploring','processing','responding'], url: 'https://faithfulwitness.us/resources/equipped-to-act-immigration/' },
+  { title: 'From Compassion to Connection: A Church Leader\'s Guide', type: 'Learning Guide', org: 'World Relief', icon: '🤝', tags: ['relational','compassion','processing','responding'], url: 'https://faithfulwitness.us/resources/from-compassion-to-connection-a-church-leaders-guide-to-engaging-immigrants/' },
+  { title: 'Guide to Respectful Conversations about Immigration', type: 'Learning Guide', org: 'Faithful Witness', icon: '💬', tags: ['learning','tension','processing'], url: 'https://faithfulwitness.us/resources/guide-respectful-conversations-immigration/' },
+  { title: 'Manual for Pastors & Church Leaders', type: 'Training', org: 'Faithful Witness', icon: '⛪', tags: ['leadership','community','mobilizing','responding'], url: 'https://faithfulwitness.us/resources/manual-pastors-church-leaders-executive-orders-immigration/' },
+  { title: 'Was Jesus a Refugee?', type: 'Article', org: 'World Relief', icon: '✝️', tags: ['faith','exploring','processing'], url: 'https://faithfulwitness.us/resources/was-jesus-a-refugee/' },
+  { title: 'Advent Welcome: Overview', type: 'Toolkit', org: 'Faithful Witness', icon: '🕯️', tags: ['relational','compassion','community'], url: 'https://faithfulwitness.us/resources/advent-welcome-overview/' },
+  { title: 'Know Your Rights', type: 'Tool', org: 'Faithful Witness', icon: '⚖️', tags: ['justice','advocacy','responding','mobilizing'], url: 'https://faithfulwitness.us/resources/know-your-rights/' },
+  { title: 'God\'s Household: Overview', type: 'Toolkit', org: 'Faithful Witness', icon: '🏠', tags: ['community','relational','mobilizing'], url: 'https://faithfulwitness.us/resources/gods-household-overview/' },
+  { title: 'Sermon Outlines: Welcoming the Stranger', type: 'Sermon Outline', org: 'Faithful Witness', icon: '📜', tags: ['faith','leadership','learning'], url: 'https://faithfulwitness.us/resources/sermon-outlines-welcoming-the-stranger/' },
+];
+
+function getRecommendedResources(profile) {
+  const motivations = answers['q-motivation'] || [];
+  const gifting = answers['q-gifting'] || [];
+  const tags = [profile, ...motivations, ...gifting];
+
+  const scored = allResources.map(r => {
+    const score = r.tags.filter(t => tags.includes(t)).length;
+    return { ...r, score };
+  }).sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, 3);
+}
+
+// ─── RENDER RESULTS ───
+function renderResults(name, profileName, tagline, narrativeHTML, profile) {
+  document.getElementById('result-badge').textContent = 'Stage 1 Profile';
+  document.getElementById('result-profile-name').textContent = profileName;
+  document.getElementById('result-tagline').textContent = tagline;
+  document.getElementById('narrative-text').innerHTML = narrativeHTML;
+
+  // Dimensions
+  const dims = getDimensions();
+  const grid = document.getElementById('dimension-grid');
+  grid.innerHTML = dims.map(d => `
+    <div class="dim-card">
+      <div class="dim-name">${d.name}</div>
+      <div class="dim-value">${d.value}</div>
+      <div class="dim-bar-wrap"><div class="dim-bar" style="width:${d.pct}%"></div></div>
+    </div>
+  `).join('');
+
+  // Resources
+  const resources = getRecommendedResources(profile);
+  const resList = document.getElementById('resources-list');
+  resList.innerHTML = resources.map(r => `
+    <a class="resource-card" href="${r.url}" target="_blank" rel="noopener">
+      <div class="resource-icon">${r.icon}</div>
+      <div>
+        <div class="resource-type">${r.type}</div>
+        <div class="resource-name">${r.title}</div>
+        <div class="resource-org">${r.org}</div>
+      </div>
+    </a>
+  `).join('');
+
+  // Next step
+  const nextSteps = {
+    exploring: { title: 'Begin with Prayer & Scripture', desc: 'A 7-day prayer guide is the perfect entry point for where you are. Begin there, and let Stage 2 Formation deepen what stirs in you.' },
+    processing: { title: 'Move into Formation', desc: 'You\'re ready to engage more deeply. Stage 2 will give you the biblical framework and human stories you need to move from uncertainty to conviction.' },
+    responding: { title: 'Continue to Guided Formation', desc: 'Stage 2 will sharpen your understanding so that when you act, you act with both clarity and compassion. A guide is ready to walk alongside you.' },
+    mobilizing: { title: 'Lead Others Through This Journey', desc: 'Your most powerful next step is to bring others with you. Complete the full experience, then consider who in your church, small group, or network needs someone like you to open this door for them.' }
+  };
+  const ns = nextSteps[profile] || nextSteps['exploring'];
+  document.getElementById('next-step-title').textContent = ns.title;
+  document.getElementById('next-step-desc').textContent = ns.desc;
+
+  // 1:1 card visibility
+  const isHighReadiness = (profile === 'responding' || profile === 'mobilizing');
+  document.getElementById('one-on-one-prominent').style.display = isHighReadiness ? 'block' : 'none';
+  document.getElementById('one-on-one-secondary').style.display = isHighReadiness ? 'none' : 'block';
+
+  goToScreen('results');
+  showStageTabs();
+  document.getElementById('tab-1').classList.add('active');
+  document.getElementById('tab-1').classList.add('completed');
+
+
+}
+
+// ─── INIT ───
+showSection(0);
+// ─── URL PARAMETER HANDLER ───
+// Handles ?profile=responding&stage=2 deep links from results email
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const stage = params.get('stage');
+  const profile = params.get('profile');
+  if (stage === '2') {
+    // Set the profile in answers so context carries through
+    if (profile) answers['profile-type'] = profile;
+    // Small delay to let DOM render first
+    setTimeout(() => {
+      showStageTabs();
+      showStageShell(2);
+    }, 100);
+  }
+})();
+</script>
+</body>
+</html>
