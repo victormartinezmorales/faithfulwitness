@@ -1,2 +1,16 @@
+# Vercel
 .vercel
+
+# Env files
 .env*.local
+
+# macOS
+.DS_Store
+
+# Project management & strategy artifacts (live alongside code but are not part of the app)
+*.docx
+Reshape and Funder-Readiness Memo.md
+Local Git and Vercel Workflow.md
+
+# Build artifacts that don't belong in source control
+api/*.zip

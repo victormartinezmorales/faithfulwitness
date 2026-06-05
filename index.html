@@ -972,6 +972,255 @@
     font-size: 0.88rem;
     margin-bottom: 1rem;
   }
+
+  /* ─── LANDING V2 — additions ─── */
+  .hero-cta-row {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.85rem;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-secondary-light {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    padding: 0.85rem 1.8rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-secondary-light:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.85);
+  }
+
+  .cred-strip {
+    background: var(--navy-dark);
+    color: rgba(255,255,255,0.85);
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .cred-item {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+  }
+  .cred-num {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+
+  .landing-section {
+    padding: 3rem 1.5rem 2rem;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+    font-weight: 600;
+    color: var(--navy);
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .problem-cards {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  @media (max-width: 640px) {
+    .problem-cards { grid-template-columns: 1fr; }
+    .problem-divider { padding: 0.5rem 0; }
+  }
+  .problem-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.35rem;
+  }
+  .problem-h {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+    line-height: 1.35;
+  }
+  .problem-p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .problem-divider {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    text-align: center;
+    font-size: 0.95rem;
+  }
+  .problem-summary {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 1rem auto 0;
+    line-height: 1.7;
+  }
+  .problem-summary strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .journey-steps-v2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.85rem;
+  }
+  @media (max-width: 720px) {
+    .journey-steps-v2 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 420px) {
+    .journey-steps-v2 { grid-template-columns: 1fr; }
+  }
+  .journey-step-v2 {
+    background: var(--cream);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 1.1rem 1rem;
+    position: relative;
+  }
+  .journey-step-v2 .step-num {
+    margin: 0 0 0.7rem 0;
+  }
+  .journey-step-v2 .step-name {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+    font-weight: 500;
+    text-align: left;
+  }
+  .step-desc {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .audience-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .audience-cards { grid-template-columns: 1fr; }
+  }
+  .audience-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .audience-card-team {
+    background: linear-gradient(135deg, var(--gold-bg) 0%, var(--warm-white) 100%);
+    border-color: var(--gold-pale);
+    position: relative;
+  }
+  .audience-card-team::after {
+    content: 'Coming Q4 2026';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--gold);
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 50px;
+    font-weight: 500;
+  }
+  .audience-icon {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    line-height: 1;
+  }
+  .audience-h {
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 0.45rem;
+    font-weight: 600;
+  }
+  .audience-p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
+    flex-grow: 1;
+  }
+
+  .coalition-section { padding-bottom: 1rem; }
+  .coalition-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+  @media (max-width: 720px) {
+    .coalition-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .coalition-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 0.85rem;
+    text-align: center;
+  }
+  .coalition-name {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+  .coalition-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
 </style>
 </head>
 <body>
@@ -1002,62 +1251,148 @@
      SCREEN: WELCOME
 ══════════════════════════════════════════ -->
 <div id="screen-welcome" class="screen active">
+
+  <!-- ─── HERO ─── -->
   <div class="welcome-hero">
     <div class="hero-eyebrow">The Faithful Witness Discernment Experience</div>
-    <h1 class="hero-title">Discover Your Faithful<br>Response to Immigration</h1>
-    <p class="hero-sub">A guided, prayerful journey to help you discern how God may be inviting you to respond—based on your story, your context, and your calling.</p>
-    <button class="btn-primary" onclick="goToScreen('assessment')">Begin the Journey</button>
-    <p class="time-note">About 8–10 minutes · Personalized to you</p>
+    <h1 class="hero-title">You've felt the tension on immigration.<br>There's a faithful way through.</h1>
+    <p class="hero-sub">A guided, prayerful journey for Christians who want to respond to immigration with clarity and conviction — shaped by Scripture, by real stories, and by who God made you to be.</p>
+    <div class="hero-cta-row">
+      <button class="btn-primary" onclick="goToScreen('assessment')">Begin the Journey</button>
+      <button class="btn-secondary-light" onclick="document.getElementById('for-teams').scrollIntoView({behavior:'smooth', block:'start'})">Bringing a group?</button>
+    </div>
+    <p class="time-note">About 8–10 minutes · Personalized to you · Free</p>
   </div>
 
-  <div class="welcome-cards">
-    <div class="what-you-gain-card">
-      <div class="gain-label">Clarity</div>
-      <div class="gain-title">Grounded Understanding</div>
-      <div class="gain-desc">Move beyond headlines and assumptions toward something deeper and more faithful.</div>
-    </div>
-    <div class="what-you-gain-card">
-      <div class="gain-label">Conviction</div>
-      <div class="gain-title">Rooted in Scripture</div>
-      <div class="gain-desc">A response shaped by the way of Jesus—not reaction, but thoughtful reflection.</div>
-    </div>
-    <div class="what-you-gain-card">
-      <div class="gain-label">Direction</div>
-      <div class="gain-title">Personal Calling</div>
-      <div class="gain-desc">Discover how you are uniquely wired to engage based on your gifts and context.</div>
-    </div>
-    <div class="what-you-gain-card">
-      <div class="gain-label">Action</div>
-      <div class="gain-title">Concrete Next Steps</div>
-      <div class="gain-desc">Leave with specific, realistic steps you can take immediately and sustainably.</div>
-    </div>
+  <!-- ─── CREDIBILITY STRIP ─── -->
+  <div class="cred-strip">
+    <div class="cred-item"><span class="cred-num">4</span> coalition partners</div>
+    <div class="cred-item"><span class="cred-num">11</span> cities and growing</div>
+    <div class="cred-item"><span class="cred-num">Free</span> for individuals and churches</div>
   </div>
 
-  <div class="welcome-journey" style="margin: 0 1.5rem 1.5rem; max-width: 860px; margin-left: auto; margin-right: auto;">
-    <div class="journey-label">Your Journey — Four Stages</div>
-    <div class="journey-steps">
-      <div class="journey-step active-step">
+  <!-- ─── THE PROBLEM ─── -->
+  <section class="landing-section">
+    <div class="section-label">Why this exists</div>
+    <h2 class="section-title">Most Christians are left with only two options.</h2>
+    <div class="problem-cards">
+      <div class="problem-card">
+        <div class="problem-h">Avoid the topic.</div>
+        <div class="problem-p">It feels too charged. Too political. So we say nothing — and the people God put in our path stay invisible to us.</div>
+      </div>
+      <div class="problem-divider">or</div>
+      <div class="problem-card">
+        <div class="problem-h">Step into something we're not prepared for.</div>
+        <div class="problem-p">We feel like we should say <em>something</em>. But we don't have the framework, the relationships, or the next step.</div>
+      </div>
+    </div>
+    <p class="problem-summary">Neither leads to sustained, faithful engagement. <strong>Faithful Witness creates the missing middle</strong> — formation before mobilization, discernment before action.</p>
+  </section>
+
+  <!-- ─── WHAT YOU'LL GAIN ─── -->
+  <section class="landing-section">
+    <div class="section-label">What you'll leave with</div>
+    <h2 class="section-title">Four things this experience is built to give you.</h2>
+    <div class="welcome-cards">
+      <div class="what-you-gain-card">
+        <div class="gain-label">Clarity</div>
+        <div class="gain-title">Grounded Understanding</div>
+        <div class="gain-desc">Beyond headlines and assumptions — a deeper grasp of who immigrants are and what Scripture says.</div>
+      </div>
+      <div class="what-you-gain-card">
+        <div class="gain-label">Conviction</div>
+        <div class="gain-title">Rooted in Scripture</div>
+        <div class="gain-desc">A response shaped by the way of Jesus — formed in reflection, not reaction.</div>
+      </div>
+      <div class="what-you-gain-card">
+        <div class="gain-label">Direction</div>
+        <div class="gain-title">Your Personal Calling</div>
+        <div class="gain-desc">A discernment process that connects your gifts, your story, and your context to this moment.</div>
+      </div>
+      <div class="what-you-gain-card">
+        <div class="gain-label">Action</div>
+        <div class="gain-title">A Real Next Step</div>
+        <div class="gain-desc">2–3 specific, realistic actions matched to who you are — routed to trusted partner organizations.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 4-STAGE JOURNEY ─── -->
+  <section class="landing-section">
+    <div class="section-label">Your four-stage journey</div>
+    <h2 class="section-title">A path from where you are to a real next step.</h2>
+    <div class="journey-steps-v2">
+      <div class="journey-step-v2">
         <div class="step-num">1</div>
         <div class="step-name">Reflection &amp; Assessment</div>
+        <div class="step-desc">A 7-dimension reflection that meets you where you are. No wrong answers.</div>
       </div>
-      <div class="journey-step">
+      <div class="journey-step-v2">
         <div class="step-num">2</div>
         <div class="step-name">Guided Formation</div>
+        <div class="step-desc">Scripture, theology, and real stories — shaped by your starting point.</div>
       </div>
-      <div class="journey-step">
+      <div class="journey-step-v2">
         <div class="step-num">3</div>
         <div class="step-name">Discernment</div>
+        <div class="step-desc">Connect your story, gifts, and context to this moment.</div>
       </div>
-      <div class="journey-step">
+      <div class="journey-step-v2">
         <div class="step-num">4</div>
         <div class="step-name">Personalized Next Steps</div>
+        <div class="step-desc">2–3 real actions, matched to who you are, routed to trusted partners.</div>
       </div>
     </div>
-  </div>
+  </section>
 
+  <!-- ─── INDIVIDUALS & TEAMS ─── -->
+  <section id="for-teams" class="landing-section">
+    <div class="section-label">Built for individuals and for teams</div>
+    <h2 class="section-title">Discernment is personal. It is also communal.</h2>
+    <div class="audience-cards">
+      <div class="audience-card">
+        <div class="audience-icon">✦</div>
+        <h3 class="audience-h">Doing this on your own</h3>
+        <p class="audience-p">Walk through the journey at your own pace. The experience meets you where you are and guides you to a real next faithful step — yours, not someone else's.</p>
+        <button class="btn-secondary" onclick="goToScreen('assessment')">Begin the Journey →</button>
+      </div>
+      <div class="audience-card audience-card-team">
+        <div class="audience-icon">☷</div>
+        <h3 class="audience-h">Doing this with a team</h3>
+        <p class="audience-p">A team-level pathway for small groups, churches, and Faithful Witness Teams. Reflect together, discern together, and build durable local presence that outlasts any campaign.</p>
+        <button class="btn-secondary" onclick="goToScreen('assessment')">Begin individually for now →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── COALITION STRIP ─── -->
+  <section class="landing-section">
+    <div class="section-label">A shared coalition initiative</div>
+    <h2 class="section-title">Built together by four trusted organizations.</h2>
+    <div class="coalition-grid">
+      <div class="coalition-card">
+        <div class="coalition-name">CCDA</div>
+        <div class="coalition-desc">Christian Community Development Association</div>
+      </div>
+      <div class="coalition-card">
+        <div class="coalition-name">NaLEC</div>
+        <div class="coalition-desc">National Latino Evangelical Coalition</div>
+      </div>
+      <div class="coalition-card">
+        <div class="coalition-name">Undivided</div>
+        <div class="coalition-desc">Reconciliation across difference</div>
+      </div>
+      <div class="coalition-card">
+        <div class="coalition-name">World Relief</div>
+        <div class="coalition-desc">Walking with the vulnerable</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FINAL CTA ─── -->
   <div class="welcome-cta">
     <button class="btn-primary" onclick="goToScreen('assessment')">Begin the Journey →</button>
-    <p class="time-note">No account required · Your responses are private</p>
+    <p class="time-note">No account required · Your responses are private · Free</p>
   </div>
 </div>
 
