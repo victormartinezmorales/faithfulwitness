@@ -10,10 +10,10 @@
 
 <style>
   :root {
-    --navy: #2D3A6B;
-    --navy-light: #3d4e8a;
-    --navy-dark: #1e2748;
-    --gold: #B8942A;
+    --navy: #333858;       /* sampled from faithfulwitness.us nav + hero */
+    --navy-light: #454B6F;
+    --navy-dark: #252940;
+    --gold: #C49A3C;       /* sampled from faithfulwitness.us top strip */
     --gold-light: #d4ab3a;
     --gold-pale: #f7f0dc;
     --gold-bg: #fdf8ee;
@@ -42,16 +42,24 @@
   }
 
   /* ─── NAV ─── */
+  .top-accent-strip {
+    height: 4px;
+    background: var(--gold);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 101;
+  }
   nav {
-    background: var(--warm-white);
-    border-bottom: 1px solid var(--border);
+    background: var(--navy);
+    border-bottom: 1px solid var(--navy-dark);
     padding: 0 1.5rem;
     height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
-    top: 0;
+    top: 4px;
     z-index: 100;
   }
   .nav-logo {
@@ -68,7 +76,7 @@
     font-family: 'Lora', serif;
     font-size: 15px;
     font-weight: 600;
-    color: var(--navy);
+    color: #fff;
     line-height: 1.2;
   }
   .nav-title span {
@@ -76,13 +84,13 @@
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
     font-weight: 400;
-    color: var(--gold);
+    color: var(--gold-light);
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
   .nav-coalition {
     font-size: 12px;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.65);
   }
 
   /* ─── SCREENS ─── */
@@ -1221,15 +1229,86 @@
     color: var(--text-muted);
     line-height: 1.4;
   }
+
+  /* ─── CAMPAIGN VOICE ALIGNMENT — additions ─── */
+  /* Calm acknowledgment for directly-affected visitors */
+  .neighbor-welcome {
+    max-width: 640px;
+    margin: 1.25rem auto 0;
+    padding: 1rem 1.25rem;
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .neighbor-welcome strong {
+    color: var(--navy);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Stage 2 values strip — quiet, lives inside the navy banner */
+  .values-strip {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  /* Acts 4:20 scriptural anchor — soft blockquote */
+  .scripture-anchor {
+    max-width: 520px;
+    margin: 0 auto 1.25rem;
+    padding: 1rem 1.25rem;
+    border-left: 2px solid var(--gold);
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    text-align: left;
+  }
+  .scripture-anchor cite {
+    display: block;
+    margin-top: 0.4rem;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* Campaign telos — replaces flat "Ready to move forward" */
+  .telos-line {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    line-height: 1.5;
+    max-width: 520px;
+    margin: 0 auto 1.1rem;
+    text-align: center;
+    font-style: italic;
+  }
 </style>
 </head>
 <body>
 
+<!-- TOP ACCENT STRIP — echoes the gold strip on faithfulwitness.us -->
+<div class="top-accent-strip" aria-hidden="true"></div>
+
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#" onclick="goToScreen('welcome')">
-    <img src="https://faithfulwitness.us/wp-content/themes/faithful-witness-child/assets/images/logo-nav.png" 
-         alt="Faithful Witness Campaign" 
+    <img src="https://faithfulwitness.us/wp-content/themes/faithful-witness-child/assets/images/logo-nav.png"
+         alt="Faithful Witness Campaign"
          style="height:36px; width:auto;">
     <div class="nav-title">
       Faithful Witness
@@ -1255,8 +1334,8 @@
   <!-- ─── HERO ─── -->
   <div class="welcome-hero">
     <div class="hero-eyebrow">The Faithful Witness Discernment Experience</div>
-    <h1 class="hero-title">You've felt the tension on immigration.<br>There's a faithful way through.</h1>
-    <p class="hero-sub">A guided, prayerful journey for Christians who want to respond to immigration with clarity and conviction — shaped by Scripture, by real stories, and by who God made you to be.</p>
+    <h1 class="hero-title">You've felt the tension on immigration.<br>There's a faithful, Gospel-rooted way through.</h1>
+    <p class="hero-sub">A guided, prayerful journey for Christians who want to respond to immigration with clarity and conviction — shaped by Scripture, by the real stories of our neighbors, and by who God made you to be.</p>
     <div class="hero-cta-row">
       <button class="btn-primary" onclick="goToScreen('assessment')">Begin the Journey</button>
       <button class="btn-secondary-light" onclick="document.getElementById('for-teams').scrollIntoView({behavior:'smooth', block:'start'})">Bringing a group?</button>
@@ -1287,6 +1366,7 @@
       </div>
     </div>
     <p class="problem-summary">Neither leads to sustained, faithful engagement. <strong>Faithful Witness creates the missing middle</strong> — formation before mobilization, discernment before action.</p>
+    <p class="neighbor-welcome">And some who come here aren't deciding how to respond to immigrants — they <strong>are</strong> immigrants, or walk closely with those who are. You are not a topic. You are our neighbor, and this journey is for you too.</p>
   </section>
 
   <!-- ─── WHAT YOU'LL GAIN ─── -->
@@ -1302,7 +1382,7 @@
       <div class="what-you-gain-card">
         <div class="gain-label">Conviction</div>
         <div class="gain-title">Rooted in Scripture</div>
-        <div class="gain-desc">A response shaped by the way of Jesus — formed in reflection, not reaction.</div>
+        <div class="gain-desc">A response shaped by the way of Jesus — courageous, compassionate, formed in reflection, not reaction.</div>
       </div>
       <div class="what-you-gain-card">
         <div class="gain-label">Direction</div>
@@ -1743,7 +1823,8 @@
     <div class="stage-hero-banner">
       <div class="stage-num">Stage 2 of 4</div>
       <h2 class="stage-name">Guided Formation</h2>
-      <p class="stage-desc">Shape how you understand immigration and how you posture yourself toward it as a follower of Jesus—through Scripture, story, and reflection.</p>
+      <p class="stage-desc">Shape how you understand immigration and how you posture yourself toward it as a follower of Jesus — a posture of courage, compassion, and deep love — through Scripture, story, and reflection.</p>
+      <p class="values-strip">We choose hope over despair · courage over silence · nonviolence over fear · love over division.</p>
     </div>
     <div class="coming-soon-card">
       <div class="cs-icon">📖</div>
@@ -1879,9 +1960,14 @@
       <p class="cs-desc">This stage will generate fully tailored recommendations once you've completed Stages 2 and 3. Your profile from Stage 1 is already informing what will appear here.</p>
     </div>
 
+    <blockquote class="scripture-anchor">
+      "As for us, we cannot help speaking about what we have seen and heard."
+      <cite>— Acts 4:20</cite>
+    </blockquote>
+
     <div style="text-align:center">
-      <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:1rem">Ready to move forward in your journey?</p>
-      <button class="btn-primary" onclick="goToScreen('welcome')">Explore the Full Campaign →</button>
+      <p class="telos-line">This isn't the end of the journey — it's an invitation to keep walking, at your own pace.</p>
+      <button class="btn-primary" onclick="goToScreen('welcome')">Explore the full campaign →</button>
     </div>
   </div>
 </div>
