@@ -178,10 +178,13 @@
   .welcome-cards {
     padding: 2rem 1.5rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    max-width: 860px;
+    max-width: 720px;
     margin: 0 auto;
+  }
+  @media (max-width: 480px) {
+    .welcome-cards { grid-template-columns: 1fr; }
   }
   .what-you-gain-card {
     background: var(--warm-white);
@@ -1205,7 +1208,8 @@
   .coalition-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0.75rem;
+    gap: 1rem;
+    align-items: center;
   }
   @media (max-width: 720px) {
     .coalition-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1214,20 +1218,27 @@
     background: var(--warm-white);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1rem 0.85rem;
+    padding: 1.5rem 1rem;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 110px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .coalition-name {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 0.25rem;
+  .coalition-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
   }
-  .coalition-desc {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    line-height: 1.4;
+  .coalition-logo {
+    max-height: 64px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: none;
   }
 
   /* ─── CAMPAIGN VOICE ALIGNMENT — additions ─── */
@@ -1315,7 +1326,7 @@
       <span>Campaign</span>
     </div>
   </a>
-  <div class="nav-coalition" id="nav-coalition">CCDA · NaLEC · World Relief · Undivided</div>
+  <div class="nav-coalition" id="nav-coalition">CCDA · NaLEC · UNDIVIDED · World Relief</div>
 </nav>
 
 <!-- STAGE TAB BAR (hidden initially) -->
@@ -1450,22 +1461,18 @@
     <div class="section-label">A shared coalition initiative</div>
     <h2 class="section-title">Built together by four trusted organizations.</h2>
     <div class="coalition-grid">
-      <div class="coalition-card">
-        <div class="coalition-name">CCDA</div>
-        <div class="coalition-desc">Christian Community Development Association</div>
-      </div>
-      <div class="coalition-card">
-        <div class="coalition-name">NaLEC</div>
-        <div class="coalition-desc">National Latino Evangelical Coalition</div>
-      </div>
-      <div class="coalition-card">
-        <div class="coalition-name">Undivided</div>
-        <div class="coalition-desc">Reconciliation across difference</div>
-      </div>
-      <div class="coalition-card">
-        <div class="coalition-name">World Relief</div>
-        <div class="coalition-desc">Walking with the vulnerable</div>
-      </div>
+      <a class="coalition-card" href="https://ccda.org/" target="_blank" rel="noopener noreferrer" aria-label="CCDA — Christian Community Development Association">
+        <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/christian_community_development_association_ccda__logo.png" alt="CCDA">
+      </a>
+      <a class="coalition-card" href="https://www.nalec.org/" target="_blank" rel="noopener noreferrer" aria-label="NaLEC — National Latino Evangelical Coalition">
+        <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/HR-Logo_PNG-1.avif" alt="NaLEC">
+      </a>
+      <a class="coalition-card" href="https://undivided.us/" target="_blank" rel="noopener noreferrer" aria-label="UNDIVIDED">
+        <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/undivided-small-scale-u-full-color-dark-rgb-1000px-w-144ppi.png" alt="UNDIVIDED">
+      </a>
+      <a class="coalition-card" href="https://worldrelief.org/" target="_blank" rel="noopener noreferrer" aria-label="World Relief">
+        <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/79051.png" alt="World Relief">
+      </a>
     </div>
   </section>
 
@@ -1949,7 +1956,7 @@
         <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🌐</div>
         <div>
           <div style="font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:2px">Ecosystem Connection</div>
-          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">Pathways into trusted partner organizations—World Relief, CCDA, NaLEC, Undivided, and local opportunities near you.</div>
+          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">Pathways into trusted partner organizations—CCDA, NaLEC, UNDIVIDED, World Relief, and local opportunities near you.</div>
         </div>
       </div>
     </div>
