@@ -76,7 +76,7 @@
     font-family: 'Libre Baskerville', serif;
     font-size: 15px;
     font-weight: 600;
-    color: #fff;
+    color: var(--warm-white);
     line-height: 1.2;
   }
   .nav-title span {
@@ -133,7 +133,7 @@
     font-family: 'Libre Baskerville', serif;
     font-size: clamp(1.8rem, 5vw, 2.8rem);
     font-weight: 600;
-    color: #fff;
+    color: var(--warm-white);
     line-height: 1.25;
     margin-bottom: 1.25rem;
     position: relative;
@@ -148,7 +148,7 @@
   }
   .btn-primary {
     background: var(--gold);
-    color: #fff;
+    color: var(--warm-white);
     border: none;
     padding: 0.85rem 2.2rem;
     border-radius: 50px;
@@ -173,7 +173,7 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-  .btn-secondary:hover { background: var(--navy); color: #fff; }
+  .btn-secondary:hover { background: var(--navy); color: var(--warm-white); }
 
   .welcome-cards {
     padding: 2rem 1.5rem;
@@ -253,7 +253,7 @@
     width: 28px; height: 28px;
     border-radius: 50%;
     background: var(--gold);
-    color: #fff;
+    color: var(--warm-white);
     font-size: 13px;
     font-weight: 500;
     display: flex;
@@ -397,7 +397,7 @@
     content: '';
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: #fff;
+    background: var(--warm-white);
     opacity: 0;
     transition: opacity 0.15s;
   }
@@ -477,8 +477,8 @@
   .check-box::after {
     content: '';
     width: 9px; height: 5px;
-    border-left: 2px solid #fff;
-    border-bottom: 2px solid #fff;
+    border-left: 2px solid var(--warm-white);
+    border-bottom: 2px solid var(--warm-white);
     transform: rotate(-45deg) translate(1px, -1px);
     opacity: 0;
     transition: opacity 0.15s;
@@ -514,7 +514,7 @@
   .btn-next {
     flex: 1;
     background: var(--navy);
-    color: #fff;
+    color: var(--warm-white);
     border: none;
     padding: 0.85rem;
     border-radius: 50px;
@@ -597,7 +597,7 @@
   .results-name {
     font-family: 'Libre Baskerville', serif;
     font-size: clamp(1.5rem, 4vw, 2.2rem);
-    color: #fff;
+    color: var(--warm-white);
     margin-bottom: 0.35rem;
   }
   .results-tagline {
@@ -807,7 +807,7 @@
     border-radius: var(--radius-lg);
     padding: 1.75rem;
     margin-bottom: 1.5rem;
-    color: #fff;
+    color: var(--warm-white);
   }
   .next-step-label {
     font-size: 11px;
@@ -831,7 +831,7 @@
   }
   .btn-gold {
     background: var(--gold);
-    color: #fff;
+    color: var(--warm-white);
     border: none;
     padding: 0.75rem 1.75rem;
     border-radius: 50px;
@@ -855,7 +855,7 @@
     border-radius: var(--radius-lg);
     padding: 2rem;
     margin-bottom: 1.5rem;
-    color: #fff;
+    color: var(--warm-white);
   }
   .stage-num {
     font-size: 11px;
@@ -996,7 +996,7 @@
   }
   .btn-secondary-light {
     background: transparent;
-    color: #fff;
+    color: var(--warm-white);
     border: 1.5px solid rgba(255,255,255,0.45);
     padding: 0.85rem 1.8rem;
     border-radius: 50px;
@@ -1175,7 +1175,7 @@
     top: 1rem;
     right: 1rem;
     background: var(--gold);
-    color: #fff;
+    color: var(--warm-white);
     font-size: 10px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -1468,7 +1468,7 @@
   <div class="welcome-hero">
     <div class="hero-eyebrow">The Faithful Witness Discernment Experience</div>
     <h1 class="hero-title">You've felt the tension on immigration.<br>There's a faithful, Gospel-rooted way through.</h1>
-    <p class="hero-sub">A guided, prayerful journey for Christians who want to respond to immigration with clarity and conviction — shaped by Scripture, by the real stories of our neighbors, and by who God made you to be.</p>
+    <p class="hero-sub">A guided, prayerful journey for Christians who want to respond to immigration with clarity and conviction, shaped by Scripture, by the real stories of our neighbors, and by who God made you to be.</p>
     <div class="hero-cta-row">
       <button class="btn-primary" onclick="goToScreen('assessment')">Begin the Journey</button>
       <button class="btn-secondary-light" onclick="document.getElementById('for-teams').scrollIntoView({behavior:'smooth', block:'start'})">Bringing a group?</button>
@@ -1490,7 +1490,7 @@
     <div class="problem-cards">
       <div class="problem-card">
         <div class="problem-h">Avoid the topic.</div>
-        <div class="problem-p">It feels too charged. Too political. So we say nothing — and the people God put in our path stay invisible to us.</div>
+        <div class="problem-p">It feels too charged. Too political. So we say nothing, and the people God put in our path stay invisible to us.</div>
       </div>
       <div class="problem-divider">or</div>
       <div class="problem-card">
@@ -1498,8 +1498,8 @@
         <div class="problem-p">We feel like we should say <em>something</em>. But we don't have the framework, the relationships, or the next step.</div>
       </div>
     </div>
-    <p class="problem-summary">Neither leads to sustained, faithful engagement. <strong>Faithful Witness creates the missing middle</strong> — formation before mobilization, discernment before action.</p>
-    <p class="neighbor-welcome">And some who come here aren't deciding how to respond to immigrants — they <strong>are</strong> immigrants, or walk closely with those who are. You are not a topic. You are our neighbor, and this journey is for you too.</p>
+    <p class="problem-summary">Neither leads to sustained, faithful engagement. <strong>Faithful Witness creates the missing middle</strong>. Formation before mobilization, discernment before action.</p>
+    <p class="neighbor-welcome">And some who come here aren't deciding how to respond to immigrants. They <strong>are</strong> immigrants, or walk closely with those who are. You are not a topic. You are our neighbor, and this journey is for you too.</p>
   </section>
 
   <!-- ─── WHAT YOU'LL GAIN ─── -->
@@ -1510,12 +1510,12 @@
       <div class="what-you-gain-card">
         <div class="gain-label">Clarity</div>
         <div class="gain-title">Grounded Understanding</div>
-        <div class="gain-desc">Beyond headlines and assumptions — a deeper grasp of who immigrants are and what Scripture says.</div>
+        <div class="gain-desc">Beyond headlines and assumptions, a deeper grasp of who immigrants are and what Scripture says.</div>
       </div>
       <div class="what-you-gain-card">
         <div class="gain-label">Conviction</div>
         <div class="gain-title">Rooted in Scripture</div>
-        <div class="gain-desc">A response shaped by the way of Jesus — courageous, compassionate, formed in reflection, not reaction.</div>
+        <div class="gain-desc">A response shaped by the way of Jesus. Courageous, compassionate, formed in reflection, not reaction.</div>
       </div>
       <div class="what-you-gain-card">
         <div class="gain-label">Direction</div>
@@ -1525,7 +1525,7 @@
       <div class="what-you-gain-card">
         <div class="gain-label">Action</div>
         <div class="gain-title">A Real Next Step</div>
-        <div class="gain-desc">2–3 specific, realistic actions matched to who you are — routed to trusted partner organizations.</div>
+        <div class="gain-desc">2–3 specific, realistic actions matched to who you are, routed to trusted partner organizations.</div>
       </div>
     </div>
   </section>
@@ -1543,7 +1543,7 @@
       <div class="journey-step-v2">
         <div class="step-num">2</div>
         <div class="step-name">Guided Formation</div>
-        <div class="step-desc">Scripture, theology, and real stories — shaped by your starting point.</div>
+        <div class="step-desc">Scripture, theology, and real stories, shaped by your starting point.</div>
       </div>
       <div class="journey-step-v2">
         <div class="step-num">3</div>
@@ -1566,7 +1566,7 @@
       <div class="audience-card">
         <div class="audience-icon">✦</div>
         <h3 class="audience-h">Doing this on your own</h3>
-        <p class="audience-p">Walk through the journey at your own pace. The experience meets you where you are and guides you to a real next faithful step — yours, not someone else's.</p>
+        <p class="audience-p">Walk through the journey at your own pace. The experience meets you where you are and guides you to a real next faithful step. Yours, not someone else's.</p>
         <button class="btn-secondary" onclick="goToScreen('assessment')">Begin the Journey →</button>
       </div>
       <div class="audience-card audience-card-team">
@@ -1583,10 +1583,10 @@
     <div class="section-label">A shared coalition initiative</div>
     <h2 class="section-title">Built together by four trusted organizations.</h2>
     <div class="coalition-grid">
-      <a class="coalition-card" href="https://ccda.org/" target="_blank" rel="noopener noreferrer" aria-label="CCDA — Christian Community Development Association">
+      <a class="coalition-card" href="https://ccda.org/" target="_blank" rel="noopener noreferrer" aria-label="CCDA: Christian Community Development Association">
         <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/christian_community_development_association_ccda__logo.png" alt="CCDA">
       </a>
-      <a class="coalition-card" href="https://www.nalec.org/" target="_blank" rel="noopener noreferrer" aria-label="NaLEC — National Latino Evangelical Coalition">
+      <a class="coalition-card" href="https://www.nalec.org/" target="_blank" rel="noopener noreferrer" aria-label="NaLEC: National Latino Evangelical Coalition">
         <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/HR-Logo_PNG-1.avif" alt="NaLEC">
       </a>
       <a class="coalition-card" href="https://undivided.us/" target="_blank" rel="noopener noreferrer" aria-label="UNDIVIDED">
@@ -1919,7 +1919,7 @@
 
       <div id="email-error" style="display:none;background:#fff5f5;border:1px solid #ffc9c9;color:#c0392b;border-radius:var(--radius);padding:0.75rem 1rem;font-size:0.85rem;margin-bottom:1rem;">Please enter a valid email address to continue.</div>
 
-      <button onclick="submitEmail()" style="width:100%;background:var(--navy);color:#fff;border:none;padding:0.9rem;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--navy-light)'" onmouseout="this.style.background='var(--navy)'">Send My Results →</button>
+      <button onclick="submitEmail()" style="width:100%;background:var(--navy);color:var(--warm-white);border:none;padding:0.9rem;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--navy-light)'" onmouseout="this.style.background='var(--navy)'">Send My Results →</button>
 
       <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:0.85rem;">We respect your privacy. No spam, ever. You can unsubscribe anytime.</p>
     </div>
@@ -1963,7 +1963,7 @@
         <p>Your reflection is being prepared...</p>
       </div>
       <div class="narrative-source">
-        <span style="color:var(--text-muted); font-size:12px; font-style:normal;">Based on what you shared, here is what we see in you · Not a label—a starting point</span>
+        <span style="color:var(--text-muted); font-size:12px; font-style:normal;">Based on what you shared, here is what we see in you · Not a label, a starting point</span>
       </div>
     </div>
 
@@ -1988,7 +1988,7 @@
         <div>
           <div class="one-on-one-label">Personal Guidance</div>
           <h3 class="one-on-one-title">Connect with a Faithful Witness Guide</h3>
-          <p class="one-on-one-desc">You're ready to move. A trained guide can sit with you—helping you clarify your next steps, connect to the right opportunities, and move forward with confidence. This conversation is free, relational, and tailored entirely to you.</p>
+          <p class="one-on-one-desc">You're ready to move. A trained guide can sit with you, helping you clarify your next steps, connect to the right opportunities, and move forward with confidence. This conversation is free, relational, and tailored entirely to you.</p>
           <button class="btn-gold" onclick="alert('1:1 scheduling will be integrated here — e.g. Calendly or a contact form.')">Schedule a Conversation →</button>
         </div>
       </div>
@@ -2006,7 +2006,7 @@
     </div>
 
     <div style="text-align:center; padding-top: 0.5rem;">
-      <p style="font-size:0.9rem; color:var(--text-secondary); max-width:400px; margin: 0 auto 0.85rem;">Know someone—a friend, a small group, a congregation—who needs this journey? You can be the one who opens the door for them.</p>
+      <p style="font-size:0.9rem; color:var(--text-secondary); max-width:400px; margin: 0 auto 0.85rem;">Know someone (a friend, a small group, a congregation) who needs this journey? You can be the one who opens the door for them.</p>
       <button class="btn-secondary" style="font-size:0.9rem; padding: 0.65rem 1.5rem;">Share This Experience</button>
     </div>
 
@@ -2021,7 +2021,7 @@
     <div class="stage-hero-banner">
       <div class="stage-num">Stage 2 of 4</div>
       <h2 class="stage-name">Guided Formation</h2>
-      <p class="stage-desc">Shape how you understand immigration and how you posture yourself toward it as a follower of Jesus — a posture of courage, compassion, and deep love — through Scripture, story, and reflection.</p>
+      <p class="stage-desc">Shape how you understand immigration and how you posture yourself toward it as a follower of Jesus (a posture of courage, compassion, and deep love) through Scripture, story, and reflection.</p>
       <p class="values-strip">We choose hope over despair · courage over silence · nonviolence over fear · love over division.</p>
     </div>
     <div class="coming-soon-card">
@@ -2124,7 +2124,7 @@
     <div class="stage-hero-banner">
       <div class="stage-num">Stage 4 of 4</div>
       <h2 class="stage-name">Personalized Next Steps</h2>
-      <p class="stage-desc">Guided into clear, supported action—connected to the right opportunities, people, and pathways for faithful engagement.</p>
+      <p class="stage-desc">Guided into clear, supported action, connected to the right opportunities, people, and pathways for faithful engagement.</p>
     </div>
 
     <h3 class="section-title-sm" style="margin-bottom:1rem">How Your Next Steps Are Shaped</h3>
@@ -2147,7 +2147,7 @@
         <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🌐</div>
         <div>
           <div style="font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:2px">Ecosystem Connection</div>
-          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">Pathways into trusted partner organizations—CCDA, NaLEC, UNDIVIDED, World Relief, and local opportunities near you.</div>
+          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">Pathways into trusted partner organizations: CCDA, NaLEC, UNDIVIDED, World Relief, and local opportunities near you.</div>
         </div>
       </div>
     </div>
@@ -2164,7 +2164,7 @@
     </blockquote>
 
     <div style="text-align:center">
-      <p class="telos-line">This isn't the end of the journey — it's an invitation to keep walking, at your own pace.</p>
+      <p class="telos-line">This isn't the end of the journey. It's an invitation to keep walking, at your own pace.</p>
       <button class="btn-primary" onclick="goToScreen('welcome')">Explore the full campaign →</button>
     </div>
   </div>
