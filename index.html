@@ -1728,6 +1728,261 @@
     font-style: italic;
   }
 
+  /* ─── STAGE 4 — Interim Page (v1) ───
+     Replaces the v3 "Coming Soon" placeholder. Continuous with the
+     contemplative tone of Stage 3: more white space, quieter headings,
+     no marketing flourish. Section 3 (#s4-interim-persistent) is the
+     team-formation invitation. It is designed to survive the catalog
+     launch: when ENABLE_STAGE_4 flips, the recommendation cards will
+     slot in ABOVE #s4-interim-persistent without changes to it. */
+  .s4-interim {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 5rem;
+    color: var(--text-primary);
+  }
+  .s4-interim-opener {
+    margin-bottom: 4rem;
+  }
+  .s4-interim-opener p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+  }
+  .s4-interim-opener p:last-child { margin-bottom: 0; }
+
+  .s4-interim-section {
+    margin-bottom: 3.75rem;
+  }
+  .s4-interim-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.85rem;
+  }
+  .s4-interim-h {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.4rem;
+    color: var(--navy);
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+  }
+  .s4-interim-section p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+  .s4-interim-section p:last-child { margin-bottom: 0; }
+
+  .s4-coalition-strip {
+    margin-top: 2rem;
+  }
+
+  .s4-profile-line {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0 1.75rem;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--navy);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .s4-team-cta-wrap {
+    text-align: center;
+    margin: 2.25rem 0 1rem;
+  }
+  .s4-team-cta {
+    background: var(--navy);
+    color: var(--warm-white);
+    border: none;
+    padding: 1rem 2.25rem;
+    border-radius: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+    text-decoration: none;
+  }
+  .s4-team-cta:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+  .s4-guide-aside {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px dashed var(--border);
+    text-align: center;
+  }
+  .s4-guide-aside p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .s4-guide-link {
+    background: transparent;
+    border: none;
+    color: var(--navy);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 0.25rem 0.5rem;
+  }
+  .s4-guide-link:hover { color: var(--gold); }
+
+  .s4-benediction {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-light);
+  }
+  .s4-benediction p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+  .s4-acts {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--navy);
+    line-height: 1.7;
+    border-left: 2px solid var(--gold);
+    padding: 0.75rem 1.25rem;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .s4-acts cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── INVITE SHEET (modal) ─── */
+  .invite-sheet-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,46,0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 1.5rem;
+  }
+  .invite-sheet-backdrop.open { display: flex; }
+  .invite-sheet {
+    background: var(--warm-white);
+    border-radius: var(--radius-lg);
+    max-width: 460px;
+    width: 100%;
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .invite-sheet h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+  .invite-sheet-sub {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .invite-sheet-link-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .invite-sheet-link {
+    flex: 1;
+    padding: 0.7rem 0.85rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    background: var(--cream);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    outline: none;
+  }
+  .invite-sheet-actions {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .invite-action {
+    background: var(--warm-white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--navy);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: border-color 0.18s, background 0.18s;
+  }
+  .invite-action:hover { border-color: var(--gold); background: var(--gold-bg); }
+  .invite-action .action-icon {
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .invite-action-copied {
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-top: 0.5rem;
+    text-align: center;
+    min-height: 1.2em;
+  }
+  .invite-sheet-close {
+    position: absolute;
+    top: 0.85rem; right: 0.85rem;
+    background: transparent;
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-muted);
+    line-height: 1;
+  }
+  .invite-sheet-close:hover { background: var(--cream); color: var(--navy); }
+
+  @media (max-width: 480px) {
+    .s4-interim { padding: 2.5rem 1.25rem 4rem; }
+    .s4-interim-h { font-size: 1.25rem; }
+    .s4-team-cta { padding: 0.9rem 1.5rem; width: 100%; max-width: 320px; }
+  }
+
   /* Solidarity acknowledgment — flag-gated, only renders when ENABLE_IMPACT_QUESTION is true AND impact_proximity is 1 or 2 */
   .solidarity-ack {
     background: var(--gold-bg);
@@ -2590,52 +2845,114 @@
      A single JS init swaps which is visible.
 ══════════════════════════════════════════ -->
 <div id="screen-stage4" class="screen">
-  <div class="stage-shell" id="stage4-placeholder">
-    <div class="stage-hero-banner">
-      <div class="stage-num">Stage 4 of 4</div>
-      <h2 class="stage-name">Personalized Next Steps</h2>
-      <p class="stage-desc">Guided into clear, supported action, connected to the right opportunities, people, and pathways for faithful engagement.</p>
-    </div>
+  <!-- INTERIM PAGE (v1) — replaces the "Coming Soon" placeholder.
+       Lives in #stage4-placeholder so the existing applyStage4FlagState()
+       toggle continues to work unchanged. When the catalog launches,
+       Section 3 (#s4-interim-persistent) and Section 4 will survive;
+       recommendation cards from #stage4-live will slot in ABOVE Section 3. -->
+  <div id="stage4-placeholder">
+    <article class="s4-interim">
 
-    <h3 class="section-title-sm" style="margin-bottom:1rem">How Your Next Steps Are Shaped</h3>
-    <div style="display:grid; gap:0.75rem; margin-bottom:1.5rem">
-      <div style="background:var(--warm-white); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; display:flex; gap:0.85rem; align-items:flex-start;">
-        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">✦</div>
-        <div>
-          <div style="font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:2px">Personalized Recommendations</div>
-          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">2–3 curated next steps matched to your profile, motivations, gifting, and readiness level.</div>
+      <!-- OPENER (universal) -->
+      <header class="s4-interim-opener">
+        <p>You've named real things today.</p>
+        <p>What you sense, what you can't shake, what you keep returning to. That's not nothing. It's the shape of how God may be moving in you. The journey from here is about responding faithfully to what's been stirred, in the time and place you actually live.</p>
+        <p>Here's what comes next.</p>
+      </header>
+
+      <!-- SECTION 1 — A growing national network -->
+      <section class="s4-interim-section">
+        <div class="s4-interim-eyebrow">Section 1</div>
+        <h2 class="s4-interim-h">A growing national network.</h2>
+        <p>The Faithful Witness Campaign is building a national network of churches, ministries, and organizations doing the work of welcome, accompaniment, advocacy, and pastoral care across the country. As the network grows, your discernment will route you to specific opportunities matched to who you are and what you sense you're being called toward. A real next step with a real organization in your community.</p>
+        <p>That network is being built right now, in partnership with CCDA, NaLEC, World Relief, and Undivided. The first set of partners will begin appearing here soon.</p>
+
+        <div class="coalition-grid s4-coalition-strip">
+          <a class="coalition-card" href="https://ccda.org/" target="_blank" rel="noopener noreferrer" aria-label="CCDA: Christian Community Development Association">
+            <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/christian_community_development_association_ccda__logo.png" alt="CCDA">
+          </a>
+          <a class="coalition-card" href="https://www.nalec.org/" target="_blank" rel="noopener noreferrer" aria-label="NaLEC: National Latino Evangelical Coalition">
+            <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/HR-Logo_PNG-1.avif" alt="NaLEC">
+          </a>
+          <a class="coalition-card" href="https://undivided.us/" target="_blank" rel="noopener noreferrer" aria-label="UNDIVIDED">
+            <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/undivided-small-scale-u-full-color-dark-rgb-1000px-w-144ppi.png" alt="UNDIVIDED">
+          </a>
+          <a class="coalition-card" href="https://worldrelief.org/" target="_blank" rel="noopener noreferrer" aria-label="World Relief">
+            <img class="coalition-logo" src="https://faithfulwitness.us/wp-content/uploads/2026/03/79051.png" alt="World Relief">
+          </a>
         </div>
-      </div>
-      <div style="background:var(--warm-white); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; display:flex; gap:0.85rem; align-items:flex-start;">
-        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">👤</div>
-        <div>
-          <div style="font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:2px">Guided 1:1 Conversation</div>
-          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">Connect with a trained guide who can help you clarify, confirm, and take your specific next step with confidence.</div>
+      </section>
+
+      <!-- SECTION 2 — The truer first step (theological hinge) -->
+      <section class="s4-interim-section">
+        <div class="s4-interim-eyebrow">Section 2</div>
+        <h2 class="s4-interim-h">The truer first step.</h2>
+        <p>But before any program, before any partnership, before any catalog. People.</p>
+        <p>Faithful witness has never been a solo practice. The earliest church didn't disciple individuals into private convictions. It gathered them into communities that lived out a different way together. What you've named today is more sustainable, more discerning, and more honest when it's named alongside others.</p>
+        <p>So while the network is being built, here is the first step we'd ask you to take.</p>
+      </section>
+
+      <!-- SECTION 3 — Form a team, walk this together
+           This block (#s4-interim-persistent) is the component that survives
+           the catalog launch. When ENABLE_STAGE_4 flips, recommendation cards
+           will be injected above this element; Section 3 and Section 4 stay. -->
+      <section class="s4-interim-section" id="s4-interim-persistent">
+        <div class="s4-interim-eyebrow">Section 3</div>
+        <h2 class="s4-interim-h">Form a team. Three to five people. Walk this together.</h2>
+
+        <!-- Profile-conditional sentence — populated by JS from PROFILE_TEAM_LINES. -->
+        <div class="s4-profile-line" id="s4-profile-line">
+          You're at the beginning. The first steps are easier with people who are also at the beginning.
         </div>
-      </div>
-      <div style="background:var(--warm-white); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; display:flex; gap:0.85rem; align-items:flex-start;">
-        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🌐</div>
-        <div>
-          <div style="font-size:0.9rem;font-weight:500;color:var(--navy);margin-bottom:2px">Ecosystem Connection</div>
-          <div style="font-size:0.83rem;color:var(--text-secondary);line-height:1.5">Pathways into trusted partner organizations: CCDA, NaLEC, UNDIVIDED, World Relief, and local opportunities near you.</div>
+
+        <p>Invite three to five others to take this same journey. When they complete it, your team forms automatically. Then walk through what comes next together. We'll send you a short guide for hosting the first conversation. As the partner network grows, your team will move into it as a team, not as scattered individuals.</p>
+
+        <div class="s4-team-cta-wrap">
+          <button class="s4-team-cta" id="s4-team-invite-btn" onclick="openTeamInviteSheet()">Invite people to your team &rarr;</button>
         </div>
+
+        <div class="s4-guide-aside">
+          <p>If you'd rather start with one conversation, you can also connect with a Faithful Witness guide. Someone who's walked this and can think out loud with you.</p>
+          <button class="s4-guide-link" onclick="openGuideConversation()">Connect with a guide &rarr;</button>
+        </div>
+      </section>
+
+      <!-- SECTION 4 — Closing benediction (universal) -->
+      <section class="s4-benediction">
+        <p>You came to this honestly. Whatever shape your response takes, may it be courageous, faithful, and grounded in the people God has placed around you. We're glad you said yes to the conversation.</p>
+        <blockquote class="s4-acts">
+          "As for us, we cannot help speaking about what we have seen and heard."
+          <cite>&mdash; Acts 4:20</cite>
+        </blockquote>
+      </section>
+
+    </article>
+  </div>
+
+  <!-- Invite sheet (modal) — opens from the team invite CTA. -->
+  <div class="invite-sheet-backdrop" id="invite-sheet-backdrop" onclick="onInviteBackdropClick(event)">
+    <div class="invite-sheet" onclick="event.stopPropagation()">
+      <button class="invite-sheet-close" onclick="closeTeamInviteSheet()" aria-label="Close">&times;</button>
+      <h3>Invite your team.</h3>
+      <p class="invite-sheet-sub">Share this link with three to five people you'd want to walk this with. When they complete the discernment, you'll be connected as a team.</p>
+      <div class="invite-sheet-link-row">
+        <input type="text" class="invite-sheet-link" id="invite-sheet-link" readonly />
       </div>
-    </div>
-
-    <div class="coming-soon-card">
-      <div class="cs-icon">🗺️</div>
-      <h3 class="cs-title">Full Personalization Coming Soon</h3>
-      <p class="cs-desc">This stage will generate fully tailored recommendations once you've completed Stages 2 and 3. Your profile from Stage 1 is already informing what will appear here.</p>
-    </div>
-
-    <blockquote class="scripture-anchor">
-      "As for us, we cannot help speaking about what we have seen and heard."
-      <cite>— Acts 4:20</cite>
-    </blockquote>
-
-    <div style="text-align:center">
-      <p class="telos-line">This isn't the end of the journey. It's an invitation to keep walking, at your own pace.</p>
-      <button class="btn-primary" onclick="goToScreen('welcome')">Explore the full campaign &rarr;</button>
+      <div class="invite-sheet-actions">
+        <button class="invite-action" onclick="copyInviteLink()">
+          <span class="action-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+          Copy invite link
+        </button>
+        <button class="invite-action" onclick="emailInvite()">
+          <span class="action-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          Send an email invite
+        </button>
+        <button class="invite-action" id="invite-native-share" onclick="nativeShareInvite()" style="display:none">
+          <span class="action-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+          Share via&hellip;
+        </button>
+      </div>
+      <div class="invite-action-copied" id="invite-copied">&nbsp;</div>
     </div>
   </div>
 
@@ -3726,12 +4043,148 @@ function routeToStage4() {
   document.getElementById('tab-4').classList.add('active');
   applyStage4FlagState();
 
+  // The interim page (#stage4-placeholder) is what participants see while
+  // ENABLE_STAGE_4 is false. Render its profile-conditional team line every
+  // time we land here. When the catalog launches and the flag flips, the
+  // recommendation cards from #stage4-live will surface and the interim's
+  // Section 3 (#s4-interim-persistent) will be the integration point.
+  renderS4InterimProfileLine();
+
   if (ENABLE_STAGE_4) {
     renderStage4Mirror();
     positionStage4GuideOffer();
     renderStage4TeamPrompt();
     requestStage4Recommendations();
   }
+}
+
+// ════════════════════════════════════════════════════════════════════
+// STAGE 4 — INTERIM PAGE (v1)
+// Five profile-keyed team-formation lines (verbatim from Drive doc).
+// One renders in Section 3 based on profile_assigned. If the value is
+// missing or unrecognized, default to open_explorer.
+// ════════════════════════════════════════════════════════════════════
+const PROFILE_TEAM_LINES = {
+  open_explorer:
+    "You're at the beginning. The first steps are easier with people who are also at the beginning.",
+  thoughtful_learner:
+    "What you're learning is deepened in conversation. Find others who want to think this through with you.",
+  careful_seeker:
+    "You showed up to a hard conversation. You don't have to keep showing up alone.",
+  ready_responder:
+    "Action without community burns out. The work you're ready for will last longer if you're not the only one doing it.",
+  faithful_witness:
+    "The people you're already walking with are your team. Bring them through this. Lead them well."
+};
+
+function renderS4InterimProfileLine() {
+  const el = document.getElementById('s4-profile-line');
+  if (!el) return;
+  const key = answers['profile_assigned_key'] || answers['profile-type'] || null;
+  const line = PROFILE_TEAM_LINES[key] || PROFILE_TEAM_LINES.open_explorer;
+  el.textContent = line;
+}
+
+// ── Invite share sheet ─────────────────────────────────────────────
+function getInviteLink() {
+  // Anchor on the production domain so links work regardless of the host
+  // the participant is on (e.g. preview deploys or local).
+  const base = 'https://faithful-witness.vercel.app/';
+  const pid = participantId || '';
+  return base + (pid ? '?ref=' + encodeURIComponent(pid) : '');
+}
+
+function getInviteEmailSubject() {
+  return 'I think you would appreciate this';
+}
+
+function getInviteEmailBody() {
+  const link = getInviteLink();
+  return (
+    "I just walked through the Faithful Witness Discernment Experience and " +
+    "thought of you. It is a short, prayerful reflection on how we as Christians " +
+    "are being invited to respond to immigration in our communities. There is no " +
+    "pressure and no agenda. It is just space to listen.\n\n" +
+    "If you have time, I would value your reflections.\n\n" +
+    link + "\n\n" +
+    "Walking together,\n"
+  );
+}
+
+function openTeamInviteSheet() {
+  const backdrop = document.getElementById('invite-sheet-backdrop');
+  const linkEl   = document.getElementById('invite-sheet-link');
+  const copied   = document.getElementById('invite-copied');
+  const nativeBtn = document.getElementById('invite-native-share');
+  if (!backdrop) return;
+  if (linkEl)  linkEl.value = getInviteLink();
+  if (copied)  copied.textContent = ' ';
+  // Show the "Share via..." action only when the Web Share API exists.
+  if (nativeBtn && typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+    nativeBtn.style.display = 'flex';
+  } else if (nativeBtn) {
+    nativeBtn.style.display = 'none';
+  }
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTeamInviteSheet() {
+  const backdrop = document.getElementById('invite-sheet-backdrop');
+  if (!backdrop) return;
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function onInviteBackdropClick(e) {
+  // Click on the backdrop itself (not bubbled from inside the sheet) closes.
+  if (e.target && e.target.id === 'invite-sheet-backdrop') closeTeamInviteSheet();
+}
+
+function copyInviteLink() {
+  const link = getInviteLink();
+  const copied = document.getElementById('invite-copied');
+  const finish = (ok) => {
+    if (copied) copied.textContent = ok ? 'Copied. Send it to three to five people.' : 'Press ⌘ C to copy.';
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(link).then(() => finish(true)).catch(() => finish(false));
+  } else {
+    // Fallback: select the input so the user can copy manually.
+    const el = document.getElementById('invite-sheet-link');
+    if (el) { el.focus(); el.select(); }
+    finish(false);
+  }
+}
+
+function emailInvite() {
+  const href = 'mailto:?subject=' + encodeURIComponent(getInviteEmailSubject()) +
+               '&body=' + encodeURIComponent(getInviteEmailBody());
+  window.location.href = href;
+}
+
+function nativeShareInvite() {
+  if (typeof navigator === 'undefined' || typeof navigator.share !== 'function') return;
+  navigator.share({
+    title: 'Faithful Witness',
+    text: 'A short, prayerful reflection on how we are invited to respond to immigration.',
+    url: getInviteLink()
+  }).catch(() => { /* user dismissed; no-op */ });
+}
+
+// ── Guide conversation ───────────────────────────────────────────
+// No real scheduling integration yet. Prefill a warm mailto to the
+// campaign's verified address so guide requests reach a human until a
+// Calendly / form is wired in.
+function openGuideConversation() {
+  const subject = 'Faithful Witness guide conversation';
+  const body =
+    "Hi, I just completed the Faithful Witness Discernment Experience. " +
+    "I would like to talk through what came up with a guide.\n\n" +
+    "A little context (feel free to skip):\n\n";
+  window.location.href = 'mailto:discernment@faithfulwitness.us' +
+    '?subject=' + encodeURIComponent(subject) +
+    '&body=' + encodeURIComponent(body);
 }
 
 function applyStage4FlagState() {
