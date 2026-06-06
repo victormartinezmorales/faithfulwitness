@@ -1308,6 +1308,128 @@
     text-align: center;
     font-style: italic;
   }
+
+  /* ─── ASSESSMENT v3 — slider + form-field additions ─── */
+  .perspective-slider-wrap {
+    background: var(--warm-white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.35rem 1.5rem 1.1rem;
+  }
+  .perspective-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--gold-pale);
+    border-radius: 3px;
+    outline: none;
+    margin: 0.4rem 0 0.55rem;
+    cursor: pointer;
+    transition: opacity 0.18s;
+  }
+  .perspective-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    background: var(--gold);
+    border: 3px solid var(--warm-white);
+    box-shadow: 0 2px 8px rgba(45,58,107,0.18);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .perspective-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    background: var(--gold);
+    border: 3px solid var(--warm-white);
+    box-shadow: 0 2px 8px rgba(45,58,107,0.18);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .perspective-slider:disabled { opacity: 0.4; cursor: not-allowed; }
+  .perspective-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+    margin-top: 0.35rem;
+  }
+  .perspective-labels span:nth-child(2) { text-align: center; }
+  .perspective-labels span:nth-child(3) { text-align: right; }
+  .perspective-readout {
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--navy);
+    margin-top: 0.85rem;
+  }
+  .perspective-readout.muted { color: var(--text-muted); font-style: italic; }
+  .perspective-unsure-wrap { margin-top: 1rem; }
+
+  .q-select, .q-textarea, .q-textinput {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--warm-white);
+    outline: none;
+    transition: border-color 0.18s;
+  }
+  .q-select:focus, .q-textarea:focus, .q-textinput:focus { border-color: var(--gold); }
+  .q-textarea { min-height: 90px; resize: vertical; line-height: 1.55; }
+  .q-helper {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    line-height: 1.5;
+  }
+  .q-privacy-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    padding: 0.6rem 0.85rem;
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    line-height: 1.5;
+  }
+
+  /* Solidarity acknowledgment — flag-gated, only renders when ENABLE_IMPACT_QUESTION is true AND impact_proximity is 1 or 2 */
+  .solidarity-ack {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem auto;
+    max-width: 640px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .solidarity-support-block {
+    background: var(--warm-white);
+    border: 1px solid var(--gold-pale);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.5rem 1.25rem;
+    margin: 1.5rem 0;
+  }
+  .solidarity-support-block h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .solidarity-support-block ul { list-style: none; padding: 0; margin: 0.75rem 0 0; }
+  .solidarity-support-block li { margin-bottom: 0.55rem; font-size: 0.9rem; }
+  .solidarity-support-block a { color: var(--navy); font-weight: 500; }
 </style>
 </head>
 <body>
@@ -1351,7 +1473,7 @@
       <button class="btn-primary" onclick="goToScreen('assessment')">Begin the Journey</button>
       <button class="btn-secondary-light" onclick="document.getElementById('for-teams').scrollIntoView({behavior:'smooth', block:'start'})">Bringing a group?</button>
     </div>
-    <p class="time-note">About 8–10 minutes · Personalized to you · Free</p>
+    <p class="time-note">Personalized to you · Free</p>
   </div>
 
   <!-- ─── CREDIBILITY STRIP ─── -->
@@ -1503,15 +1625,15 @@
       <div class="q-section-header">
         <div class="section-chip">Welcome</div>
         <h2 class="q-section-title">Let's begin with a moment of reflection.</h2>
-        <p class="q-section-desc">This experience is not a test. There are no right or wrong answers—only honest ones. Take a breath, and answer as you truly are today.</p>
+        <p class="q-section-desc">There are no right or wrong answers here. Just answer honestly.</p>
       </div>
       <div class="question-block">
-        <label class="q-label" for="q-name">What's your first name? <span class="q-sub">So we can personalize your experience.</span></label>
-        <input type="text" id="q-name" placeholder="Your first name" style="width:100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: var(--radius); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; outline: none; color: var(--text-primary); background: var(--warm-white);">
+        <label class="q-label" for="q-name">What's your first name? <span class="q-sub">We'll use this to personalize your reflection.</span></label>
+        <input type="text" id="q-name" class="q-textinput" placeholder="Your first name">
       </div>
     </div>
 
-    <!-- SECTION 1: Exposure -->
+    <!-- SECTION 1: Exposure (D1, spec §3) -->
     <div id="section-1" class="q-section" style="display:none">
       <div class="q-section-header">
         <div class="section-chip">Exposure</div>
@@ -1519,154 +1641,223 @@
         <p class="q-section-desc">Personal experience shapes how we understand and engage with any issue.</p>
       </div>
       <div class="question-block">
-        <div class="q-label">How would you describe your personal experience with immigrants or immigration?</div>
+        <div class="q-label">How much personal contact have you had with immigrants or immigrant communities?</div>
         <div class="options-grid" id="q-exposure">
-          <button class="option-btn" data-val="none" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I have had little to no direct interaction with immigrants</button>
-          <button class="option-btn" data-val="indirect" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I've had some indirect exposure—through news, church, or community—but limited personal connection</button>
-          <button class="option-btn" data-val="relational" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I have meaningful relationships with immigrants in my life</button>
-          <button class="option-btn" data-val="deep" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I am regularly involved with immigrant communities through work, ministry, or relationships</button>
+          <button class="option-btn" data-val="1" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>Little or no personal contact</button>
+          <button class="option-btn" data-val="2" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>Mostly through news or at a distance, with few personal relationships</button>
+          <button class="option-btn" data-val="3" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I have personal relationships with immigrants (friends, neighbors, coworkers)</button>
+          <button class="option-btn" data-val="4" onclick="selectOption(this,'q-exposure')"><div class="opt-dot"></div>I'm regularly involved with immigrant communities (ministry, work, ongoing relationships)</button>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 2: Understanding -->
+    <!-- SECTION 2: Understanding (D2, spec §3) — two items, unchanged structure -->
     <div id="section-2" class="q-section" style="display:none">
       <div class="q-section-header">
         <div class="section-chip">Understanding</div>
         <h2 class="q-section-title">Your sense of knowledge and clarity</h2>
-        <p class="q-section-desc">Be honest with yourself—this helps us meet you where you are.</p>
+        <p class="q-section-desc">Your honest read is what makes this useful.</p>
       </div>
       <div class="question-block">
-        <div class="q-label">How informed do you feel about immigration as an issue—its realities, complexities, and human dimensions?</div>
-        <div class="scale-options" id="q-understanding">
-          <button class="scale-btn" data-val="1" onclick="selectScale(this,'q-understanding')">Not very<br>informed</button>
-          <button class="scale-btn" data-val="2" onclick="selectScale(this,'q-understanding')">Slightly<br>informed</button>
-          <button class="scale-btn" data-val="3" onclick="selectScale(this,'q-understanding')">Somewhat<br>informed</button>
-          <button class="scale-btn" data-val="4" onclick="selectScale(this,'q-understanding')">Fairly<br>informed</button>
-          <button class="scale-btn" data-val="5" onclick="selectScale(this,'q-understanding')">Very<br>informed</button>
+        <div class="q-label">How informed do you feel about the realities of immigration?</div>
+        <div class="scale-options" id="q-understanding-informed">
+          <button class="scale-btn" data-val="1" onclick="selectScale(this,'q-understanding-informed')">Not very<br>informed</button>
+          <button class="scale-btn" data-val="2" onclick="selectScale(this,'q-understanding-informed')">Slightly<br>informed</button>
+          <button class="scale-btn" data-val="3" onclick="selectScale(this,'q-understanding-informed')">Somewhat<br>informed</button>
+          <button class="scale-btn" data-val="4" onclick="selectScale(this,'q-understanding-informed')">Fairly<br>informed</button>
+          <button class="scale-btn" data-val="5" onclick="selectScale(this,'q-understanding-informed')">Very<br>informed</button>
         </div>
       </div>
       <div class="question-block" style="margin-top: 1.5rem">
-        <div class="q-label">How confident do you feel that your understanding is accurate and complete?</div>
-        <div class="scale-options" id="q-confidence">
-          <button class="scale-btn" data-val="1" onclick="selectScale(this,'q-confidence')">Not at all<br>confident</button>
-          <button class="scale-btn" data-val="2" onclick="selectScale(this,'q-confidence')">Slightly<br>confident</button>
-          <button class="scale-btn" data-val="3" onclick="selectScale(this,'q-confidence')">Somewhat<br>confident</button>
-          <button class="scale-btn" data-val="4" onclick="selectScale(this,'q-confidence')">Fairly<br>confident</button>
-          <button class="scale-btn" data-val="5" onclick="selectScale(this,'q-confidence')">Very<br>confident</button>
+        <div class="q-label">How confident are you that your understanding is accurate and complete?</div>
+        <div class="scale-options" id="q-understanding-confidence">
+          <button class="scale-btn" data-val="1" onclick="selectScale(this,'q-understanding-confidence')">Not at all<br>confident</button>
+          <button class="scale-btn" data-val="2" onclick="selectScale(this,'q-understanding-confidence')">Slightly<br>confident</button>
+          <button class="scale-btn" data-val="3" onclick="selectScale(this,'q-understanding-confidence')">Somewhat<br>confident</button>
+          <button class="scale-btn" data-val="4" onclick="selectScale(this,'q-understanding-confidence')">Fairly<br>confident</button>
+          <button class="scale-btn" data-val="5" onclick="selectScale(this,'q-understanding-confidence')">Very<br>confident</button>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 3: Perspective -->
+    <!-- SECTION 3: Perspective (D3 hybrid, spec §3) — slider + "unsure" boolean -->
     <div id="section-3" class="q-section" style="display:none">
       <div class="q-section-header">
         <div class="section-chip">Perspective</div>
         <h2 class="q-section-title">How you currently think about immigration</h2>
-        <p class="q-section-desc">There's no "correct" view here. We want to understand where you genuinely are.</p>
+        <p class="q-section-desc">There is no correct view here. We want to understand where you genuinely are.</p>
       </div>
       <div class="question-block">
-        <div class="q-label">When you think about immigration, which of the following best describes your perspective?</div>
-        <div class="options-grid" id="q-perspective">
-          <button class="option-btn" data-val="order" onclick="selectOption(this,'q-perspective')"><div class="opt-dot"></div>I tend to emphasize the importance of order, rule of law, and national security</button>
-          <button class="option-btn" data-val="compassion" onclick="selectOption(this,'q-perspective')"><div class="opt-dot"></div>I tend to emphasize compassion, hospitality, and the dignity of every person</button>
-          <button class="option-btn" data-val="tension" onclick="selectOption(this,'q-perspective')"><div class="opt-dot"></div>I feel the tension between both—and I'm not sure how to hold them together</button>
-          <button class="option-btn" data-val="unformed" onclick="selectOption(this,'q-perspective')"><div class="opt-dot"></div>I'm honestly not sure—I haven't formed a clear perspective yet</button>
+        <div class="q-label">When you think about immigration, where do you find yourself?</div>
+        <div class="perspective-slider-wrap">
+          <input type="range" min="0" max="100" value="50" class="perspective-slider" id="perspective-lean-slider" oninput="updatePerspectiveSlider(this.value)" aria-label="Perspective: order to compassion">
+          <div class="perspective-labels">
+            <span>Order, rule of law, security</span>
+            <span>I hold both together</span>
+            <span>Compassion, hospitality, dignity</span>
+          </div>
+          <div class="perspective-readout" id="perspective-readout">I hold both together</div>
+        </div>
+        <div class="perspective-unsure-wrap">
+          <button type="button" class="multi-btn" data-val="unsure" id="perspective-unsure-btn" onclick="togglePerspectiveUnsure()"><div class="check-box"></div>I haven't formed a clear view yet</button>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 4: Posture -->
+    <!-- SECTION 4: Posture (D4, spec §3) — no dashes -->
     <div id="section-4" class="q-section" style="display:none">
       <div class="q-section-header">
         <div class="section-chip">Posture</div>
         <h2 class="q-section-title">Your openness to engaging this topic</h2>
-        <p class="q-section-desc">Honest self-awareness here is a gift to your own growth.</p>
+        <p class="q-section-desc">Whatever you bring is welcome here.</p>
       </div>
       <div class="question-block">
-        <div class="q-label">How open do you feel to exploring immigration as a matter of Christian discipleship?</div>
+        <div class="q-label">How do you feel about engaging immigration as part of following Jesus?</div>
         <div class="options-grid" id="q-posture">
-          <button class="option-btn" data-val="resistant" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>Honestly, I feel some resistance—this topic feels divisive or uncomfortable to me</button>
-          <button class="option-btn" data-val="cautious" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm cautious—I want to engage but I'm not sure where this might lead</button>
-          <button class="option-btn" data-val="open" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm genuinely open—I want to understand what faithful engagement looks like</button>
-          <button class="option-btn" data-val="eager" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm eager—this matters deeply to me and I want to go deeper</button>
+          <button class="option-btn" data-val="1" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I feel some resistance. It feels divisive or uncomfortable.</button>
+          <button class="option-btn" data-val="2" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm cautious. I want to engage but I'm unsure where it leads.</button>
+          <button class="option-btn" data-val="3" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm open. I want to understand what faithful engagement looks like.</button>
+          <button class="option-btn" data-val="4" onclick="selectOption(this,'q-posture')"><div class="opt-dot"></div>I'm eager. This matters deeply and I want to go further.</button>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 5: Readiness -->
+    <!-- SECTION 5: Readiness (D6, spec §3) — five options including apathy floor, no dashes -->
     <div id="section-5" class="q-section" style="display:none">
       <div class="q-section-header">
         <div class="section-chip">Readiness</div>
         <h2 class="q-section-title">Where you are in your engagement journey</h2>
-        <p class="q-section-desc">Everyone starts somewhere. What matters is taking the next faithful step from where you are.</p>
+        <p class="q-section-desc">Everyone starts somewhere. What matters is the next step from where you are.</p>
       </div>
       <div class="question-block">
-        <div class="q-label">Which best describes where you are in responding to immigration right now?</div>
+        <div class="q-label">Where are you right now in actually responding to immigration?</div>
         <div class="options-grid" id="q-readiness">
-          <button class="option-btn" data-val="exploring" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm exploring—I'm still learning and figuring out what I think</button>
-          <button class="option-btn" data-val="considering" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm considering—I care about this but haven't taken concrete steps yet</button>
-          <button class="option-btn" data-val="ready" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm ready—I want to act but I need clarity on what to do</button>
-          <button class="option-btn" data-val="active" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm already active—I'm engaged but want to grow in depth and faithfulness</button>
+          <button class="option-btn" data-val="1" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>Honestly, I'm not sure this is something for me right now</button>
+          <button class="option-btn" data-val="2" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm still learning and forming my views</button>
+          <button class="option-btn" data-val="3" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I care about this, but I haven't taken concrete steps yet</button>
+          <button class="option-btn" data-val="4" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm ready to act and I need clarity on how</button>
+          <button class="option-btn" data-val="5" onclick="selectOption(this,'q-readiness')"><div class="opt-dot"></div>I'm already engaged and want to go deeper</button>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 6: Motivation + Gifting -->
+    <!-- SECTION 6: Motivation (D5) + Gifting (D7) — kept in Stage 1 per spec §3 -->
     <div id="section-6" class="q-section" style="display:none">
       <div class="q-section-header">
         <div class="section-chip">Motivation &amp; Gifting</div>
-        <h2 class="q-section-title">What drives you and how you're wired</h2>
+        <h2 class="q-section-title">What draws you and how you're wired</h2>
         <p class="q-section-desc">Your unique combination of motivation and gifts shapes the most meaningful path forward.</p>
       </div>
       <div class="question-block">
-        <div class="q-label">What most drives your interest in engaging with immigration? <span class="q-sub">Choose all that apply.</span></div>
+        <div class="q-label">What draws you to this? <span class="q-sub">Select all that apply.</span></div>
         <div class="multi-options" id="q-motivation">
-          <button class="multi-btn" data-val="faith" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>My faith—I believe following Jesus calls me to care about this</button>
-          <button class="multi-btn" data-val="compassion" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Compassion—I feel moved by the suffering and stories I've encountered</button>
-          <button class="multi-btn" data-val="justice" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Justice—I want to address systems and policies that cause harm</button>
-          <button class="multi-btn" data-val="community" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Community—people in my church or neighborhood are directly affected</button>
-          <button class="multi-btn" data-val="curiosity" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Curiosity—I want to understand this better before I know how I feel</button>
+          <button class="multi-btn" data-val="faith" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Faith. Following Jesus calls me to care about this.</button>
+          <button class="multi-btn" data-val="compassion" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Compassion. I'm moved by the stories and the suffering.</button>
+          <button class="multi-btn" data-val="justice" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Justice. I want to address systems and policies that cause harm.</button>
+          <button class="multi-btn" data-val="community" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Community. People in my church or neighborhood are directly affected.</button>
+          <button class="multi-btn" data-val="curiosity" onclick="toggleMulti(this,'q-motivation')"><div class="check-box"></div>Curiosity. I want to understand this better.</button>
         </div>
       </div>
       <div class="question-block" style="margin-top:1.5rem">
-        <div class="q-label">How are you most naturally wired to respond to things you care about? <span class="q-sub">Choose your top 1–2.</span></div>
+        <div class="q-label">How are you most naturally wired to respond? <span class="q-sub">Choose your top 1 or 2.</span></div>
         <div class="multi-options" id="q-gifting">
-          <button class="multi-btn" data-val="relational" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Relationally—I build relationships and show up personally for people</button>
-          <button class="multi-btn" data-val="service" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Practically—I like to serve, help, and meet tangible needs</button>
-          <button class="multi-btn" data-val="advocacy" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Through advocacy—I speak up, write, and engage public conversation</button>
-          <button class="multi-btn" data-val="leadership" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Through leading—I organize, build teams, and develop initiatives</button>
-          <button class="multi-btn" data-val="learning" onclick="toggleMulti(this,'q-gifting')"><div class="check-box"></div>Through learning and teaching—I go deep and help others understand</button>
+          <button class="multi-btn" data-val="relational" onclick="toggleMulti(this,'q-gifting', 2)"><div class="check-box"></div>Relationally. I build relationships and show up personally for people.</button>
+          <button class="multi-btn" data-val="service" onclick="toggleMulti(this,'q-gifting', 2)"><div class="check-box"></div>Practically. I serve, help, and meet tangible needs.</button>
+          <button class="multi-btn" data-val="advocacy" onclick="toggleMulti(this,'q-gifting', 2)"><div class="check-box"></div>Through advocacy. I speak up and engage public conversation.</button>
+          <button class="multi-btn" data-val="leading" onclick="toggleMulti(this,'q-gifting', 2)"><div class="check-box"></div>Through leading. I organize, build teams, and develop initiatives.</button>
+          <button class="multi-btn" data-val="learning" onclick="toggleMulti(this,'q-gifting', 2)"><div class="check-box"></div>Through learning and teaching. I go deep and help others understand.</button>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 7: Context -->
+    <!-- SECTION 7: Context (C1–C6, spec §4) — old church_type + immig_connection removed -->
     <div id="section-7" class="q-section" style="display:none">
       <div class="q-section-header">
         <div class="section-chip">Your Context</div>
         <h2 class="q-section-title">A little about your community and background</h2>
-        <p class="q-section-desc">This helps us understand patterns and connect you to relevant opportunities. All optional.</p>
+        <p class="q-section-desc">This helps us connect you to relevant opportunities. All optional.</p>
       </div>
+
+      <!-- C1 Faith tradition — replaces old church type -->
       <div class="question-block">
-        <div class="q-label">What type of church or faith community are you part of?</div>
-        <div class="options-grid" id="q-church-type">
-          <button class="option-btn" data-val="suburban" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Suburban church</button>
-          <button class="option-btn" data-val="urban" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Urban church</button>
-          <button class="option-btn" data-val="rural" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Rural church</button>
-          <button class="option-btn" data-val="multisite" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Multi-site or regional church</button>
-          <button class="option-btn" data-val="none" onclick="selectOption(this,'q-church-type')"><div class="opt-dot"></div>Not currently connected to a church</button>
-        </div>
+        <label class="q-label" for="q-faith-tradition">What faith tradition or family of churches are you part of?</label>
+        <select class="q-select" id="q-faith-tradition" onchange="answers['q-faith-tradition']=this.value">
+          <option value="">Select a tradition (optional)</option>
+          <option value="nondenominational">Non-denominational or community church</option>
+          <option value="baptist">Baptist</option>
+          <option value="pentecostal">Pentecostal or charismatic</option>
+          <option value="methodist">Methodist</option>
+          <option value="presbyterian_reformed">Presbyterian or Reformed</option>
+          <option value="lutheran">Lutheran</option>
+          <option value="anglican_episcopal">Anglican or Episcopal</option>
+          <option value="catholic">Catholic</option>
+          <option value="orthodox">Orthodox</option>
+          <option value="other_christian">Another Christian tradition</option>
+          <option value="unaffiliated">I follow Jesus but I'm not part of a church right now</option>
+          <option value="prefer_not_to_say">Prefer not to say</option>
+        </select>
       </div>
-      <!-- region question removed — zip code captures this on the email screen -->
+
+      <!-- C2 Leadership / influence -->
       <div class="question-block" style="margin-top:1.5rem">
-        <div class="q-label">Do you have a personal connection to immigration?</div>
-        <div class="options-grid" id="q-immig-connection">
-          <button class="option-btn" data-val="immigrant" onclick="selectOption(this,'q-immig-connection')"><div class="opt-dot"></div>I am an immigrant or have been a refugee</button>
-          <button class="option-btn" data-val="family" onclick="selectOption(this,'q-immig-connection')"><div class="opt-dot"></div>My family immigrated to this country</button>
-          <button class="option-btn" data-val="none" onclick="selectOption(this,'q-immig-connection')"><div class="opt-dot"></div>No direct personal connection</button>
+        <div class="q-label">Do you lead or influence others in any of these settings? <span class="q-sub">Select all that apply. There's no wrong answer.</span></div>
+        <div class="multi-options" id="q-leadership-context">
+          <button class="multi-btn" data-val="church" onclick="toggleMulti(this,'q-leadership-context')"><div class="check-box"></div>A church or congregation</button>
+          <button class="multi-btn" data-val="ministry_group" onclick="toggleMulti(this,'q-leadership-context')"><div class="check-box"></div>A ministry or small group</button>
+          <button class="multi-btn" data-val="nonprofit_org" onclick="toggleMulti(this,'q-leadership-context')"><div class="check-box"></div>A nonprofit or organization</button>
+          <button class="multi-btn" data-val="workplace" onclick="toggleMulti(this,'q-leadership-context')"><div class="check-box"></div>A workplace or business team</button>
+          <button class="multi-btn" data-val="community" onclick="toggleMulti(this,'q-leadership-context')"><div class="check-box"></div>My neighborhood or community</button>
+          <button class="multi-btn" data-val="informal" onclick="toggleMulti(this,'q-leadership-context')"><div class="check-box"></div>Informally. People often look to me even without a title.</button>
+          <button class="multi-btn" data-val="none" onclick="toggleMulti(this,'q-leadership-context')"><div class="check-box"></div>Not in a leadership role right now</button>
         </div>
       </div>
+
+      <!-- C3 Engaging for whom -->
+      <div class="question-block" style="margin-top:1.5rem">
+        <div class="q-label">Are you exploring this mostly for yourself, a group you're part of, or a community you lead?</div>
+        <div class="options-grid" id="q-engaging-for">
+          <button class="option-btn" data-val="self" onclick="selectOption(this,'q-engaging-for')"><div class="opt-dot"></div>For myself</button>
+          <button class="option-btn" data-val="small_group" onclick="selectOption(this,'q-engaging-for')"><div class="opt-dot"></div>For a small group I'm part of</button>
+          <button class="option-btn" data-val="congregation_org" onclick="selectOption(this,'q-engaging-for')"><div class="opt-dot"></div>For a congregation or organization I lead</button>
+          <button class="option-btn" data-val="unsure" onclick="selectOption(this,'q-engaging-for')"><div class="opt-dot"></div>I'm not sure yet</button>
+        </div>
+      </div>
+
+      <!-- C4 Personal impact — FEATURE-FLAGGED, hidden by default. Revealed only when ENABLE_IMPACT_QUESTION === true. -->
+      <div class="question-block" id="impact-question-wrap" style="display:none; margin-top:1.5rem">
+        <div class="q-label">Has immigration touched your own life or the lives of those closest to you? <span class="q-sub">Optional.</span></div>
+        <div class="options-grid" id="q-impact-proximity">
+          <button class="option-btn" data-val="1" onclick="selectOption(this,'q-impact-proximity')"><div class="opt-dot"></div>Yes. I've lived through the immigration system myself.</button>
+          <button class="option-btn" data-val="2" onclick="selectOption(this,'q-impact-proximity')"><div class="opt-dot"></div>Yes. Someone in my immediate family or household has.</button>
+          <button class="option-btn" data-val="3" onclick="selectOption(this,'q-impact-proximity')"><div class="opt-dot"></div>Yes. People close to me (friends, congregation, neighbors) are directly affected.</button>
+          <button class="option-btn" data-val="4" onclick="selectOption(this,'q-impact-proximity')"><div class="opt-dot"></div>Not in a close, personal way.</button>
+        </div>
+        <p class="q-privacy-note">Your answer is private. We never share or sell it, and you can ask us to delete it anytime.</p>
+      </div>
+
+      <!-- C5 Time capacity -->
+      <div class="question-block" style="margin-top:1.5rem">
+        <div class="q-label">Realistically, how much time can you give to this right now?</div>
+        <div class="options-grid" id="q-time-capacity">
+          <button class="option-btn" data-val="one_time" onclick="selectOption(this,'q-time-capacity')"><div class="opt-dot"></div>An occasional or one-time thing</button>
+          <button class="option-btn" data-val="monthly" onclick="selectOption(this,'q-time-capacity')"><div class="opt-dot"></div>A few hours a month</button>
+          <button class="option-btn" data-val="weekly_ongoing" onclick="selectOption(this,'q-time-capacity')"><div class="opt-dot"></div>Weekly or ongoing involvement</button>
+          <button class="option-btn" data-val="unsure" onclick="selectOption(this,'q-time-capacity')"><div class="opt-dot"></div>I'm not sure yet</button>
+        </div>
+      </div>
+
+      <!-- C6 Burning question — optional open text -->
+      <div class="question-block" style="margin-top:1.5rem">
+        <label class="q-label" for="q-burning-question">What's the biggest question on your heart about this right now? <span class="q-sub">Optional.</span></label>
+        <textarea class="q-textarea" id="q-burning-question" placeholder="A sentence or two is plenty." oninput="answers['q-burning-question']=this.value"></textarea>
+      </div>
+
+      <!-- Optional team code input — pre-fills from ?team= URL param if present -->
+      <div class="question-block" style="margin-top:1.5rem">
+        <label class="q-label" for="q-team-code">Team code <span class="q-sub">Optional. If a Faithful Witness Team invited you, paste their code here.</span></label>
+        <input type="text" class="q-textinput" id="q-team-code" placeholder="e.g. fw-houston-1" oninput="answers['q-team-code']=this.value">
+      </div>
+
     </div>
 
   </div><!-- /q-container -->
@@ -1761,8 +1952,8 @@
 <div id="screen-results" class="screen">
   <div class="results-hero">
     <div class="profile-badge" id="result-badge">Your Profile</div>
-    <h2 class="results-name" id="result-profile-name">Thoughtful Explorer</h2>
-    <p class="results-tagline" id="result-tagline">You're in a meaningful place—open, curious, and ready to go deeper.</p>
+    <h2 class="results-name" id="result-profile-name">Your profile</h2>
+    <p class="results-tagline" id="result-tagline">Preparing your reflection...</p>
   </div>
 
   <div class="results-body">
@@ -1980,10 +2171,53 @@
 </div>
 
 <script>
+// ─── FEATURE FLAGS ───
+// Personal-impact question (C4) + solidarity branch (§5). Built but dormant.
+// DO NOT enable until legal / World Relief sign-off.
+const ENABLE_IMPACT_QUESTION = false;
+
+// ─── ASSESSMENT VERSION ───
+const ASSESSMENT_VERSION = '3.0';
+
 // ─── STATE ───
 const answers = {};
 let currentSection = 0;
 const totalSections = 8;
+
+// ─── DATA LAYER — participant id, invite graph, timestamps ───
+// All captured at assessment start; submitted alongside the responses.
+let participantId = null;
+let invitedBy = null;
+let referralSource = null;
+let teamCodeFromUrl = null;
+let startedAt = null;
+let completedAt = null;
+
+(function initDataLayer() {
+  const params = new URLSearchParams(window.location.search);
+  const pidParam = params.get('pid');
+  // Reuse a returning participant's id if present; otherwise mint a new one.
+  participantId = pidParam || (window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'fw-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10));
+  invitedBy = params.get('ref') || null;
+  referralSource = params.get('utm_source') || params.get('ref') || null;
+  teamCodeFromUrl = params.get('team') || null;
+  startedAt = new Date().toISOString();
+  // Pre-fill team-code input from ?team= when DOM is ready
+  document.addEventListener('DOMContentLoaded', function () {
+    if (teamCodeFromUrl) {
+      const el = document.getElementById('q-team-code');
+      if (el) { el.value = teamCodeFromUrl; answers['q-team-code'] = teamCodeFromUrl; }
+    }
+    // Reveal the C4 impact question only when the flag is on.
+    if (ENABLE_IMPACT_QUESTION) {
+      const w = document.getElementById('impact-question-wrap');
+      if (w) w.style.display = 'block';
+    }
+  });
+  // Default perspective slider midpoint so the field is always set unless "unsure" is checked.
+  answers['perspective_lean'] = 50;
+  answers['perspective_unsure'] = false;
+})();
 
 // ─── NAVIGATION ───
 function goToScreen(id) {
@@ -2140,11 +2374,55 @@ function selectScale(btn, groupId) {
   answers[groupId] = btn.dataset.val;
 }
 
-function toggleMulti(btn, groupId) {
+function toggleMulti(btn, groupId, maxN) {
+  // Soft-cap: if maxN is set and we'd exceed it, refuse to add (but always allow deselect).
+  const willSelect = !btn.classList.contains('selected');
+  if (willSelect && typeof maxN === 'number') {
+    const current = document.querySelectorAll('#' + groupId + ' .multi-btn.selected').length;
+    if (current >= maxN) return;
+  }
   btn.classList.toggle('selected');
   const vals = [];
   document.querySelectorAll('#' + groupId + ' .multi-btn.selected').forEach(b => vals.push(b.dataset.val));
   answers[groupId] = vals;
+}
+
+// ─── PERSPECTIVE (D3 hybrid) — slider + "unsure" boolean ───
+function updatePerspectiveSlider(v) {
+  const val = parseInt(v, 10);
+  answers['perspective_lean'] = val;
+  const readout = document.getElementById('perspective-readout');
+  let label = 'I hold both together';
+  if (val < 35) label = 'Leaning toward order, rule of law, security';
+  else if (val > 65) label = 'Leaning toward compassion, hospitality, dignity';
+  readout.classList.remove('muted');
+  readout.textContent = label;
+  // If "unsure" was selected and the user nudged the slider, clear unsure.
+  const unsureBtn = document.getElementById('perspective-unsure-btn');
+  if (unsureBtn && unsureBtn.classList.contains('selected')) {
+    unsureBtn.classList.remove('selected');
+    answers['perspective_unsure'] = false;
+    document.getElementById('perspective-lean-slider').disabled = false;
+  }
+}
+function togglePerspectiveUnsure() {
+  const btn = document.getElementById('perspective-unsure-btn');
+  const slider = document.getElementById('perspective-lean-slider');
+  const readout = document.getElementById('perspective-readout');
+  btn.classList.toggle('selected');
+  const isUnsure = btn.classList.contains('selected');
+  answers['perspective_unsure'] = isUnsure;
+  if (isUnsure) {
+    slider.disabled = true;
+    answers['perspective_lean'] = null;
+    readout.classList.add('muted');
+    readout.textContent = "I haven't formed a clear view yet";
+  } else {
+    slider.disabled = false;
+    const v = parseInt(slider.value, 10);
+    answers['perspective_lean'] = v;
+    updatePerspectiveSlider(v);
+  }
 }
 
 // ─── LOADING ───
@@ -2160,95 +2438,157 @@ async function startLoading() {
 
 function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ─── PROFILE LOGIC ───
-function computeProfile() {
-  const exposure = answers['q-exposure'] || 'indirect';
-  const posture = answers['q-posture'] || 'open';
-  const readiness = answers['q-readiness'] || 'considering';
-  const perspective = answers['q-perspective'] || 'tension';
+// ─── PROFILE LOGIC — spec §7 waterfall on (readiness × posture × exposure) ───
+// 1. readiness 5 (active)          → faithful_witness
+// 2. readiness 4 (ready)           → ready_responder
+// 3. posture <= 2                  → careful_seeker
+// 4. else (posture 3-4 AND readiness 1-3):
+//      exposure <= 2               → open_explorer
+//      exposure >= 3               → thoughtful_learner
+// Canonical 5 profiles only; old "Thoughtful Seeker" fallback removed.
+const PROFILES = {
+  faithful_witness:   { name: 'Faithful Witness',   tagline: "You're already engaged. This journey will help you go deeper and lead others well." },
+  ready_responder:    { name: 'Ready Responder',    tagline: "You're prepared to act, and this experience will help you act with clarity and conviction." },
+  careful_seeker:     { name: 'Careful Seeker',     tagline: "You're approaching this with honesty and care. That is a faithful place to begin." },
+  open_explorer:      { name: 'Open Explorer',      tagline: "You're in a meaningful place. Open, curious, and ready to go deeper." },
+  thoughtful_learner: { name: 'Thoughtful Learner', tagline: "You have some connection to this reality. Now you're ready to understand it more deeply." }
+};
 
-  if (posture === 'resistant' || posture === 'cautious') {
-    return { name: 'Careful Seeker', tagline: 'You\'re approaching this with honesty and care—that is a faithful place to begin.', profile: 'exploring' };
-  }
-  if (readiness === 'exploring' || readiness === 'considering') {
-    if (exposure === 'none' || exposure === 'indirect') {
-      return { name: 'Open Explorer', tagline: 'You\'re in a meaningful place—open, curious, and ready to go deeper.', profile: 'exploring' };
-    }
-    return { name: 'Thoughtful Learner', tagline: 'You have some connection to this reality. Now you\'re ready to understand it more deeply.', profile: 'processing' };
-  }
-  if (readiness === 'ready') {
-    return { name: 'Ready Responder', tagline: 'You\'re prepared to act—and this experience will help you act with clarity and conviction.', profile: 'responding' };
-  }
-  if (readiness === 'active') {
-    return { name: 'Faithful Witness', tagline: 'You\'re already engaged. This journey will help you go deeper and lead others well.', profile: 'mobilizing' };
-  }
-  return { name: 'Thoughtful Seeker', tagline: 'You\'re in an important place of formation—and that matters deeply.', profile: 'processing' };
+function computeProfile() {
+  const readiness = parseInt(answers['q-readiness'], 10);   // 1-5
+  const posture   = parseInt(answers['q-posture'],   10);   // 1-4
+  const exposure  = parseInt(answers['q-exposure'],  10);   // 1-4
+
+  let key;
+  if (readiness === 5)        key = 'faithful_witness';
+  else if (readiness === 4)   key = 'ready_responder';
+  else if (posture <= 2)      key = 'careful_seeker';
+  else if (exposure <= 2)     key = 'open_explorer';
+  else                        key = 'thoughtful_learner';
+
+  return { key, name: PROFILES[key].name, tagline: PROFILES[key].tagline, profile: key };
 }
+
+// ─── DIMENSION BARS (for results screen) ───
+// Maps the new 1-4 / 1-5 ints to display labels + percentages.
+const exposureLabel = { 1: 'Minimal', 2: 'Indirect', 3: 'Relational', 4: 'Immersed' };
+const postureLabel  = { 1: 'Resistant', 2: 'Cautious', 3: 'Open', 4: 'Eager' };
+const readinessLabel = { 1: 'Not yet', 2: 'Exploring', 3: 'Considering', 4: 'Ready', 5: 'Active' };
 
 function getDimensions() {
-  const exposureMap = { none: 15, indirect: 35, relational: 70, deep: 95 };
-  const postureMap = { resistant: 15, cautious: 40, open: 75, eager: 95 };
-  const readinessMap = { exploring: 20, considering: 45, ready: 70, active: 90 };
-  const understandingMap = { '1': 15, '2': 35, '3': 55, '4': 75, '5': 90 };
+  const exposure  = parseInt(answers['q-exposure'],  10);
+  const posture   = parseInt(answers['q-posture'],   10);
+  const readiness = parseInt(answers['q-readiness'], 10);
+  const informed  = parseInt(answers['q-understanding-informed'], 10);
+
+  const pctOf4 = (n) => n ? Math.round((n / 4) * 100) : 50;
+  const pctOf5 = (n) => n ? Math.round((n / 5) * 100) : 50;
 
   return [
-    { name: 'Proximity', value: exposureLabels[answers['q-exposure']] || 'Indirect', pct: exposureMap[answers['q-exposure']] || 35 },
-    { name: 'Openness', value: postureLabels[answers['q-posture']] || 'Open', pct: postureMap[answers['q-posture']] || 75 },
-    { name: 'Readiness', value: readinessLabels[answers['q-readiness']] || 'Considering', pct: readinessMap[answers['q-readiness']] || 45 },
-    { name: 'Knowledge', value: 'Level ' + (answers['q-understanding'] || '3') + ' of 5', pct: understandingMap[answers['q-understanding']] || 55 },
+    { name: 'Proximity',  value: exposureLabel[exposure]   || 'Indirect',    pct: pctOf4(exposure  || 2) },
+    { name: 'Openness',   value: postureLabel[posture]     || 'Open',        pct: pctOf4(posture   || 3) },
+    { name: 'Readiness',  value: readinessLabel[readiness] || 'Considering', pct: pctOf5(readiness || 3) },
+    { name: 'Knowledge',  value: informed ? 'Level ' + informed + ' of 5' : 'Level 3 of 5', pct: pctOf5(informed || 3) }
   ];
 }
-
-const exposureLabels = { none: 'Minimal', indirect: 'Indirect', relational: 'Relational', deep: 'Immersed' };
-const postureLabels = { resistant: 'Cautious', cautious: 'Careful', open: 'Open', eager: 'Eager' };
-const readinessLabels = { exploring: 'Exploring', considering: 'Considering', ready: 'Ready', active: 'Active' };
 
 // ─── PROFILE GENERATION ───
 async function generateProfile() {
   const name = document.getElementById('q-name').value || 'friend';
-  const { name: profileName, tagline, profile } = computeProfile();
-  const narrativeHTML = getFallbackNarrative(name, profile);
+  const { key: profileKey, name: profileName, tagline } = computeProfile();
+  const narrativeHTML = getFallbackNarrative(name, profileKey);
+  completedAt = new Date().toISOString();
+
+  // Legacy text-column mappings (so existing downstream tools still get something readable).
+  const readinessNum = parseInt(answers['q-readiness'], 10);
+  const postureNum   = parseInt(answers['q-posture'],   10);
+  const exposureNum  = parseInt(answers['q-exposure'],  10);
+  const legacyExposure  = ({1:'none', 2:'indirect', 3:'relational', 4:'deep'})[exposureNum] || null;
+  const legacyPosture   = ({1:'resistant', 2:'cautious', 3:'open', 4:'eager'})[postureNum]  || null;
+  const legacyReadiness = ({1:'not_yet', 2:'exploring', 3:'considering', 4:'ready', 5:'active'})[readinessNum] || null;
+
+  // Effective team_code: URL takes precedence, otherwise the manual input.
+  const teamCode = (teamCodeFromUrl || answers['q-team-code'] || '').trim() || null;
+
+  // Build the submit payload. New columns use the spec's exact variable names.
+  const payload = {
+    // — Existing columns (preserved per guardrail) —
+    name:                    name,
+    email:                   answers['user-email'] || null,
+    zip:                     answers['user-zip']   || null,
+    profileName:             profileName,
+    profileType:             profileKey,                  // canonical key, e.g. "thoughtful_learner"
+    exposure:                legacyExposure,              // legacy text
+    posture:                 legacyPosture,               // legacy text
+    readiness:               legacyReadiness,             // legacy text
+    understanding:           answers['q-understanding-informed'] || null,  // legacy single value → informed
+    motivation:              (answers['q-motivation'] || []).join(','),
+    gifting:                 (answers['q-gifting']    || []).join(','),
+    churchContext:           null,                        // replaced by faith_tradition; intentionally null
+    readyFlag:               answers['user-ready']  || false,
+    campaignOptIn:           campaignOptIn,
+    rawAnswers:              answers,
+
+    // — v3 new columns (spec §2, §3, §4) —
+    participant_id:          participantId,
+    assessment_version:      ASSESSMENT_VERSION,
+    started_at:              startedAt,
+    completed_at:            completedAt,
+    profile_assigned:        profileKey,
+    team_code:               teamCode,
+    invited_by:              invitedBy,
+    referral_source:         referralSource,
+
+    // D1–D7 typed
+    exposure_level:          exposureNum || null,
+    understanding_informed:  parseInt(answers['q-understanding-informed'], 10) || null,
+    understanding_confidence: parseInt(answers['q-understanding-confidence'], 10) || null,
+    perspective_lean:        (answers['perspective_unsure'] === true) ? null : (answers['perspective_lean'] != null ? answers['perspective_lean'] : null),
+    perspective_unsure:      answers['perspective_unsure'] === true,
+    posture_openness:        postureNum || null,
+    motivation_arr:          answers['q-motivation'] || [],
+    readiness_stage:         readinessNum || null,
+    gifting_arr:             answers['q-gifting']    || [],
+
+    // C1–C6
+    faith_tradition:         answers['q-faith-tradition'] || null,
+    leadership_context:      answers['q-leadership-context'] || [],
+    engaging_for:            answers['q-engaging-for'] || null,
+    time_capacity:           answers['q-time-capacity'] || null,
+    burning_question:        (answers['q-burning-question'] || '').trim() || null,
+  };
+
+  // C4 (impact_proximity) — sensitive. Only included when the feature flag is ON.
+  // NOTE FOR MAILCHIMP / EXTERNAL SYNC: impact_proximity must NEVER be synced to any
+  //   external system (Mailchimp, analytics, broadly shared dashboard view). Per spec §6,
+  //   this column is access-restricted on the Supabase side and excluded from all exports.
+  if (ENABLE_IMPACT_QUESTION) {
+    payload.impact_proximity = parseInt(answers['q-impact-proximity'], 10) || null;
+  }
 
   // ── Submit to database ──
   try {
     await fetch('/api/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name:          name,
-        email:         answers['user-email']        || null,
-        zip:           answers['user-zip']           || null,
-        profileName:   profileName,
-        profileType:   profile,
-        exposure:      answers['q-exposure']         || null,
-        posture:       answers['q-posture']          || null,
-        readiness:     answers['q-readiness']        || null,
-        understanding: answers['q-understanding']    || null,
-        motivation:    (answers['q-motivation'] || []).join(','),
-        gifting:       (answers['q-gifting']    || []).join(','),
-        churchContext: answers['q-church-type']      || null,
-        readyFlag:     answers['user-ready']         || false,
-        campaignOptIn: campaignOptIn,
-        rawAnswers:    answers
-      })
+      body: JSON.stringify(payload)
     });
   } catch (err) {
     // Silently fail — never block the user experience
     console.error('Submission error:', err);
   }
 
-  // ── Send results email via Resend (non-blocking) ──
+  // ── Send results email via Resend (non-blocking, unchanged contract) ──
   if (answers['user-email']) {
     const emailPayload = {
       name,
       email:       answers['user-email'],
       profileName,
-      profileType: profile,
+      profileType: profileKey,
       narrativeHTML,
-      resources:   getRecommendedResources(profile),
-      continueUrl: `https://faithful-witness.vercel.app?profile=${profile}&stage=2`
+      resources:   getRecommendedResources(profileKey),
+      continueUrl: `https://faithful-witness.vercel.app?profile=${profileKey}&stage=2&pid=${encodeURIComponent(participantId || '')}`
     };
-    // Fire and forget — don't await, don't block the user experience
     fetch('/api/send-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -2259,52 +2599,104 @@ async function generateProfile() {
     .catch(err => console.error('Email error:', err));
   }
 
-  renderResults(name, profileName, tagline, narrativeHTML, profile);
+  renderResults(name, profileName, tagline, narrativeHTML, profileKey);
 }
 
-function buildPrompt(name, profile) {
+function buildPrompt(name, profileKey) {
   const motivations = (answers['q-motivation'] || []).join(', ') || 'faith and curiosity';
-  const gifting = (answers['q-gifting'] || []).join(', ') || 'relational';
-  const exposure = answers['q-exposure'] || 'indirect';
-  const posture = answers['q-posture'] || 'open';
-  const perspective = answers['q-perspective'] || 'tension';
-  const readiness = answers['q-readiness'] || 'considering';
-  const churchType = answers['q-church-type'] || 'not specified';
-  const immigConn = answers['q-immig-connection'] || 'none';
+  const gifting     = (answers['q-gifting']    || []).join(', ') || 'relational';
+  const exposureN   = parseInt(answers['q-exposure'], 10);
+  const postureN    = parseInt(answers['q-posture'],  10);
+  const readinessN  = parseInt(answers['q-readiness'],10);
+  const informedN   = parseInt(answers['q-understanding-informed'],   10);
+  const confN       = parseInt(answers['q-understanding-confidence'], 10);
+  const lean        = (answers['perspective_unsure'] === true) ? 'not yet formed' : (answers['perspective_lean'] != null ? answers['perspective_lean'] : 50);
+  const faithTrad   = answers['q-faith-tradition'] || 'not specified';
+  const leadCtx     = (answers['q-leadership-context'] || []).join(', ') || 'none';
+  const engFor      = answers['q-engaging-for'] || 'unsure';
+  const timeCap     = answers['q-time-capacity'] || 'unsure';
 
-  return `You are a wise, warm Christian leader writing a personalized reflection summary for someone who has just completed a spiritual discernment assessment about immigration. Your writing should feel like it was written by a pastor who knows this person deeply — encouraging, non-judgmental, grounded in faith, and pointing them forward.
+  return `You are a wise, warm Christian leader writing a personalized reflection summary for someone who has just completed a spiritual discernment assessment about immigration. Your writing should feel like it was written by a pastor who knows this person deeply, encouraging, non-judgmental, grounded in faith, and pointing them forward.
 
 Write 3 short paragraphs (no headers, no bullet points) for ${name}. Here is what they shared:
 
-- Profile type: ${profile} (exploring / processing / responding / mobilizing)
-- Exposure to immigrants: ${exposure}
-- Posture/openness: ${posture}
-- Perspective on immigration: ${perspective}
-- Readiness to act: ${readiness}
+- Profile: ${profileKey} (one of: open_explorer, thoughtful_learner, careful_seeker, ready_responder, faithful_witness)
+- Exposure to immigrants (1 low - 4 immersed): ${exposureN}
+- Posture/openness (1 resistant - 4 eager): ${postureN}
+- Perspective lean (0 order - 100 compassion, or "not yet formed"): ${lean}
+- Readiness (1 not-yet - 5 active): ${readinessN}
+- Understanding: informed=${informedN}/5, confidence=${confN}/5
 - Motivations: ${motivations}
 - Gifting/wiring: ${gifting}
-- Church context: ${churchType}
-- Personal immigration connection: ${immigConn}
+- Faith tradition: ${faithTrad}
+- Leadership/influence: ${leadCtx}
+- Engaging for: ${engFor}
+- Time capacity: ${timeCap}
 
 Guidelines:
-- Begin the first paragraph by naming where they are RIGHT NOW in a way that feels seen and affirmed, not evaluated.
-- Second paragraph: reflect what seems to be stirring in them — connect their motivations and gifting to what God might be doing.
-- Third paragraph: a gentle, encouraging word about what this journey holds for them — ending with a sense of hope and invitation.
-- If the profile is 'mobilizing' or 'responding': the third paragraph should be activating and leader-focused. Name the opportunity they have to not just engage themselves, but to walk alongside others — to be the person who opens this door for their community, church, or small group. Make it feel like a calling, not a task.
-- Tone: warm, pastoral, grounded. Not preachy. Not therapeutic. Not generic. Like a wise friend who also happens to know Scripture and the immigrant experience.
-- Do NOT use the person's name more than once (in the first paragraph).
-- Do NOT be preachy or guilt-inducing. Do NOT make political statements.
+- Begin the first paragraph by naming where they are right now in a way that feels seen and affirmed, not evaluated.
+- Second paragraph: reflect what seems to be stirring in them. Connect motivations and gifting to what God might be doing.
+- Third paragraph: a gentle, encouraging word about what this journey holds for them, ending with hope and invitation.
+- If the profile is 'faithful_witness' or 'ready_responder': make the third paragraph activating and leader-focused. Name the opportunity to walk alongside others, especially when leadership_context is non-empty.
+- If the profile is 'careful_seeker': honor the tension and resistance. No pressure. Pace matters more than progress.
+- Tone: warm, pastoral, grounded. Not preachy. Not therapeutic. Not generic.
+- Do not use the person's name more than once (in the first paragraph).
+- Do not be preachy or guilt-inducing. Do not make political statements.
+- Avoid em dashes; prefer periods and commas.
 - Keep it under 220 words total.`;
 }
 
-function getFallbackNarrative(name, profile) {
+function getFallbackNarrative(name, profileKey) {
   const narratives = {
-    exploring: `<p>${name}, you're in a meaningful and honest place right now. You've shown up with openness—willing to explore something that many people quietly wonder about but rarely engage with deeply. That matters. Beginning with curiosity and a humble heart is exactly the right foundation.</p><p>Something is clearly stirring in you. Your motivations point to a genuine desire to understand—not just as an intellectual exercise, but as part of what it means to follow Jesus faithfully. That combination of faith and open-heartedness is exactly what this journey is designed to meet.</p><p>This experience will help you find your footing—offering you Scripture, real stories, and space to discern what your own faithful response might look like. You don't have to have it figured out to begin. You just have to be willing. And you already are.</p>`,
-    processing: `<p>You're carrying something real, ${name}. There's an awareness in you—a sense that this issue matters, that it has human faces, and that your faith should have something to say about it. The fact that you feel some tension isn't a problem. It's often exactly where formation happens.</p><p>What you've shared points to someone who is motivated by more than information—you want to respond in a way that's genuinely faithful. That desire is a gift, and this experience is designed to help you move from that stirring toward clarity.</p><p>Stay with the process. The formation and discernment ahead will give you something you can actually hold onto—a conviction that is yours, not borrowed, and a next step that fits your life and your calling.</p>`,
-    responding: `<p>You're ready, ${name}, and that readiness is worth naming. Something in you has moved from awareness to conviction, and now you're looking for direction. That's a meaningful threshold—and arriving here with intentionality is a sign that your next step is going to matter.</p><p>Your gifts and motivations are pointing you somewhere specific. The formation ahead will help you understand not just what to do, but why—and how your unique wiring fits into something larger than any individual action. You don't have to wait to be more prepared than you already are.</p><p>The journey ahead will shape you as you move. And when you take that step, you won't be taking it alone—there are people ready to walk alongside you and connect you to where you're needed most.</p>`,
-    mobilizing: `<p>${name}, you're not just engaged—you're positioned to lead. What you've shared points to someone who has moved through the early questions and arrived somewhere with conviction, capacity, and genuine desire to see the Church respond faithfully to immigration. That is rare, and it matters.</p><p>What lies ahead for you isn't simply more learning. It's a call to become a guide for others who are just beginning this journey. The people in your church, your community, your network—many of them are where you once were: aware, perhaps unsettled, but unsure of how to engage. You can be the one who walks alongside them, not pointing from a distance, but going first and inviting others to follow.</p><p>This experience was designed for people like you to complete, to own, and ultimately to champion. Consider how you might open this door for someone else—a friend, a small group, a congregation. The most powerful next step isn't just your own faithful action. It's helping others find theirs.</p>`
+    open_explorer:      `<p>${name}, you're in a meaningful and honest place right now. You've shown up with openness, willing to explore something many people quietly wonder about but rarely engage deeply. That matters. Beginning with curiosity and a humble heart is exactly the right foundation.</p><p>Something is clearly stirring in you. Your motivations point to a genuine desire to understand, not just as an intellectual exercise but as part of what it means to follow Jesus faithfully. That combination of faith and open-heartedness is exactly what this journey is designed to meet.</p><p>This experience will help you find your footing. Scripture, real stories, and space to discern what your own faithful response might look like. You don't have to have it figured out to begin. You just have to be willing. And you already are.</p>`,
+    thoughtful_learner: `<p>You're carrying something real, ${name}. There's an awareness in you, a sense that this issue matters, that it has human faces, and that your faith should have something to say about it. The fact that you feel some tension isn't a problem. It's often exactly where formation happens.</p><p>What you've shared points to someone motivated by more than information. You want to respond in a way that's genuinely faithful. That desire is a gift, and this experience is designed to help you move from that stirring toward clarity.</p><p>Stay with the process. The formation and discernment ahead will give you something you can actually hold onto. A conviction that is yours, not borrowed, and a next step that fits your life and your calling.</p>`,
+    careful_seeker:     `<p>${name}, the fact that you're here matters. You've shown up honestly, with real questions and some real hesitation. That honesty is a gift, not a problem. Many people stay silent on this topic; you're choosing to look at it with care, and that takes courage.</p><p>This journey will not push you to a conclusion you haven't reached. It will hold space for the tension you feel, between order and compassion, between what you think and what you wonder. Scripture has more to say into this tension than most of us have heard.</p><p>Take this at your own pace. There is no test to pass and no timeline to hit. What you'll find here is room to think, room to feel, and a way of holding both that you can actually live with.</p>`,
+    ready_responder:    `<p>You're ready, ${name}, and that readiness is worth naming. Something in you has moved from awareness to conviction, and now you're looking for direction. That's a meaningful threshold, and arriving here with intention is a sign that your next step is going to matter.</p><p>Your gifts and motivations point you somewhere specific. The formation ahead will help you understand not just what to do, but why, and how your unique wiring fits into something larger than any individual action. You don't have to wait to be more prepared than you already are.</p><p>The journey ahead will shape you as you move. And when you take that step, you won't be taking it alone. There are people ready to walk alongside you and connect you to where you're needed most.</p>`,
+    faithful_witness:   `<p>${name}, you're not just engaged. You're positioned to lead. What you've shared points to someone who has moved through the early questions and arrived somewhere with conviction, capacity, and a genuine desire to see the Church respond faithfully to immigration. That is rare, and it matters.</p><p>What lies ahead for you isn't simply more learning. It's a call to guide others who are just beginning. The people in your church, your community, your network. Many of them are where you once were, aware, perhaps unsettled, but unsure of how to engage. You can be the one who walks alongside them, not pointing from a distance but going first and inviting others to follow.</p><p>This experience was designed for people like you to complete, to own, and ultimately to champion. Consider how you might open this door for someone else, a friend, a small group, a congregation. The most powerful next step isn't only your own faithful action. It's helping others find theirs.</p>`
   };
-  return narratives[profile] || narratives['exploring'];
+  return narratives[profileKey] || narratives.open_explorer;
+}
+
+// ─── SOLIDARITY BRANCH (spec §5) — flag-gated, additive only ───
+// Runs after computeProfile when ENABLE_IMPACT_QUESTION is true AND impact_proximity ∈ {1, 2}.
+// Renders an acknowledgment on results and (lazily) decorates Stage 4 with a support block + story invite.
+// When the flag is OFF, this function is a no-op.
+function applySolidarityBranchIfNeeded(profileKey) {
+  if (!ENABLE_IMPACT_QUESTION) return;
+  const impact = parseInt(answers['q-impact-proximity'], 10);
+  if (impact !== 1 && impact !== 2) return;
+
+  // 1) Acknowledgment line on the results screen — inserted just under the hero, above the narrative card.
+  const resultsBody = document.querySelector('.results-body');
+  if (resultsBody && !document.getElementById('solidarity-ack')) {
+    const ack = document.createElement('div');
+    ack.id = 'solidarity-ack';
+    ack.className = 'solidarity-ack';
+    ack.textContent = "Thank you for trusting us with that. You're not a topic here. This is for you, at your pace.";
+    resultsBody.insertBefore(ack, resultsBody.firstChild);
+  }
+
+  // 2) Stage 4 support routing + optional story invitation — inserted into the Stage 4 shell.
+  const stage4 = document.querySelector('#screen-stage4 .stage-shell');
+  if (stage4 && !document.getElementById('solidarity-support')) {
+    const block = document.createElement('div');
+    block.id = 'solidarity-support';
+    block.className = 'solidarity-support-block';
+    block.innerHTML = `
+      <h3>Support and accompaniment</h3>
+      <p>A short, trusted set of places to begin, routed to existing infrastructure rather than invented here.</p>
+      <ul>
+        <li><a href="https://faithfulwitness.us/find-support" target="_blank" rel="noopener">Find support near you</a> — Faithful Witness local network</li>
+        <li><a href="https://worldrelief.org/" target="_blank" rel="noopener">World Relief</a> — accompaniment, legal services, and church partners</li>
+        <li>Local Faithful Witness Teams in your area (matched after you share your zip)</li>
+      </ul>
+      <p style="margin-top:1rem; font-size:0.9rem; color:var(--text-secondary);">
+        <strong style="color:var(--navy)">Would you be open to sharing your story?</strong>
+        Only if and when you're ready. It would help us shape this experience for people who come after you.
+      </p>
+    `;
+    stage4.appendChild(block);
+  }
 }
 
 // ─── RESOURCES ───
@@ -2321,10 +2713,21 @@ const allResources = [
   { title: 'Sermon Outlines: Welcoming the Stranger', type: 'Sermon Outline', org: 'Faithful Witness', icon: '📜', tags: ['faith','leadership','learning'], url: 'https://faithfulwitness.us/resources/sermon-outlines-welcoming-the-stranger/' },
 ];
 
-function getRecommendedResources(profile) {
+function getRecommendedResources(profileKey) {
+  // Bridge canonical profile keys to the legacy track tags used in allResources.
+  const legacyTag = {
+    open_explorer:      'exploring',
+    careful_seeker:     'exploring',
+    thoughtful_learner: 'processing',
+    ready_responder:    'responding',
+    faithful_witness:   'mobilizing',
+  }[profileKey] || 'exploring';
+
   const motivations = answers['q-motivation'] || [];
-  const gifting = answers['q-gifting'] || [];
-  const tags = [profile, ...motivations, ...gifting];
+  const gifting     = answers['q-gifting']    || [];
+  // Bridge gifting "leading" (new canonical) to legacy "leadership" tag in resources.
+  const giftingLegacy = gifting.map(g => g === 'leading' ? 'leadership' : g);
+  const tags = [profileKey, legacyTag, ...motivations, ...giftingLegacy];
 
   const scored = allResources.map(r => {
     const score = r.tags.filter(t => tags.includes(t)).length;
@@ -2377,10 +2780,13 @@ function renderResults(name, profileName, tagline, narrativeHTML, profile) {
   document.getElementById('next-step-title').textContent = ns.title;
   document.getElementById('next-step-desc').textContent = ns.desc;
 
-  // 1:1 card visibility
-  const isHighReadiness = (profile === 'responding' || profile === 'mobilizing');
+  // 1:1 card visibility — high readiness = ready_responder or faithful_witness
+  const isHighReadiness = (profile === 'ready_responder' || profile === 'faithful_witness');
   document.getElementById('one-on-one-prominent').style.display = isHighReadiness ? 'block' : 'none';
   document.getElementById('one-on-one-secondary').style.display = isHighReadiness ? 'none' : 'block';
+
+  // Solidarity branch (flag-gated; no-op when ENABLE_IMPACT_QUESTION is false).
+  applySolidarityBranchIfNeeded(profile);
 
   goToScreen('results');
   showStageTabs();

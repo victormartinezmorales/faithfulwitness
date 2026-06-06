@@ -830,9 +830,15 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script>
 // ─── CONFIG ───
-const SUPABASE_URL = 'https://yymyplxlarzonxxskyfb.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_rjNcOoSDTBXJSX5AvbMe8w_HFsgufFL';
+// As of v3, this dashboard no longer hits Supabase directly. Data is fetched through
+// /api/dashboard, a serverless endpoint that authenticates as service_role and strips
+// sensitive fields (email, raw_answers, impact_proximity) before responding. The
+// Supabase URL and publishable key are intentionally not in this page anymore.
 const DASHBOARD_PASSWORD = 'faithfulwitness2026';
+// Optional: paste the same value here that's set in Vercel env var DASHBOARD_TOKEN to
+// authenticate to /api/dashboard. Leave empty to match today's "no token required"
+// behavior on the endpoint side.
+const DASHBOARD_TOKEN = '';
 
 // ─── PASSWORD GATE ───
 function checkPassword() {
@@ -860,16 +866,17 @@ function checkPassword() {
 document.getElementById('current-date').textContent =
   new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-// ─── FETCH FROM SUPABASE ───
+// ─── FETCH VIA SERVER-SIDE PROXY ───
+// /api/dashboard authenticates to Supabase as service_role on the server and returns
+// only the columns the dashboard is allowed to see (no email, no raw_answers, no
+// impact_proximity). The publishable Supabase key is no longer in this page.
 async function fetchSubmissions() {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/submissions?select=*&order=created_at.desc`, {
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`
-    }
-  });
-  if (!res.ok) throw new Error('Failed to fetch');
-  return await res.json();
+  const headers = { 'Accept': 'application/json' };
+  if (DASHBOARD_TOKEN) headers['x-fw-dashboard-token'] = DASHBOARD_TOKEN;
+  const res = await fetch('/api/dashboard', { headers });
+  if (!res.ok) throw new Error('Failed to fetch (status ' + res.status + ')');
+  const body = await res.json();
+  return Array.isArray(body.submissions) ? body.submissions : [];
 }
 
 // ─── COUNTER ANIMATION ───
