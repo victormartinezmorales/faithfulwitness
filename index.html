@@ -1797,23 +1797,75 @@
 
   .s4-team-cta-wrap {
     text-align: center;
-    margin: 2.25rem 0 1rem;
+    margin: 2.5rem 0 1rem;
   }
   .s4-team-cta {
-    background: var(--navy);
+    background: var(--gold);
     color: var(--warm-white);
     border: none;
-    padding: 1rem 2.25rem;
+    padding: 1.2rem 2.75rem;
     border-radius: 50px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
     display: inline-block;
     text-decoration: none;
+    box-shadow: 0 6px 22px rgba(196,154,60,0.32);
   }
-  .s4-team-cta:hover { background: var(--navy-light); transform: translateY(-1px); }
+  .s4-team-cta:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(196,154,60,0.42);
+  }
+
+  /* Quiet "team tool is coming" note. */
+  .s4-team-tool-note {
+    margin-top: 1.5rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    font-style: italic;
+    padding: 0.75rem 1rem;
+    border-left: 2px solid var(--border);
+  }
+
+  /* Inline "partner with us" trigger inside Section 1 prose. */
+  .s4-partner-link {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--navy);
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .s4-partner-link:hover { color: var(--gold); }
+
+  /* Closing button to faithfulwitness.us */
+  .s4-campaign-link-wrap {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .s4-campaign-link {
+    display: inline-block;
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+    padding: 0.7rem 1.75rem;
+    border-radius: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .s4-campaign-link:hover { background: var(--navy); color: var(--warm-white); }
 
   .s4-guide-aside {
     margin-top: 2.5rem;
@@ -1980,7 +2032,7 @@
   @media (max-width: 480px) {
     .s4-interim { padding: 2.5rem 1.25rem 4rem; }
     .s4-interim-h { font-size: 1.25rem; }
-    .s4-team-cta { padding: 0.9rem 1.5rem; width: 100%; max-width: 320px; }
+    .s4-team-cta { padding: 1.1rem 1.75rem; width: 100%; max-width: 360px; font-size: 1.05rem; }
   }
 
   /* Solidarity acknowledgment — flag-gated, only renders when ENABLE_IMPACT_QUESTION is true AND impact_proximity is 1 or 2 */
@@ -2845,27 +2897,30 @@
      A single JS init swaps which is visible.
 ══════════════════════════════════════════ -->
 <div id="screen-stage4" class="screen">
-  <!-- INTERIM PAGE (v1) — replaces the "Coming Soon" placeholder.
+  <!-- INTERIM PAGE (v1.1) — replaces the "Coming Soon" placeholder.
        Lives in #stage4-placeholder so the existing applyStage4FlagState()
        toggle continues to work unchanged. When the catalog launches,
-       Section 3 (#s4-interim-persistent) and Section 4 will survive;
-       recommendation cards from #stage4-live will slot in ABOVE Section 3. -->
+       the team-formation section (#s4-interim-persistent) and the
+       benediction will survive; recommendation cards from #stage4-live
+       will slot in ABOVE #s4-interim-persistent. -->
   <div id="stage4-placeholder">
     <article class="s4-interim">
 
-      <!-- OPENER (universal) -->
+      <!-- Stage 4 eyebrow — mirrors Stage 3's pattern for milestone continuity. -->
+      <div class="s3-eyebrow" style="margin-bottom: 2.5rem;">Stage 4 &middot; Next Steps</div>
+
+      <!-- OPENER (universal) — concise, with guide-conversation disclaimer. -->
       <header class="s4-interim-opener">
-        <p>You've named real things today.</p>
-        <p>What you sense, what you can't shake, what you keep returning to. That's not nothing. It's the shape of how God may be moving in you. The journey from here is about responding faithfully to what's been stirred, in the time and place you actually live.</p>
-        <p>Here's what comes next.</p>
+        <p>You've named real things today. Here are some honest suggestions for what comes next.</p>
+        <p>A page can only do so much. If you'd like to think any of this through with a real person who has walked it, talking with one of our guides will always be more personal than anything we recommend here.</p>
       </header>
 
       <!-- SECTION 1 — A growing national network -->
       <section class="s4-interim-section">
         <div class="s4-interim-eyebrow">Section 1</div>
         <h2 class="s4-interim-h">A growing national network.</h2>
-        <p>The Faithful Witness Campaign is building a national network of churches, ministries, and organizations doing the work of welcome, accompaniment, advocacy, and pastoral care across the country. As the network grows, your discernment will route you to specific opportunities matched to who you are and what you sense you're being called toward. A real next step with a real organization in your community.</p>
-        <p>That network is being built right now, in partnership with CCDA, NaLEC, World Relief, and Undivided. The first set of partners will begin appearing here soon.</p>
+        <p>The Faithful Witness Campaign is building a national network of churches, ministries, and organizations doing the work of welcome, accompaniment, advocacy, and pastoral care. As this network of partners grows, this tool will provide actionable, local connections. People and organizations near you that you can join, learn from, or walk alongside.</p>
+        <p>Our founding partners are CCDA, NaLEC, Undivided, and World Relief. They're a good starting place. If you lead an organization doing this work and would like to become part of the network, <button class="s4-partner-link" onclick="openPartnerSheet()">reach out to us</button>.</p>
 
         <div class="coalition-grid s4-coalition-strip">
           <a class="coalition-card" href="https://ccda.org/" target="_blank" rel="noopener noreferrer" aria-label="CCDA: Christian Community Development Association">
@@ -2883,33 +2938,30 @@
         </div>
       </section>
 
-      <!-- SECTION 2 — The truer first step (theological hinge) -->
-      <section class="s4-interim-section">
-        <div class="s4-interim-eyebrow">Section 2</div>
-        <h2 class="s4-interim-h">The truer first step.</h2>
-        <p>But before any program, before any partnership, before any catalog. People.</p>
-        <p>Faithful witness has never been a solo practice. The earliest church didn't disciple individuals into private convictions. It gathered them into communities that lived out a different way together. What you've named today is more sustainable, more discerning, and more honest when it's named alongside others.</p>
-        <p>So while the network is being built, here is the first step we'd ask you to take.</p>
-      </section>
-
-      <!-- SECTION 3 — Form a team, walk this together
-           This block (#s4-interim-persistent) is the component that survives
-           the catalog launch. When ENABLE_STAGE_4 flips, recommendation cards
-           will be injected above this element; Section 3 and Section 4 stay. -->
+      <!-- SECTION 2 — Form a team. Walk this together.
+           Merges the theological hinge with the team-formation invitation.
+           Wrapped as #s4-interim-persistent so it survives the catalog
+           launch unchanged; recommendation cards will slot in ABOVE it. -->
       <section class="s4-interim-section" id="s4-interim-persistent">
-        <div class="s4-interim-eyebrow">Section 3</div>
-        <h2 class="s4-interim-h">Form a team. Three to five people. Walk this together.</h2>
+        <div class="s4-interim-eyebrow">Section 2</div>
+        <h2 class="s4-interim-h">Form a team. Walk this together.</h2>
+
+        <p>Faithful witness has never been a solo practice. The earliest church didn't disciple individuals into private convictions. It gathered them into communities that lived out a different way together. What you've named today is more sustainable, more discerning, and more honest when it's named alongside others.</p>
+
+        <p>So before any program or partnership, the truer first step is people. Three to five of them. Walking this with you.</p>
 
         <!-- Profile-conditional sentence — populated by JS from PROFILE_TEAM_LINES. -->
         <div class="s4-profile-line" id="s4-profile-line">
           You're at the beginning. The first steps are easier with people who are also at the beginning.
         </div>
 
-        <p>Invite three to five others to take this same journey. When they complete it, your team forms automatically. Then walk through what comes next together. We'll send you a short guide for hosting the first conversation. As the partner network grows, your team will move into it as a team, not as scattered individuals.</p>
+        <p>Invite three to five others to take this same journey. When they complete it, your team forms automatically. Then walk through what comes next together. We'll send you a short guide for hosting the first conversation.</p>
 
         <div class="s4-team-cta-wrap">
           <button class="s4-team-cta" id="s4-team-invite-btn" onclick="openTeamInviteSheet()">Invite people to your team &rarr;</button>
         </div>
+
+        <p class="s4-team-tool-note">A team tool is on the way. Team leaders will have a space to coordinate, communicate, and access resources matched to their team's context, gifting, and capacity. For now, the invitation itself is the first move.</p>
 
         <div class="s4-guide-aside">
           <p>If you'd rather start with one conversation, you can also connect with a Faithful Witness guide. Someone who's walked this and can think out loud with you.</p>
@@ -2917,16 +2969,34 @@
         </div>
       </section>
 
-      <!-- SECTION 4 — Closing benediction (universal) -->
+      <!-- SECTION 3 — Closing benediction (universal) -->
       <section class="s4-benediction">
         <p>You came to this honestly. Whatever shape your response takes, may it be courageous, faithful, and grounded in the people God has placed around you. We're glad you said yes to the conversation.</p>
         <blockquote class="s4-acts">
           "As for us, we cannot help speaking about what we have seen and heard."
           <cite>&mdash; Acts 4:20</cite>
         </blockquote>
+        <div class="s4-campaign-link-wrap">
+          <a class="s4-campaign-link" href="https://faithfulwitness.us" target="_blank" rel="noopener noreferrer">Visit faithfulwitness.us &rarr;</a>
+        </div>
       </section>
 
     </article>
+  </div>
+
+  <!-- Partner-with-us modal (opens from the inline "reach out to us" link in Section 1). -->
+  <div class="invite-sheet-backdrop" id="partner-sheet-backdrop" onclick="onPartnerBackdropClick(event)">
+    <div class="invite-sheet" onclick="event.stopPropagation()">
+      <button class="invite-sheet-close" onclick="closePartnerSheet()" aria-label="Close">&times;</button>
+      <h3>Partner with us.</h3>
+      <p class="invite-sheet-sub">We're building this network now. If your organization is doing the work of welcome, accompaniment, advocacy, or pastoral care and you'd like to become part of it, send a quick note with a brief intro and what you do. We'll be in touch.</p>
+      <div class="invite-sheet-actions">
+        <a class="invite-action" href="mailto:taylor@ccda.org?subject=Faithful%20Witness%20partner%20network&body=Hi%20Taylor%2C%0A%0AI%20lead%20an%20organization%20that%20I%20think%20could%20be%20part%20of%20the%20Faithful%20Witness%20partner%20network.%20A%20quick%20intro%3A%0A%0A">
+          <span class="action-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          Email taylor@ccda.org
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- Invite sheet (modal) — opens from the team invite CTA. -->
@@ -4170,6 +4240,23 @@ function nativeShareInvite() {
     text: 'A short, prayerful reflection on how we are invited to respond to immigration.',
     url: getInviteLink()
   }).catch(() => { /* user dismissed; no-op */ });
+}
+
+// ── Partner-with-us modal ────────────────────────────────────────
+function openPartnerSheet() {
+  const backdrop = document.getElementById('partner-sheet-backdrop');
+  if (!backdrop) return;
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePartnerSheet() {
+  const backdrop = document.getElementById('partner-sheet-backdrop');
+  if (!backdrop) return;
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function onPartnerBackdropClick(e) {
+  if (e.target && e.target.id === 'partner-sheet-backdrop') closePartnerSheet();
 }
 
 // ── Guide conversation ───────────────────────────────────────────
