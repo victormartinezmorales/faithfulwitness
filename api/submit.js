@@ -35,6 +35,59 @@ module.exports = async function handler(req, res) {
 
   try {
     const data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+
+    // ── Stage 3 PATCH branch ─────────────────────────────────────────
+    // When the client signals update_stage3:true, we PATCH the existing
+    // submissions row identified by participant_id with the Stage 3
+    // fields (spec §2) and bump assessment_version to '4.0'. The Stage 1
+    // insert path below is untouched.
+    if (data.update_stage3 === true) {
+      const pid = toStringOrNull(data.participant_id);
+      if (!pid) {
+        return res.status(400).json({ success: false, error: 'participant_id required for Stage 3 update' });
+      }
+
+      const patch = {
+        assessment_version:               '4.0',
+        stage3_started_at:                toStringOrNull(data.stage3_started_at),
+        stage3_completed_at:              toStringOrNull(data.stage3_completed_at),
+        cant_shake_text:                  toStringOrNull(data.cant_shake_text),
+        cant_shake_emotions:              toArrayOrEmpty(data.cant_shake_emotions),
+        specific_neighbor:                toArrayOrEmpty(data.specific_neighbor),
+        specific_neighbor_other:          toStringOrNull(data.specific_neighbor_other),
+        action_shape:                     toStringOrNull(data.action_shape),
+        contextual_focus:                 toArrayOrEmpty(data.contextual_focus),
+        contextual_focus_followups:       Array.isArray(data.contextual_focus_followups) ? data.contextual_focus_followups : [],
+        contextual_focus_specific_place:  toStringOrNull(data.contextual_focus_specific_place),
+        time_recalibrated:                toStringOrNull(data.time_recalibrated),
+        sense_of_calling:                 toStringOrNull(data.sense_of_calling),
+        journal_entry:                    toStringOrNull(data.journal_entry),
+        journal_share_team:               toBool(data.journal_share_team),
+      };
+
+      // PATCH the row by participant_id. If multiple rows share a pid
+      // (older sessions), Supabase updates all matches; the most recent
+      // Stage 1 row dominates for downstream reads.
+      const patchUrl = `${SUPABASE_URL}/rest/v1/submissions?participant_id=eq.${encodeURIComponent(pid)}`;
+      const response = await fetch(patchUrl, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_SERVICE_KEY,
+          'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(patch)
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        console.error('Supabase Stage 3 PATCH error:', error);
+        return res.status(500).json({ success: false, error: 'Stage 3 update failed' });
+      }
+      return res.status(200).json({ success: true, stage: 3 });
+    }
+
     console.log('campaignOptIn received:', data.campaignOptIn);
 
     const row = {

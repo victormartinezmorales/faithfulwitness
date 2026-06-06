@@ -1401,6 +1401,333 @@
     line-height: 1.5;
   }
 
+  /* ─── STAGE 3 — Discernment (v4) ───
+     Listening stage. One question per screen. Generous vertical space.
+     The participant should feel time pass differently here than in Stage 1. */
+  .s3-screen {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  .s3-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .s3-prompt {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+    line-height: 1.45;
+    margin-bottom: 1.75rem;
+  }
+  .s3-helper {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .s3-secondary-prompt {
+    margin-top: 2.5rem;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+  .s3-textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 1rem 1.1rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background: var(--warm-white);
+    outline: none;
+    line-height: 1.65;
+    resize: vertical;
+    transition: border-color 0.18s;
+  }
+  .s3-textarea:focus { border-color: var(--gold); }
+  .s3-textarea.s3-journal { min-height: 240px; }
+  .s3-textinput {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--warm-white);
+    outline: none;
+    transition: border-color 0.18s;
+  }
+  .s3-textinput:focus { border-color: var(--gold); }
+
+  .s3-continue-wrap {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .s3-back {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    padding: 0.5rem 0.25rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .s3-back:hover { color: var(--navy); }
+  .s3-continue {
+    background: var(--gold);
+    color: var(--warm-white);
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .s3-continue:hover { background: var(--gold-light); }
+
+  /* Contemplative opener / closer panels */
+  .s3-contemplative {
+    padding-top: 1rem;
+  }
+  .s3-scripture {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--navy);
+    border-left: 2px solid var(--gold);
+    padding: 0.5rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .s3-scripture cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .s3-framing {
+    font-size: 1rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .s3-framing p { margin-bottom: 1.25rem; }
+  .s3-framing p:last-child { margin-bottom: 0; }
+  .s3-slowdown {
+    font-style: italic;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 2.5rem 0;
+    line-height: 1.7;
+  }
+  .s3-closer-prayer {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.25rem 1.5rem;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.75;
+    margin: 1.5rem 0 2rem;
+  }
+  .s3-closer-prayer .s3-prayer-intro {
+    display: block;
+    font-style: normal;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.65rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Stage 3 progress strip — minimal, no percentages */
+  .s3-progress {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+  .s3-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+  .s3-dot.done { background: var(--gold); }
+  .s3-dot.active { background: var(--navy); }
+
+  /* Stage 3 multi-button (reuses .multi-btn styles but offers a wrapped variant) */
+  .s3-multi { display: grid; gap: 0.5rem; }
+  .s3-other-wrap {
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--border);
+  }
+
+  /* Per-context follow-ups in Q3 */
+  .s3-context-block {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    margin-top: 1rem;
+  }
+  .s3-context-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.85rem;
+    text-transform: uppercase;
+  }
+  .s3-context-sub {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0.85rem 0 0.45rem;
+  }
+
+  /* Echoing the participant's Stage 1 time_capacity answer in Q4 */
+  .s3-echo {
+    background: var(--cream);
+    border-left: 3px solid var(--navy);
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0 1.25rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* Journal share-with-team checkbox */
+  .s3-share-wrap {
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .s3-share-box {
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--navy);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.18s;
+  }
+  .s3-share-wrap.checked .s3-share-box {
+    background: var(--navy);
+  }
+  .s3-share-wrap.checked .s3-share-box::after {
+    content: '';
+    width: 9px; height: 5px;
+    border-left: 2px solid var(--warm-white);
+    border-bottom: 2px solid var(--warm-white);
+    transform: rotate(-45deg) translate(0, -1px);
+  }
+  .s3-share-label {
+    font-size: 0.92rem;
+    color: var(--text-primary);
+  }
+
+  /* ─── STAGE 4 — Dark framework (v4) ───
+     ENABLE_STAGE_4 flag-gated. The "Coming Soon" placeholder remains
+     the live participant experience until the flag flips and the
+     catalog is populated. Styles live here so flipping is trivial. */
+  .s4-mirror-back {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.65;
+  }
+  .s4-card-grid { display: grid; gap: 1rem; margin-bottom: 1.5rem; }
+  .s4-card {
+    background: var(--warm-white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+  .s4-card.primary {
+    border-color: var(--gold);
+    background: var(--warm-white);
+    box-shadow: var(--shadow-sm);
+  }
+  .s4-card.stretch {
+    border-style: dashed;
+  }
+  .s4-card-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .s4-card.primary .s4-card-label { color: var(--gold); }
+  .s4-card-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+  .s4-card-why {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.85rem;
+  }
+  .s4-card-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .s4-card-cta {
+    background: var(--gold);
+    color: var(--warm-white);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .s4-card-cta:hover { background: var(--gold-light); }
+  .s4-empty {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
   /* Solidarity acknowledgment — flag-gated, only renders when ENABLE_IMPACT_QUESTION is true AND impact_proximity is 1 or 2 */
   .solidarity-ack {
     background: var(--gold-bg);
@@ -1977,9 +2304,9 @@
 
     <div class="next-step-card">
       <div class="next-step-label">Your Next Step</div>
-      <h3 class="next-step-title" id="next-step-title">Continue to Guided Formation</h3>
-      <p class="next-step-desc" id="next-step-desc">You've completed the first stage of your Discernment Experience. The next stage, Guided Formation, will help you engage Scripture, encounter real stories, and develop a posture aligned with the way of Jesus.</p>
-      <button class="btn-gold" onclick="showStageShell(2); showStageTabs()">Continue to Stage 2 →</button>
+      <h3 class="next-step-title" id="next-step-title">Continue to Discernment</h3>
+      <p class="next-step-desc" id="next-step-desc">You've completed Stage 1. The next stage, Discernment, is a quieter, more personal listening space. It will help you move from awareness toward a faithful next step that fits this season of your life.</p>
+      <button class="btn-gold" onclick="startStage3()">Continue to Discernment &rarr;</button>
     </div>
 
     <div id="one-on-one-prominent" style="display:none">
@@ -2064,63 +2391,206 @@
       </div>
     </div>
     <div style="text-align:center">
-      <button class="btn-primary" onclick="showStageShell(3)">Preview Stage 3: Discernment →</button>
+      <button class="btn-primary" onclick="startStage3()">Continue to Discernment &rarr;</button>
     </div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
-     SCREEN: STAGE 3 SHELL
+     SCREEN: STAGE 3 — DISCERNMENT (v4, live)
+     One question per screen. Manual continue. Generous white space.
+     Inner steps are switched by showS3Step(n). Step IDs are 1-based.
 ══════════════════════════════════════════ -->
 <div id="screen-stage3" class="screen">
-  <div class="stage-shell">
-    <div class="stage-hero-banner">
-      <div class="stage-num">Stage 3 of 4</div>
-      <h2 class="stage-name">Discernment</h2>
-      <p class="stage-desc">Move from general conviction to personal calling. Identify how you are uniquely invited to respond to immigration as a follower of Jesus.</p>
+
+  <!-- Step 1 — Contemplative opener (profile-specific) -->
+  <section class="s3-screen s3-step" id="s3-step-1" style="display:none">
+    <div class="s3-eyebrow">Stage 3 · Discernment</div>
+    <div class="s3-progress" id="s3-progress-1"></div>
+    <div class="s3-contemplative">
+      <blockquote class="s3-scripture" id="s3-opener-scripture">
+        <span id="s3-opener-scripture-text"></span>
+        <cite id="s3-opener-scripture-ref"></cite>
+      </blockquote>
+      <div class="s3-framing" id="s3-opener-framing"></div>
+      <p class="s3-slowdown" id="s3-opener-slowdown"></p>
     </div>
-    <div class="coming-soon-card">
-      <div class="cs-icon">🙏</div>
-      <h3 class="cs-title">Content Coming Soon</h3>
-      <p class="cs-desc">This guided discernment experience will help you reflect on your formation, identify your passions and gifts, and hear from God about your specific next faithful step.</p>
+    <div class="s3-continue-wrap">
+      <span></span>
+      <button class="s3-continue" onclick="s3Continue(2)">Continue &rarr;</button>
     </div>
-    <div class="preview-modules">
-      <div class="module-preview">
-        <div class="module-num">1</div>
-        <div class="module-info">
-          <div class="module-name">Reflecting on What Has Shifted</div>
-          <div class="module-sub">Formation review · ~10 min</div>
-        </div>
-        <div class="module-lock">🔒</div>
+  </section>
+
+  <!-- Step 2 — Q0 What you can't shake -->
+  <section class="s3-screen s3-step" id="s3-step-2" style="display:none">
+    <div class="s3-eyebrow">Stage 3 · Discernment</div>
+    <div class="s3-progress" id="s3-progress-2"></div>
+    <h2 class="s3-prompt">Is there something you've seen, learned, or heard about that you can't shake, that makes you angry, grieved, or troubled?</h2>
+    <p class="s3-helper">Optional. Take your time.</p>
+    <textarea id="s3-cant-shake-text" class="s3-textarea"
+              placeholder="It's okay if it's not fully formed. Even one sentence helps."></textarea>
+
+    <p class="s3-secondary-prompt">If you can name an emotion that comes up with it, which fits best?</p>
+    <div class="s3-multi" id="s3-cant-shake-emotions">
+      <button class="multi-btn" data-val="angry"      onclick="s3ToggleEmotion(this)"><span class="check-box"></span>Angry</button>
+      <button class="multi-btn" data-val="grieved"    onclick="s3ToggleEmotion(this)"><span class="check-box"></span>Grieved</button>
+      <button class="multi-btn" data-val="troubled"   onclick="s3ToggleEmotion(this)"><span class="check-box"></span>Troubled</button>
+      <button class="multi-btn" data-val="frightened" onclick="s3ToggleEmotion(this)"><span class="check-box"></span>Frightened</button>
+      <button class="multi-btn" data-val="confused"   onclick="s3ToggleEmotion(this)"><span class="check-box"></span>Confused</button>
+      <button class="multi-btn" data-val="ashamed"    onclick="s3ToggleEmotion(this)"><span class="check-box"></span>Ashamed</button>
+      <button class="multi-btn" data-val="weary"      onclick="s3ToggleEmotion(this)"><span class="check-box"></span>Weary</button>
+      <button class="multi-btn" data-val="other"      onclick="s3ToggleEmotion(this)"><span class="check-box"></span>Something else</button>
+    </div>
+
+    <div class="s3-continue-wrap">
+      <button class="s3-back" onclick="s3Continue(1)">&larr; Back</button>
+      <button class="s3-continue" onclick="s3Continue(3)">Continue &rarr;</button>
+    </div>
+  </section>
+
+  <!-- Step 3 — Q1 Specific neighbor (multi, cap 3) -->
+  <section class="s3-screen s3-step" id="s3-step-3" style="display:none">
+    <div class="s3-eyebrow">Stage 3 · Discernment</div>
+    <div class="s3-progress" id="s3-progress-3"></div>
+    <h2 class="s3-prompt">As you've sat with this, is there a specific person or community you keep returning to?</h2>
+    <p class="s3-helper">Choose up to three.</p>
+    <div class="s3-multi" id="s3-specific-neighbor">
+      <button class="multi-btn" data-val="mixed_status_families"          onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>People in mixed-status families, including those facing separation</button>
+      <button class="multi-btn" data-val="asylum_refugees"                onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>Asylum seekers and refugees</button>
+      <button class="multi-btn" data-val="daca_undocumented_young_adults" onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>DACA recipients and undocumented young adults</button>
+      <button class="multi-btn" data-val="day_laborers_workers"           onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>Day laborers and immigrant workers</button>
+      <button class="multi-btn" data-val="immigrant_churches_pastors"     onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>Immigrant churches and pastors near me</button>
+      <button class="multi-btn" data-val="known_neighbors"                onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>Families I already know in my neighborhood, workplace, or congregation</button>
+      <button class="multi-btn" data-val="immigrant_children_youth"       onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>Immigrant children and youth</button>
+      <button class="multi-btn" data-val="detention_deportation"          onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>People in detention or facing deportation</button>
+      <button class="multi-btn" data-val="other_specific"                 onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>Someone else God has put on my heart</button>
+      <button class="multi-btn" data-val="not_yet_clear"                  onclick="s3ToggleNeighbor(this)"><span class="check-box"></span>I'm not sure yet, that's still becoming clear</button>
+    </div>
+    <div id="s3-neighbor-other-wrap" class="s3-other-wrap" style="display:none">
+      <input type="text" id="s3-neighbor-other" class="s3-textinput" placeholder="Name who's on your heart" />
+    </div>
+    <div class="s3-continue-wrap">
+      <button class="s3-back" onclick="s3Continue(2)">&larr; Back</button>
+      <button class="s3-continue" onclick="s3Continue(4)">Continue &rarr;</button>
+    </div>
+  </section>
+
+  <!-- Step 4 — Q2 Action shape (single-select) -->
+  <section class="s3-screen s3-step" id="s3-step-4" style="display:none">
+    <div class="s3-eyebrow">Stage 3 · Discernment</div>
+    <div class="s3-progress" id="s3-progress-4"></div>
+    <h2 class="s3-prompt">Sitting with all of this, what shape of response feels most honest for this season of your life?</h2>
+    <div class="options-grid" id="s3-action-shape">
+      <button class="option-btn" data-val="deepen_learning"     onclick="s3SelectActionShape(this)"><span class="opt-dot"></span>Going deeper in learning and prayer before I act</button>
+      <button class="option-btn" data-val="build_relationship"  onclick="s3SelectActionShape(this)"><span class="opt-dot"></span>Building one real relationship with someone affected</button>
+      <button class="option-btn" data-val="join_existing"       onclick="s3SelectActionShape(this)"><span class="opt-dot"></span>Joining an effort that's already underway</button>
+      <button class="option-btn" data-val="start_in_community"  onclick="s3SelectActionShape(this)"><span class="opt-dot"></span>Starting or strengthening something in my church or community</button>
+      <button class="option-btn" data-val="advocate_publicly"   onclick="s3SelectActionShape(this)"><span class="opt-dot"></span>Speaking up publicly, advocating, or organizing</button>
+      <button class="option-btn" data-val="accompany_affected"  onclick="s3SelectActionShape(this)"><span class="opt-dot"></span>Walking with people who are directly affected</button>
+      <button class="option-btn" data-val="not_yet"             onclick="s3SelectActionShape(this)"><span class="opt-dot"></span>I'm not ready to name a shape yet</button>
+    </div>
+    <div class="s3-continue-wrap">
+      <button class="s3-back" onclick="s3Continue(3)">&larr; Back</button>
+      <button class="s3-continue" onclick="s3Continue(5)">Continue &rarr;</button>
+    </div>
+  </section>
+
+  <!-- Step 5 — Q3 Contextual focus (multi) + per-context follow-ups -->
+  <section class="s3-screen s3-step" id="s3-step-5" style="display:none">
+    <div class="s3-eyebrow">Stage 3 · Discernment</div>
+    <div class="s3-progress" id="s3-progress-5"></div>
+    <h2 class="s3-prompt">Where do you sense this engagement belongs in your life?</h2>
+    <div class="s3-multi" id="s3-contextual-focus">
+      <button class="multi-btn" data-val="neighborhood"   onclick="s3ToggleContext(this)"><span class="check-box"></span>In my neighborhood</button>
+      <button class="multi-btn" data-val="workplace"      onclick="s3ToggleContext(this)"><span class="check-box"></span>In my workplace</button>
+      <button class="multi-btn" data-val="church"         onclick="s3ToggleContext(this)"><span class="check-box"></span>In my church or faith community</button>
+      <button class="multi-btn" data-val="city_region"    onclick="s3ToggleContext(this)"><span class="check-box"></span>In my city or region more broadly</button>
+      <button class="multi-btn" data-val="specific_place" onclick="s3ToggleContext(this)"><span class="check-box"></span>In a specific place I'm being drawn to</button>
+      <button class="multi-btn" data-val="not_yet"        onclick="s3ToggleContext(this)"><span class="check-box"></span>Not sure yet</button>
+    </div>
+    <div id="s3-context-specific-wrap" class="s3-other-wrap" style="display:none">
+      <input type="text" id="s3-context-specific-place" class="s3-textinput" placeholder="Name the place" />
+    </div>
+    <div id="s3-context-followups"></div>
+    <div class="s3-continue-wrap">
+      <button class="s3-back" onclick="s3Continue(4)">&larr; Back</button>
+      <button class="s3-continue" onclick="s3Continue(6)">Continue &rarr;</button>
+    </div>
+  </section>
+
+  <!-- Step 6 — Q4 Recalibrated capacity -->
+  <section class="s3-screen s3-step" id="s3-step-6" style="display:none">
+    <div class="s3-eyebrow">Stage 3 · Discernment</div>
+    <div class="s3-progress" id="s3-progress-6"></div>
+    <h2 class="s3-prompt" id="s3-q4-stem">You said earlier you could give &hellip;</h2>
+    <div class="s3-echo" id="s3-q4-echo"></div>
+    <p class="s3-helper">Optional.</p>
+    <div class="options-grid" id="s3-time-recalibrated">
+      <button class="option-btn" data-val="same"      onclick="s3SelectRecalibrated(this)"><span class="opt-dot"></span>Yes, that's still about right</button>
+      <button class="option-btn" data-val="more"      onclick="s3SelectRecalibrated(this)"><span class="opt-dot"></span>I can actually offer more than I thought</button>
+      <button class="option-btn" data-val="less"      onclick="s3SelectRecalibrated(this)"><span class="opt-dot"></span>Honestly, less than I thought</button>
+      <button class="option-btn" data-val="no_commit" onclick="s3SelectRecalibrated(this)"><span class="opt-dot"></span>I'd rather not commit to a timeframe yet</button>
+    </div>
+    <div class="s3-continue-wrap">
+      <button class="s3-back" onclick="s3Continue(5)">&larr; Back</button>
+      <button class="s3-continue" onclick="s3Continue(7)">Continue &rarr;</button>
+    </div>
+  </section>
+
+  <!-- Step 7 — Q5 Sense of calling -->
+  <section class="s3-screen s3-step" id="s3-step-7" style="display:none">
+    <div class="s3-eyebrow">Stage 3 · Discernment</div>
+    <div class="s3-progress" id="s3-progress-7"></div>
+    <h2 class="s3-prompt">If you sense God might be inviting you toward something specific, what does it sound like right now?</h2>
+    <p class="s3-helper">It's okay if it's vague. Name what you can. Optional.</p>
+    <textarea id="s3-sense-of-calling" class="s3-textarea"
+              placeholder="Even one sentence is enough. 'I think I need to start by…' or 'I keep hearing…'"></textarea>
+    <div class="s3-continue-wrap">
+      <button class="s3-back" onclick="s3Continue(6)">&larr; Back</button>
+      <button class="s3-continue" onclick="s3Continue(8)">Continue &rarr;</button>
+    </div>
+  </section>
+
+  <!-- Step 8 — Contemplative closer (profile-specific) + journal -->
+  <section class="s3-screen s3-step" id="s3-step-8" style="display:none">
+    <div class="s3-eyebrow">Stage 3 · Discernment</div>
+    <div class="s3-progress" id="s3-progress-8"></div>
+    <div class="s3-contemplative">
+      <p class="s3-framing" id="s3-closer-sending"></p>
+      <div class="s3-closer-prayer" id="s3-closer-prayer">
+        <span class="s3-prayer-intro" id="s3-closer-prayer-intro"></span>
+        <span id="s3-closer-prayer-body"></span>
       </div>
-      <div class="module-preview">
-        <div class="module-num">2</div>
-        <div class="module-info">
-          <div class="module-name">Understanding Your Unique Wiring</div>
-          <div class="module-sub">Gifts, passions & context · ~15 min</div>
-        </div>
-        <div class="module-lock">🔒</div>
-      </div>
-      <div class="module-preview">
-        <div class="module-num">3</div>
-        <div class="module-info">
-          <div class="module-name">Listening & Prayer</div>
-          <div class="module-sub">Guided prayerful reflection · ~10 min</div>
-        </div>
-        <div class="module-lock">🔒</div>
-      </div>
     </div>
-    <div style="text-align:center">
-      <button class="btn-primary" onclick="showStageShell(4)">Preview Stage 4: Next Steps →</button>
+
+    <h3 class="s3-prompt" style="font-size:1.15rem; margin-top:1rem;">This space is yours.</h3>
+    <p class="s3-helper">What do you want to remember from today? What do you want to bring back to this when you return? You can write a sentence or a page. It's whatever you need it to be.</p>
+    <textarea id="s3-journal-entry" class="s3-textarea s3-journal" placeholder="Write what you need to write."></textarea>
+
+    <div id="s3-share-team-wrap" class="s3-share-wrap" style="display:none" onclick="s3ToggleShareTeam()">
+      <span class="s3-share-box"></span>
+      <span class="s3-share-label">Share this reflection with my team.</span>
     </div>
-  </div>
+
+    <div class="s3-continue-wrap">
+      <button class="s3-back" onclick="s3Continue(7)">&larr; Back</button>
+      <button class="s3-continue" onclick="s3CompleteStage3()">Finish Discernment &rarr;</button>
+    </div>
+  </section>
+
 </div>
 
 <!-- ══════════════════════════════════════════
      SCREEN: STAGE 4 SHELL
+     Two sibling shells:
+       #stage4-placeholder — the live participant experience while
+                              ENABLE_STAGE_4 is false.
+       #stage4-live        — the v4 framework, dark until the flag flips
+                              and the catalog has entries.
+     A single JS init swaps which is visible.
 ══════════════════════════════════════════ -->
 <div id="screen-stage4" class="screen">
-  <div class="stage-shell">
+  <div class="stage-shell" id="stage4-placeholder">
     <div class="stage-hero-banner">
       <div class="stage-num">Stage 4 of 4</div>
       <h2 class="stage-name">Personalized Next Steps</h2>
@@ -2165,8 +2635,62 @@
 
     <div style="text-align:center">
       <p class="telos-line">This isn't the end of the journey. It's an invitation to keep walking, at your own pace.</p>
-      <button class="btn-primary" onclick="goToScreen('welcome')">Explore the full campaign →</button>
+      <button class="btn-primary" onclick="goToScreen('welcome')">Explore the full campaign &rarr;</button>
     </div>
+  </div>
+
+  <!-- LIVE Stage 4 framework — built dark, hidden until ENABLE_STAGE_4 flips. -->
+  <div class="stage-shell" id="stage4-live" style="display:none">
+    <div class="stage-hero-banner">
+      <div class="stage-num">Stage 4 of 4</div>
+      <h2 class="stage-name">Personalized Next Steps</h2>
+      <p class="stage-desc">A few concrete next steps, shaped by who you are and what you named in Discernment.</p>
+    </div>
+
+    <!-- Block 1 — Personalized next steps (mirror-back + cards) -->
+    <div id="s4-mirror-back" class="s4-mirror-back" style="display:none"></div>
+    <div id="s4-card-grid" class="s4-card-grid">
+      <div class="s4-empty">Next steps will appear here once the catalog is populated.</div>
+    </div>
+
+    <!-- Block 2 — Guide conversation offer (profile-conditional position) -->
+    <div id="s4-guide-primary" class="next-step-card" style="display:none">
+      <div class="next-step-label">Personal Guidance</div>
+      <h3 class="next-step-title">Connect with a Faithful Witness Guide</h3>
+      <p class="next-step-desc" id="s4-guide-primary-desc">A trained guide can sit with you, help you clarify your next step, and walk alongside you as you take it.</p>
+      <button class="btn-gold" onclick="alert('Guide scheduling will be wired here.')">Schedule a Conversation &rarr;</button>
+    </div>
+
+    <div id="s4-guide-secondary" style="display:none">
+      <div class="one-on-one-secondary">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🤝</div>
+        <div style="flex:1">
+          <div style="font-size:0.88rem;font-weight:500;color:var(--navy)" id="s4-guide-secondary-title">Sometimes it helps to think out loud with someone.</div>
+          <div style="font-size:0.82rem;color:var(--text-muted)" id="s4-guide-secondary-sub">No pressure to do anything.</div>
+        </div>
+        <button class="btn-secondary" style="font-size:0.82rem;padding:0.5rem 1rem;white-space:nowrap" onclick="alert('Guide scheduling will be wired here.')">Connect</button>
+      </div>
+    </div>
+
+    <!-- Block 3 — Invite / share moment -->
+    <div style="text-align:center; padding: 1.5rem 0 0.5rem;">
+      <p style="font-size:0.95rem; color:var(--text-secondary); max-width:440px; margin: 0 auto 0.85rem; line-height:1.65;">
+        Who in your life is wrestling with this? You could be the one who opens the door for them.
+      </p>
+      <button class="btn-secondary" style="font-size:0.9rem; padding: 0.65rem 1.5rem;" id="s4-invite-btn">Share This Experience</button>
+    </div>
+
+    <!-- Block 4 — Team prompt (conditional) -->
+    <div id="s4-team-prompt" style="display:none; margin-top:2rem;">
+      <div class="next-step-card" style="background:var(--gold-bg); color:var(--navy);">
+        <div class="next-step-label" style="color:var(--gold);">For You and Yours</div>
+        <h3 class="next-step-title" style="color:var(--navy);" id="s4-team-prompt-title">Want to bring others through this with you?</h3>
+        <p class="next-step-desc" style="color:var(--text-secondary);" id="s4-team-prompt-desc">Tell us a little about your group and we'll be in touch.</p>
+        <!-- TODO_TEAM_PROMPT_DESTINATION: replace mailto: with the real team-interest intake when chosen. -->
+        <a class="btn-gold" id="s4-team-prompt-cta" href="mailto:team-interest@faithfulwitness.us?subject=Bring%20my%20team%20through%20Faithful%20Witness">I'm interested &rarr;</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -2176,7 +2700,12 @@
 // DO NOT enable until legal / World Relief sign-off.
 const ENABLE_IMPACT_QUESTION = false;
 
+// Stage 4 (Personalized Next Steps). Built dark.
+// DO NOT enable until the next_steps catalog is populated and routing reviewed.
+const ENABLE_STAGE_4 = false;
+
 // ─── ASSESSMENT VERSION ───
+// Stage 1 inserts use '3.0'. Stage 3 completion bumps the record to '4.0'.
 const ASSESSMENT_VERSION = '3.0';
 
 // ─── STATE ───
@@ -2796,8 +3325,548 @@ function renderResults(name, profileName, tagline, narrativeHTML, profile) {
 
 }
 
+// ════════════════════════════════════════════════════════════════════
+// STAGE 3 — DISCERNMENT (v4)
+// One question per screen. Manual continue. All fields optional.
+// Stage 3 reads slower than Stage 1 by design.
+// ════════════════════════════════════════════════════════════════════
+
+// Profile-keyed contemplative content. Verbatim from
+// "Discernment Experience — Stage 3 Contemplative Content v1" (Drive).
+// Coalition will revise; these are v1 starting points.
+const STAGE3_CONTEMPLATIVE = {
+  open_explorer: {
+    scripture: '"For I was a stranger and you welcomed me."',
+    scriptureRef: '— Matthew 25:35',
+    framing: [
+      "Before you go any further, slow down. You've shared honestly about where you are, and that honesty is the beginning of something. The questions ahead aren't a test. They're an invitation to listen. Listen to what's stirred in you. Listen to what feels new. Listen for the quiet voice underneath the noise."
+    ],
+    slowdown: "Take a few minutes. Breathe. Come back when you're ready.",
+    closerSending: "You've named things today you may not have named before. That matters.",
+    closerPrayerIntro: "A prayer to close with, if you'd like one:",
+    closerPrayerBody: "God, you welcomed me before I welcomed anyone. Help me see who you've already placed in my path, and give me the courage to take one small step toward them. Amen."
+  },
+  thoughtful_learner: {
+    scripture: '"The foreigner residing among you must be treated as your native-born. Love them as yourself, for you were foreigners in Egypt."',
+    scriptureRef: '— Leviticus 19:34',
+    framing: [
+      "You've done some learning already. You've engaged enough to know this is complicated, and you want to think well about it. Good. The questions ahead invite a shift, from understanding about this to discernment toward something specific. They're a chance to let what you know start to shape what you do."
+    ],
+    slowdown: "Take a few minutes before continuing. Sit with what's been clarifying and what still feels unresolved.",
+    closerSending: "Knowledge that doesn't move us isn't really knowledge. What you've named today is a beginning, not a conclusion.",
+    closerPrayerIntro: "A prayer to close with, if you'd like one:",
+    closerPrayerBody: "God of Abraham, Hagar, and Ruth. You have always been a God who moves with people on the road. Show me what I now know that I didn't know before, and help me carry it into how I live. Amen."
+  },
+  careful_seeker: {
+    scripture: '"Come now, let us reason together, says the LORD."',
+    scriptureRef: '— Isaiah 1:18',
+    framing: [
+      "You showed up to a hard conversation, and that itself is faithful. The questions ahead won't ask you to resolve every tension you feel. They'll ask you to listen to what's underneath the tension. To what you're protecting, what you're wrestling with, what's true even when it's uncomfortable."
+    ],
+    slowdown: "There are no right answers here. Take your time.",
+    closerSending: "You've been honest about hard things today. That's worth more than any easy conclusion.",
+    closerPrayerIntro: "A prayer to close with, if you'd like one:",
+    closerPrayerBody: "God of truth and grace. You don't ask me to pretend my questions away. You meet me in them. Walk with me as I keep wrestling, and help me hear what you're saying even when it isn't what I expected. Amen."
+  },
+  ready_responder: {
+    scripture: '"Here am I. Send me."',
+    scriptureRef: '— Isaiah 6:8',
+    framing: [
+      "You're ready. You've named it. The questions ahead aren't designed to slow you down. They're designed to make sure the action you take is the one you're actually called to, not the loudest one in front of you. There's a difference between movement and direction, and discernment is what turns one into the other."
+    ],
+    slowdown: "Pause before you continue. The ground you're about to step onto is worth standing on for a moment first.",
+    closerSending: "The world doesn't need more activity. It needs faithful action. What you've named today is part of finding yours.",
+    closerPrayerIntro: "A prayer to close with, if you'd like one:",
+    closerPrayerBody: "God who sends, and God who sustains. Keep me from confusing my own urgency with your call. Show me clearly the place you've prepared for me, and help me walk toward it without burning out on the way. Amen."
+  },
+  faithful_witness: {
+    scripture: '"Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up."',
+    scriptureRef: '— Galatians 6:9',
+    framing: [
+      "You're not new to this. You've already given things. Time, relationships, hope, maybe more than you sometimes know how to say. The questions ahead are an invitation to do something you don't do often enough. Stop and listen to what's becoming clearer in you, not just what's needed around you."
+    ],
+    slowdown: "Take longer than you think you need. The work will still be there.",
+    closerSending: "The people you're walking with need you to be sustained, not just sustained-enough. What you've named today is part of that sustaining.",
+    closerPrayerIntro: "A prayer to close with, if you'd like one:",
+    closerPrayerBody: "God of the long road. You have walked with your people through deserts and exiles, and you walk with them still. Refresh me where I'm weary, sharpen me where I've grown dull, and let what I do continue to flow from who I am in you. Amen."
+  }
+};
+
+// Verbatim Stage 1 time_capacity option labels, keyed by stored value.
+// These mirror the assessment screen's option text exactly so Q4 echoes
+// the participant's prior answer verbatim per spec §3 Q4.
+const TIME_CAPACITY_LABELS = {
+  one_time:        "an occasional or one-time thing",
+  monthly:         "a few hours a month",
+  weekly_ongoing:  "weekly or ongoing involvement",
+  unsure:          "you weren't sure yet"
+};
+
+// Stage 3 state — all collected client-side, submitted as a single PATCH at completion.
+const stage3 = {
+  startedAt:                       null,
+  cant_shake_text:                 '',
+  cant_shake_emotions:             [],
+  specific_neighbor:               [],
+  specific_neighbor_other:         '',
+  action_shape:                    null,
+  contextual_focus:                [],
+  contextual_focus_followups:      [],   // [{ context, notice, change }]
+  contextual_focus_specific_place: '',
+  time_recalibrated:               null,
+  sense_of_calling:                '',
+  journal_entry:                   '',
+  journal_share_team:              false,
+  currentStep:                     1
+};
+
+function startStage3() {
+  goToScreen('stage3');
+  stage3.startedAt = stage3.startedAt || new Date().toISOString();
+  renderStage3Opener();
+  renderStage3Closer();
+  renderStage3Q4Echo();
+  setupStage3JournalShare();
+  s3Continue(1);
+}
+
+function s3Continue(stepN) {
+  // Capture any open text on the current step before switching.
+  s3CaptureOpenText(stage3.currentStep);
+  document.querySelectorAll('#screen-stage3 .s3-step').forEach((el) => {
+    el.style.display = 'none';
+  });
+  const el = document.getElementById('s3-step-' + stepN);
+  if (el) el.style.display = 'block';
+  stage3.currentStep = stepN;
+  renderStage3Progress(stepN);
+  window.scrollTo(0, 0);
+}
+
+function s3CaptureOpenText(stepN) {
+  if (stepN === 2) {
+    const v = document.getElementById('s3-cant-shake-text');
+    if (v) stage3.cant_shake_text = v.value.trim();
+  } else if (stepN === 3) {
+    const o = document.getElementById('s3-neighbor-other');
+    if (o) stage3.specific_neighbor_other = o.value.trim();
+  } else if (stepN === 5) {
+    const s = document.getElementById('s3-context-specific-place');
+    if (s) stage3.contextual_focus_specific_place = s.value.trim();
+    // Sync per-context follow-ups.
+    s3SyncContextFollowups();
+  } else if (stepN === 7) {
+    const c = document.getElementById('s3-sense-of-calling');
+    if (c) stage3.sense_of_calling = c.value.trim();
+  } else if (stepN === 8) {
+    const j = document.getElementById('s3-journal-entry');
+    if (j) stage3.journal_entry = j.value.trim();
+  }
+}
+
+function renderStage3Progress(currentStep) {
+  // 8 dots total; index 1 = opener, 2..7 = Q0..Q5, 8 = closer/journal.
+  const target = document.getElementById('s3-progress-' + currentStep);
+  if (!target) return;
+  target.innerHTML = '';
+  for (let i = 1; i <= 8; i++) {
+    const dot = document.createElement('span');
+    dot.className = 's3-dot';
+    if (i < currentStep) dot.classList.add('done');
+    if (i === currentStep) dot.classList.add('active');
+    target.appendChild(dot);
+  }
+}
+
+function renderStage3Opener() {
+  const profileKey = answers['profile_assigned_key'] || answers['profile-type'] || 'open_explorer';
+  const c = STAGE3_CONTEMPLATIVE[profileKey] || STAGE3_CONTEMPLATIVE.open_explorer;
+  document.getElementById('s3-opener-scripture-text').textContent = c.scripture;
+  document.getElementById('s3-opener-scripture-ref').textContent  = c.scriptureRef;
+  document.getElementById('s3-opener-framing').innerHTML =
+    c.framing.map((p) => '<p>' + p + '</p>').join('');
+  document.getElementById('s3-opener-slowdown').textContent = c.slowdown;
+}
+
+function renderStage3Closer() {
+  const profileKey = answers['profile_assigned_key'] || answers['profile-type'] || 'open_explorer';
+  const c = STAGE3_CONTEMPLATIVE[profileKey] || STAGE3_CONTEMPLATIVE.open_explorer;
+  document.getElementById('s3-closer-sending').textContent      = c.closerSending;
+  document.getElementById('s3-closer-prayer-intro').textContent = c.closerPrayerIntro;
+  document.getElementById('s3-closer-prayer-body').textContent  = c.closerPrayerBody;
+}
+
+function renderStage3Q4Echo() {
+  const tc = answers['q-time-capacity'];
+  const label = TIME_CAPACITY_LABELS[tc] || null;
+  const stem  = document.getElementById('s3-q4-stem');
+  const echo  = document.getElementById('s3-q4-echo');
+  if (label && tc !== 'unsure') {
+    stem.textContent = "You said earlier you could give " + label + ". Does that still feel right?";
+    echo.style.display = 'block';
+    echo.textContent = "Your earlier answer: " + label + ".";
+  } else if (tc === 'unsure') {
+    stem.textContent = "Earlier you weren't sure how much time you could give. How does that feel now?";
+    echo.style.display = 'none';
+  } else {
+    // No prior answer (rare). Soften the stem to avoid an empty echo.
+    stem.textContent = "How much time and presence does this season of your life allow?";
+    echo.style.display = 'none';
+  }
+}
+
+function setupStage3JournalShare() {
+  const teamCode = (teamCodeFromUrl || answers['q-team-code'] || '').trim();
+  const wrap = document.getElementById('s3-share-team-wrap');
+  if (!wrap) return;
+  if (teamCode) {
+    wrap.style.display = 'flex';
+  } else {
+    wrap.style.display = 'none';
+    stage3.journal_share_team = false;
+  }
+}
+
+function s3ToggleEmotion(btn) {
+  btn.classList.toggle('selected');
+  const vals = [];
+  document.querySelectorAll('#s3-cant-shake-emotions .multi-btn.selected').forEach((b) => vals.push(b.dataset.val));
+  stage3.cant_shake_emotions = vals;
+}
+
+function s3ToggleNeighbor(btn) {
+  const val = btn.dataset.val;
+  const willSelect = !btn.classList.contains('selected');
+
+  // not_yet_clear is mutually exclusive with all others.
+  if (willSelect && val === 'not_yet_clear') {
+    document.querySelectorAll('#s3-specific-neighbor .multi-btn.selected').forEach((b) => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  } else if (willSelect) {
+    // Deselect not_yet_clear if it's currently selected.
+    const notYet = document.querySelector('#s3-specific-neighbor .multi-btn[data-val="not_yet_clear"].selected');
+    if (notYet) notYet.classList.remove('selected');
+    // Cap at 3.
+    const currentCount = document.querySelectorAll('#s3-specific-neighbor .multi-btn.selected').length;
+    if (currentCount >= 3) return;
+    btn.classList.add('selected');
+  } else {
+    btn.classList.remove('selected');
+  }
+
+  const vals = [];
+  document.querySelectorAll('#s3-specific-neighbor .multi-btn.selected').forEach((b) => vals.push(b.dataset.val));
+  stage3.specific_neighbor = vals;
+
+  // Reveal/hide other_specific open text.
+  const otherWrap = document.getElementById('s3-neighbor-other-wrap');
+  if (vals.includes('other_specific')) {
+    otherWrap.style.display = 'block';
+  } else {
+    otherWrap.style.display = 'none';
+    stage3.specific_neighbor_other = '';
+    const o = document.getElementById('s3-neighbor-other');
+    if (o) o.value = '';
+  }
+}
+
+function s3SelectActionShape(btn) {
+  document.querySelectorAll('#s3-action-shape .option-btn').forEach((b) => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  stage3.action_shape = btn.dataset.val;
+}
+
+function s3ToggleContext(btn) {
+  const val = btn.dataset.val;
+  const willSelect = !btn.classList.contains('selected');
+
+  // not_yet is mutually exclusive with others.
+  if (willSelect && val === 'not_yet') {
+    document.querySelectorAll('#s3-contextual-focus .multi-btn.selected').forEach((b) => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  } else if (willSelect) {
+    const notYet = document.querySelector('#s3-contextual-focus .multi-btn[data-val="not_yet"].selected');
+    if (notYet) notYet.classList.remove('selected');
+    btn.classList.add('selected');
+  } else {
+    btn.classList.remove('selected');
+  }
+
+  const vals = [];
+  document.querySelectorAll('#s3-contextual-focus .multi-btn.selected').forEach((b) => vals.push(b.dataset.val));
+  stage3.contextual_focus = vals;
+
+  // Reveal/hide specific_place input.
+  const specWrap = document.getElementById('s3-context-specific-wrap');
+  if (vals.includes('specific_place')) {
+    specWrap.style.display = 'block';
+  } else {
+    specWrap.style.display = 'none';
+    stage3.contextual_focus_specific_place = '';
+    const s = document.getElementById('s3-context-specific-place');
+    if (s) s.value = '';
+  }
+
+  // Render per-context follow-ups (except not_yet).
+  renderContextFollowups(vals);
+}
+
+const CONTEXT_LABELS = {
+  neighborhood:   'In my neighborhood',
+  workplace:      'In my workplace',
+  church:         'In my church or faith community',
+  city_region:    'In my city or region',
+  specific_place: 'In a specific place'
+};
+
+function renderContextFollowups(values) {
+  const host = document.getElementById('s3-context-followups');
+  host.innerHTML = '';
+  values.filter((v) => v !== 'not_yet').forEach((ctx) => {
+    const block = document.createElement('div');
+    block.className = 's3-context-block';
+    block.dataset.context = ctx;
+    block.innerHTML =
+      '<div class="s3-context-label">' + (CONTEXT_LABELS[ctx] || ctx) + '</div>' +
+      '<p class="s3-context-sub">What do you notice there that you\'d like to understand better?</p>' +
+      '<textarea class="s3-textarea" data-field="notice" style="min-height:80px;"></textarea>' +
+      '<p class="s3-context-sub">What would you like to see change?</p>' +
+      '<textarea class="s3-textarea" data-field="change" style="min-height:80px;"></textarea>';
+    host.appendChild(block);
+  });
+  // Restore any previously typed follow-ups for contexts still selected.
+  s3RestoreContextFollowups();
+}
+
+function s3RestoreContextFollowups() {
+  const map = {};
+  (stage3.contextual_focus_followups || []).forEach((row) => { map[row.context] = row; });
+  document.querySelectorAll('#s3-context-followups .s3-context-block').forEach((block) => {
+    const ctx = block.dataset.context;
+    const row = map[ctx];
+    if (!row) return;
+    const n = block.querySelector('textarea[data-field="notice"]');
+    const c = block.querySelector('textarea[data-field="change"]');
+    if (n && row.notice) n.value = row.notice;
+    if (c && row.change) c.value = row.change;
+  });
+}
+
+function s3SyncContextFollowups() {
+  const rows = [];
+  document.querySelectorAll('#s3-context-followups .s3-context-block').forEach((block) => {
+    const ctx = block.dataset.context;
+    const n = block.querySelector('textarea[data-field="notice"]');
+    const c = block.querySelector('textarea[data-field="change"]');
+    rows.push({
+      context: ctx,
+      notice: n ? n.value.trim() : '',
+      change: c ? c.value.trim() : ''
+    });
+  });
+  stage3.contextual_focus_followups = rows;
+}
+
+function s3SelectRecalibrated(btn) {
+  document.querySelectorAll('#s3-time-recalibrated .option-btn').forEach((b) => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  stage3.time_recalibrated = btn.dataset.val;
+}
+
+function s3ToggleShareTeam() {
+  stage3.journal_share_team = !stage3.journal_share_team;
+  const wrap = document.getElementById('s3-share-team-wrap');
+  if (stage3.journal_share_team) wrap.classList.add('checked');
+  else wrap.classList.remove('checked');
+}
+
+async function s3CompleteStage3() {
+  // Final capture for the journal screen.
+  s3CaptureOpenText(8);
+
+  const completedAtStage3 = new Date().toISOString();
+
+  const payload = {
+    update_stage3:                   true,
+    participant_id:                  participantId,
+    stage3_started_at:               stage3.startedAt,
+    stage3_completed_at:             completedAtStage3,
+    cant_shake_text:                 stage3.cant_shake_text || null,
+    cant_shake_emotions:             stage3.cant_shake_emotions,
+    specific_neighbor:               stage3.specific_neighbor,
+    specific_neighbor_other:         stage3.specific_neighbor_other || null,
+    action_shape:                    stage3.action_shape || null,
+    contextual_focus:                stage3.contextual_focus,
+    contextual_focus_followups:      stage3.contextual_focus_followups || [],
+    contextual_focus_specific_place: stage3.contextual_focus_specific_place || null,
+    time_recalibrated:               stage3.time_recalibrated || null,
+    sense_of_calling:                stage3.sense_of_calling || null,
+    journal_entry:                   stage3.journal_entry || null,
+    journal_share_team:              !!stage3.journal_share_team
+  };
+
+  try {
+    await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    // Never block the user experience on a network failure.
+    console.error('Stage 3 submit error:', err);
+  }
+
+  // Route forward: live Stage 4 if the flag is on, otherwise existing Coming Soon.
+  routeToStage4();
+}
+
+function routeToStage4() {
+  goToScreen('stage4');
+  showStageTabs();
+  document.getElementById('tab-4').classList.add('active');
+  applyStage4FlagState();
+
+  if (ENABLE_STAGE_4) {
+    renderStage4Mirror();
+    positionStage4GuideOffer();
+    renderStage4TeamPrompt();
+    requestStage4Recommendations();
+  }
+}
+
+function applyStage4FlagState() {
+  const placeholder = document.getElementById('stage4-placeholder');
+  const live        = document.getElementById('stage4-live');
+  if (!placeholder || !live) return;
+  if (ENABLE_STAGE_4) {
+    placeholder.style.display = 'none';
+    live.style.display = 'block';
+  } else {
+    placeholder.style.display = 'block';
+    live.style.display = 'none';
+  }
+}
+
+function renderStage4Mirror() {
+  const host = document.getElementById('s4-mirror-back');
+  if (!host) return;
+  const text = stage3.sense_of_calling || stage3.cant_shake_text || answers['q-burning-question'] || '';
+  if (!text) { host.style.display = 'none'; return; }
+  host.style.display = 'block';
+  host.textContent = 'You said: "' + text + '". Here\'s where to start with that.';
+}
+
+function positionStage4GuideOffer() {
+  // Spec §4 Block 2 positioning.
+  const profileKey = answers['profile_assigned_key'] || null;
+  const emotions   = stage3.cant_shake_emotions || [];
+  const readyFlag  = nextStepChecked === true;
+  const promoteForEmotion = ['grieved', 'troubled', 'weary'].some((e) => emotions.includes(e));
+
+  const primary = (
+    profileKey === 'ready_responder' ||
+    profileKey === 'faithful_witness' ||
+    promoteForEmotion ||
+    readyFlag
+  );
+
+  const primEl = document.getElementById('s4-guide-primary');
+  const secEl  = document.getElementById('s4-guide-secondary');
+  if (!primEl || !secEl) return;
+
+  if (primary) {
+    primEl.style.display = 'block';
+    secEl.style.display = 'none';
+  } else {
+    primEl.style.display = 'none';
+    secEl.style.display = 'block';
+    if (profileKey === 'careful_seeker') {
+      document.getElementById('s4-guide-secondary-title').textContent =
+        'Sometimes it helps to think out loud with someone.';
+      document.getElementById('s4-guide-secondary-sub').textContent =
+        'No pressure to do anything.';
+    }
+  }
+}
+
+function renderStage4TeamPrompt() {
+  const teamCode = (teamCodeFromUrl || answers['q-team-code'] || '').trim();
+  const engagingFor = answers['q-engaging-for'] || null;
+  const leadership  = answers['q-leadership-context'] || [];
+  const hasLeadership = Array.isArray(leadership) && leadership.some((v) => v && v !== 'none');
+
+  const shouldShow = (
+    (engagingFor === 'small_group' || engagingFor === 'congregation_org') ||
+    hasLeadership ||
+    !!teamCode
+  );
+
+  const wrap = document.getElementById('s4-team-prompt');
+  if (!wrap) return;
+  if (!shouldShow) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+
+  const titleEl = document.getElementById('s4-team-prompt-title');
+  if (engagingFor === 'congregation_org') {
+    titleEl.textContent = "You said you're exploring this for a congregation or organization. Want to bring them through together?";
+  } else if (hasLeadership) {
+    titleEl.textContent = "You're already leading. Would you bring others through this with you?";
+  } else {
+    titleEl.textContent = "Want to bring your team through this with you?";
+  }
+}
+
+async function requestStage4Recommendations() {
+  if (!ENABLE_STAGE_4) return;   // belt-and-braces; never fires when off.
+  try {
+    const r = await fetch('/api/recommend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ participant_id: participantId })
+    });
+    if (!r.ok) return;
+    const data = await r.json();
+    renderStage4Cards(data.steps || []);
+  } catch (err) {
+    console.error('recommend fetch error:', err);
+  }
+}
+
+function renderStage4Cards(steps) {
+  const host = document.getElementById('s4-card-grid');
+  if (!host) return;
+  if (!steps.length) {
+    host.innerHTML = '<div class="s4-empty">Next steps will appear here once the catalog is populated.</div>';
+    return;
+  }
+  const labels = ['Primary', 'Alternative', 'If you\'re ready to go further'];
+  host.innerHTML = steps.map((s, i) => {
+    const cls = i === 0 ? 'primary' : (i === 2 ? 'stretch' : '');
+    return (
+      '<div class="s4-card ' + cls + '">' +
+      '  <div class="s4-card-label">' + (labels[i] || 'Next step') + '</div>' +
+      '  <h3 class="s4-card-title">' + (s.title || 'Untitled step') + '</h3>' +
+      (s.why_one_liner ? '  <p class="s4-card-why">' + s.why_one_liner + '</p>' : '') +
+      (s.time_cue ? '  <div class="s4-card-meta">' + s.time_cue + (s.partner_org ? ' &middot; ' + s.partner_org : '') + '</div>' : (s.partner_org ? '  <div class="s4-card-meta">' + s.partner_org + '</div>' : '')) +
+      (s.destination_url ? '  <a class="s4-card-cta" href="' + s.destination_url + '" target="_blank" rel="noopener">' + (s.cta_text || 'Learn more') + '</a>' : '') +
+      '</div>'
+    );
+  }).join('');
+}
+
+// Surface the canonical profile key into the answers map so Stage 3 can read it.
+// (renderResults already runs before Stage 3 is entered.)
+const _originalRenderResults = renderResults;
+renderResults = function(name, profileName, tagline, narrativeHTML, profile) {
+  answers['profile_assigned_key'] = profile;
+  return _originalRenderResults.apply(this, arguments);
+};
+
 // ─── INIT ───
 showSection(0);
+// Apply the Stage 4 flag at load so the placeholder/live state is correct
+// before the user ever lands on Stage 4.
+applyStage4FlagState();
 // ─── URL PARAMETER HANDLER ───
 // Handles ?profile=responding&stage=2 deep links from results email
 (function() {
