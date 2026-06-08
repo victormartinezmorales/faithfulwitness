@@ -3496,14 +3496,20 @@ async function generateProfile() {
 
   // ── Send results email via Resend (non-blocking, unchanged contract) ──
   if (answers['user-email']) {
+    // Stage 1 v2 email — sender accepts both new + legacy field shapes.
+    // We send the new shape; the legacy keys remain for any future fallback.
     const emailPayload = {
+      email:         answers['user-email'],
+      firstName:     name,
+      profileKey:    profileKey,
+      participantId: participantId,
+      // Legacy keys (kept for compat; sender ignores when new keys are present):
       name,
-      email:       answers['user-email'],
       profileName,
-      profileType: profileKey,
+      profileType:   profileKey,
       narrativeHTML,
-      resources:   getRecommendedResources(profileKey),
-      continueUrl: `https://faithful-witness.vercel.app?profile=${profileKey}&stage=2&pid=${encodeURIComponent(participantId || '')}`
+      resources:     getRecommendedResources(profileKey),
+      continueUrl:   `https://faithful-witness.vercel.app/stage3?pid=${encodeURIComponent(participantId || '')}`
     };
     fetch('/api/send-email', {
       method: 'POST',
@@ -4408,18 +4414,33 @@ showSection(0);
 // before the user ever lands on Stage 4.
 applyStage4FlagState();
 // ─── URL PARAMETER HANDLER ───
-// Handles ?profile=responding&stage=2 deep links from results email
+// Handles deep links from the results / reflection emails:
+//   ?stage=2            → Stage 2 placeholder shell
+//   ?stage=3&profile=X  → Stage 3 live flow (resume from email link)
+//   ?profile=X          → seed profile context for downstream renderers
+// The pid is picked up earlier by initDataLayer() so returning participants
+// keep their participant_id throughout the session.
 (function() {
   const params = new URLSearchParams(window.location.search);
   const stage = params.get('stage');
   const profile = params.get('profile');
+  // Seed profile context for any downstream renderer (Stage 3 opener, etc.).
+  if (profile) {
+    answers['profile-type'] = profile;
+    answers['profile_assigned_key'] = profile;
+  }
   if (stage === '2') {
-    // Set the profile in answers so context carries through
-    if (profile) answers['profile-type'] = profile;
-    // Small delay to let DOM render first
     setTimeout(() => {
       showStageTabs();
       showStageShell(2);
+    }, 100);
+  } else if (stage === '3') {
+    // Land directly on the Stage 3 contemplative opener. The profile-keyed
+    // content is selected from answers.profile_assigned_key (seeded above).
+    setTimeout(() => {
+      showStageTabs();
+      document.getElementById('tab-3') && document.getElementById('tab-3').classList.add('active');
+      startStage3();
     }, 100);
   }
 })();

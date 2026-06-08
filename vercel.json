@@ -1,13 +1,16 @@
 {
   "functions": {
-    "api/send-email.js": {
-      "maxDuration": 30
-    },
-    "api/submit.js": {
-      "maxDuration": 30
-    }
+    "api/send-email.js":                    { "maxDuration": 30 },
+    "api/submit.js":                        { "maxDuration": 30 },
+    "api/send-pending-stage3-emails.js":    { "maxDuration": 60 },
+    "api/recommend.js":                     { "maxDuration": 30 }
   },
+  "crons": [
+    { "path": "/api/send-pending-stage3-emails", "schedule": "0 12 * * *" }
+  ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" }
+    { "source": "/api/(.*)",   "destination": "/api/$1" },
+    { "source": "/stage3",     "destination": "/index.html?stage=3" },
+    { "source": "/welcome-back", "destination": "/welcome-back.html" }
   ]
 }

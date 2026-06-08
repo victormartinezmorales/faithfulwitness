@@ -14,3 +14,6 @@ Local Git and Vercel Workflow.md
 
 # Build artifacts that don't belong in source control
 api/*.zip
+
+# Email render previews (verification artifacts, not deployed)
+email-previews/
