@@ -575,7 +575,175 @@
   .loading-steps li.done::before { content: '✓'; font-weight: 600; }
   .loading-steps li:not(.done)::before { content: '·'; font-size: 1.4rem; line-height: 0; margin-top: 2px; }
 
-  /* ─── RESULTS ─── */
+  /* ─── RESULTS v2 (Bug 2 fix) ───
+     On-screen results panel mirrors the Stage 1 Results Email v2 structure.
+     Profile reveal → definition → bullets callout → disclaimer → "What this
+     means" / "Watch out for" → "Your next faithful step" + 2 CTAs → prayer →
+     closing + signature. Same brand tokens as the email. */
+  .r1-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+  .r1-salutation {
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+  }
+  .r1-profile-prefix {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.35rem;
+  }
+  .r1-profile-name {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .r1-definition {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--navy);
+    margin-bottom: 1.75rem;
+  }
+  .r1-callout {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.75rem;
+    border-radius: 0 6px 6px 0;
+  }
+  .r1-callout-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 0.85rem;
+  }
+  .r1-callout-list {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--navy);
+  }
+  .r1-callout-list .r1-bullet {
+    margin-bottom: 0.5rem;
+  }
+  .r1-callout-list .r1-bullet:last-child { margin-bottom: 0; }
+  .r1-disclaimer {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #5a5a7a; /* matches email's textMutedOnWhite (WCAG AA) */
+    font-style: italic;
+    margin-bottom: 2.25rem;
+  }
+  .r1-h {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+    font-weight: 700;
+    margin: 0 0 0.85rem;
+  }
+  .r1-p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--navy);
+    margin: 0 0 1.75rem;
+  }
+  .r1-step {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--navy);
+    margin: 0 0 1.1rem;
+  }
+  .r1-step strong { color: var(--navy); }
+  .r1-cta-primary-wrap {
+    margin: 0 0 2rem;
+  }
+  .r1-cta-primary {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--warm-white);
+    border: none;
+    padding: 0.85rem 1.85rem;
+    border-radius: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s;
+    min-height: 44px;
+    line-height: 1.5;
+  }
+  .r1-cta-primary:hover { background: var(--navy-light); transform: translateY(-1px); }
+  .r1-cta-secondary-wrap {
+    margin: 0 0 2.5rem;
+  }
+  .r1-cta-secondary {
+    background: transparent;
+    border: none;
+    color: var(--gold);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding: 0 0 2px;
+  }
+  .r1-cta-secondary:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+  .r1-prayer {
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 1.4rem;
+    margin: 0 0 1.75rem;
+  }
+  .r1-prayer-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 0.65rem;
+  }
+  .r1-prayer-text {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--navy);
+    margin: 0;
+  }
+  .r1-closing {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--navy);
+    margin: 0 0 0.5rem;
+  }
+  .r1-signature {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  .r1-signature .r1-coalition {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+
+  @media (max-width: 480px) {
+    .r1-wrap { padding: 2.25rem 1.25rem 3.5rem; }
+    .r1-profile-name { font-size: 1.85rem; }
+    .r1-cta-primary { width: 100%; max-width: 320px; text-align: center; }
+  }
+
+  /* ─── RESULTS (legacy classes — kept for the existing solidarity branch
+       and other in-flight references; the v2 markup above replaces the
+       day-to-day rendering) ─── */
   .results-hero {
     background: var(--navy);
     padding: 2.5rem 1.5rem;
@@ -2583,68 +2751,59 @@
 <!-- ══════════════════════════════════════════
      SCREEN: RESULTS (Stage 1)
 ══════════════════════════════════════════ -->
+<!-- RESULTS — Bug 2 fix.
+     Mirrors the Stage 1 Results Email v2 structure: salutation, profile
+     reveal (italic serif), definition, "Based on what you shared" callout,
+     universal disclaimer, "What this means for you", "Watch out for",
+     "Your next faithful step" + 2 CTAs, prayer blockquote, closing line,
+     signature. Profile-specific content is populated by renderResults()
+     from STAGE1_PROFILES_CLIENT. Same brand tokens as the email. -->
 <div id="screen-results" class="screen">
-  <div class="results-hero">
-    <div class="profile-badge" id="result-badge">Your Profile</div>
-    <h2 class="results-name" id="result-profile-name">Your profile</h2>
-    <p class="results-tagline" id="result-tagline">Preparing your reflection...</p>
-  </div>
+  <article class="r1-wrap">
+    <div class="r1-salutation">Hi <span id="r1-first-name">friend</span>,</div>
 
-  <div class="results-body">
+    <div class="r1-profile-prefix">You're a</div>
+    <h2 class="r1-profile-name" id="r1-profile-name">Profile Name.</h2>
 
-    <div class="narrative-card">
-      <div class="narrative-text" id="narrative-text">
-        <p>Your reflection is being prepared...</p>
-      </div>
-      <div class="narrative-source">
-        <span style="color:var(--text-muted); font-size:12px; font-style:normal;">Based on what you shared, here is what we see in you · Not a label, a starting point</span>
-      </div>
+    <p class="r1-definition" id="r1-definition">Your profile is being prepared&hellip;</p>
+
+    <div class="r1-callout">
+      <div class="r1-callout-label">Based on what you shared</div>
+      <div class="r1-callout-list" id="r1-bullets"></div>
     </div>
 
-    <div class="dimension-grid" id="dimension-grid"></div>
-
-    <div style="margin-bottom:1.5rem">
-      <h3 class="section-title-sm">Resources for Where You Are</h3>
-      <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1rem">Curated from the Faithful Witness library based on your profile and motivations.</p>
-      <div id="resources-list"></div>
+    <div class="r1-disclaimer">
+      This profile reflects where you are right now, not who you are. It's meant to help you find a faithful next step, not put you in a box.
     </div>
 
-    <div class="next-step-card">
-      <div class="next-step-label">Your Next Step</div>
-      <h3 class="next-step-title" id="next-step-title">Continue to Discernment</h3>
-      <p class="next-step-desc" id="next-step-desc">You've completed Stage 1. The next stage, Discernment, is a quieter, more personal listening space. It will help you move from awareness toward a faithful next step that fits this season of your life.</p>
-      <button class="btn-gold" onclick="startStage3()">Continue to Discernment &rarr;</button>
+    <h3 class="r1-h">What this means for you</h3>
+    <p class="r1-p" id="r1-means"></p>
+
+    <h3 class="r1-h">Watch out for</h3>
+    <p class="r1-p" id="r1-watch"></p>
+
+    <h3 class="r1-h">Your next faithful step</h3>
+    <p class="r1-step"><strong>1. <span id="r1-step1-lead"></span></strong> <span id="r1-step1-body"></span></p>
+    <div class="r1-cta-primary-wrap">
+      <button class="r1-cta-primary" onclick="startStage3()">Continue to Stage 3 &nbsp;&rarr;</button>
     </div>
 
-    <div id="one-on-one-prominent" style="display:none">
-      <div class="one-on-one-card">
-        <div class="one-on-one-icon">🤝</div>
-        <div>
-          <div class="one-on-one-label">Personal Guidance</div>
-          <h3 class="one-on-one-title">Connect with a Faithful Witness Guide</h3>
-          <p class="one-on-one-desc">You're ready to move. A trained guide can sit with you, helping you clarify your next steps, connect to the right opportunities, and move forward with confidence. This conversation is free, relational, and tailored entirely to you.</p>
-          <button class="btn-gold" onclick="alert('1:1 scheduling will be integrated here — e.g. Calendly or a contact form.')">Schedule a Conversation →</button>
-        </div>
-      </div>
+    <p class="r1-step"><strong>2. <span id="r1-step2-lead"></span></strong> <span id="r1-step2-body"></span></p>
+    <div class="r1-cta-secondary-wrap">
+      <button class="r1-cta-secondary" id="r1-invite-btn" onclick="openTeamInviteSheet()">Invite someone &rarr;</button>
     </div>
 
-    <div id="one-on-one-secondary" style="display:none">
-      <div class="one-on-one-secondary">
-        <div style="width:36px;height:36px;border-radius:50%;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🤝</div>
-        <div style="flex:1">
-          <div style="font-size:0.88rem;font-weight:500;color:var(--navy)">Want a guide for this journey?</div>
-          <div style="font-size:0.82rem;color:var(--text-muted)">A Faithful Witness guide can walk alongside you at any point.</div>
-        </div>
-        <button class="btn-secondary" style="font-size:0.82rem;padding:0.5rem 1rem;white-space:nowrap" onclick="alert('1:1 scheduling will be integrated here.')">Connect</button>
-      </div>
+    <div class="r1-prayer">
+      <div class="r1-prayer-label">A short prayer to carry</div>
+      <p class="r1-prayer-text" id="r1-prayer"></p>
     </div>
 
-    <div style="text-align:center; padding-top: 0.5rem;">
-      <p style="font-size:0.9rem; color:var(--text-secondary); max-width:400px; margin: 0 auto 0.85rem;">Know someone (a friend, a small group, a congregation) who needs this journey? You can be the one who opens the door for them.</p>
-      <button class="btn-secondary" style="font-size:0.9rem; padding: 0.65rem 1.5rem;">Share This Experience</button>
+    <p class="r1-closing">We're glad you showed up.</p>
+    <div class="r1-signature">
+      <div>The Faithful Witness Team</div>
+      <div class="r1-coalition">CCDA &middot; NaLEC &middot; World Relief &middot; Undivided</div>
     </div>
-
-  </div>
+  </article>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -3659,63 +3818,158 @@ function getRecommendedResources(profileKey) {
   return scored.slice(0, 3);
 }
 
-// ─── RENDER RESULTS ───
+// ─── STAGE 1 PROFILE CONTENT (client mirror of lib/email-templates.js) ───
+// KEEP IN SYNC with STAGE1_PROFILES in lib/email-templates.js. Copy is
+// verbatim from "Faithful Witness — Stage 1 Results Email v2" (Drive).
+// If you change one, change the other in the same commit.
+const STAGE1_PROFILES_CLIENT = {
+  open_explorer: {
+    name:       "Open Explorer",
+    definition: "That means you're open to engaging immigration as a matter of faith, and you're approaching it without the heavy contact or sustained involvement that comes with deep proximity. You may have thought about this topic before in other ways, through politics, through the news, through conversations at church. What this profile recognizes is that you're at the start of a particular journey: working out what faithful engagement looks like, with curiosity rather than resistance.",
+    bullets: [
+      "You're approaching this as a matter of faith, not just opinion or politics",
+      "You haven't had much personal contact with immigrant communities yet",
+      "You're motivated by a sense that your faith calls you toward something here",
+      "You're ready to learn before you're ready to act"
+    ],
+    means: "For Open Explorers, the most important thing isn't to act quickly. It's to let real stories and real faces shape how you understand what's at stake. Information without relationship becomes noise. Relationship without information becomes naive. You need both, in that order.",
+    watch: "Curiosity is a beautiful starting place, but it can become an end in itself. You can read for years, listen to a hundred podcasts, follow every story, and still never know one person whose life has been shaped by the immigration system. Don't let learning become a substitute for the closer, harder work of relationship.",
+    step1Lead: "Continue the journey.",
+    step1Body: "Stage 2 (Formation) and Stage 3 (Discernment) will help you move from initial curiosity to a deeper understanding of what your faith is asking. Stage 3 is where the real shift happens.",
+    step2Lead: "Bring someone with you.",
+    step2Body: "Open Explorers often move best alongside one other person who's also starting fresh. Invite a friend, a spouse, or someone from your small group to take this journey with you.",
+    inviteLabel: "Invite someone",
+    prayer: "God, you welcomed me before I welcomed anyone. Help me see who you've already placed in my path, and give me the courage to take one small step toward them."
+  },
+  thoughtful_learner: {
+    name:       "Thoughtful Learner",
+    definition: "That means you've already engaged with immigration in some real ways. You've read, listened, maybe had a few hard conversations. You want to think well about this, not just feel right about it. That kind of seriousness is worth naming.",
+    bullets: [
+      "You have some personal exposure to immigrant communities or stories",
+      "You want to understand more deeply before you act",
+      "You're motivated by a desire to think faithfully, not just react",
+      "You're holding questions rather than jumping to conclusions"
+    ],
+    means: "For Thoughtful Learners, the work is moving from understanding about this to discernment toward something specific. You've built a foundation. The question now is what that foundation is for. Knowledge that doesn't move us isn't really knowledge. It's furniture.",
+    watch: "The biggest risk for Thoughtful Learners is using understanding as a way to delay action. There's always another book to read, another angle to consider, another nuance to wrestle with. At some point the most faithful thing you can do is move on what you already know, even imperfectly. Don't let depth become a hiding place.",
+    step1Lead: "Continue to Stage 3: Discernment.",
+    step1Body: "This is where your learning starts becoming direction. The questions in Stage 3 are designed for someone in exactly your position. You have enough information to discern; the work now is listening for what you're being called to.",
+    step2Lead: "Find a conversation partner.",
+    step2Body: "Thoughtful Learners do their best discernment in dialogue. Invite someone you respect to take this journey alongside you and talk through what comes up.",
+    inviteLabel: "Invite someone",
+    prayer: "God of Abraham, Hagar, and Ruth. You have always been a God who moves with people on the road. Show me what I now know that I didn't know before, and help me carry it into how I live."
+  },
+  careful_seeker: {
+    name:       "Careful Seeker",
+    definition: "That means you came to this with some honest hesitation, maybe some resistance, maybe just caution. You showed up anyway. That's not a small thing. Many people who feel what you feel about this topic never make it this far.",
+    bullets: [
+      "You feel some tension or hesitation about how to engage immigration",
+      "You're approaching this with care rather than enthusiasm",
+      "You want to be honest about your questions rather than performing certainty",
+      "You're open enough to keep listening"
+    ],
+    means: "For Careful Seekers, the most faithful posture isn't to push past your hesitation. It's to listen to what's underneath it. What are you protecting? What are you wrestling with? What's true even when it's uncomfortable? The journey from here is about reasoning together with Scripture, with people you trust, and with God. The point isn't forcing a resolution before you have one.",
+    watch: "Caution is a gift, but it can harden into permanent fence-sitting. The fence is a real place to stand for a season; it shouldn't become your address. Be honest with yourself about whether your hesitation is still doing real discernment work, or whether it's become a way to avoid moving at all.",
+    step1Lead: "Continue to Stage 3: Discernment.",
+    step1Body: "Stage 3 is designed to honor the tension you feel, not resolve it for you. It asks questions you can answer honestly without pretending.",
+    step2Lead: "Talk with someone, not at someone.",
+    step2Body: "Careful Seekers do their best work in conversation with one trusted person. Not a debate, just an honest exchange. Invite someone who will hold your questions seriously.",
+    inviteLabel: "Invite someone",
+    prayer: "God of truth and grace. You don't ask me to pretend my questions away. You meet me in them. Walk with me as I keep wrestling, and help me hear what you're saying even when it isn't what I expected."
+  },
+  ready_responder: {
+    name:       "Ready Responder",
+    definition: "That means you're not just learning anymore. You're ready to do something. You just want to make sure it's the right something. Ready Responders are people for whom this has stopped being theoretical. The question now is what faithfulness actually looks like when you take a step.",
+    bullets: [
+      "You're already aware of the issue and have moved past initial learning",
+      "You're motivated by compassion, conviction, or both",
+      "You're looking for a clear, guided next step",
+      "You may be more ready to engage than you've fully named yet"
+    ],
+    means: "For Ready Responders, the work isn't building more conviction. You have it. The work is channeling that readiness into something sustainable. Movement is easier than direction. The most faithful thing you can do right now is make sure the action you take is the one you're actually called to, not the loudest one in front of you.",
+    watch: "Readiness can turn into pressure if you try to carry too much too quickly. You don't have to solve everything. The biggest risk for Ready Responders isn't inaction. It's burning out within six months because you said yes to everything. Start with one faithful next step. Sustain before you scale.",
+    step1Lead: "Continue to Stage 3: Discernment.",
+    step1Body: "Stage 3 is where you find your specific shape: which population, which kind of action, which context. That's how the readiness you already have lands somewhere real.",
+    step2Lead: "Don't move alone.",
+    step2Body: "Ready Responders often move best with someone beside them, a trusted friend, a pastor, a colleague. Action without community burns out. Invite someone to discern this with you.",
+    inviteLabel: "Invite someone",
+    prayer: "God who sends, and God who sustains. Keep me from confusing my own urgency with your call. Show me clearly the place you've prepared for me, and help me walk toward it without burning out on the way."
+  },
+  faithful_witness: {
+    name:       "Faithful Witness",
+    definition: "That means you're already in this work. You've given time, relationships, hope, maybe more than you sometimes know how to name. The profile recognizes what's already true: you're not at a beginning, you're somewhere along the road, and you're looking for what sustains the walking.",
+    bullets: [
+      "You're already actively engaged with immigration in some form",
+      "You have meaningful relationships with immigrants or immigrant communities",
+      "You're motivated by deep conviction shaped by experience",
+      "You're not looking for orientation, you're looking for depth and sustenance"
+    ],
+    means: "For Faithful Witnesses, the work has shifted. You're not building conviction anymore; you're maintaining it. You're not finding the first step; you're walking the long road. The most faithful thing you can do isn't another initiative. It's making sure what you do continues to flow from who you are in God, and that you're sustained well enough to keep going.",
+    watch: "The biggest risk for Faithful Witnesses isn't apathy. It's weariness. You can give and give until what was once a calling becomes a job. And the people you're walking with deserve more than your tiredness. Sustain before you scale. And consider: who's sustaining you?",
+    step1Lead: "Continue to Stage 3: Discernment.",
+    step1Body: "Stage 3 is designed for what someone in your position rarely gets: time to listen to what's becoming clearer in you, not just what's needed around you. Take longer than you think you need.",
+    step2Lead: "Bring your people with you.",
+    step2Body: "Faithful Witnesses are often already leading others. The people you're walking with are your team. Bring them through this journey, lead them well, and let them sharpen what you're already doing.",
+    inviteLabel: "Invite your team",
+    prayer: "God of the long road. You have walked with your people through deserts and exiles, and you walk with them still. Refresh me where I'm weary, sharpen me where I've grown dull, and let what I do continue to flow from who I am in you."
+  }
+};
+
+// Tiny HTML escape so a participant's first name can't break the markup.
+function escHtml(s) {
+  if (s === null || s === undefined) return '';
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ─── RENDER RESULTS (v2 — mirrors the Stage 1 Results Email v2 structure) ───
 function renderResults(name, profileName, tagline, narrativeHTML, profile) {
-  document.getElementById('result-badge').textContent = 'Stage 1 Profile';
-  document.getElementById('result-profile-name').textContent = profileName;
-  document.getElementById('result-tagline').textContent = tagline;
-  document.getElementById('narrative-text').innerHTML = narrativeHTML;
+  const profileKey = (STAGE1_PROFILES_CLIENT[profile] ? profile : 'open_explorer');
+  const P = STAGE1_PROFILES_CLIENT[profileKey];
+  const firstName = (name || 'friend').trim().split(/\s+/)[0] || 'friend';
 
-  // Dimensions
-  const dims = getDimensions();
-  const grid = document.getElementById('dimension-grid');
-  grid.innerHTML = dims.map(d => `
-    <div class="dim-card">
-      <div class="dim-name">${d.name}</div>
-      <div class="dim-value">${d.value}</div>
-      <div class="dim-bar-wrap"><div class="dim-bar" style="width:${d.pct}%"></div></div>
-    </div>
-  `).join('');
+  // Salutation
+  document.getElementById('r1-first-name').textContent = firstName;
 
-  // Resources
-  const resources = getRecommendedResources(profile);
-  const resList = document.getElementById('resources-list');
-  resList.innerHTML = resources.map(r => `
-    <a class="resource-card" href="${r.url}" target="_blank" rel="noopener">
-      <div class="resource-icon">${r.icon}</div>
-      <div>
-        <div class="resource-type">${r.type}</div>
-        <div class="resource-name">${r.title}</div>
-        <div class="resource-org">${r.org}</div>
-      </div>
-    </a>
-  `).join('');
+  // Profile reveal
+  document.getElementById('r1-profile-name').textContent = P.name + '.';
 
-  // Next step
-  const nextSteps = {
-    exploring: { title: 'Begin with Prayer & Scripture', desc: 'A 7-day prayer guide is the perfect entry point for where you are. Begin there, and let Stage 2 Formation deepen what stirs in you.' },
-    processing: { title: 'Move into Formation', desc: 'You\'re ready to engage more deeply. Stage 2 will give you the biblical framework and human stories you need to move from uncertainty to conviction.' },
-    responding: { title: 'Continue to Guided Formation', desc: 'Stage 2 will sharpen your understanding so that when you act, you act with both clarity and compassion. A guide is ready to walk alongside you.' },
-    mobilizing: { title: 'Lead Others Through This Journey', desc: 'Your most powerful next step is to bring others with you. Complete the full experience, then consider who in your church, small group, or network needs someone like you to open this door for them.' }
-  };
-  const ns = nextSteps[profile] || nextSteps['exploring'];
-  document.getElementById('next-step-title').textContent = ns.title;
-  document.getElementById('next-step-desc').textContent = ns.desc;
+  // Definition paragraph
+  document.getElementById('r1-definition').textContent = P.definition;
 
-  // 1:1 card visibility — high readiness = ready_responder or faithful_witness
-  const isHighReadiness = (profile === 'ready_responder' || profile === 'faithful_witness');
-  document.getElementById('one-on-one-prominent').style.display = isHighReadiness ? 'block' : 'none';
-  document.getElementById('one-on-one-secondary').style.display = isHighReadiness ? 'none' : 'block';
+  // Bullets callout
+  document.getElementById('r1-bullets').innerHTML = P.bullets
+    .map((b) => '<div class="r1-bullet">&bull; ' + escHtml(b) + '</div>')
+    .join('');
+
+  // "What this means for you" + "Watch out for"
+  document.getElementById('r1-means').textContent = P.means;
+  document.getElementById('r1-watch').textContent = P.watch;
+
+  // "Your next faithful step" — both numbered paragraphs
+  document.getElementById('r1-step1-lead').textContent = P.step1Lead;
+  document.getElementById('r1-step1-body').textContent = ' ' + P.step1Body;
+  document.getElementById('r1-step2-lead').textContent = P.step2Lead;
+  document.getElementById('r1-step2-body').textContent = ' ' + P.step2Body;
+
+  // Secondary CTA label varies for Faithful Witness ("Invite your team" vs "Invite someone")
+  const inviteBtn = document.getElementById('r1-invite-btn');
+  if (inviteBtn) inviteBtn.innerHTML = escHtml(P.inviteLabel) + ' &rarr;';
+
+  // Prayer blockquote
+  document.getElementById('r1-prayer').textContent = P.prayer;
 
   // Solidarity branch (flag-gated; no-op when ENABLE_IMPACT_QUESTION is false).
-  applySolidarityBranchIfNeeded(profile);
+  // Note: applySolidarityBranchIfNeeded queries .results-body which no longer
+  // exists in the v2 markup. The function is now a soft no-op unless the
+  // flag flips; when it does, it should be updated to target .r1-wrap.
+  applySolidarityBranchIfNeeded(profileKey);
 
   goToScreen('results');
   showStageTabs();
-  document.getElementById('tab-1').classList.add('active');
+  setActiveStageTab(1);
   document.getElementById('tab-1').classList.add('completed');
-
-
 }
 
 // ════════════════════════════════════════════════════════════════════
@@ -3813,8 +4067,25 @@ const stage3 = {
   currentStep:                     1
 };
 
+// Tab-breadcrumb helper: clears 'active' from all 4 stage tabs and sets it
+// on the target. Use this whenever a stage transition happens without going
+// through showStage(n), so the breadcrumb always reflects the current stage.
+function setActiveStageTab(n) {
+  [1, 2, 3, 4].forEach((i) => {
+    const t = document.getElementById('tab-' + i);
+    if (t) t.classList.remove('active');
+  });
+  const target = document.getElementById('tab-' + n);
+  if (target) target.classList.add('active');
+}
+
 function startStage3() {
   goToScreen('stage3');
+  // Bug 3 fix: surface the tab bar and highlight Stage 3. Previously the
+  // breadcrumb stayed on whatever it last was (usually Stage 1) when the
+  // participant entered Stage 3 from the results page.
+  showStageTabs();
+  setActiveStageTab(3);
   stage3.startedAt = stage3.startedAt || new Date().toISOString();
   renderStage3Opener();
   renderStage3Closer();
@@ -4116,7 +4387,7 @@ async function s3CompleteStage3() {
 function routeToStage4() {
   goToScreen('stage4');
   showStageTabs();
-  document.getElementById('tab-4').classList.add('active');
+  setActiveStageTab(4);   // clears other tabs too, not just sets tab-4
   applyStage4FlagState();
 
   // The interim page (#stage4-placeholder) is what participants see while
@@ -4437,9 +4708,9 @@ applyStage4FlagState();
   } else if (stage === '3') {
     // Land directly on the Stage 3 contemplative opener. The profile-keyed
     // content is selected from answers.profile_assigned_key (seeded above).
+    // startStage3() now handles the tab activation itself (Bug 3 fix), so
+    // we just call it; setActiveStageTab(3) inside will set the breadcrumb.
     setTimeout(() => {
-      showStageTabs();
-      document.getElementById('tab-3') && document.getElementById('tab-3').classList.add('active');
       startStage3();
     }, 100);
   }

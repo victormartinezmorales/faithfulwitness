@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faithful Witness — Team Dashboard Mockup v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #333858;
+    --navy-light: #454B6F;
+    --navy-dark: #252940;
+    --gold: #C49A3C;
+    --gold-light: #d4ab3a;
+    --gold-pale: #f7f0dc;
+    --gold-bg: #fdf8ee;
+    --cream: #faf8f4;
+    --warm-white: #ffffff;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #5a5a7a;
+    --border: #e8e4f0;
+    --border-light: #f0edf8;
+    --radius: 12px;
+    --radius-sm: 8px;
+
+    /* Profile colors */
+    --p-open: #6B9BD8;
+    --p-thoughtful: #8B7BA8;
+    --p-careful: #C49A3C;
+    --p-ready: #D87B5B;
+    --p-faithful: #5B8C7B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: #f0eee8;
+    color: var(--text-primary);
+    margin: 0;
+    padding: 32px 24px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  /* Top nav */
+  .top-nav {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-mark {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--navy);
+  }
+  .brand-divider {
+    width: 1px;
+    height: 18px;
+    background: var(--border);
+  }
+  .brand-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .nav-actions a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+  .nav-actions .user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: var(--cream);
+    border-radius: 100px;
+  }
+  .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  /* Team header */
+  .team-header {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+    border-left: 4px solid var(--gold);
+  }
+  .team-header-left .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .privacy-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    text-transform: none;
+  }
+  .privacy-pill svg {
+    width: 11px;
+    height: 11px;
+  }
+  .team-name {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 38px;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .edit-icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .edit-icon:hover { opacity: 0.8; }
+  .team-meta {
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 16px;
+  }
+  .team-meta span:not(:last-child)::after {
+    content: " · ";
+    margin-left: 16px;
+    color: var(--text-muted);
+  }
+
+  .btn-invite {
+    background: var(--navy);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(51, 56, 88, 0.2);
+    transition: all 0.2s;
+  }
+  .btn-invite:hover { background: var(--navy-light); }
+  .btn-invite .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .stat-card.highlight {
+    background: linear-gradient(135deg, var(--gold-bg) 0%, var(--cream) 100%);
+    border-left: 3px solid var(--gold);
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .stat-value {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .stat-detail {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .stat-detail .arrow-up {
+    color: var(--p-faithful);
+    font-weight: 700;
+  }
+
+  /* Events section (NEW) */
+  .events-section {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .events-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .btn-add-event {
+    background: var(--cream);
+    border: 1px solid var(--gold);
+    color: var(--navy);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-add-event:hover { background: var(--gold-bg); }
+  .events-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .event-card {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .event-card.urgent {
+    background: var(--gold-bg);
+  }
+  .event-card-top {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .event-date {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: center;
+    min-width: 58px;
+    flex-shrink: 0;
+  }
+  .event-date .month {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .event-date .day {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin: 2px 0;
+  }
+  .event-date .weekday {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .event-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .event-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .event-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .event-source-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .source-mobilize { background: #e8eef9; color: #3a5a8a; }
+  .source-eventbrite { background: #ffe5d4; color: #b34d1f; }
+  .source-internal { background: var(--gold-bg); color: var(--navy); }
+  .event-rsvp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+  }
+  .rsvp-counts {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .rsvp-counts .going {
+    color: var(--p-faithful);
+    font-weight: 700;
+  }
+  .rsvp-buttons {
+    display: flex;
+    gap: 4px;
+  }
+  .rsvp-btn {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+  .rsvp-btn.selected-going {
+    background: var(--p-faithful);
+    color: white;
+    border-color: var(--p-faithful);
+  }
+  .rsvp-btn.selected-maybe {
+    background: var(--gold-light);
+    color: var(--navy-dark);
+    border-color: var(--gold);
+  }
+  .event-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .event-link {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Main grid */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .panel {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .panel-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .panel-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  /* Invite graph */
+  .graph-container {
+    position: relative;
+    padding: 12px 0;
+  }
+  .graph-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* Member list */
+  .member-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .member-row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto auto auto;
+    gap: 14px;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--cream);
+    border-radius: 10px;
+    border-left: 3px solid transparent;
+  }
+  .member-row.is-leader {
+    background: var(--gold-bg);
+    border-left-color: var(--gold);
+  }
+  .member-row.is-coleader {
+    border-left-color: var(--gold-light);
+  }
+  .member-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .member-info { min-width: 0; }
+  .member-name {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 14px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .member-name .you-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    background: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+  }
+  .member-profile {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .profile-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .role-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 4px;
+  }
+  .role-leader {
+    background: var(--gold);
+    color: white;
+  }
+  .role-coleader {
+    background: white;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+  .role-participant {
+    background: var(--border-light);
+    color: var(--text-muted);
+  }
+  .member-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+  .member-meta .spark {
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .stage-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .stage-complete {
+    background: rgba(91, 140, 123, 0.15);
+    color: #3d6155;
+  }
+  .stage-progress {
+    background: rgba(196, 154, 60, 0.15);
+    color: #8a6a25;
+  }
+  .stage-started {
+    background: rgba(107, 155, 216, 0.15);
+    color: #4773a8;
+  }
+  .member-menu {
+    width: 18px;
+    height: 18px;
+    opacity: 0.3;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .member-menu:hover { opacity: 0.8; }
+
+  /* Right column small panels */
+  .small-panel {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+    margin-bottom: 16px;
+  }
+  .small-panel:last-child { margin-bottom: 0; }
+  .small-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+
+  /* Profile mix bars */
+  .profile-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .profile-bar {
+    display: grid;
+    grid-template-columns: 110px 1fr 24px;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+  }
+  .profile-bar .name {
+    color: var(--text-secondary);
+  }
+  .profile-bar .track {
+    height: 8px;
+    background: var(--border-light);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .profile-bar .fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+  .profile-bar .count {
+    color: var(--navy);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* Gifting dots */
+  .gifting-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .gifting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .gifting-row .name {
+    color: var(--text-secondary);
+  }
+  .gift-dots {
+    display: flex;
+    gap: 4px;
+  }
+  .gift-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .gift-dot.empty {
+    background: var(--border-light);
+  }
+
+  /* Populations panel */
+  .pop-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pop-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--cream);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--navy);
+  }
+  .pop-row.top {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+  }
+  .pop-count {
+    background: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* Bottom row */
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* Momentum panel */
+  .momentum-panel {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: white;
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .momentum-panel::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(196, 154, 60, 0.15) 0%, transparent 70%);
+  }
+  .momentum-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .momentum-sub {
+    font-size: 14px;
+    color: rgba(232, 228, 240, 0.85);
+    margin-bottom: 24px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .momentum-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    position: relative;
+  }
+  .m-stat-value {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .m-stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(232, 228, 240, 0.7);
+  }
+  .momentum-cta {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(232, 228, 240, 0.15);
+    position: relative;
+  }
+  .momentum-cta-text {
+    font-size: 14px;
+    color: rgba(232, 228, 240, 0.95);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .btn-momentum {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy-dark);
+    padding: 11px 22px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* Themes */
+  .theme-block {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    border-left: 3px solid var(--gold);
+  }
+  .theme-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .theme-quote {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  /* Notes */
+  .notes {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    margin-top: 32px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .notes h3 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 17px;
+    color: var(--navy);
+    margin: 0 0 10px;
+    font-weight: 700;
+  }
+  .notes h4 {
+    font-size: 13px;
+    color: var(--navy);
+    margin: 16px 0 6px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .notes p { margin: 0 0 10px; }
+  .notes p:last-child { margin-bottom: 0; }
+  .notes strong { color: var(--navy); }
+  .notes code {
+    background: var(--cream);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Top nav -->
+  <div class="top-nav">
+    <div class="nav-brand">
+      <div class="brand-mark">FAITHFUL WITNESS</div>
+      <div class="brand-divider"></div>
+      <div class="brand-sub">Discernment Experience · Team Dashboard</div>
+    </div>
+    <div class="nav-actions">
+      <a href="#">My journey</a>
+      <a href="#">Resources</a>
+      <div class="user">
+        <div class="avatar" style="background: #D87B5B;">SM</div>
+        <span>Sarah Martinez</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team header -->
+  <div class="team-header">
+    <div class="team-header-left">
+      <div class="label">
+        YOU'RE LEADING
+        <span class="privacy-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Private team
+        </span>
+      </div>
+      <div class="team-name">
+        Westside Welcome Team
+        <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+      </div>
+      <div class="team-meta">
+        <span>Cincinnati, OH</span>
+        <span>Formed 12 weeks ago</span>
+        <span>Crossroads en Español</span>
+      </div>
+    </div>
+    <button class="btn-invite">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+      Invite people to your team
+    </button>
+  </div>
+
+  <!-- Stats row -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">YOUR TEAM</div>
+      <div class="stat-value">5</div>
+      <div class="stat-detail">People you directly invited</div>
+    </div>
+    <div class="stat-card highlight">
+      <div class="stat-label">YOUR REACH</div>
+      <div class="stat-value">12</div>
+      <div class="stat-detail"><span class="arrow-up">↑ 4</span> in the last 2 weeks</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">TEAMS SPARKED</div>
+      <div class="stat-value">2</div>
+      <div class="stat-detail">From your team's invitations</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">TEAM COMPLETION</div>
+      <div class="stat-value">80%</div>
+      <div class="stat-detail">4 of 5 completed the journey</div>
+    </div>
+  </div>
+
+  <!-- EVENTS section -->
+  <div class="events-section">
+    <div class="events-header">
+      <div>
+        <div class="events-title">Upcoming events</div>
+        <div class="events-sub">What your team has coming up. Tap an event for full details on its source platform.</div>
+      </div>
+      <button class="btn-add-event">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Add event
+      </button>
+    </div>
+
+    <div class="events-grid">
+
+      <!-- Event 1 - Urgent vigil -->
+      <div class="event-card urgent">
+        <div class="event-card-top">
+          <div class="event-date">
+            <div class="month">Nov</div>
+            <div class="day">14</div>
+            <div class="weekday">Fri</div>
+          </div>
+          <div class="event-info">
+            <div class="event-title">Family Support Vigil at the Federal Building</div>
+            <div class="event-meta">6:00 PM<br>Cincinnati Federal Building</div>
+            <div class="event-source-badge source-mobilize">Mobilize</div>
+          </div>
+        </div>
+        <div class="event-rsvp-row">
+          <div class="rsvp-counts"><span class="going">4 going</span> · 1 maybe · 0 can't</div>
+          <div class="rsvp-buttons">
+            <div class="rsvp-btn selected-going">Going</div>
+            <div class="rsvp-btn">Maybe</div>
+            <div class="rsvp-btn">Can't</div>
+          </div>
+        </div>
+        <div class="event-card-bottom">
+          <span style="font-size: 11px; color: var(--text-muted);">Added by James · 2 days ago</span>
+          <a href="#" class="event-link">View details →</a>
+        </div>
+      </div>
+
+      <!-- Event 2 - Workshop -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <div class="event-date">
+            <div class="month">Nov</div>
+            <div class="day">22</div>
+            <div class="weekday">Sat</div>
+          </div>
+          <div class="event-info">
+            <div class="event-title">Welcome Workshop: Mixed-Status Families</div>
+            <div class="event-meta">10:00 AM<br>World Relief Cincinnati</div>
+            <div class="event-source-badge source-eventbrite">Eventbrite</div>
+          </div>
+        </div>
+        <div class="event-rsvp-row">
+          <div class="rsvp-counts"><span class="going">3 going</span> · 1 maybe · 1 can't</div>
+          <div class="rsvp-buttons">
+            <div class="rsvp-btn">Going</div>
+            <div class="rsvp-btn selected-maybe">Maybe</div>
+            <div class="rsvp-btn">Can't</div>
+          </div>
+        </div>
+        <div class="event-card-bottom">
+          <span style="font-size: 11px; color: var(--text-muted);">Added by Sarah · 5 days ago</span>
+          <a href="#" class="event-link">View details →</a>
+        </div>
+      </div>
+
+      <!-- Event 3 - Prayer service -->
+      <div class="event-card">
+        <div class="event-card-top">
+          <div class="event-date">
+            <div class="month">Nov</div>
+            <div class="day">16</div>
+            <div class="weekday">Sun</div>
+          </div>
+          <div class="event-info">
+            <div class="event-title">Sunday Prayer Service for Immigrant Neighbors</div>
+            <div class="event-meta">9:30 AM<br>Crossroads en Español</div>
+            <div class="event-source-badge source-internal">Church event</div>
+          </div>
+        </div>
+        <div class="event-rsvp-row">
+          <div class="rsvp-counts"><span class="going">5 going</span> · 0 maybe · 0 can't</div>
+          <div class="rsvp-buttons">
+            <div class="rsvp-btn selected-going">Going</div>
+            <div class="rsvp-btn">Maybe</div>
+            <div class="rsvp-btn">Can't</div>
+          </div>
+        </div>
+        <div class="event-card-bottom">
+          <span style="font-size: 11px; color: var(--text-muted);">Added by James · 1 week ago</span>
+          <a href="#" class="event-link">View details →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Main grid: invite graph + side panels -->
+  <div class="main-grid">
+
+    <!-- Left: Invite graph -->
+    <div class="panel">
+      <div class="panel-title">Who you've brought in</div>
+      <div class="panel-sub">Your team's growth and the teams sparked through their invitations.</div>
+
+      <div class="graph-container">
+        <svg viewBox="0 0 800 360" style="width: 100%; height: auto;" xmlns="http://www.w3.org/2000/svg">
+          <!-- Connecting lines -->
+          <g stroke="#C49A3C" stroke-width="2" fill="none" opacity="0.5">
+            <path d="M 400,55 Q 400,90 130,135"/>
+            <path d="M 400,55 Q 400,90 310,135"/>
+            <path d="M 400,55 Q 400,90 490,135"/>
+            <path d="M 400,55 Q 400,90 670,135"/>
+            <path d="M 310,165 Q 310,210 220,260"/>
+            <path d="M 310,165 Q 310,210 310,260"/>
+            <path d="M 310,165 Q 310,210 400,260"/>
+            <path d="M 670,165 Q 670,210 580,260"/>
+            <path d="M 670,165 Q 670,210 670,260"/>
+            <path d="M 220,290 Q 220,310 165,335" stroke-dasharray="3,3"/>
+            <path d="M 220,290 Q 220,310 275,335" stroke-dasharray="3,3"/>
+          </g>
+
+          <!-- Sarah (root, leader) -->
+          <g>
+            <circle cx="400" cy="40" r="22" fill="#D87B5B" stroke="#C49A3C" stroke-width="3"/>
+            <text x="400" y="46" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="13">SM</text>
+            <text x="400" y="85" text-anchor="middle" fill="#333858" font-family="Plus Jakarta Sans" font-weight="600" font-size="13">Sarah (you)</text>
+            <text x="400" y="102" text-anchor="middle" fill="#C49A3C" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">LEADER</text>
+          </g>
+
+          <!-- Direct invitees -->
+          <g>
+            <circle cx="130" cy="150" r="18" fill="#8B7BA8"/>
+            <text x="130" y="155" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="11">RL</text>
+            <text x="130" y="185" text-anchor="middle" fill="#333858" font-family="Plus Jakarta Sans" font-weight="600" font-size="12">Rebecca</text>
+            <text x="130" y="200" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">Careful Seeker</text>
+          </g>
+
+          <g>
+            <circle cx="310" cy="150" r="18" fill="#8B7BA8"/>
+            <text x="310" y="155" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="11">MC</text>
+            <text x="310" y="185" text-anchor="middle" fill="#333858" font-family="Plus Jakarta Sans" font-weight="600" font-size="12">Mike</text>
+            <text x="310" y="200" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">Thoughtful Learner</text>
+            <text x="310" y="215" text-anchor="middle" fill="#C49A3C" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">+3 invited</text>
+          </g>
+
+          <g>
+            <circle cx="490" cy="150" r="18" fill="#6B9BD8"/>
+            <text x="490" y="155" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="11">LP</text>
+            <text x="490" y="185" text-anchor="middle" fill="#333858" font-family="Plus Jakarta Sans" font-weight="600" font-size="12">Lisa</text>
+            <text x="490" y="200" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">Open Explorer</text>
+          </g>
+
+          <!-- James, co-leader, with badge -->
+          <g>
+            <circle cx="670" cy="150" r="18" fill="#5B8C7B" stroke="#C49A3C" stroke-width="2"/>
+            <text x="670" y="155" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="11">JR</text>
+            <text x="670" y="185" text-anchor="middle" fill="#333858" font-family="Plus Jakarta Sans" font-weight="600" font-size="12">James</text>
+            <text x="670" y="200" text-anchor="middle" fill="#C49A3C" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">CO-LEADER</text>
+            <text x="670" y="215" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">Faithful Witness · +2 invited</text>
+          </g>
+
+          <!-- Mike's sub-team -->
+          <g>
+            <circle cx="220" cy="275" r="14" fill="#6B9BD8" opacity="0.85"/>
+            <text x="220" y="279" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">JH</text>
+            <text x="220" y="302" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">John</text>
+            <text x="220" y="315" text-anchor="middle" fill="#C49A3C" font-family="Plus Jakarta Sans" font-weight="700" font-size="9">+2 invited</text>
+          </g>
+          <g>
+            <circle cx="310" cy="275" r="14" fill="#D87B5B" opacity="0.85"/>
+            <text x="310" y="279" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">EM</text>
+            <text x="310" y="302" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">Emily</text>
+          </g>
+          <g>
+            <circle cx="400" cy="275" r="14" fill="#8B7BA8" opacity="0.85"/>
+            <text x="400" y="279" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">MK</text>
+            <text x="400" y="302" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">Marcus</text>
+          </g>
+
+          <!-- James's sub-team -->
+          <g>
+            <circle cx="580" cy="275" r="14" fill="#5B8C7B" opacity="0.85"/>
+            <text x="580" y="279" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">MA</text>
+            <text x="580" y="302" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">Maria</text>
+          </g>
+          <g>
+            <circle cx="670" cy="275" r="14" fill="#6B9BD8" opacity="0.85"/>
+            <text x="670" y="279" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">DC</text>
+            <text x="670" y="302" text-anchor="middle" fill="#5a5a7a" font-family="Plus Jakarta Sans" font-size="10">David</text>
+          </g>
+
+          <!-- John's sub-sub team -->
+          <g opacity="0.7">
+            <circle cx="165" cy="345" r="10" fill="#8B7BA8"/>
+            <circle cx="275" cy="345" r="10" fill="#D87B5B"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="graph-legend">
+        <div class="legend-item"><div class="legend-dot" style="background: #6B9BD8;"></div>Open Explorer</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #8B7BA8;"></div>Thoughtful Learner</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #C49A3C;"></div>Careful Seeker</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #D87B5B;"></div>Ready Responder</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #5B8C7B;"></div>Faithful Witness</div>
+        <div class="legend-item" style="border-left: 1px solid var(--border); padding-left: 16px; margin-left: 8px;"><span style="font-size: 10px; padding: 2px 6px; background: var(--gold); color: white; border-radius: 3px; font-weight: 700; letter-spacing: 0.04em;">GOLD RING</span>indicates leader or co-leader</div>
+      </div>
+    </div>
+
+    <!-- Right: profile mix + gifting -->
+    <div>
+      <div class="small-panel">
+        <div class="small-title">Profile mix on your team</div>
+        <div class="profile-bars">
+          <div class="profile-bar">
+            <span class="name">Open Explorer</span>
+            <div class="track"><div class="fill" style="width: 20%; background: #6B9BD8;"></div></div>
+            <span class="count">1</span>
+          </div>
+          <div class="profile-bar">
+            <span class="name">Thoughtful Learner</span>
+            <div class="track"><div class="fill" style="width: 20%; background: #8B7BA8;"></div></div>
+            <span class="count">1</span>
+          </div>
+          <div class="profile-bar">
+            <span class="name">Careful Seeker</span>
+            <div class="track"><div class="fill" style="width: 20%; background: #C49A3C;"></div></div>
+            <span class="count">1</span>
+          </div>
+          <div class="profile-bar">
+            <span class="name">Ready Responder</span>
+            <div class="track"><div class="fill" style="width: 20%; background: #D87B5B;"></div></div>
+            <span class="count">1</span>
+          </div>
+          <div class="profile-bar">
+            <span class="name">Faithful Witness</span>
+            <div class="track"><div class="fill" style="width: 20%; background: #5B8C7B;"></div></div>
+            <span class="count">1</span>
+          </div>
+        </div>
+        <div style="font-size: 12px; color: var(--gold); margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border-light); font-weight: 600;">
+          ✦ One of each profile. A rare and balanced team.
+        </div>
+      </div>
+
+      <div class="small-panel">
+        <div class="small-title">What your team offers</div>
+        <div class="gifting-block">
+          <div class="gifting-row">
+            <span class="name">Relational</span>
+            <div class="gift-dots"><div class="gift-dot"></div><div class="gift-dot"></div><div class="gift-dot"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div></div>
+          </div>
+          <div class="gifting-row">
+            <span class="name">Learning &amp; teaching</span>
+            <div class="gift-dots"><div class="gift-dot"></div><div class="gift-dot"></div><div class="gift-dot"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div></div>
+          </div>
+          <div class="gifting-row">
+            <span class="name">Leading</span>
+            <div class="gift-dots"><div class="gift-dot"></div><div class="gift-dot"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div></div>
+          </div>
+          <div class="gifting-row">
+            <span class="name">Service</span>
+            <div class="gift-dots"><div class="gift-dot"></div><div class="gift-dot"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div></div>
+          </div>
+          <div class="gifting-row">
+            <span class="name">Advocacy</span>
+            <div class="gift-dots"><div class="gift-dot"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div><div class="gift-dot empty"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Members list + populations -->
+  <div class="main-grid">
+
+    <div class="panel">
+      <div class="panel-title">Your team members</div>
+      <div class="panel-sub">The five people you directly invited into formation. Tap the menu on any row to manage their role.</div>
+
+      <div class="member-list">
+
+        <div class="member-row is-leader">
+          <div class="member-avatar" style="background: #D87B5B;">SM</div>
+          <div class="member-info">
+            <div class="member-name">Sarah Martinez <span class="you-tag">YOU</span></div>
+            <div class="member-profile"><div class="profile-dot" style="background: #D87B5B;"></div>Ready Responder · leading, advocacy</div>
+          </div>
+          <span class="role-badge role-leader">Leader</span>
+          <div class="member-meta">
+            5 invited<br>
+            <span style="color: var(--text-muted);">Founder</span>
+          </div>
+          <svg class="member-menu" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+        </div>
+
+        <div class="member-row is-coleader">
+          <div class="member-avatar" style="background: #5B8C7B;">JR</div>
+          <div class="member-info">
+            <div class="member-name">James Reyes</div>
+            <div class="member-profile"><div class="profile-dot" style="background: #5B8C7B;"></div>Faithful Witness · leading, learning</div>
+          </div>
+          <span class="role-badge role-coleader">Co-leader</span>
+          <div class="member-meta">
+            <span class="spark">+2 invited</span><br>
+            <span style="color: var(--text-muted);">Pastor, Crossroads en Español</span>
+          </div>
+          <svg class="member-menu" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+        </div>
+
+        <div class="member-row">
+          <div class="member-avatar" style="background: #8B7BA8;">MC</div>
+          <div class="member-info">
+            <div class="member-name">Mike Chen</div>
+            <div class="member-profile"><div class="profile-dot" style="background: #8B7BA8;"></div>Thoughtful Learner · learning, relational</div>
+          </div>
+          <span class="role-badge role-participant">Participant</span>
+          <div class="member-meta">
+            <span class="spark">+3 invited</span><br>
+            <span style="color: var(--text-muted);">Joined 10 weeks ago</span>
+          </div>
+          <svg class="member-menu" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+        </div>
+
+        <div class="member-row">
+          <div class="member-avatar" style="background: #8B7BA8;">RL</div>
+          <div class="member-info">
+            <div class="member-name">Rebecca Liu</div>
+            <div class="member-profile"><div class="profile-dot" style="background: #8B7BA8;"></div>Careful Seeker · service, relational</div>
+          </div>
+          <span class="role-badge role-participant">Participant</span>
+          <div class="member-meta">
+            0 invited<br>
+            <span style="color: var(--text-muted);">Joined 8 weeks ago</span>
+          </div>
+          <svg class="member-menu" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+        </div>
+
+        <div class="member-row">
+          <div class="member-avatar" style="background: #6B9BD8;">LP</div>
+          <div class="member-info">
+            <div class="member-name">Lisa Park</div>
+            <div class="member-profile"><div class="profile-dot" style="background: #6B9BD8;"></div>Open Explorer · relational, service</div>
+          </div>
+          <span class="role-badge role-participant">Participant</span>
+          <div class="member-meta">
+            0 invited<br>
+            <span style="color: var(--text-muted);">Joined 3 weeks ago</span>
+          </div>
+          <svg class="member-menu" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="small-panel">
+        <div class="small-title">Who your team keeps returning to</div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">From Stage 3 discernment, across all team members.</div>
+        <div class="pop-list">
+          <div class="pop-row top">
+            Mixed-status families
+            <span class="pop-count">3</span>
+          </div>
+          <div class="pop-row">
+            Immigrant children &amp; youth
+            <span class="pop-count">2</span>
+          </div>
+          <div class="pop-row">
+            Immigrant churches &amp; pastors
+            <span class="pop-count">2</span>
+          </div>
+          <div class="pop-row">
+            People in detention
+            <span class="pop-count">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="small-panel">
+        <div class="small-title">What your team is ready to do together</div>
+        <div style="font-size: 13.5px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 14px;">
+          Your team has one of each profile, gifting across relational, learning, and leading, and a clear focus on mixed-status families. A natural next step:
+        </div>
+        <div style="background: var(--gold-bg); border-left: 3px solid var(--gold); padding: 14px 18px; border-radius: 6px;">
+          <div style="font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14.5px; color: var(--navy); line-height: 1.5;">
+            Begin a sustained accompaniment relationship with one mixed-status family near Pastor James's congregation. Mike and Rebecca host the welcome dinner; Lisa learns alongside.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Momentum + themes -->
+  <div class="bottom-row">
+
+    <div class="momentum-panel">
+      <div class="momentum-title">Your team is sparking a movement.</div>
+      <div class="momentum-sub">
+        You started with one invitation. Twelve weeks later, your reach is twelve people in formation, two new teams have formed underneath you, and one of those teams is starting to spark its own.
+      </div>
+
+      <div class="momentum-stats">
+        <div>
+          <div class="m-stat-value">5</div>
+          <div class="m-stat-label">You invited</div>
+        </div>
+        <div>
+          <div class="m-stat-value">7</div>
+          <div class="m-stat-label">They invited</div>
+        </div>
+        <div>
+          <div class="m-stat-value">2</div>
+          <div class="m-stat-label">Teams sparked</div>
+        </div>
+      </div>
+
+      <div class="momentum-cta">
+        <div class="momentum-cta-text">
+          You're 3 invitations away from your team reaching 15 people. Each new person multiplies what's already begun.
+        </div>
+        <a href="#" class="btn-momentum">Invite more →</a>
+      </div>
+    </div>
+
+    <div class="small-panel">
+      <div class="small-title">What your team is carrying</div>
+      <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Shared sense of calling, drawn from team members who chose to share.</div>
+
+      <div class="theme-block">
+        <div class="theme-label">James, Faithful Witness</div>
+        <div class="theme-quote">"I think we're being asked to be the bridge between our church and the families on our block."</div>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-label">Mike, Thoughtful Learner</div>
+        <div class="theme-quote">"I want to understand what real welcome looks like, not just speak about it."</div>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-label">Rebecca, Careful Seeker</div>
+        <div class="theme-quote">"I keep coming back to the kids in our schools. I don't have a plan yet, but I can't look away."</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Notes -->
+  <div class="notes">
+    <h3>What's new in v2</h3>
+    <p><strong>Roles.</strong> Every member has one of three roles: <code>leader</code>, <code>co-leader</code>, or <code>participant</code>. The leader is the person who originally formed the team. Leaders can promote any participant to co-leader. Co-leaders share the leader's permissions: invite others, assign roles, add and edit events. Participants can RSVP to events and see the team dashboard but cannot modify team data. The three-role limit is deliberate. Specific organizing roles (attorney liaison, social media lead, phone banking, family liaison) belong to the team's own internal life, not to the platform. Teams can name and track those roles wherever they already coordinate.</p>
+
+    <p><strong>Events.</strong> Aggregator-card pattern: leaders and co-leaders paste a URL from any event platform (Eventbrite, Mobilize, Facebook Events, internal church events, Google Calendar invites, anything). The platform fetches Open Graph metadata to populate the card. RSVP is captured on the dashboard (going / maybe / can't) for team coordination, even though the authoritative RSVP lives on the source platform. When an event is added, all team members receive an email notification. A reminder email goes out 24 hours before the event. Calendar view is deferred to a later phase — list view is sufficient at this scale.</p>
+
+    <p><strong>Privacy posture.</strong> All teams default to private. Teams are not discoverable from outside; the only way to join is via invitation from a leader or co-leader. Member identities, event details, and team data are visible only to current team members. The "Private team" pill near the team name signals this. The same architecture supports more sensitive teams (rapid-response, family-defense) without requiring a separate privacy tier — every team gets the protective default.</p>
+
+    <h3>The architecture point (carries from v1)</h3>
+    <p>A "team" is not a separate object in the database. It's a participant plus everyone whose <code>invited_by</code> points to them. Every person who invites becomes a leader of their own team automatically. The invite graph IS the movement. Sarah's reach (12) is larger than her team (5) because her team members are leading teams of their own.</p>
+
+    <h3>The funder story</h3>
+    <p>The platform is not a discernment tool that happens to track teams. It is movement-building infrastructure whose first instance forms people around immigration. The seven-dimension profiling, the discernment-driven team formation, the longitudinal data, the gamified multiplication graph, and now the role-based coordination and event awareness layer would work identically for racial reconciliation, creation care, or any movement requiring the church to move from passive awareness to formed communal action. Immigration is the proof of concept. The infrastructure is the asset.</p>
+
+    <h3>What's deliberately NOT in v2</h3>
+    <p><strong>Team types.</strong> No formation-team-vs-action-team distinction in the platform. The same dashboard serves all teams. Leaders make it useful through how they use it. Defer until evidence emerges that the differentiation earns its keep.</p>
+    <p><strong>Calendar view for events.</strong> List view only. Add calendar later if teams ask.</p>
+    <p><strong>Attendance tracking.</strong> RSVP is the indicator. Whether people actually showed up is for the source platform, not us.</p>
+    <p><strong>Native event creation.</strong> Events always come from external sources via URL. The platform's job is awareness and notification, not event hosting.</p>
+    <p><strong>Project management tools.</strong> No tasks, no assignments, no deadlines beyond events. The platform tracks roles; the team coordinates tasks wherever it already coordinates.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

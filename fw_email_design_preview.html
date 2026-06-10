@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faithful Witness — Email Design Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #333858;
+    --navy-light: #454B6F;
+    --navy-dark: #252940;
+    --gold: #C49A3C;
+    --gold-light: #d4ab3a;
+    --gold-pale: #f7f0dc;
+    --gold-bg: #fdf8ee;
+    --cream: #faf8f4;
+    --warm-white: #ffffff;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #7a7a9a;
+    --border: #e8e4f0;
+    --border-light: #f0edf8;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: #ececec;
+    color: var(--text-primary);
+    margin: 0;
+    padding: 48px 16px;
+    line-height: 1.5;
+  }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .page-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--navy);
+    margin: 0 0 8px;
+  }
+  .page-sub {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin: 0 0 40px;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 48px 0 14px;
+  }
+  .inbox-preview {
+    background: #f5f4f0;
+    border: 1px solid var(--border);
+    border-radius: 12px 12px 0 0;
+    padding: 14px 20px;
+    font-size: 13px;
+  }
+  .inbox-preview .subject { color: var(--text-primary); font-weight: 600; margin-bottom: 4px; }
+  .inbox-preview .sender { color: var(--text-muted); }
+  .inbox-preview .preview-text { color: var(--text-muted); margin-top: 2px; font-style: italic; }
+
+  /* Email container */
+  .email {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 32px rgba(51, 56, 88, 0.08);
+  }
+
+  /* Header band */
+  .header-band {
+    background: var(--cream);
+    padding: 28px 40px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .campaign-mark {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .coalition-mark {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .gold-rule {
+    width: 36px;
+    height: 2px;
+    background: var(--gold);
+    margin: 16px auto 0;
+  }
+
+  /* Body */
+  .body {
+    padding: 36px 40px 32px;
+  }
+  .salutation {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--navy);
+    margin-bottom: 28px;
+  }
+  .profile-reveal {
+    margin-bottom: 24px;
+  }
+  .profile-prefix {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .profile-name {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+  .body p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--navy);
+    margin: 0 0 24px;
+  }
+  .h-serif {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 20px;
+    color: var(--navy);
+    font-weight: 700;
+    margin: 0 0 12px;
+  }
+  .callout {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border-radius: 4px;
+  }
+  .callout-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .callout-list {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--navy);
+  }
+  .callout-list div { margin-bottom: 8px; }
+  .callout-list div:last-child { margin-bottom: 0; }
+  .disclaimer {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 32px;
+  }
+  .quote-block {
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 22px;
+    margin-bottom: 24px;
+  }
+  .quote-block .label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .quote-block p {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--navy);
+    margin: 0;
+  }
+  .reflected {
+    border-left: 3px solid var(--gold);
+    padding: 6px 0 6px 22px;
+    margin-bottom: 22px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--navy);
+  }
+  .reflected em {
+    font-style: italic;
+    color: var(--navy);
+  }
+  .calling-callout {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    padding: 22px 26px;
+    margin-bottom: 32px;
+    border-radius: 4px;
+  }
+  .calling-callout .quote {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--navy);
+    margin: 0 0 12px;
+  }
+  .calling-callout .response {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--navy-light); }
+  .link-gold {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+  }
+  .blessing {
+    border-top: 1px solid var(--border-light);
+    padding-top: 28px;
+    margin-bottom: 28px;
+  }
+  .blessing .label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .blessing p {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--navy);
+    margin: 0;
+  }
+  .signature-block {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .signature-block .team {
+    margin-bottom: 2px;
+  }
+  .signature-block .coalition {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* Footer */
+  .footer-band {
+    background: var(--cream);
+    padding: 20px 40px 22px;
+    text-align: center;
+    border-top: 1px solid var(--border-light);
+  }
+  .footer-band a {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .footer-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* Dark mode email */
+  .email.dark {
+    background: #1a1a2e;
+    border-color: #252940;
+  }
+  .email.dark .header-band {
+    background: #252940;
+    border-bottom-color: #333858;
+  }
+  .email.dark .campaign-mark {
+    color: #e8e4f0;
+  }
+  .email.dark .coalition-mark {
+    color: #9a9ab4;
+  }
+  .email.dark .gold-rule {
+    background: var(--gold-light);
+  }
+  .email.dark .salutation,
+  .email.dark .body p,
+  .email.dark .profile-name {
+    color: #e8e4f0;
+  }
+  .email.dark .profile-name {
+    color: var(--gold-light);
+  }
+  .email.dark .profile-prefix {
+    color: #b8b8d0;
+  }
+  .email.dark .h-serif {
+    color: #e8e4f0;
+  }
+  .email.dark .callout {
+    background: #252940;
+    border-left-color: var(--gold-light);
+  }
+  .email.dark .callout-label {
+    color: var(--gold-light);
+  }
+  .email.dark .callout-list {
+    color: #d8d8e8;
+  }
+  .email.dark .disclaimer {
+    color: #9a9ab4;
+  }
+  .email.dark .quote-block {
+    border-left-color: var(--gold-light);
+  }
+  .email.dark .quote-block .label {
+    color: var(--gold-light);
+  }
+  .email.dark .quote-block p,
+  .email.dark .reflected,
+  .email.dark .reflected em {
+    color: #d8d8e8;
+  }
+  .email.dark .reflected {
+    border-left-color: var(--gold-light);
+  }
+  .email.dark .calling-callout {
+    background: #252940;
+    border-left-color: var(--gold-light);
+  }
+  .email.dark .calling-callout .quote {
+    color: #e8e4f0;
+  }
+  .email.dark .calling-callout .response {
+    color: #b8b8d0;
+  }
+  .email.dark .btn-primary {
+    background: var(--gold-light);
+    color: var(--navy-dark);
+    font-weight: 700;
+  }
+  .email.dark .link-gold {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+  }
+  .email.dark .blessing {
+    border-top-color: #333858;
+  }
+  .email.dark .blessing .label {
+    color: #9a9ab4;
+  }
+  .email.dark .blessing p {
+    color: #e8e4f0;
+  }
+  .email.dark .signature-block {
+    color: #b8b8d0;
+  }
+  .email.dark .signature-block .coalition {
+    color: #9a9ab4;
+  }
+  .email.dark .footer-band {
+    background: #252940;
+    border-top-color: #333858;
+  }
+  .email.dark .footer-band a {
+    color: var(--gold-light);
+  }
+  .email.dark .footer-note {
+    color: #9a9ab4;
+  }
+
+  /* Design notes */
+  .notes {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 48px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .notes h3 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px;
+    color: var(--navy);
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+  .notes p { margin: 0 0 12px; }
+  .notes p:last-child { margin-bottom: 0; }
+  .notes strong { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <h1 class="page-title">Faithful Witness — Email Design Preview</h1>
+  <p class="page-sub">Both emails matched to the campaign brand. 600px wide, navy and gold against cream, Plus Jakarta Sans body, Libre Baskerville italic for emphasis moments. Open this file in any browser. Share it freely. Reactions welcome.</p>
+
+  <!-- ============= STAGE 1 LIGHT ============= -->
+  <div class="section-label">Stage 1 Results Email — Ready Responder (Light Mode)</div>
+
+  <div class="inbox-preview">
+    <div class="subject">Your Faithful Witness Discernment Results: Ready Responder</div>
+    <div class="sender">From: Faithful Witness &lt;discernment@faithfulwitness.us&gt;</div>
+    <div class="preview-text">You're ready, and that readiness is worth naming. Here's how to channel it.</div>
+  </div>
+
+  <div class="email">
+    <div class="header-band">
+      <div class="campaign-mark">FAITHFUL WITNESS CAMPAIGN</div>
+      <div class="coalition-mark">CCDA · NaLEC · World Relief · Undivided</div>
+      <div class="gold-rule"></div>
+    </div>
+
+    <div class="body">
+      <div class="salutation">Hi Sarah,</div>
+
+      <div class="profile-reveal">
+        <div class="profile-prefix">You're a</div>
+        <div class="profile-name">Ready Responder.</div>
+      </div>
+
+      <p>That means you're not just learning anymore. You're ready to do something. You just want to make sure it's the right something. Ready Responders are people for whom this has stopped being theoretical. The question now is what faithfulness actually looks like when you take a step.</p>
+
+      <div class="callout">
+        <div class="callout-label">Based on what you shared</div>
+        <div class="callout-list">
+          <div>• You're already aware of the issue and have moved past initial learning</div>
+          <div>• You're motivated by compassion, conviction, or both</div>
+          <div>• You're looking for a clear, guided next step</div>
+          <div>• You may be more ready to engage than you've fully named yet</div>
+        </div>
+      </div>
+
+      <div class="disclaimer">This profile reflects where you are right now, not who you are. It's meant to help you find a faithful next step, not put you in a box.</div>
+
+      <h3 class="h-serif">What this means for you</h3>
+      <p>For Ready Responders, the work isn't building more conviction. You have it. The work is channeling that readiness into something sustainable. Movement is easier than direction. The most faithful thing you can do right now is make sure the action you take is the one you're actually called to, not the loudest one in front of you.</p>
+
+      <h3 class="h-serif">Watch out for</h3>
+      <p>Readiness can turn into pressure if you try to carry too much too quickly. You don't have to solve everything. The biggest risk for Ready Responders isn't inaction. It's burning out within six months because you said yes to everything. Start with one faithful next step. Sustain before you scale.</p>
+
+      <h3 class="h-serif">Your next faithful step</h3>
+      <p><strong>1. Continue to Stage 3: Discernment.</strong> Stage 3 is where you find your specific shape: which population, which kind of action, which context. That's how the readiness you already have lands somewhere real.</p>
+
+      <div style="margin-bottom: 28px;">
+        <a href="#" class="btn-primary">Continue to Stage 3 &nbsp;→</a>
+      </div>
+
+      <p><strong>2. Don't move alone.</strong> Ready Responders often move best with someone beside them, a trusted friend, a pastor, a colleague. Action without community burns out. Invite someone to discern this with you.</p>
+
+      <div style="margin-bottom: 36px;">
+        <a href="#" class="link-gold">Invite someone →</a>
+      </div>
+
+      <div class="quote-block">
+        <div class="label">A short prayer to carry</div>
+        <p>God who sends, and God who sustains. Keep me from confusing my own urgency with your call. Show me clearly the place you've prepared for me, and help me walk toward it without burning out on the way.</p>
+      </div>
+
+      <p style="margin-bottom: 8px;">We're glad you showed up.</p>
+      <div class="signature-block">
+        <div class="team">The Faithful Witness Team</div>
+        <div class="coalition">CCDA · NaLEC · World Relief · Undivided</div>
+      </div>
+    </div>
+
+    <div class="footer-band">
+      <a href="#">Return to your results anytime →</a>
+      <div class="footer-note">You received this because you completed the Faithful Witness Discernment Experience.</div>
+    </div>
+  </div>
+
+
+  <!-- ============= STAGE 3 LIGHT ============= -->
+  <div class="section-label">Stage 3 Reflection Email — Ready Responder (Light Mode)</div>
+
+  <div class="inbox-preview">
+    <div class="subject">Your Faithful Witness Discernment Reflection, Sarah</div>
+    <div class="sender">From: Faithful Witness &lt;discernment@faithfulwitness.us&gt;</div>
+    <div class="preview-text">Your reflection from the Faithful Witness journey</div>
+  </div>
+
+  <div class="email">
+    <div class="header-band">
+      <div class="campaign-mark">FAITHFUL WITNESS CAMPAIGN</div>
+      <div class="coalition-mark">CCDA · NaLEC · World Relief · Undivided</div>
+      <div class="gold-rule"></div>
+    </div>
+
+    <div class="body">
+      <div class="salutation">Hi Sarah,</div>
+
+      <p>You did real discernment yesterday. We held this for a day before sending it, even for those of us who tend to move fast.</p>
+
+      <p style="font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 22px; color: var(--navy); margin-bottom: 24px;">Here's what you named.</p>
+
+      <div class="reflected">You came in carrying a question: <em>"How do I love my immigrant neighbors when my own church seems silent?"</em></div>
+
+      <div class="reflected">In the discernment, you named what you can't shake: <em>"A family in my neighborhood was separated last month. The kids are still in our schools."</em> The feeling that came with it: a grief and an anger. That's part of what's driving you. Let it fuel you without driving you.</div>
+
+      <div class="reflected">The people you keep returning to are mixed-status families and immigrant children and youth. The shape of response that felt right for this season is building one real relationship with someone affected, and you sense it belongs in your neighborhood and your church.</div>
+
+      <div class="calling-callout">
+        <p class="quote">And you wrote: "I think I'm being asked to be the bridge between my church and the families on my block."</p>
+        <p class="response">Don't move on it yet. Sit with it for a week. Tell three people. Let it sharpen. Then move.</p>
+      </div>
+
+      <h3 class="h-serif">A word for where you are</h3>
+      <p>The discernment you just did is what keeps your readiness from becoming a problem. Move in the shape you named, not the louder shape someone else will offer you next week.</p>
+
+      <h3 class="h-serif">What now</h3>
+      <p>Don't move alone. Action without community burns out. Invite three to five people to take this same journey and walk into action with you.</p>
+
+      <div style="margin-bottom: 20px;">
+        <a href="#" class="btn-primary">Invite people to your team &nbsp;→</a>
+      </div>
+
+      <p style="font-size: 14.5px; color: var(--text-secondary); margin-bottom: 32px;">Or, if you'd rather start with one trusted person first, <a href="#" class="link-gold">connect with a Faithful Witness guide →</a></p>
+
+      <div class="blessing">
+        <div class="label">A blessing as you carry this</div>
+        <p>May your readiness be matched by your patience. May the urgency you feel become faithful endurance. And may the people around you sustain you as you sustain them.</p>
+      </div>
+
+      <div class="signature-block">
+        <div class="team">The Faithful Witness Team</div>
+        <div class="coalition">CCDA · NaLEC · World Relief · Undivided</div>
+      </div>
+    </div>
+
+    <div class="footer-band">
+      <a href="#">Return to your reflection anytime →</a>
+      <div class="footer-note">You received this because you completed the Faithful Witness Discernment Experience.</div>
+    </div>
+  </div>
+
+
+  <!-- ============= DARK MODE ============= -->
+  <div class="section-label">Stage 1 Email — Dark Mode Adaptation</div>
+
+  <div class="email dark">
+    <div class="header-band">
+      <div class="campaign-mark">FAITHFUL WITNESS CAMPAIGN</div>
+      <div class="coalition-mark">CCDA · NaLEC · World Relief · Undivided</div>
+      <div class="gold-rule"></div>
+    </div>
+
+    <div class="body">
+      <div class="salutation">Hi Sarah,</div>
+
+      <div class="profile-reveal">
+        <div class="profile-prefix">You're a</div>
+        <div class="profile-name">Ready Responder.</div>
+      </div>
+
+      <p>That means you're not just learning anymore. You're ready to do something. You just want to make sure it's the right something.</p>
+
+      <div class="callout">
+        <div class="callout-label">Based on what you shared</div>
+        <div class="callout-list">
+          <div>• You're already aware of the issue and have moved past initial learning</div>
+          <div>• You're motivated by compassion, conviction, or both</div>
+          <div>• You're looking for a clear, guided next step</div>
+        </div>
+      </div>
+
+      <h3 class="h-serif">Watch out for</h3>
+      <p>Readiness can turn into pressure if you try to carry too much too quickly. Start with one faithful next step. Sustain before you scale.</p>
+
+      <div style="margin-bottom: 28px;">
+        <a href="#" class="btn-primary">Continue to Stage 3 &nbsp;→</a>
+      </div>
+
+      <div class="quote-block">
+        <div class="label">A short prayer to carry</div>
+        <p>God who sends, and God who sustains. Keep me from confusing my own urgency with your call.</p>
+      </div>
+
+      <div class="signature-block">
+        <div class="team">The Faithful Witness Team</div>
+        <div class="coalition">CCDA · NaLEC · World Relief · Undivided</div>
+      </div>
+    </div>
+
+    <div class="footer-band">
+      <a href="#">Return to your results anytime →</a>
+    </div>
+  </div>
+
+
+  <!-- ============= NOTES ============= -->
+  <div class="notes">
+    <h3>What you're seeing</h3>
+    <p><strong>Brand continuity.</strong> The same navy (#333858), gold (#C49A3C), and cream (#faf8f4) tokens already in the tool's CSS. Plus Jakarta Sans for body. Libre Baskerville italic for the profile reveal, section headings, and blessings. The italic-serif treatment on the profile name mirrors the "Gospel-Centered" hero treatment on faithfulwitness.us, so the visual identity feels continuous from the campaign site through the tool into the inbox.</p>
+    <p><strong>The header band.</strong> Centered campaign mark in letterspaced sans, the four-coalition wordmark beneath, anchored by a small gold horizontal rule. No logo file used (per your call). Works clean in both light and dark mode.</p>
+    <p><strong>Gold as accent, not surface.</strong> The gold is used precisely: a thin rule under the header, a 3px left border on callouts and blockquotes, the button border (dark mode) and the link underline. Never as a background fill except in the soft gold-pale callout boxes. This is the same restraint the campaign site uses.</p>
+    <p><strong>Two distinct callout treatments.</strong> The "Based on what you shared" bullets sit in a gold-pale box with a gold left edge — a small visual moment that signals "this is yours." The reflected-back quotes in Stage 3 use the same gold left edge without the background tint, so the participant's own words feel held but not boxed.</p>
+    <p><strong>The sense-of-calling callout (Stage 3 only).</strong> When a participant has written a sense of calling, it gets the strongest visual treatment — gold-pale background plus gold edge — because it's the most important thing they wrote.</p>
+    <p><strong>Dark mode.</strong> Navy darkens to #1a1a2e (matching the tool's dark variant). Gold brightens slightly to #d4ab3a and inverts to become the primary action color — the CTA button becomes gold with dark navy text. The gold left edges remain on blockquotes and callouts as the anchoring brand element. All text adjusts to higher-contrast off-whites for readability. About a third of inbox views happen in dark mode, so this matters.</p>
+    <p><strong>What's NOT shown but worth noting.</strong> The five-profile variants share this exact visual skeleton. The only profile-specific differences are content (definition paragraph, bullets, "Watch out for," "What this means," prayer, blessing) — not visual. One template, five content sets. The build is simpler than the visual variety might suggest.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

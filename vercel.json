@@ -3,14 +3,19 @@
     "api/send-email.js":                    { "maxDuration": 30 },
     "api/submit.js":                        { "maxDuration": 30 },
     "api/send-pending-stage3-emails.js":    { "maxDuration": 60 },
-    "api/recommend.js":                     { "maxDuration": 30 }
+    "api/recommend.js":                     { "maxDuration": 30 },
+    "api/team/[...path].js":                { "maxDuration": 30 },
+    "api/og-fetch.js":                      { "maxDuration": 10 },
+    "api/send-event-reminders.js":          { "maxDuration": 60 }
   },
   "crons": [
-    { "path": "/api/send-pending-stage3-emails", "schedule": "0 12 * * *" }
+    { "path": "/api/send-pending-stage3-emails", "schedule": "0 12 * * *" },
+    { "path": "/api/send-event-reminders",       "schedule": "0 */4 * * *" }
   ],
   "rewrites": [
     { "source": "/api/(.*)",   "destination": "/api/$1" },
     { "source": "/stage3",     "destination": "/index.html?stage=3" },
-    { "source": "/welcome-back", "destination": "/welcome-back.html" }
+    { "source": "/welcome-back", "destination": "/welcome-back.html" },
+    { "source": "/team",       "destination": "/team.html" }
   ]
 }

@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faithful Witness — Team Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Tokens & layout: verbatim from fw_team_dashboard_mockup_v2.html ── */
+  :root {
+    --navy: #333858;
+    --navy-light: #454B6F;
+    --navy-dark: #252940;
+    --gold: #C49A3C;
+    --gold-light: #d4ab3a;
+    --gold-pale: #f7f0dc;
+    --gold-bg: #fdf8ee;
+    --cream: #faf8f4;
+    --warm-white: #ffffff;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #5a5a7a;
+    --border: #e8e4f0;
+    --border-light: #f0edf8;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --p-open: #6B9BD8;
+    --p-thoughtful: #8B7BA8;
+    --p-careful: #C49A3C;
+    --p-ready: #D87B5B;
+    --p-faithful: #5B8C7B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: #f0eee8;
+    color: var(--text-primary);
+    margin: 0;
+    padding: 32px 24px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1320px; margin: 0 auto; }
+
+  /* Top nav */
+  .top-nav {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 16px 28px; display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 14px; }
+  .brand-mark { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: var(--navy); }
+  .brand-divider { width: 1px; height: 18px; background: var(--border); }
+  .brand-sub { font-size: 12px; color: var(--text-muted); letter-spacing: 0.04em; }
+  .nav-actions { display: flex; gap: 12px; align-items: center; font-size: 13px; color: var(--text-secondary); }
+  .nav-actions a { color: var(--text-secondary); text-decoration: none; }
+  .nav-actions .user {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 12px; background: var(--cream); border-radius: 100px;
+  }
+  .avatar {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--gold);
+    color: white; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px;
+  }
+
+  /* Team header */
+  .team-header {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 32px 36px; margin-bottom: 20px; display: flex;
+    justify-content: space-between; align-items: flex-end;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+    border-left: 4px solid var(--gold);
+  }
+  .team-header-left .label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .privacy-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--cream); border: 1px solid var(--border);
+    border-radius: 100px; padding: 3px 10px; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--text-secondary); text-transform: none;
+  }
+  .privacy-pill svg { width: 11px; height: 11px; }
+  .team-name {
+    font-family: 'Libre Baskerville', Georgia, serif; font-style: italic;
+    font-size: 38px; color: var(--navy); line-height: 1.1; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .team-name input {
+    font-family: 'Libre Baskerville', Georgia, serif; font-style: italic;
+    font-size: 38px; color: var(--navy); line-height: 1.1;
+    border: none; border-bottom: 2px solid var(--gold); background: var(--gold-bg);
+    outline: none; padding: 0 6px; max-width: 100%; min-width: 120px;
+  }
+  .edit-icon { width: 18px; height: 18px; opacity: 0.4; cursor: pointer; transition: opacity 0.2s; flex-shrink: 0; }
+  .edit-icon:hover { opacity: 0.8; }
+  .team-meta { font-size: 14px; color: var(--text-secondary); display: flex; gap: 16px; flex-wrap: wrap; }
+  .team-meta span:not(:last-child)::after { content: " · "; margin-left: 16px; color: var(--text-muted); }
+  .team-switch {
+    font-size: 13px; color: var(--gold); font-weight: 600; text-decoration: none;
+    border-bottom: 1px solid var(--gold-pale); padding-bottom: 1px;
+  }
+  .team-switch:hover { border-bottom-color: var(--gold); }
+  .graph-nudge {
+    margin-top: 16px; padding: 14px 18px; background: var(--gold-bg);
+    border-left: 3px solid var(--gold); border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  }
+  .graph-nudge .nudge-text {
+    font-family: 'Libre Baskerville', Georgia, serif; font-style: italic;
+    font-size: 14px; color: var(--navy); line-height: 1.5;
+  }
+  .btn-nudge {
+    background: var(--navy); color: white; border: none; border-radius: 6px;
+    padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer;
+    font-family: inherit; white-space: nowrap;
+  }
+  .btn-nudge:hover { background: var(--navy-light); }
+
+  .btn-invite {
+    background: var(--navy); color: white; padding: 14px 24px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(51, 56, 88, 0.2); transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-invite:hover { background: var(--navy-light); }
+  .btn-invite .icon { width: 16px; height: 16px; }
+
+  /* Stats row */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+  .stat-card {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 22px 24px; box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .stat-card.highlight {
+    background: linear-gradient(135deg, var(--gold-bg) 0%, var(--cream) 100%);
+    border-left: 3px solid var(--gold);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+  }
+  .stat-value {
+    font-family: 'Libre Baskerville', Georgia, serif; font-size: 38px; font-weight: 700;
+    color: var(--navy); line-height: 1.1; margin-bottom: 4px;
+  }
+  .stat-detail { font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 4px; }
+  .stat-detail .arrow-up { color: var(--p-faithful); font-weight: 700; }
+
+  /* Events section */
+  .events-section {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 26px 28px; margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .events-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 12px; }
+  .events-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+  .btn-add-event {
+    background: var(--cream); border: 1px solid var(--gold); color: var(--navy);
+    padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    font-family: inherit; flex-shrink: 0;
+  }
+  .btn-add-event:hover { background: var(--gold-bg); }
+  .events-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+  .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .events-empty {
+    background: var(--cream); border-radius: 10px; padding: 28px 24px;
+    text-align: center; font-size: 13.5px; color: var(--text-muted);
+  }
+  .event-card {
+    background: var(--cream); border-radius: 10px; padding: 18px 20px;
+    border-left: 3px solid var(--gold); display: flex; flex-direction: column; gap: 12px;
+    position: relative;
+  }
+  .event-card.urgent { background: var(--gold-bg); }
+  .event-card-top { display: flex; gap: 14px; align-items: flex-start; }
+  .event-date {
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 10px; text-align: center; min-width: 58px; flex-shrink: 0;
+  }
+  .event-date .month { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; }
+  .event-date .day { font-family: 'Libre Baskerville', Georgia, serif; font-size: 24px; font-weight: 700; color: var(--navy); line-height: 1; margin: 2px 0; }
+  .event-date .weekday { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .event-info { flex: 1; min-width: 0; }
+  .event-title { font-size: 14.5px; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 4px; }
+  .event-meta { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .event-source-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-top: 8px;
+  }
+  .source-mobilize { background: #e8eef9; color: #3a5a8a; }
+  .source-eventbrite { background: #ffe5d4; color: #b34d1f; }
+  .source-facebook { background: #e8eef9; color: #3a5a8a; }
+  .source-google_calendar { background: #e6f2ea; color: #2e6b4f; }
+  .source-internal { background: var(--gold-bg); color: var(--navy); }
+  .source-other { background: var(--border-light); color: var(--text-muted); }
+  .event-rsvp-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 12px; border-top: 1px solid var(--border-light); gap: 8px;
+  }
+  .rsvp-counts { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+  .rsvp-counts .going { color: var(--p-faithful); font-weight: 700; }
+  .rsvp-buttons { display: flex; gap: 4px; }
+  .rsvp-btn {
+    background: white; border: 1px solid var(--border); padding: 4px 10px;
+    border-radius: 4px; font-size: 11px; font-weight: 600;
+    color: var(--text-secondary); cursor: pointer; font-family: inherit;
+  }
+  .rsvp-btn.selected-going { background: var(--p-faithful); color: white; border-color: var(--p-faithful); }
+  .rsvp-btn.selected-maybe { background: var(--gold-light); color: var(--navy-dark); border-color: var(--gold); }
+  .rsvp-btn.selected-cant { background: var(--text-muted); color: white; border-color: var(--text-muted); }
+  .event-card-bottom { display: flex; justify-content: space-between; align-items: center; }
+  .event-added-by { font-size: 11px; color: var(--text-muted); }
+  .event-link { font-size: 12px; color: var(--gold); font-weight: 600; text-decoration: none; }
+  .event-admin { display: inline-flex; gap: 6px; margin-right: 8px; }
+  .event-admin button {
+    background: white; border: 1px solid var(--border); border-radius: 4px;
+    font-size: 10px; color: var(--text-muted); cursor: pointer;
+    padding: 2px 7px; font-family: inherit; font-weight: 600;
+  }
+  .event-admin button:hover { color: var(--navy); border-color: var(--gold); }
+
+  /* Main grid */
+  .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; }
+  /* Grid blowout guard: grid items default to min-width:auto, so the
+     min-width SVG inside the graph panel would otherwise stretch the whole
+     column past the viewport on mobile. Scrolling stays INSIDE the panel. */
+  .main-grid > *, .bottom-row > *, .events-grid > * { min-width: 0; }
+  .panel {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 26px 28px; box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .panel-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .panel-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+
+  /* Invite graph */
+  .graph-container { position: relative; padding: 12px 0; overflow-x: auto; }
+  .graph-container svg { min-width: 640px; width: 100%; height: auto; }
+  .graph-legend {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px;
+    padding-top: 16px; border-top: 1px solid var(--border-light);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* Member list */
+  .member-list { display: flex; flex-direction: column; gap: 12px; }
+  .member-row {
+    display: grid; grid-template-columns: 36px 1fr auto auto auto;
+    gap: 14px; align-items: center; padding: 14px 16px;
+    background: var(--cream); border-radius: 10px; border-left: 3px solid transparent;
+    position: relative;
+  }
+  .member-row.is-leader { background: var(--gold-bg); border-left-color: var(--gold); }
+  .member-row.is-coleader { border-left-color: var(--gold-light); }
+  .member-avatar {
+    width: 36px; height: 36px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; color: white;
+    font-weight: 700; font-size: 13px;
+  }
+  .member-info { min-width: 0; }
+  .member-name { font-weight: 600; color: var(--navy); font-size: 14px; margin-bottom: 2px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .member-name .you-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--gold);
+    background: white; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--gold);
+  }
+  .member-profile { font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+  .profile-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .role-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 9px; border-radius: 4px; white-space: nowrap;
+  }
+  .role-leader { background: var(--gold); color: white; }
+  .role-coleader { background: white; color: var(--gold); border: 1px solid var(--gold); }
+  .role-participant { background: var(--border-light); color: var(--text-muted); }
+  .member-meta { font-size: 11px; color: var(--text-muted); text-align: right; line-height: 1.5; }
+  .member-meta .spark { color: var(--gold); font-weight: 600; }
+  .stage-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    padding: 4px 8px; border-radius: 4px; text-transform: uppercase; white-space: nowrap;
+  }
+  .stage-complete { background: rgba(91, 140, 123, 0.15); color: #3d6155; }
+  .stage-progress { background: rgba(196, 154, 60, 0.15); color: #8a6a25; }
+  .stage-started { background: rgba(107, 155, 216, 0.15); color: #4773a8; }
+  .member-menu { width: 18px; height: 18px; opacity: 0.3; cursor: pointer; transition: opacity 0.2s; }
+  .member-menu:hover { opacity: 0.8; }
+  .member-menu-pop {
+    position: absolute; right: 12px; top: calc(100% - 6px); z-index: 30;
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(51,56,88,0.15); padding: 6px; min-width: 170px;
+  }
+  .member-menu-pop button {
+    display: block; width: 100%; text-align: left; background: none; border: none;
+    font-family: inherit; font-size: 13px; color: var(--text-primary);
+    padding: 8px 12px; border-radius: 6px; cursor: pointer;
+  }
+  .member-menu-pop button:hover { background: var(--cream); }
+
+  /* Right column small panels */
+  .small-panel {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 22px 24px; box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04); margin-bottom: 16px;
+  }
+  .small-panel:last-child { margin-bottom: 0; }
+  .small-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+
+  /* Profile mix bars */
+  .profile-bars { display: flex; flex-direction: column; gap: 10px; }
+  .profile-bar { display: grid; grid-template-columns: 110px 1fr 24px; gap: 10px; align-items: center; font-size: 12px; }
+  .profile-bar .name { color: var(--text-secondary); }
+  .profile-bar .track { height: 8px; background: var(--border-light); border-radius: 4px; overflow: hidden; }
+  .profile-bar .fill { height: 100%; border-radius: 4px; }
+  .profile-bar .count { color: var(--navy); font-weight: 600; text-align: right; }
+
+  /* Gifting dots */
+  .gifting-block { display: flex; flex-direction: column; gap: 10px; }
+  .gifting-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+  .gifting-row .name { color: var(--text-secondary); }
+  .gift-dots { display: flex; gap: 4px; }
+  .gift-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); }
+  .gift-dot.empty { background: var(--border-light); }
+
+  /* Populations panel */
+  .pop-list { display: flex; flex-direction: column; gap: 10px; }
+  .pop-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; background: var(--cream); border-radius: 6px;
+    font-size: 13px; color: var(--navy);
+  }
+  .pop-row.top { background: var(--gold-bg); border-left: 3px solid var(--gold); }
+  .pop-count { background: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; color: var(--navy); }
+
+  /* Bottom row */
+  .bottom-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+  /* Momentum panel */
+  .momentum-panel {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: white; border-radius: var(--radius); padding: 28px 30px;
+    position: relative; overflow: hidden;
+  }
+  .momentum-panel::before {
+    content: ''; position: absolute; top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(196, 154, 60, 0.15) 0%, transparent 70%);
+  }
+  .momentum-title { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 22px; color: var(--gold-light); margin-bottom: 8px; position: relative; }
+  .momentum-sub { font-size: 14px; color: rgba(232, 228, 240, 0.85); margin-bottom: 24px; position: relative; line-height: 1.6; }
+  .momentum-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; }
+  .m-stat-value { font-family: 'Libre Baskerville', Georgia, serif; font-size: 32px; font-weight: 700; color: var(--gold-light); line-height: 1; margin-bottom: 6px; }
+  .m-stat-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232, 228, 240, 0.7); }
+  .momentum-cta { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(232, 228, 240, 0.15); position: relative; }
+  .momentum-cta-text { font-size: 14px; color: rgba(232, 228, 240, 0.95); margin-bottom: 12px; line-height: 1.6; }
+  .btn-momentum {
+    display: inline-block; background: var(--gold); color: var(--navy-dark);
+    padding: 11px 22px; border-radius: 6px; font-size: 13px; font-weight: 700;
+    text-decoration: none; letter-spacing: 0.02em; border: none; cursor: pointer; font-family: inherit;
+  }
+
+  /* Themes */
+  .theme-block { background: var(--cream); border-radius: 8px; padding: 16px 18px; margin-bottom: 12px; border-left: 3px solid var(--gold); }
+  .theme-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .theme-quote { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14px; color: var(--navy); line-height: 1.6; }
+
+  /* Privacy footnote */
+  .privacy-note {
+    font-size: 12px; color: var(--text-muted); line-height: 1.7;
+    padding: 16px 20px; background: var(--warm-white); border-radius: var(--radius);
+    border: 1px solid var(--border-light);
+  }
+
+  /* Modals */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(26, 26, 46, 0.55);
+    display: flex; align-items: center; justify-content: center; z-index: 100;
+    padding: 20px;
+  }
+  .modal {
+    background: white; border-radius: 14px; padding: 28px 30px;
+    width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(26, 26, 46, 0.3);
+  }
+  .modal h3 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; color: var(--navy); margin: 0 0 6px; }
+  .modal .modal-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+  .modal label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin: 16px 0 6px; }
+  .modal input[type="text"], .modal input[type="url"], .modal input[type="date"],
+  .modal input[type="time"], .modal textarea {
+    width: 100%; border: 1px solid var(--border); border-radius: 8px;
+    padding: 11px 13px; font-size: 14px; font-family: inherit; color: var(--text-primary);
+    background: var(--cream); outline: none;
+  }
+  .modal input:focus, .modal textarea:focus { border-color: var(--gold); background: white; }
+  .modal textarea { resize: vertical; min-height: 70px; }
+  .modal-datetime { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+  .btn-secondary {
+    background: white; border: 1px solid var(--border); color: var(--text-secondary);
+    padding: 11px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--navy); border: none; color: white; padding: 11px 22px;
+    border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .btn-primary:disabled { opacity: 0.5; cursor: default; }
+  .og-preview {
+    margin-top: 16px; border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden; background: var(--cream);
+  }
+  .og-preview img { width: 100%; height: 140px; object-fit: cover; display: block; }
+  .og-preview .og-body { padding: 12px 16px; }
+  .og-preview .og-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .og-preview .og-host { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .og-status { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+  .invite-options { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .invite-option {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    background: var(--cream); border: 1px solid var(--border); border-radius: 10px;
+    cursor: pointer; font-size: 14px; font-weight: 600; color: var(--navy);
+    font-family: inherit; text-align: left; width: 100%;
+  }
+  .invite-option:hover { border-color: var(--gold); background: var(--gold-bg); }
+  .invite-option svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+  .invite-link-box {
+    margin-top: 14px; padding: 11px 13px; background: var(--cream);
+    border: 1px dashed var(--border); border-radius: 8px; font-size: 12px;
+    color: var(--text-secondary); word-break: break-all;
+  }
+
+  /* Loading / error states */
+  .state-screen { max-width: 560px; margin: 80px auto; text-align: center; }
+  .state-screen .panel { padding: 44px 40px; }
+  .state-screen h2 { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 26px; color: var(--navy); margin: 0 0 12px; }
+  .state-screen p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.7; margin: 0 0 20px; }
+  .spinner {
+    width: 28px; height: 28px; border: 3px solid var(--border);
+    border-top-color: var(--gold); border-radius: 50%; margin: 0 auto 18px;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--navy-dark); color: white; font-size: 13px; font-weight: 600;
+    padding: 12px 22px; border-radius: 100px; z-index: 200;
+    box-shadow: 0 8px 24px rgba(26,26,46,0.3); opacity: 0; transition: opacity 0.25s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; }
+
+  /* ── Mobile (spec E4) ── */
+  @media (max-width: 768px) {
+    body { padding: 16px 12px; }
+    .top-nav { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
+    .brand-sub { display: none; }
+    .team-header { flex-direction: column; align-items: flex-start; gap: 18px; padding: 24px 22px; }
+    .team-name { font-size: 28px; }
+    .team-name input { font-size: 28px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }     /* 2x2 grid */
+    .events-grid { grid-template-columns: 1fr; }              /* single column */
+    .main-grid { grid-template-columns: 1fr; }                /* stack */
+    .bottom-row { grid-template-columns: 1fr; }
+    .member-row { grid-template-columns: 36px 1fr auto; grid-template-rows: auto auto; }
+    .member-row .role-badge { grid-column: 2; grid-row: 2; justify-self: start; } /* badge to second line */
+    .member-row .member-meta { grid-column: 3; grid-row: 1 / span 2; }
+    .member-row .stage-badge { display: none; }
+    .member-row .member-menu { grid-column: 3; grid-row: 1; justify-self: end; display: none; }
+    .member-row.can-manage .member-menu { display: block; }
+    .modal-datetime { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="state-screen">
+    <div class="panel">
+      <div class="spinner"></div>
+      <p style="margin:0;">Loading your team&hellip;</p>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+'use strict';
+
+// ─── Constants ──────────────────────────────────────────────────────────────
+var BASE_URL = 'https://faithful-witness.vercel.app';
+var PROFILE_COLORS = {
+  open_explorer: '#6B9BD8', thoughtful_learner: '#8B7BA8', careful_seeker: '#C49A3C',
+  ready_responder: '#D87B5B', faithful_witness: '#5B8C7B'
+};
+var PROFILE_NAMES = {
+  open_explorer: 'Open Explorer', thoughtful_learner: 'Thoughtful Learner',
+  careful_seeker: 'Careful Seeker', ready_responder: 'Ready Responder',
+  faithful_witness: 'Faithful Witness'
+};
+var GIFTING_LABELS = { relational: 'Relational', learning: 'Learning & teaching', leading: 'Leading', service: 'Service', advocacy: 'Advocacy' };
+var SOURCE_LABELS = { eventbrite: 'Eventbrite', mobilize: 'Mobilize', facebook: 'Facebook', google_calendar: 'Google Calendar', internal: 'Church event', other: 'Event link' };
+var STAGE_CLASSES = { complete: 'stage-complete', stage3: 'stage-progress', stage1: 'stage-progress', started: 'stage-started' };
+
+// ─── State ──────────────────────────────────────────────────────────────────
+var params = new URLSearchParams(window.location.search);
+var PID  = params.get('pid') || '';
+var TEAM_OVERRIDE = params.get('team') || '';
+var DATA = null;          // last GET /api/team payload
+var CTX = null;           // GET /api/team/context payload (for the team switcher)
+var TEAM_ID = null;
+var editingEventId = null;
+var ogFetchTimer = null;
+var lastOg = null;
+
+// ─── Utilities ──────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function initialsOf(name) {
+  var parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return '?';
+  return (parts[0][0] + (parts.length > 1 ? parts[parts.length-1][0] : '')).toUpperCase();
+}
+function colorOf(profileKey) { return PROFILE_COLORS[profileKey] || '#9a9ab4'; }
+function toast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function () { t.classList.remove('show'); }, 2400);
+}
+function api(path, opts) {
+  opts = opts || {};
+  var sep = path.indexOf('?') >= 0 ? '&' : '?';
+  return fetch('/api/team/' + path + sep + 'pid=' + encodeURIComponent(PID), {
+    method: opts.method || 'GET',
+    headers: opts.body ? { 'Content-Type': 'application/json' } : undefined,
+    body: opts.body ? JSON.stringify(opts.body) : undefined
+  }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, status: r.status, json: j }; }); });
+}
+function eventDateBits(iso) {
+  var d = new Date(iso);
+  return {
+    month:   d.toLocaleDateString(undefined, { month: 'short' }),
+    day:     d.getDate(),
+    weekday: d.toLocaleDateString(undefined, { weekday: 'short' }),
+    time:    d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })
+  };
+}
+function relTime(iso) {
+  var days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+  if (days <= 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days < 7)  return days + ' days ago';
+  var w = Math.floor(days / 7);
+  return w === 1 ? '1 week ago' : w + ' weeks ago';
+}
+
+// ─── Boot (spec E1) ─────────────────────────────────────────────────────────
+function boot() {
+  if (!PID) { window.location.replace('/'); return; }
+  api('context').then(function (r) {
+    if (!r.ok) { renderNotFound(); return; }
+    CTX = r.json;
+    if (TEAM_OVERRIDE) { loadTeam(TEAM_OVERRIDE); return; }
+    if (CTX.defaultTeamLeaderId) { loadTeam(CTX.defaultTeamLeaderId); }
+    else { window.location.replace('/welcome-back?pid=' + encodeURIComponent(PID)); }
+  }).catch(renderError);
+}
+function loadTeam(tid) {
+  TEAM_ID = tid;
+  api(encodeURIComponent(tid)).then(function (r) {
+    if (r.status === 403 || r.status === 404) { renderNotFound(); return; }
+    if (!r.ok) { renderError(); return; }
+    DATA = r.json;
+    render();
+    if (window.location.hash === '#events') {
+      var el = document.getElementById('events');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }).catch(renderError);
+}
+function refresh() { loadTeam(TEAM_ID); }
+
+function renderNotFound() {
+  document.getElementById('app').innerHTML =
+    '<div class="state-screen"><div class="panel">' +
+    '<h2>Team not found</h2>' +
+    '<p>We couldn’t find a team for this link. The link may be incomplete, or it may belong to someone else — team dashboards are private to their members.</p>' +
+    '<a class="btn-invite" style="display:inline-flex;" href="/">Back to Faithful Witness</a>' +
+    '</div></div>';
+}
+function renderError() {
+  document.getElementById('app').innerHTML =
+    '<div class="state-screen"><div class="panel">' +
+    '<h2>Something went wrong</h2>' +
+    '<p>We couldn’t load your team just now. Please try again in a moment.</p>' +
+    '<button class="btn-invite" onclick="boot()">Try again</button>' +
+    '</div></div>';
+}
+
+// ─── Render ─────────────────────────────────────────────────────────────────
+function render() {
+  var d = DATA;
+  var you = null;
+  d.members.forEach(function (m) { if (m.isYou) you = m; });
+  var leading = d.viewer.role === 'leader';
+  var manage  = d.viewer.canManage;
+  var pct = d.momentum.completion.total
+    ? Math.round(100 * d.momentum.completion.completed / d.momentum.completion.total) : 0;
+
+  var html = '';
+
+  // Top nav
+  html += '<div class="page">'
+    + '<div class="top-nav">'
+    +   '<div class="nav-brand"><div class="brand-mark">FAITHFUL WITNESS</div>'
+    +   '<div class="brand-divider"></div>'
+    +   '<div class="brand-sub">Discernment Experience &middot; Team Dashboard</div></div>'
+    +   '<div class="nav-actions">'
+    +     '<a href="/welcome-back?pid=' + encodeURIComponent(PID) + '">My journey</a>'
+    +     '<div class="user"><div class="avatar" style="background:' + colorOf(you && you.profileKey) + ';">'
+    +       esc(initialsOf(you ? you.name : '')) + '</div><span>' + esc(you ? you.name : 'You') + '</span></div>'
+    +   '</div>'
+    + '</div>';
+
+  // Team header
+  html += '<div class="team-header">'
+    + '<div class="team-header-left">'
+    +   '<div class="label">' + (leading ? "YOU'RE LEADING" : 'YOUR TEAM')
+    +     '<span class="privacy-pill">'
+    +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
+    +     'Private team</span></div>'
+    +   '<div class="team-name" id="team-name-wrap">'
+    +     '<span id="team-name-text">' + esc(d.team.teamName) + '</span>'
+    +     (manage
+        ? '<svg class="edit-icon" id="team-name-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'
+        +   '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>'
+        +   '<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'
+        : '')
+    +   '</div>'
+    +   '<div class="team-meta">'
+    +     '<span>' + d.members.length + (d.members.length === 1 ? ' person' : ' people') + '</span>'
+    +     '<span>Led by ' + esc(d.team.leaderFirstName) + '</span>'
+    +     teamSwitchLink()
+    +   '</div>'
+    + '</div>'
+    + (manage
+      ? '<button class="btn-invite" onclick="openInviteModal()">'
+      + '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>'
+      + 'Invite people to your team</button>'
+      : '')
+    + '</div>';
+
+  // First-invitation banner: a freshly started (still empty) team.
+  if (leading && d.momentum.youInvited === 0) {
+    html += '<div class="events-section" style="border-left:4px solid var(--gold);">'
+      + '<div style="font-family:\'Libre Baskerville\',Georgia,serif;font-style:italic;font-size:19px;color:var(--navy);margin-bottom:6px;">'
+      + esc(d.team.teamName) + ' becomes real with the first yes.</div>'
+      + '<div style="font-size:13.5px;color:var(--text-secondary);line-height:1.7;margin-bottom:14px;">'
+      + 'Think of one person who would walk this with you — someone you’d want beside you, not just someone who’d say yes. '
+      + 'When they finish their own discernment through your link, they join your team here.</div>'
+      + '<button class="btn-invite" onclick="openInviteModal()">'
+      + '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>'
+      + 'Send your first invitation</button>'
+      + '</div>';
+  }
+
+  // Stats row
+  html += '<div class="stats-row">'
+    + '<div class="stat-card"><div class="stat-label">' + (leading ? 'YOUR TEAM' : 'TEAM SIZE') + '</div>'
+    +   '<div class="stat-value">' + d.momentum.youInvited + '</div>'
+    +   '<div class="stat-detail">' + (leading ? 'People you directly invited' : 'People ' + esc(d.team.leaderFirstName) + ' directly invited') + '</div></div>'
+    + '<div class="stat-card highlight"><div class="stat-label">' + (leading ? 'YOUR REACH' : 'TEAM REACH') + '</div>'
+    +   '<div class="stat-value">' + d.momentum.reach + '</div>'
+    +   '<div class="stat-detail">Across three levels of invitations</div></div>'
+    + '<div class="stat-card"><div class="stat-label">TEAMS SPARKED</div>'
+    +   '<div class="stat-value">' + d.momentum.teamsSparked + '</div>'
+    +   '<div class="stat-detail">From your team’s invitations</div></div>'
+    + '<div class="stat-card"><div class="stat-label">TEAM COMPLETION</div>'
+    +   '<div class="stat-value">' + pct + '%</div>'
+    +   '<div class="stat-detail">' + d.momentum.completion.completed + ' of ' + d.momentum.completion.total + ' completed the journey</div></div>'
+    + '</div>';
+
+  // Events
+  html += '<div class="events-section" id="events">'
+    + '<div class="events-header"><div>'
+    +   '<div class="events-title">Upcoming events</div>'
+    +   '<div class="events-sub">What your team has coming up. Tap an event for full details on its source platform.</div></div>'
+    + (manage
+      ? '<button class="btn-add-event" onclick="openEventModal()">'
+      + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>'
+      + ' Add event</button>'
+      : '')
+    + '</div>';
+
+  if (!d.events.length) {
+    html += '<div class="events-empty">No upcoming events yet.'
+      + (manage ? ' Paste a link from Eventbrite, Mobilize, Facebook, or your church calendar to add one.' : '')
+      + '</div>';
+  } else {
+    html += '<div class="events-grid">';
+    d.events.forEach(function (ev) { html += renderEventCard(ev, manage); });
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // Main grid 1: invite graph + profile mix / gifting
+  // Participants see the same graph reframed around the team's growth
+  // (their node highlighted) plus a spark-your-own-team nudge.
+  var participantView = !manage;
+  var hasNotInvited = you && you.invitedCount === 0;
+  html += '<div class="main-grid">'
+    + '<div class="panel">'
+    +   '<div class="panel-title">' + (participantView ? 'How this team is growing' : 'Who you’ve brought in') + '</div>'
+    +   '<div class="panel-sub">' + (participantView
+          ? 'Every person here was invited by someone. Your invitation could spark the next branch.'
+          : 'Your team’s growth and the teams sparked through their invitations.') + '</div>'
+    +   '<div class="graph-container">' + renderGraph(d.graph) + '</div>'
+    +   renderLegend()
+    + (participantView && hasNotInvited
+      ? '<div class="graph-nudge">'
+      + '<div class="nudge-text">Want to spark your own team? It starts with one person you trust.</div>'
+      + (CTX && CTX.leadsOwnTeam
+        ? '<button class="btn-nudge" onclick="openInviteModal()">Invite someone →</button>'
+        : '<button class="btn-nudge" onclick="openStartTeamModal()">Start your own team →</button>')
+      + '</div>'
+      : '')
+    + '</div>'
+    + '<div>' + renderProfileMix(d) + renderGifting(d) + '</div>'
+    + '</div>';
+
+  // Main grid 2: member list + populations / ready-to-do
+  html += '<div class="main-grid">'
+    + '<div class="panel">'
+    +   '<div class="panel-title">Your team members</div>'
+    +   '<div class="panel-sub">' + (manage ? 'Tap the menu on any row to manage roles.' : 'The people walking this journey with you.') + '</div>'
+    +   '<div class="member-list">';
+  d.members.forEach(function (m) { html += renderMemberRow(m, d.viewer); });
+  html += '</div></div>'
+    + '<div>' + renderPopulations(d) + renderReadyPanel(d) + '</div>'
+    + '</div>';
+
+  // Bottom: momentum + themes
+  html += '<div class="bottom-row">' + renderMomentum(d, manage) + renderThemes(d) + '</div>';
+
+  // Privacy note (Part F / E3 flag)
+  html += '<div class="privacy-note"><strong>Privacy.</strong> This team is private: only current team members can see this page, '
+    + 'and it is never discoverable from outside. Sense-of-calling reflections appear in “What your team is carrying” '
+    + 'only for members who chose to share their journal with the team; a dedicated sharing control is coming in v2.</div>';
+
+  html += '</div>'; // .page
+
+  document.getElementById('app').innerHTML = html;
+  wireTeamNameEdit();
+}
+
+// ─── Event card ─────────────────────────────────────────────────────────────
+function renderEventCard(ev, manage) {
+  var bits = eventDateBits(ev.event_datetime);
+  var soon = (new Date(ev.event_datetime).getTime() - Date.now()) < 3 * 86400000;
+  var badgeCls = 'source-' + (ev.source_platform || 'other');
+  var c = ev.rsvpCounts || { going: 0, maybe: 0, cant: 0 };
+  var adder = addedByName(ev.added_by);
+  return '<div class="event-card' + (soon ? ' urgent' : '') + '">'
+    + '<div class="event-card-top">'
+    +   '<div class="event-date"><div class="month">' + esc(bits.month) + '</div>'
+    +     '<div class="day">' + bits.day + '</div><div class="weekday">' + esc(bits.weekday) + '</div></div>'
+    +   '<div class="event-info">'
+    +     '<div class="event-title">' + esc(ev.title) + '</div>'
+    +     '<div class="event-meta">' + esc(bits.time) + (ev.location ? '<br>' + esc(ev.location) : '') + '</div>'
+    +     '<div class="event-source-badge ' + badgeCls + '">' + esc(SOURCE_LABELS[ev.source_platform] || 'Event link') + '</div>'
+    +   '</div>'
+    + '</div>'
+    + '<div class="event-rsvp-row">'
+    +   '<div class="rsvp-counts"><span class="going">' + c.going + ' going</span> &middot; ' + c.maybe + ' maybe &middot; ' + c.cant + ' can’t</div>'
+    +   '<div class="rsvp-buttons">'
+    +     rsvpBtn(ev, 'going', 'Going') + rsvpBtn(ev, 'maybe', 'Maybe') + rsvpBtn(ev, 'cant', 'Can’t')
+    +   '</div>'
+    + '</div>'
+    + '<div class="event-card-bottom">'
+    +   '<span class="event-added-by">Added by ' + esc(adder) + ' &middot; ' + relTime(ev.created_at) + '</span>'
+    +   '<span>'
+    +   (manage
+      ? '<span class="event-admin">'
+      + '<button onclick="openEventModal(\'' + ev.id + '\')">Edit</button>'
+      + '<button onclick="removeEvent(\'' + ev.id + '\')">Remove</button></span>'
+      : '')
+    +   '<a class="event-link" href="' + esc(ev.source_url) + '" target="_blank" rel="noopener noreferrer">View details →</a>'
+    +   '</span>'
+    + '</div>'
+    + '</div>';
+}
+function rsvpBtn(ev, status, label) {
+  var sel = ev.viewerRsvp === status ? ' selected-' + status : '';
+  return '<button class="rsvp-btn' + sel + '" onclick="setRsvp(\'' + ev.id + '\',\'' + status + '\')">' + label + '</button>';
+}
+function addedByName(pid) {
+  var n = 'a team member';
+  DATA.members.forEach(function (m) { if (m.participantId === pid) n = m.firstName; });
+  return n;
+}
+
+// Team switcher (multiple-team support, spec A2): shown when the viewer both
+// leads their own team and belongs to someone else's. If they lead nothing
+// yet, the same spot offers to START one — naming a team is the first act
+// of leading it.
+function teamSwitchLink() {
+  if (!CTX) return '';
+  var viewingOwn = TEAM_ID === PID;
+  if (viewingOwn && CTX.memberOfTeam && CTX.memberOfTeam !== PID) {
+    return '<span><a class="team-switch" href="/team?pid=' + encodeURIComponent(PID)
+      + '&team=' + encodeURIComponent(CTX.memberOfTeam) + '">Switch to the team you belong to →</a></span>';
+  }
+  if (!viewingOwn && CTX.leadsOwnTeam) {
+    return '<span><a class="team-switch" href="/team?pid=' + encodeURIComponent(PID)
+      + '&team=' + encodeURIComponent(PID) + '">Switch to the team you lead →</a></span>';
+  }
+  if (!viewingOwn && !CTX.leadsOwnTeam) {
+    return '<span><a class="team-switch" href="#" onclick="openStartTeamModal();return false;">Start your own team →</a></span>';
+  }
+  return '';
+}
+
+// ─── Start a team (name it → empty-team dashboard → invite) ────────────────
+function openStartTeamModal() {
+  var suggested = (CTX && CTX.firstName ? CTX.firstName : 'My') + '’s Team';
+  var html = '<div class="modal-backdrop" id="modal" onclick="if(event.target===this)closeModal()">'
+    + '<div class="modal">'
+    + '<h3>Start your own team</h3>'
+    + '<div class="modal-sub">Give it a name — something the people you invite will recognize as theirs to join. You can change it anytime.</div>'
+    + '<label for="st-name">Team name</label>'
+    + '<input type="text" id="st-name" maxlength="60" placeholder="' + esc(suggested) + '">'
+    + '<div class="modal-actions">'
+    +   '<button class="btn-secondary" onclick="closeModal()">Not yet</button>'
+    +   '<button class="btn-primary" id="st-save" onclick="startTeam()">Start team</button>'
+    + '</div>'
+    + '</div></div>';
+  document.body.insertAdjacentHTML('beforeend', html);
+  var input = document.getElementById('st-name');
+  setTimeout(function () { input.focus(); }, 50);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); startTeam(); } });
+}
+function startTeam() {
+  var input = document.getElementById('st-name');
+  var name = (input.value || input.placeholder || '').trim();
+  if (!name || name.length > 60) { toast('Pick a name up to 60 characters'); return; }
+  var btn = document.getElementById('st-save');
+  btn.disabled = true; btn.textContent = 'Starting…';
+  api(encodeURIComponent(PID) + '/name', { method: 'POST', body: { teamName: name } })
+    .then(function (r) {
+      if (r.ok) {
+        window.location.href = '/team?pid=' + encodeURIComponent(PID) + '&team=' + encodeURIComponent(PID);
+      } else {
+        btn.disabled = false; btn.textContent = 'Start team';
+        toast(r.json.error || 'Could not start the team');
+      }
+    })
+    .catch(function () { btn.disabled = false; btn.textContent = 'Start team'; toast('Could not start the team'); });
+}
+
+// Optimistic RSVP (spec E3)
+function setRsvp(eventId, status) {
+  var ev = null;
+  DATA.events.forEach(function (e) { if (e.id === eventId) ev = e; });
+  if (!ev || ev.viewerRsvp === status) return;
+  var prev = ev.viewerRsvp;
+  if (prev) ev.rsvpCounts[prev] = Math.max(0, ev.rsvpCounts[prev] - 1);
+  ev.rsvpCounts[status]++;
+  ev.viewerRsvp = status;
+  render();   // optimistic
+  api(encodeURIComponent(TEAM_ID) + '/events/' + encodeURIComponent(eventId) + '/rsvp',
+      { method: 'POST', body: { rsvp_status: status } })
+    .then(function (r) { if (!r.ok) { toast('Could not save your RSVP'); refresh(); } })
+    .catch(function () { toast('Could not save your RSVP'); refresh(); });
+}
+
+// ─── Invite graph SVG (spec E3) ─────────────────────────────────────────────
+function renderGraph(graph) {
+  var W = 800;
+  var Y = [40, 150, 275, 345];
+  var nodes = [];
+
+  // children lookup
+  var kidsOf = function (pid, level) {
+    return (level === 1 ? graph.level1 : level === 2 ? graph.level2 : graph.level3)
+      .filter(function (n) { return n.invitedBy === pid; });
+  };
+
+  // Subtree leaf-width for proportional x placement (3 levels max).
+  function width(node, level) {
+    if (level >= 3) return 1;
+    var kids = kidsOf(node.participantId, level + 1);
+    if (!kids.length) return 1;
+    return kids.reduce(function (s, k) { return s + width(k, level + 1); }, 0);
+  }
+
+  function place(node, level, x0, x1) {
+    var x = (x0 + x1) / 2;
+    nodes.push({ n: node, level: level, x: x, y: Y[level] });
+    var kids = kidsOf(node.participantId, level + 1);
+    if (!kids.length || level >= 3) return;
+    var total = kids.reduce(function (s, k) { return s + width(k, level + 1); }, 0);
+    var cx = x0;
+    kids.forEach(function (k) {
+      var w = (x1 - x0) * width(k, level + 1) / total;
+      place(k, level + 1, cx, cx + w);
+      cx += w;
+    });
+  }
+  place(graph.root, 0, 40, W - 40);
+
+  var maxLevel = 0;
+  nodes.forEach(function (p) { if (p.level > maxLevel) maxLevel = p.level; });
+  var H = Y[maxLevel] + (maxLevel === 0 ? 80 : 75);
+
+  var byPid = {};
+  nodes.forEach(function (p) { byPid[p.n.participantId] = p; });
+
+  var lines = '', circles = '';
+  var R = [22, 18, 14, 10];
+  var FS = [13, 11, 10, 9];
+
+  nodes.forEach(function (p) {
+    if (p.level > 0) {
+      var parent = byPid[p.n.invitedBy];
+      if (parent) {
+        var dash = p.level === 3 ? ' stroke-dasharray="3,3"' : '';
+        lines += '<path d="M ' + parent.x + ',' + (parent.y + R[parent.level] - 7) +
+          ' Q ' + parent.x + ',' + ((parent.y + p.y) / 2) + ' ' + p.x + ',' + (p.y - R[p.level] - 1) + '"' + dash + '/>';
+      }
+    }
+    var ring = (p.n.role === 'leader' || p.n.role === 'co-leader')
+      ? ' stroke="#C49A3C" stroke-width="' + (p.level === 0 ? 3 : 2) + '"' : '';
+    var op = p.level >= 2 ? ' opacity="0.85"' : '';
+    var isYouNode = p.n.participantId === PID;
+    circles += '<g>'
+      + (isYouNode
+        ? '<circle cx="' + p.x + '" cy="' + p.y + '" r="' + (R[p.level] + 5) + '" fill="none" stroke="#C49A3C" stroke-width="1.5" stroke-dasharray="3,3"/>'
+        : '')
+      + '<circle cx="' + p.x + '" cy="' + p.y + '" r="' + R[p.level] + '" fill="' + colorOf(p.n.profileKey) + '"' + ring + op + '/>'
+      + (p.level <= 2
+        ? '<text x="' + p.x + '" y="' + (p.y + (p.level === 0 ? 6 : 4)) + '" text-anchor="middle" fill="white" font-family="Plus Jakarta Sans" font-weight="700" font-size="' + FS[p.level] + '">'
+          + esc(initialsOf(p.n.firstName)) + '</text>'
+        : '');
+    if (p.level <= 2) {
+      var ny = p.y + R[p.level] + (p.level === 0 ? 23 : 17);
+      circles += '<text x="' + p.x + '" y="' + ny + '" text-anchor="middle" fill="#333858" font-family="Plus Jakarta Sans" font-weight="600" font-size="' + (p.level === 0 ? 13 : p.level === 1 ? 12 : 10) + '">'
+        + esc(p.n.firstName) + (isYouNode ? ' (you)' : (p.level === 0 ? ' (leads)' : '')) + '</text>';
+      var line2 = p.n.role === 'co-leader' ? 'CO-LEADER' : (p.level === 0 ? 'LEADER' : (PROFILE_NAMES[p.n.profileKey] || ''));
+      var gold2 = (p.n.role === 'co-leader' || p.level === 0);
+      if (line2) {
+        circles += '<text x="' + p.x + '" y="' + (ny + 15) + '" text-anchor="middle" fill="' + (gold2 ? '#C49A3C' : '#5a5a7a') + '" font-family="Plus Jakarta Sans"' +
+          (gold2 ? ' font-weight="700"' : '') + ' font-size="10">' + esc(line2) + '</text>';
+      }
+      if (p.level > 0 && p.n.invitedCount > 0) {
+        circles += '<text x="' + p.x + '" y="' + (ny + 30) + '" text-anchor="middle" fill="#C49A3C" font-family="Plus Jakarta Sans" font-weight="700" font-size="10">+'
+          + p.n.invitedCount + ' invited</text>';
+      }
+    } else {
+      // Level 3: bare circles; deeper levels collapse into a "+N more" hint.
+      if (p.n.invitedCount > 0) {
+        circles += '<text x="' + p.x + '" y="' + (p.y + R[3] + 14) + '" text-anchor="middle" fill="#C49A3C" font-family="Plus Jakarta Sans" font-weight="700" font-size="9">+'
+          + p.n.invitedCount + ' more</text>';
+      }
+    }
+    circles += '</g>';
+  });
+
+  return '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">'
+    + '<g stroke="#C49A3C" stroke-width="2" fill="none" opacity="0.5">' + lines + '</g>'
+    + circles + '</svg>';
+}
+function renderLegend() {
+  var html = '<div class="graph-legend">';
+  Object.keys(PROFILE_NAMES).forEach(function (k) {
+    html += '<div class="legend-item"><div class="legend-dot" style="background:' + PROFILE_COLORS[k] + ';"></div>' + PROFILE_NAMES[k] + '</div>';
+  });
+  html += '<div class="legend-item" style="border-left:1px solid var(--border);padding-left:16px;margin-left:8px;">'
+    + '<span style="font-size:10px;padding:2px 6px;background:var(--gold);color:white;border-radius:3px;font-weight:700;letter-spacing:0.04em;">GOLD RING</span>'
+    + 'indicates leader or co-leader</div></div>';
+  return html;
+}
+
+// ─── Right-column panels ────────────────────────────────────────────────────
+function renderProfileMix(d) {
+  var total = 0;
+  Object.keys(d.profileMix).forEach(function (k) { total += d.profileMix[k]; });
+  var html = '<div class="small-panel"><div class="small-title">Profile mix on your team</div><div class="profile-bars">';
+  Object.keys(PROFILE_NAMES).forEach(function (k) {
+    var n = d.profileMix[k] || 0;
+    var w = total ? Math.round(100 * n / total) : 0;
+    html += '<div class="profile-bar"><span class="name">' + PROFILE_NAMES[k] + '</span>'
+      + '<div class="track"><div class="fill" style="width:' + w + '%;background:' + PROFILE_COLORS[k] + ';"></div></div>'
+      + '<span class="count">' + n + '</span></div>';
+  });
+  html += '</div>';
+  var distinct = Object.keys(d.profileMix).filter(function (k) { return d.profileMix[k] > 0; }).length;
+  if (distinct === 5) {
+    html += '<div style="font-size:12px;color:var(--gold);margin-top:14px;padding-top:14px;border-top:1px solid var(--border-light);font-weight:600;">✦ One of each profile. A rare and balanced team.</div>';
+  }
+  return html + '</div>';
+}
+function renderGifting(d) {
+  var max = Math.max(5, DATA.members.length);
+  var html = '<div class="small-panel"><div class="small-title">What your team offers</div><div class="gifting-block">';
+  Object.keys(GIFTING_LABELS).forEach(function (k) {
+    var n = Math.min(d.giftingDistribution[k] || 0, max);
+    var dots = '';
+    for (var i = 0; i < 5; i++) {
+      dots += '<div class="gift-dot' + (i < Math.min(n, 5) ? '' : ' empty') + '"></div>';
+    }
+    html += '<div class="gifting-row"><span class="name">' + GIFTING_LABELS[k] + '</span><div class="gift-dots">' + dots + '</div></div>';
+  });
+  return html + '</div></div>';
+}
+function renderPopulations(d) {
+  var html = '<div class="small-panel"><div class="small-title">Who your team keeps returning to</div>'
+    + '<div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">From Stage 3 discernment, across all team members.</div>';
+  if (!d.populations.length) {
+    return html + '<div style="font-size:13px;color:var(--text-muted);">This fills in as team members complete Stage 3.</div></div>';
+  }
+  html += '<div class="pop-list">';
+  d.populations.slice(0, 5).forEach(function (p, i) {
+    html += '<div class="pop-row' + (i === 0 ? ' top' : '') + '">' + esc(p.label) + '<span class="pop-count">' + p.count + '</span></div>';
+  });
+  return html + '</div></div>';
+}
+function renderReadyPanel(d) {
+  var bits = [];
+  var distinct = Object.keys(d.profileMix).filter(function (k) { return d.profileMix[k] > 0; }).length;
+  if (distinct >= 2) bits.push(distinct === 5 ? 'one of each profile' : distinct + ' of the five profiles');
+  var gifts = Object.keys(d.giftingDistribution)
+    .sort(function (a, b) { return d.giftingDistribution[b] - d.giftingDistribution[a]; }).slice(0, 3)
+    .map(function (k) { return GIFTING_LABELS[k].toLowerCase(); });
+  if (gifts.length) bits.push('gifting across ' + gifts.join(', '));
+  var top = d.populations.length ? d.populations[0] : null;
+  if (top) bits.push('a focus on ' + top.label.toLowerCase());
+
+  var html = '<div class="small-panel"><div class="small-title">What your team is ready to do together</div>';
+  if (!bits.length) {
+    return html + '<div style="font-size:13.5px;line-height:1.7;color:var(--text-secondary);">As your team completes the journey, a picture of your shared readiness will form here.</div></div>';
+  }
+  html += '<div style="font-size:13.5px;line-height:1.7;color:var(--text-secondary);margin-bottom:14px;">Your team has ' + esc(bits.join(', ')) + '.' + (top ? ' A natural next step:' : '') + '</div>';
+  if (top) {
+    html += '<div style="background:var(--gold-bg);border-left:3px solid var(--gold);padding:14px 18px;border-radius:6px;">'
+      + '<div style="font-family:\'Libre Baskerville\',Georgia,serif;font-style:italic;font-size:14.5px;color:var(--navy);line-height:1.5;">'
+      + 'Gather the team and ask: what would one faithful step toward ' + esc(top.label.toLowerCase()) + ' look like in our context this month?'
+      + '</div></div>';
+  }
+  return html + '</div>';
+}
+
+// ─── Member rows & role menu ────────────────────────────────────────────────
+function renderMemberRow(m, viewer) {
+  var rowCls = m.role === 'leader' ? ' is-leader' : (m.role === 'co-leader' ? ' is-coleader' : '');
+  var roleCls = m.role === 'leader' ? 'role-leader' : (m.role === 'co-leader' ? 'role-coleader' : 'role-participant');
+  var roleLabel = m.role === 'leader' ? 'Leader' : (m.role === 'co-leader' ? 'Co-leader' : 'Participant');
+  var profBits = (m.profileName || 'Journey in progress') + (m.gifting.length ? ' · ' + m.gifting.slice(0, 2).join(', ') : '');
+  var menu = viewer.canManage
+    ? '<svg class="member-menu" onclick="toggleMemberMenu(event,\'' + m.participantId + '\')" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>'
+    : '<span></span>';
+  return '<div class="member-row' + rowCls + (viewer.canManage ? ' can-manage' : '') + '" id="member-' + m.participantId + '">'
+    + '<div class="member-avatar" style="background:' + colorOf(m.profileKey) + ';">' + esc(initialsOf(m.name)) + '</div>'
+    + '<div class="member-info">'
+    +   '<div class="member-name">' + esc(m.name) + (m.isYou ? ' <span class="you-tag">YOU</span>' : '') + '</div>'
+    +   '<div class="member-profile"><div class="profile-dot" style="background:' + colorOf(m.profileKey) + ';"></div>' + esc(profBits) + '</div>'
+    + '</div>'
+    + '<span class="role-badge ' + roleCls + '">' + roleLabel + '</span>'
+    + '<div class="member-meta">'
+    +   (m.invitedCount > 0 ? '<span class="spark">+' + m.invitedCount + ' invited</span>' : '0 invited') + '<br>'
+    +   (m.isFounder ? '<span style="color:var(--text-muted);">Founder</span>'
+                     : '<span class="stage-badge ' + (STAGE_CLASSES[m.journeyStage.key] || 'stage-started') + '">' + esc(m.journeyStage.label) + '</span>')
+    + '</div>'
+    + menu
+    + '</div>';
+}
+
+function toggleMemberMenu(evt, memberPid) {
+  evt.stopPropagation();
+  closeMenus();
+  var m = null;
+  DATA.members.forEach(function (x) { if (x.participantId === memberPid) m = x; });
+  if (!m) return;
+  var isLeaderViewer = DATA.viewer.role === 'leader';
+  var html = '<div class="member-menu-pop" id="member-menu-pop">';
+  if (isLeaderViewer && !m.isFounder) {
+    if (m.role === 'co-leader') {
+      html += '<button onclick="setRole(\'' + m.participantId + '\',\'participant\')">Remove co-leader</button>';
+    } else {
+      html += '<button onclick="setRole(\'' + m.participantId + '\',\'co-leader\')">Make co-leader</button>';
+    }
+  }
+  html += '<button onclick="closeMenus()">' + (isLeaderViewer && !m.isFounder ? 'Cancel' : 'View profile above') + '</button>';
+  html += '</div>';
+  var row = document.getElementById('member-' + memberPid);
+  row.insertAdjacentHTML('beforeend', html);
+}
+function closeMenus() {
+  var pop = document.getElementById('member-menu-pop');
+  if (pop) pop.remove();
+}
+document.addEventListener('click', closeMenus);
+
+function setRole(memberPid, role) {
+  closeMenus();
+  api(encodeURIComponent(TEAM_ID) + '/role', { method: 'POST', body: { participantId: memberPid, role: role } })
+    .then(function (r) {
+      if (r.ok) { toast(role === 'co-leader' ? 'Promoted to co-leader' : 'Co-leader removed'); refresh(); }
+      else toast(r.json.error || 'Could not change role');
+    })
+    .catch(function () { toast('Could not change role'); });
+}
+
+// ─── Momentum + themes ──────────────────────────────────────────────────────
+function renderMomentum(d, manage) {
+  var m = d.momentum;
+  var narrative;
+  if (m.reach === 0) {
+    narrative = 'It starts with one invitation. Invite someone you trust into the journey and watch what forms.';
+  } else if (m.teamsSparked === 0) {
+    narrative = 'You started with one invitation. Today ' + (m.reach === 1 ? 'one person is' : m.reach + ' people are')
+      + ' in formation because of it. When your team members begin inviting, new teams will spark underneath you.';
+  } else {
+    narrative = 'You started with one invitation. Today your reach is ' + m.reach + ' people in formation, and '
+      + (m.teamsSparked === 1 ? 'one new team has' : m.teamsSparked + ' new teams have') + ' formed underneath you.';
+  }
+  var nextMilestone = m.reach < 5 ? 5 : m.reach < 15 ? 15 : (Math.floor(m.reach / 10) + 1) * 10;
+  var away = nextMilestone - m.reach;
+  return '<div class="momentum-panel">'
+    + '<div class="momentum-title">' + (m.teamsSparked > 0 ? 'Your team is sparking a movement.' : 'Every movement starts here.') + '</div>'
+    + '<div class="momentum-sub">' + narrative + '</div>'
+    + '<div class="momentum-stats">'
+    +   '<div><div class="m-stat-value">' + m.youInvited + '</div><div class="m-stat-label">' + (DATA.viewer.role === 'leader' ? 'You invited' : 'Direct invites') + '</div></div>'
+    +   '<div><div class="m-stat-value">' + m.theyInvited + '</div><div class="m-stat-label">They invited</div></div>'
+    +   '<div><div class="m-stat-value">' + m.teamsSparked + '</div><div class="m-stat-label">Teams sparked</div></div>'
+    + '</div>'
+    + (manage
+      ? '<div class="momentum-cta"><div class="momentum-cta-text">'
+      + (away > 0 ? 'You’re ' + away + (away === 1 ? ' invitation' : ' invitations') + ' away from your team reaching ' + nextMilestone + ' people. Each new person multiplies what’s already begun.'
+                  : 'Each new person multiplies what’s already begun.')
+      + '</div><button class="btn-momentum" onclick="openInviteModal()">Invite more →</button></div>'
+      : '')
+    + '</div>';
+}
+function renderThemes(d) {
+  var html = '<div class="small-panel"><div class="small-title">What your team is carrying</div>'
+    + '<div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Shared sense of calling, drawn from team members who chose to share.</div>';
+  if (!d.themes.length) {
+    return html + '<div style="font-size:13px;color:var(--text-muted);line-height:1.7;">Nothing shared yet. When team members choose to share their reflections, they’ll appear here.</div></div>';
+  }
+  d.themes.slice(0, 4).forEach(function (t) {
+    html += '<div class="theme-block">'
+      + '<div class="theme-label">' + esc(t.firstName) + (t.profileName ? ', ' + esc(t.profileName) : '') + '</div>'
+      + '<div class="theme-quote">“' + esc(t.quote) + '”</div></div>';
+  });
+  return html + '</div>';
+}
+
+// ─── Team name inline edit (spec E3) ────────────────────────────────────────
+function wireTeamNameEdit() {
+  var icon = document.getElementById('team-name-edit');
+  if (!icon) return;
+  icon.addEventListener('click', function () {
+    var wrap = document.getElementById('team-name-wrap');
+    var current = DATA.team.teamName;
+    wrap.innerHTML = '<input type="text" id="team-name-input" maxlength="60" value="' + esc(current) + '">';
+    var input = document.getElementById('team-name-input');
+    input.focus();
+    input.setSelectionRange(0, input.value.length);
+    var done = false;
+    function save() {
+      if (done) return; done = true;
+      var v = input.value.trim();
+      if (!v || v.length > 60 || v === current) { render(); return; }
+      api(encodeURIComponent(TEAM_ID) + '/name', { method: 'POST', body: { teamName: v } })
+        .then(function (r) {
+          if (r.ok) { DATA.team.teamName = v; toast('Team name saved'); }
+          else toast(r.json.error || 'Could not save name');
+          render();
+        })
+        .catch(function () { toast('Could not save name'); render(); });
+    }
+    input.addEventListener('blur', save);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); save(); }
+      if (e.key === 'Escape') { done = true; render(); }
+    });
+  });
+}
+
+// ─── Invite modal (spec E3) ─────────────────────────────────────────────────
+function inviteLink() { return BASE_URL + '/?ref=' + encodeURIComponent(PID); }
+function openInviteModal() {
+  var link = inviteLink();
+  var canShare = !!navigator.share;
+  var html = '<div class="modal-backdrop" id="modal" onclick="if(event.target===this)closeModal()">'
+    + '<div class="modal">'
+    + '<h3>Invite people to your team</h3>'
+    + '<div class="modal-sub">Anyone who starts the Discernment Experience through your link joins your team.</div>'
+    + '<div class="invite-options">'
+    + '<button class="invite-option" onclick="copyInviteLink()">'
+    +   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
+    +   'Copy invite link</button>'
+    + '<a class="invite-option" style="text-decoration:none;" href="mailto:?subject=' + encodeURIComponent('I think you would appreciate this')
+    +   '&body=' + encodeURIComponent('I just went through the Faithful Witness Discernment Experience and thought of you.\n\n' + link) + '">'
+    +   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>'
+    +   'Send via email</a>'
+    + (canShare
+      ? '<button class="invite-option" onclick="shareInvite()">'
+      + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>'
+      + 'Share…</button>'
+      : '')
+    + '</div>'
+    + '<div class="invite-link-box">' + esc(link) + '</div>'
+    + '<div class="modal-actions"><button class="btn-secondary" onclick="closeModal()">Done</button></div>'
+    + '</div></div>';
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+function copyInviteLink() {
+  navigator.clipboard.writeText(inviteLink()).then(function () { toast('Invite link copied'); })
+    .catch(function () { toast('Copy the link below manually'); });
+}
+function shareInvite() {
+  navigator.share({ title: 'Faithful Witness', text: 'I think you would appreciate this.', url: inviteLink() }).catch(function () {});
+}
+function closeModal() {
+  var m = document.getElementById('modal');
+  if (m) m.remove();
+}
+
+// ─── Add / edit event modal (spec E3) ───────────────────────────────────────
+function openEventModal(eventId) {
+  editingEventId = eventId || null;
+  lastOg = null;
+  var ev = null;
+  if (eventId) DATA.events.forEach(function (e) { if (e.id === eventId) ev = e; });
+  var d = ev ? new Date(ev.event_datetime) : null;
+  var dateVal = d ? localDateValue(d) : '';
+  var timeVal = d ? localTimeValue(d) : '';
+
+  var html = '<div class="modal-backdrop" id="modal" onclick="if(event.target===this)closeModal()">'
+    + '<div class="modal">'
+    + '<h3>' + (ev ? 'Edit event' : 'Add an event') + '</h3>'
+    + '<div class="modal-sub">Paste a link from Eventbrite, Mobilize, Facebook, Google Calendar, or your church site. We’ll pull in the details.</div>'
+    + '<label for="ev-url">Event link</label>'
+    + '<input type="url" id="ev-url" placeholder="https://…" value="' + esc(ev ? ev.source_url : '') + '">'
+    + '<div class="og-status" id="og-status"></div>'
+    + '<div id="og-preview"></div>'
+    + '<label for="ev-title">Title</label>'
+    + '<input type="text" id="ev-title" maxlength="200" placeholder="Event title" value="' + esc(ev ? ev.title : '') + '">'
+    + '<label for="ev-desc">Description <span style="font-weight:400;text-transform:none;">(optional)</span></label>'
+    + '<textarea id="ev-desc" maxlength="2000" placeholder="Anything your team should know">' + esc(ev ? (ev.description || '') : '') + '</textarea>'
+    + '<label>Date &amp; time</label>'
+    + '<div class="modal-datetime">'
+    +   '<input type="date" id="ev-date" value="' + dateVal + '">'
+    +   '<input type="time" id="ev-time" value="' + timeVal + '">'
+    + '</div>'
+    + '<label for="ev-loc">Location <span style="font-weight:400;text-transform:none;">(optional)</span></label>'
+    + '<input type="text" id="ev-loc" maxlength="300" placeholder="Where it’s happening" value="' + esc(ev ? (ev.location || '') : '') + '">'
+    + '<div class="modal-actions">'
+    +   '<button class="btn-secondary" onclick="closeModal()">Cancel</button>'
+    +   '<button class="btn-primary" id="ev-save" onclick="saveEvent()">' + (ev ? 'Save changes' : 'Add event') + '</button>'
+    + '</div>'
+    + '</div></div>';
+  document.body.insertAdjacentHTML('beforeend', html);
+
+  var urlInput = document.getElementById('ev-url');
+  urlInput.addEventListener('blur', fetchOgPreview);
+  urlInput.addEventListener('paste', function () { setTimeout(fetchOgPreview, 50); });
+  if (!ev) setTimeout(function () { urlInput.focus(); }, 50);
+}
+function localDateValue(d) {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function localTimeValue(d) {
+  return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+}
+function fetchOgPreview() {
+  var url = (document.getElementById('ev-url') || {}).value || '';
+  if (!/^https?:\/\//i.test(url.trim())) return;
+  var status = document.getElementById('og-status');
+  status.textContent = 'Fetching event details…';
+  clearTimeout(ogFetchTimer);
+  ogFetchTimer = setTimeout(function () {
+    fetch('/api/og-fetch?pid=' + encodeURIComponent(PID) + '&url=' + encodeURIComponent(url.trim()))
+      .then(function (r) { return r.json(); })
+      .then(function (og) {
+        var prev = document.getElementById('og-preview');
+        if (!prev) return;
+        if (og.error) { status.textContent = og.error + ' — you can still fill in the details by hand.'; prev.innerHTML = ''; return; }
+        lastOg = og;
+        status.textContent = '';
+        prev.innerHTML = '<div class="og-preview">'
+          + (og.image ? '<img src="' + esc(og.image) + '" alt="">' : '')
+          + '<div class="og-body"><div class="og-title">' + esc(og.title || 'Untitled event') + '</div>'
+          + '<div class="og-host">' + esc(og.host || '') + '</div></div></div>';
+        var titleInput = document.getElementById('ev-title');
+        if (titleInput && !titleInput.value && og.title) titleInput.value = og.title;
+        var descInput = document.getElementById('ev-desc');
+        if (descInput && !descInput.value && og.description) descInput.value = og.description;
+      })
+      .catch(function () { if (status) status.textContent = 'Could not fetch that page — fill in the details by hand.'; });
+  }, 150);
+}
+function saveEvent() {
+  var url   = document.getElementById('ev-url').value.trim();
+  var title = document.getElementById('ev-title').value.trim();
+  var desc  = document.getElementById('ev-desc').value.trim();
+  var date  = document.getElementById('ev-date').value;
+  var time  = document.getElementById('ev-time').value;
+  var loc   = document.getElementById('ev-loc').value.trim();
+  if (!/^https?:\/\//i.test(url)) { toast('A valid event link is required'); return; }
+  if (!title) { toast('Give the event a title'); return; }
+  if (!date || !time) { toast('Pick a date and time'); return; }
+  var dt = new Date(date + 'T' + time);
+  if (isNaN(dt.getTime())) { toast('That date/time doesn’t look right'); return; }
+
+  var btn = document.getElementById('ev-save');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  var body = { sourceUrl: url, title: title, description: desc, eventDatetime: dt.toISOString(), location: loc };
+  var p = editingEventId
+    ? api(encodeURIComponent(TEAM_ID) + '/events/' + encodeURIComponent(editingEventId), { method: 'PATCH', body: body })
+    : api(encodeURIComponent(TEAM_ID) + '/events', { method: 'POST', body: body });
+  p.then(function (r) {
+    if (r.ok) {
+      closeModal();
+      toast(editingEventId ? 'Event updated' : 'Event added — your team has been notified');
+      refresh();
+    } else {
+      btn.disabled = false; btn.textContent = editingEventId ? 'Save changes' : 'Add event';
+      toast(r.json.error || 'Could not save the event');
+    }
+  }).catch(function () {
+    btn.disabled = false; btn.textContent = editingEventId ? 'Save changes' : 'Add event';
+    toast('Could not save the event');
+  });
+}
+function removeEvent(eventId) {
+  var ev = null;
+  DATA.events.forEach(function (e) { if (e.id === eventId) ev = e; });
+  if (!ev) return;
+  if (!window.confirm('Remove “' + ev.title + '”? Team members who RSVP’d will be notified.')) return;
+  api(encodeURIComponent(TEAM_ID) + '/events/' + encodeURIComponent(eventId), { method: 'DELETE' })
+    .then(function (r) {
+      if (r.ok) { toast('Event removed'); refresh(); }
+      else toast(r.json.error || 'Could not remove the event');
+    })
+    .catch(function () { toast('Could not remove the event'); });
+}
+
+boot();
+</script>
+
+</body>
+</html>
