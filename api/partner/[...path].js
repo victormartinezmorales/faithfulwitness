@@ -143,6 +143,19 @@ module.exports = async function handler(req, res) {
   try {
     let path = req.query.path || [];
     if (typeof path === 'string') path = path.split('/').filter(Boolean);
+    // Same production fallback as api/team/[...path].js: Vercel's plain
+    // functions may leave catch-all params unpopulated; derive from req.url.
+    // The /partner/login rewrite also lands here with its ORIGINAL url
+    // (/partner/login), so map that explicitly.
+    if (!Array.isArray(path) || !path.length) {
+      const bare = String(req.url || '').split('?')[0];
+      if (bare === '/partner/login') {
+        path = ['login'];
+      } else {
+        const m = bare.match(/\/api\/partner\/(.+)$/);
+        path = m ? m[1].split('/').filter(Boolean).map(decodeURIComponent) : [];
+      }
+    }
     const route = path[0] || '';
 
     // Unauthenticated routes

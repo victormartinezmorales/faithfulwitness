@@ -365,19 +365,25 @@ const server = http.createServer(async (req, res) => {
       if (fs.existsSync(f)) return res.end(fs.readFileSync(f));
       return res.end('<body style="font-family:sans-serif;padding:40px;">partner-dashboard.html not built yet (waiting on mockup)</body>');
     }
+    // PROD_SIM=1 mimics what Vercel actually sends in production (observed
+    // 2026-06-10): catch-all params NOT populated in req.query — handlers
+    // must derive the route from req.url. Default mode mimics the
+    // documented query.path behavior. Run the suites in BOTH modes.
+    const PROD_SIM = !!process.env.PROD_SIM;
     if (u.pathname === '/partner/login') {
       const body = await collectBody(req);
-      return partnerHandler({ method: req.method, query: Object.assign({ path: ['login'] }, query), headers: req.headers, body }, makeRes(res));
+      const q = PROD_SIM ? query : Object.assign({ path: ['login'] }, query);
+      return partnerHandler({ method: req.method, url: req.url, query: q, headers: req.headers, body }, makeRes(res));
     }
     if (u.pathname.startsWith('/api/partner/')) {
-      query.path = u.pathname.replace('/api/partner/', '').split('/').filter(Boolean);
+      if (!PROD_SIM) query.path = u.pathname.replace('/api/partner/', '').split('/').filter(Boolean);
       const body = await collectBody(req);
-      return partnerHandler({ method: req.method, query, headers: req.headers, body }, makeRes(res));
+      return partnerHandler({ method: req.method, url: req.url, query, headers: req.headers, body }, makeRes(res));
     }
     if (u.pathname.startsWith('/api/team/')) {
-      query.path = u.pathname.replace('/api/team/', '').split('/').filter(Boolean);
+      if (!PROD_SIM) query.path = u.pathname.replace('/api/team/', '').split('/').filter(Boolean);
       const body = await collectBody(req);
-      return teamHandler({ method: req.method, query, headers: req.headers, body }, makeRes(res));
+      return teamHandler({ method: req.method, url: req.url, query, headers: req.headers, body }, makeRes(res));
     }
     if (u.pathname === '/api/og-fetch') {
       return ogHandler({ method: req.method, query, headers: req.headers }, makeRes(res));

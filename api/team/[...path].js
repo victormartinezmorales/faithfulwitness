@@ -446,6 +446,13 @@ module.exports = async function handler(req, res) {
   try {
     let path = req.query.path || [];
     if (typeof path === 'string') path = path.split('/').filter(Boolean);
+    // Vercel's plain Node functions don't reliably populate catch-all
+    // params in req.query (observed in production 2026-06-10: empty path →
+    // every route fell through to deny). Derive from the URL when absent.
+    if (!Array.isArray(path) || !path.length) {
+      const m = String(req.url || '').split('?')[0].match(/\/api\/team\/(.+)$/);
+      path = m ? m[1].split('/').filter(Boolean).map(decodeURIComponent) : [];
+    }
 
     // GET /api/team/context?pid=… — resolve which team this pid sees by
     // default (spec E1): own team if they've invited anyone, else the team

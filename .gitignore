@@ -17,3 +17,7 @@ api/*.zip
 
 # Email render previews (verification artifacts, not deployed)
 email-previews/
+
+# Local test harness artifacts (mock emails + screenshots regenerate on every run)
+test/outbox/
+test/screenshots/
