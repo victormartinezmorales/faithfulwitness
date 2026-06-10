@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Dashboard — Faithful Witness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Tokens & layout: verbatim from fw_partner_dashboard_mockup.html ── */
+  :root {
+    --navy: #333858; --navy-light: #454B6F; --navy-dark: #252940;
+    --gold: #C49A3C; --gold-light: #d4ab3a; --gold-pale: #f7f0dc; --gold-bg: #fdf8ee;
+    --cream: #faf8f4; --warm-white: #ffffff;
+    --text-primary: #1a1a2e; --text-secondary: #4a4a6a; --text-muted: #5a5a7a;
+    --border: #e8e4f0; --border-light: #f0edf8;
+    --radius: 12px; --radius-sm: 8px;
+    --p-open: #6B9BD8; --p-thoughtful: #8B7BA8; --p-careful: #C49A3C;
+    --p-ready: #D87B5B; --p-faithful: #5B8C7B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: #f0eee8; color: var(--text-primary); margin: 0;
+    padding: 32px 24px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1320px; margin: 0 auto; }
+
+  .top-nav {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 16px 28px; display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 14px; }
+  .brand-mark { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: var(--navy); }
+  .brand-divider { width: 1px; height: 18px; background: var(--border); }
+  .brand-sub { font-size: 12px; color: var(--text-muted); letter-spacing: 0.04em; }
+  .nav-actions { display: flex; gap: 12px; align-items: center; font-size: 13px; color: var(--text-secondary); }
+  .nav-actions a { color: var(--text-secondary); text-decoration: none; }
+  .nav-actions .user {
+    display: flex; align-items: center; gap: 8px; padding: 6px 12px;
+    background: var(--cream); border-radius: 100px; cursor: pointer; position: relative;
+    border: none; font-family: inherit; font-size: 13px; color: var(--text-secondary);
+  }
+  .avatar {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--navy);
+    color: white; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px;
+  }
+  .user-menu {
+    position: absolute; right: 0; top: calc(100% + 8px); z-index: 50;
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(51,56,88,0.15); padding: 6px; min-width: 160px;
+  }
+  .user-menu button {
+    display: block; width: 100%; text-align: left; background: none; border: none;
+    font-family: inherit; font-size: 13px; color: var(--text-primary);
+    padding: 9px 12px; border-radius: 6px; cursor: pointer;
+  }
+  .user-menu button:hover { background: var(--cream); }
+
+  .partner-header {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 32px 36px; margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04); border-left: 4px solid var(--navy);
+  }
+  .partner-label-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .partner-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .privacy-pill {
+    display: inline-flex; align-items: center; gap: 5px; background: var(--cream);
+    border: 1px solid var(--border); border-radius: 100px; padding: 3px 10px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+    color: var(--text-secondary); text-transform: none; text-decoration: none;
+  }
+  .privacy-pill:hover { border-color: var(--gold); }
+  .privacy-pill svg { width: 11px; height: 11px; }
+  .partner-name { font-family: 'Libre Baskerville', Georgia, serif; font-size: 34px; color: var(--navy); line-height: 1.1; margin-bottom: 8px; font-weight: 700; }
+  .partner-fullname { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
+  .partner-fullname code { background: var(--cream); padding: 2px 8px; border-radius: 3px; font-size: 12px; }
+  .partner-narrative {
+    font-family: 'Libre Baskerville', Georgia, serif; font-style: italic;
+    font-size: 18px; color: var(--navy); line-height: 1.5;
+    padding-top: 16px; border-top: 1px solid var(--border-light); max-width: 900px;
+  }
+  .retired-banner {
+    background: var(--gold-bg); border-left: 4px solid var(--gold); border-radius: var(--radius);
+    padding: 18px 24px; margin-bottom: 20px; font-size: 14.5px; color: var(--navy);
+    font-weight: 600;
+  }
+
+  .stats-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 20px; }
+  .stat-card {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 20px 18px; box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .stat-card.featured {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: white; position: relative; overflow: hidden;
+  }
+  .stat-card.featured::after {
+    content: ''; position: absolute; top: -20px; right: -20px; width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(196,154,60,0.2) 0%, transparent 70%);
+  }
+  .stat-card.featured .stat-label { color: rgba(232,228,240,0.7); }
+  .stat-card.featured .stat-value { color: var(--gold-light); }
+  .stat-card.featured .stat-detail { color: rgba(232,228,240,0.85); }
+  .stat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .stat-value { font-family: 'Libre Baskerville', Georgia, serif; font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1.1; margin-bottom: 3px; }
+  .stat-detail { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+
+  .panel {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 26px 28px; box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .panel-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; gap: 12px; flex-wrap: wrap; }
+  .panel-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+  .panel-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+  .panel-filter {
+    font-size: 12px; color: var(--text-secondary); display: flex; gap: 4px;
+    background: var(--cream); border-radius: 6px; padding: 4px;
+  }
+  .filter-btn {
+    padding: 4px 10px; border-radius: 4px; color: var(--text-secondary);
+    cursor: pointer; font-weight: 600; border: none; background: none; font-family: inherit; font-size: 12px;
+  }
+  .filter-btn.active { background: white; color: var(--navy); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .filter-btn:focus-visible { outline: 2px solid var(--gold); }
+
+  .growth-section { margin-bottom: 20px; }
+  .chart-container { margin-top: 8px; transition: opacity 0.25s; }
+  .chart-container.loading { opacity: 0.35; }
+  .chart-legend {
+    display: flex; gap: 18px; margin-top: 18px; padding-top: 18px;
+    border-top: 1px solid var(--border-light); font-size: 12px; color: var(--text-secondary);
+    flex-wrap: wrap; align-items: center;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-line { width: 18px; height: 3px; border-radius: 2px; }
+  .btn-table-toggle {
+    margin-left: auto; background: var(--cream); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 12px; font-size: 11px; font-weight: 600;
+    color: var(--text-secondary); cursor: pointer; font-family: inherit;
+  }
+  .btn-table-toggle:hover { border-color: var(--gold); color: var(--navy); }
+  .chart-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 12px; }
+  .chart-table th, .chart-table td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--border-light); }
+  .chart-table th:first-child, .chart-table td:first-child { text-align: left; }
+  .chart-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+
+  .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .main-grid > * { min-width: 0; }
+
+  .dist-bars { display: flex; flex-direction: column; gap: 14px; }
+  .dist-bar { display: grid; grid-template-columns: 140px 1fr auto auto; gap: 12px; align-items: center; font-size: 13px; }
+  .dist-bar .name { color: var(--text-primary); font-weight: 500; }
+  .dist-bar .track { height: 10px; background: var(--border-light); border-radius: 5px; overflow: hidden; }
+  .dist-bar .fill { height: 100%; border-radius: 5px; transition: width 0.4s; }
+  .dist-bar .count { color: var(--navy); font-weight: 700; text-align: right; min-width: 36px; }
+  .dist-bar .pct { color: var(--text-muted); font-size: 12px; text-align: right; min-width: 40px; }
+  .observation {
+    font-size: 12px; color: var(--gold); margin-top: 18px; padding-top: 18px;
+    border-top: 1px solid var(--border-light); font-weight: 600;
+  }
+  .insufficient {
+    padding: 26px 20px; text-align: center; font-size: 13px; color: var(--text-muted);
+    background: var(--cream); border-radius: 8px; line-height: 1.7;
+  }
+
+  .geo-list { display: flex; flex-direction: column; gap: 12px; }
+  .geo-row {
+    display: grid; grid-template-columns: 1fr 100px 50px; gap: 14px; align-items: center;
+    font-size: 13px; padding: 10px 14px; background: var(--cream); border-radius: 6px;
+  }
+  .geo-row.top { background: var(--gold-bg); border-left: 3px solid var(--gold); }
+  .geo-row .city { color: var(--navy); font-weight: 600; }
+  .geo-row .state { color: var(--text-muted); font-size: 11px; margin-left: 6px; font-weight: 400; }
+  .geo-row .geo-track { height: 6px; background: white; border-radius: 3px; overflow: hidden; }
+  .geo-row .geo-fill { height: 100%; background: var(--gold); border-radius: 3px; }
+  .geo-row .geo-count { color: var(--navy); font-weight: 700; text-align: right; }
+  .geo-other {
+    padding: 10px 14px; font-size: 12px; color: var(--text-muted); font-style: italic;
+    text-align: center; border-top: 1px solid var(--border-light); margin-top: 4px; padding-top: 14px;
+  }
+
+  .pop-grid { display: flex; flex-direction: column; gap: 10px; }
+  .pop-row {
+    display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center;
+    padding: 12px 16px; background: var(--cream); border-radius: 6px;
+    font-size: 13.5px; color: var(--navy);
+  }
+  .pop-row.top { background: var(--gold-bg); border-left: 3px solid var(--gold); }
+  .pop-stats { display: flex; align-items: center; gap: 12px; }
+  .pop-count { background: white; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; color: var(--navy); }
+  .pop-pct { font-size: 11px; color: var(--text-muted); font-weight: 600; min-width: 30px; text-align: right; }
+
+  .events-section {
+    background: var(--warm-white); border-radius: var(--radius);
+    padding: 26px 28px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(51, 56, 88, 0.04);
+  }
+  .btn-publish-event {
+    background: var(--navy); color: white; padding: 10px 18px; border-radius: 6px;
+    font-size: 13px; font-weight: 600; border: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px; font-family: inherit;
+    opacity: 0.55;
+  }
+  .events-empty {
+    margin-top: 18px; padding: 30px 24px; text-align: center;
+    background: var(--cream); border-radius: 8px; font-size: 13.5px;
+    color: var(--text-muted); line-height: 1.7;
+  }
+
+  .insight-panel {
+    background: linear-gradient(135deg, var(--gold-bg) 0%, var(--cream) 100%);
+    border-left: 4px solid var(--gold); border-radius: var(--radius);
+    padding: 26px 30px; margin-bottom: 20px;
+  }
+  .insight-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .insight-text { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 18px; line-height: 1.6; color: var(--navy); max-width: 900px; }
+
+  .dash-footer {
+    font-size: 12px; color: var(--text-muted); text-align: center;
+    padding: 18px 20px; line-height: 1.7;
+  }
+  .dash-footer a { color: var(--gold); font-weight: 600; text-decoration: none; }
+
+  .state-screen { max-width: 560px; margin: 80px auto; text-align: center; }
+  .state-screen .panel { padding: 44px 40px; }
+  .state-screen h2 { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 26px; color: var(--navy); margin: 0 0 12px; }
+  .state-screen p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.7; margin: 0 0 20px; }
+  .spinner {
+    width: 28px; height: 28px; border: 3px solid var(--border);
+    border-top-color: var(--gold); border-radius: 50%; margin: 0 auto 18px;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Mobile (spec E2) ── */
+  @media (max-width: 768px) {
+    body { padding: 16px 12px; }
+    .top-nav { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
+    .brand-sub { display: none; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }   /* 2x3 grid */
+    .main-grid { grid-template-columns: 1fr; }
+    .partner-header { padding: 24px 22px; }
+    .partner-name { font-size: 26px; }
+    .partner-narrative { font-size: 16px; }
+    .insight-text { font-size: 16px; }
+    .dist-bar { grid-template-columns: 110px 1fr auto auto; gap: 8px; }
+    .chart-legend { gap: 12px; }
+  }
+  @media (max-width: 420px) {
+    .stats-row { display: flex; overflow-x: auto; padding-bottom: 6px; }
+    .stats-row .stat-card { min-width: 150px; flex-shrink: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="state-screen">
+    <div class="panel">
+      <div class="spinner"></div>
+      <p style="margin:0;">Loading your network&hellip;</p>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// Data Promise + Partner Agreement reference links (footer + privacy pill).
+var DATA_PROMISE_URL = 'https://docs.google.com/document/d/1SxjIokMOXBAJLg82RfJVxuW_4njCt1nlZe6aFs6gdJY/view';
+var AGREEMENT_URL    = 'https://docs.google.com/document/d/1fhrWpgV-BvYxuQvO12hY_fFT3AlfENIquQPHgMOZCgo/view';
+
+var PROFILE_META = {
+  ready_responder:    ['Ready Responder', '#D87B5B'],
+  faithful_witness:   ['Faithful Witness', '#5B8C7B'],
+  thoughtful_learner: ['Thoughtful Learner', '#8B7BA8'],
+  open_explorer:      ['Open Explorer', '#6B9BD8'],
+  careful_seeker:     ['Careful Seeker', '#C49A3C'],
+};
+var GIFT_LABELS = { relational: 'Relational', service: 'Service', learning: 'Learning & teaching', leading: 'Leading', advocacy: 'Advocacy' };
+var POPULATION_LABELS = {
+  mixed_status_families: 'Mixed-status families',
+  asylum_refugees: 'Asylum seekers & refugees',
+  daca_undocumented_young_adults: 'DACA recipients',
+  day_laborers_workers: 'Day laborers',
+  immigrant_churches_pastors: 'Immigrant churches & pastors',
+  known_neighbors: 'Neighbors they already know',
+  immigrant_children_youth: 'Immigrant children & youth',
+  detention_deportation: 'People in detention',
+  other: 'Other populations',
+};
+var INSUFFICIENT_MSG = 'Insufficient data to display. This metric will appear when at least 10 participants are in this category.';
+
+var DATA = null;
+var SERIES = null;
+var currentRange = '12w';
+var tableMode = false;
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function initialsOf(name) {
+  var parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return '?';
+  return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
+}
+
+// ─── Boot ───────────────────────────────────────────────────────────────────
+function boot() {
+  fetch('/api/partner/dashboard', { credentials: 'same-origin' })
+    .then(function (r) {
+      if (r.status === 401) { window.location.replace('/partner'); throw new Error('unauthenticated'); }
+      return r.json();
+    })
+    .then(function (d) {
+      DATA = d;
+      return fetch('/api/partner/growth-series?range=' + currentRange, { credentials: 'same-origin' })
+        .then(function (r) { return r.json(); });
+    })
+    .then(function (s) { SERIES = s; render(); })
+    .catch(function (e) { if (e.message !== 'unauthenticated') renderError(); });
+}
+function renderError() {
+  document.getElementById('app').innerHTML =
+    '<div class="state-screen"><div class="panel"><h2>Something went wrong</h2>' +
+    '<p>We couldn’t load your dashboard just now. Please try again in a moment.</p>' +
+    '<button class="btn-publish-event" style="opacity:1;" onclick="boot()">Try again</button></div></div>';
+}
+
+// ─── Render ─────────────────────────────────────────────────────────────────
+function render() {
+  var d = DATA;
+  var html = '<div class="page">';
+
+  // Top nav
+  html += '<div class="top-nav">'
+    + '<div class="nav-brand"><div class="brand-mark">FAITHFUL WITNESS</div>'
+    + '<div class="brand-divider"></div><div class="brand-sub">Partner Network Dashboard</div></div>'
+    + '<div class="nav-actions">'
+    +   '<a href="' + DATA_PROMISE_URL + '" target="_blank" rel="noopener">Data Promise</a>'
+    +   '<a href="' + AGREEMENT_URL + '" target="_blank" rel="noopener">Partner agreement</a>'
+    +   '<button class="user" id="user-pill" onclick="toggleUserMenu(event)" aria-haspopup="true">'
+    +     '<div class="avatar">' + esc(initialsOf(d.viewer.full_name)) + '</div>'
+    +     '<span>' + esc(d.viewer.full_name) + ' &middot; ' + esc(d.partner.name) + '</span>'
+    +   '</button>'
+    + '</div></div>';
+
+  // Retired partnership banner (D5)
+  if (d.partner.is_active === false) {
+    html += '<div class="retired-banner">This partnership is retired. The data below is the historical record; '
+      + 'no new participants are being attributed to this network.</div>';
+  }
+
+  // Partner header
+  html += '<div class="partner-header">'
+    + '<div class="partner-label-row"><div class="partner-label">YOU\'RE VIEWING</div>'
+    + '<a class="privacy-pill" href="' + DATA_PROMISE_URL + '" target="_blank" rel="noopener" title="Read the Data Promise">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
+    + 'Aggregate data only &middot; No individual identities</a></div>'
+    + '<div class="partner-name">' + esc(d.partner.name) + ' — Network</div>'
+    + '<div class="partner-fullname">' + esc(d.partner.full_name || d.partner.name)
+    + ' &nbsp;&middot;&nbsp; Network attribution: <code>' + esc(d.partner.slug) + '</code></div>'
+    + '<div class="partner-narrative">' + esc(d.narrative) + '</div>'
+    + '</div>';
+
+  // Stats row (6 cards; In Formation featured. active_teams rides as the
+  // Teams Formed detail line — the mockup has six cards, the API has seven
+  // always-on numbers).
+  var pctOfFormation = d.in_formation > 0 ? Math.round(100 * d.completed_journey / d.in_formation) : 0;
+  html += '<div class="stats-row">'
+    + statCard('IN FORMATION', d.in_formation, 'Completed Stage 1 — your cohort', true)
+    + statCard('NETWORK SIZE', d.network_size, 'All-time participants')
+    + statCard('COMPLETED JOURNEY', d.completed_journey, d.in_formation > 0 ? pctOfFormation + '% of formation' : '&nbsp;')
+    + statCard('TEAMS FORMED', d.teams_formed, d.active_teams + ' active in the last 90 days')
+    + statCard('TEAMS SPARKED', d.teams_sparked, 'Teams formed by invited members')
+    + statCard('SEED PARTICIPANTS', d.seed_participants, 'Direct entries via ' + esc(d.partner.slug) + ' link')
+    + '</div>';
+
+  // Growth chart
+  html += '<div class="panel growth-section">'
+    + '<div class="panel-header"><div>'
+    +   '<div class="panel-title">Growth across your network</div>'
+    +   '<div class="panel-sub">Participants entering the Discernment Experience through your attribution.</div></div>'
+    +   '<div class="panel-filter" role="tablist">'
+    +     filterBtn('30d', '30d') + filterBtn('90d', '90d') + filterBtn('12w', '12 weeks') + filterBtn('all', 'All')
+    +   '</div>'
+    + '</div>'
+    + '<div class="chart-container" id="chart-container">' + (tableMode ? renderChartTable() : renderChart()) + '</div>'
+    + '<div class="chart-legend">'
+    +   '<div class="legend-item"><div class="legend-line" style="background:#C49A3C;"></div>Network size (started)</div>'
+    +   '<div class="legend-item"><div class="legend-line" style="background:#333858;"></div>In formation (completed Stage 1)</div>'
+    +   '<div class="legend-item"><div class="legend-line" style="background:#5B8C7B;"></div>Completed the journey (Stage 3)</div>'
+    +   '<button class="btn-table-toggle" onclick="toggleTable()" aria-pressed="' + tableMode + '">'
+    +     (tableMode ? 'Show as chart' : 'Show data as table') + '</button>'
+    + '</div></div>';
+
+  // Distributions
+  html += '<div class="main-grid">'
+    + distPanel('Profile distribution',
+        'How participants in your network are distributed across the five profiles.'
+          + (d.profile_distribution ? ' Of ' + d.in_formation + ' in formation.' : ''),
+        d.profile_distribution, function (row) {
+          var meta = PROFILE_META[row.profile] || [row.profile, '#9a9ab4'];
+          return { label: meta[0], color: meta[1], count: row.count, pct: row.percentage };
+        }, profileObservation(d))
+    + distPanel('Gifting distribution',
+        'What participants in your network bring. Each person selected one or more in Stage 1.',
+        d.gifting_distribution, function (row) {
+          return { label: GIFT_LABELS[row.gift] || row.gift, color: 'var(--gold)', count: row.count, pct: row.percentage };
+        }, giftingObservation(d))
+    + '</div>';
+
+  // Geo + populations
+  html += '<div class="main-grid">' + geoPanel(d) + popPanel(d) + '</div>';
+
+  // Events (Phase 1 stub)
+  html += '<div class="events-section">'
+    + '<div class="panel-header"><div>'
+    +   '<div class="panel-title">Events you’ve published to your network</div>'
+    +   '<div class="panel-sub">Aggregate engagement. Individual RSVP identities are never visible. See the Partner Agreement for full data terms.</div></div>'
+    + (d.viewer.role === 'admin'
+      ? '<button class="btn-publish-event" disabled title="Event publishing arrives in Phase 2">'
+        + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>'
+        + ' Publish an event</button>'
+      : '')
+    + '</div>'
+    + '<div class="events-empty">No events yet. Event publishing for partners arrives in the next phase — '
+    + 'you’ll be able to publish events that surface on the team dashboards of people in your network.</div>'
+    + '</div>';
+
+  // Insight panel
+  html += '<div class="insight-panel">'
+    + '<div class="insight-label">A note on what your data is showing</div>'
+    + '<div class="insight-text">' + esc(d.insight) + '</div>'
+    + '</div>';
+
+  // Footer
+  html += '<div class="dash-footer">Every number on this page is governed by the '
+    + '<a href="' + DATA_PROMISE_URL + '" target="_blank" rel="noopener">Data Promise</a> and the '
+    + '<a href="' + AGREEMENT_URL + '" target="_blank" rel="noopener">Partner Agreement</a>. '
+    + 'Aggregate-by-design: no individual identities, responses, or reflections are ever shown.</div>';
+
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function statCard(label, value, detail, featured) {
+  return '<div class="stat-card' + (featured ? ' featured' : '') + '">'
+    + '<div class="stat-label">' + label + '</div>'
+    + '<div class="stat-value">' + value + '</div>'
+    + '<div class="stat-detail">' + detail + '</div></div>';
+}
+function filterBtn(key, label) {
+  return '<button class="filter-btn' + (currentRange === key ? ' active' : '') + '" role="tab" '
+    + 'aria-selected="' + (currentRange === key) + '" onclick="setRange(\'' + key + '\')">' + label + '</button>';
+}
+
+// ─── Distribution panels with insufficient-data state (E1) ─────────────────
+function distPanel(title, sub, rows, mapper, observation) {
+  var html = '<div class="panel"><div class="panel-title">' + title + '</div>'
+    + '<div class="panel-sub">' + sub + '</div>';
+  if (!rows) {
+    return html + '<div class="insufficient">' + INSUFFICIENT_MSG + '</div></div>';
+  }
+  var max = rows.reduce(function (m, r) { return Math.max(m, r.count); }, 1);
+  html += '<div class="dist-bars">';
+  rows.forEach(function (r) {
+    var m = mapper(r);
+    html += '<div class="dist-bar"><span class="name">' + esc(m.label) + '</span>'
+      + '<div class="track"><div class="fill" style="width:' + Math.round(100 * m.count / max) + '%;background:' + m.color + ';"></div></div>'
+      + '<span class="count">' + m.count + '</span><span class="pct">' + m.pct + '%</span></div>';
+  });
+  html += '</div>';
+  if (observation) html += '<div class="observation">✦ ' + esc(observation) + '</div>';
+  return html + '</div>';
+}
+
+function profileObservation(d) {
+  if (!d.profile_distribution || d.profile_distribution.length < 2) return null;
+  var top = d.profile_distribution[0];
+  var second = d.profile_distribution[1];
+  var n1 = (PROFILE_META[top.profile] || [top.profile])[0];
+  var n2 = (PROFILE_META[second.profile] || [second.profile])[0];
+  if (top.percentage + second.percentage >= 50) {
+    return 'Your network skews toward ' + n1 + 's and ' + n2 + 's.';
+  }
+  return 'A balanced spread across the five profiles — no single posture dominates.';
+}
+function giftingObservation(d) {
+  if (!d.gifting_distribution || !d.gifting_distribution.length) return null;
+  var top = d.gifting_distribution.slice(0, 2).map(function (g) { return (GIFT_LABELS[g.gift] || g.gift).toLowerCase(); });
+  return 'Strong ' + top.join(' and ') + ' capacity across the network.';
+}
+
+// ─── Geography ──────────────────────────────────────────────────────────────
+function geoPanel(d) {
+  var html = '<div class="panel"><div class="panel-title">Where your network is</div>'
+    + '<div class="panel-sub">Distribution across metropolitan areas. Metro level only — never addresses or ZIP codes.</div>';
+  var g = d.geographic_distribution;
+  if (!g) return html + '<div class="insufficient">' + INSUFFICIENT_MSG + '</div></div>';
+  var max = g.msa.length ? g.msa[0].count : 1;
+  html += '<div class="geo-list">';
+  g.msa.forEach(function (m, i) {
+    html += '<div class="geo-row' + (i === 0 ? ' top' : '') + '">'
+      + '<div><span class="city">' + esc(m.city) + '</span><span class="state">' + esc(m.state) + '</span></div>'
+      + '<div class="geo-track"><div class="geo-fill" style="width:' + Math.round(100 * m.count / max) + '%;"></div></div>'
+      + '<div class="geo-count">' + m.count + '</div></div>';
+  });
+  html += '</div>';
+  if (g.other_msas > 0) {
+    html += '<div class="geo-other">+ ' + g.other_msas + ' participant' + (g.other_msas === 1 ? '' : 's')
+      + ' across other MSAs</div>';
+  }
+  return html + '</div>';
+}
+
+// ─── Populations ────────────────────────────────────────────────────────────
+function popPanel(d) {
+  var html = '<div class="panel"><div class="panel-title">Who your network keeps returning to</div>'
+    + '<div class="panel-sub">From Stage 3 discernment. The populations participants in your network feel drawn toward.</div>';
+  if (!d.population_focus) return html + '<div class="insufficient">' + INSUFFICIENT_MSG + '</div></div>';
+  html += '<div class="pop-grid">';
+  d.population_focus.forEach(function (p, i) {
+    html += '<div class="pop-row' + (i === 0 ? ' top' : '') + '">'
+      + esc(POPULATION_LABELS[p.population] || p.population)
+      + '<div class="pop-stats"><span class="pop-pct">' + p.percentage + '%</span>'
+      + '<span class="pop-count">' + p.count + '</span></div></div>';
+  });
+  return html + '</div></div>';
+}
+
+// ─── Growth chart (dynamic SVG, mockup geometry) ────────────────────────────
+function renderChart() {
+  var pts = (SERIES && SERIES.points) || [];
+  if (pts.length < 2) return '<div class="insufficient">Growth data will appear as participants come through your link.</div>';
+
+  var W = 1000, H = 280, L = 60, R = 980, TOP = 30, BOT = 240;
+  var maxVal = Math.max(5, pts.reduce(function (m, p) { return Math.max(m, p.network_size); }, 0));
+  var niceMax = Math.ceil(maxVal / 4) * 4;
+  var x = function (i) { return L + (R - L) * (pts.length === 1 ? 1 : i / (pts.length - 1)); };
+  var y = function (v) { return BOT - (BOT - TOP) * (v / niceMax); };
+  var line = function (key) {
+    return pts.map(function (p, i) { return (i ? 'L' : 'M') + ' ' + x(i).toFixed(1) + ',' + y(p[key]).toFixed(1); }).join(' ');
+  };
+
+  var grid = '', ylabels = '';
+  for (var gi = 0; gi <= 4; gi++) {
+    var gy = TOP + (BOT - TOP) * gi / 4;
+    grid += '<line x1="' + L + '" y1="' + gy + '" x2="' + R + '" y2="' + gy + '"/>';
+    ylabels += '<text x="' + (L - 20) + '" y="' + (gy + 4) + '" text-anchor="end">' + Math.round(niceMax * (4 - gi) / 4) + '</text>';
+  }
+  var xlabels = '';
+  var step = Math.max(1, Math.floor(pts.length / 6));
+  for (var xi = 0; xi < pts.length; xi += step) {
+    var dt = new Date(pts[xi].date);
+    xlabels += '<text x="' + x(xi).toFixed(1) + '" y="262" text-anchor="middle">'
+      + dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + '</text>';
+  }
+  var last = pts[pts.length - 1];
+  var area = line('network_size') + ' L ' + R + ',' + BOT + ' L ' + L + ',' + BOT + ' Z';
+
+  return '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto;" xmlns="http://www.w3.org/2000/svg" role="img" '
+    + 'aria-label="Growth chart. Use the show-data-as-table button for the accessible version.">'
+    + '<g stroke="#f0edf8" stroke-width="1">' + grid + '</g>'
+    + '<g fill="#7a7a9a" font-family="Plus Jakarta Sans" font-size="10" font-weight="600">' + ylabels + '</g>'
+    + '<path d="' + area + '" fill="url(#gradGold)" opacity="0.15"/>'
+    + '<path d="' + line('network_size') + '" fill="none" stroke="#C49A3C" stroke-width="2.5"/>'
+    + '<path d="' + line('in_formation') + '" fill="none" stroke="#333858" stroke-width="2.5"/>'
+    + '<path d="' + line('completed_journey') + '" fill="none" stroke="#5B8C7B" stroke-width="2.5"/>'
+    + '<circle cx="' + x(pts.length - 1) + '" cy="' + y(last.network_size) + '" r="4" fill="#C49A3C" stroke="white" stroke-width="2"/>'
+    + '<g font-family="Plus Jakarta Sans">'
+    +   '<rect x="' + (R - 88) + '" y="' + Math.max(8, y(last.network_size) - 34) + '" width="80" height="22" rx="11" fill="#C49A3C"/>'
+    +   '<text x="' + (R - 48) + '" y="' + (Math.max(8, y(last.network_size) - 34) + 15) + '" text-anchor="middle" fill="white" font-size="12" font-weight="700">' + last.network_size + '</text>'
+    + '</g>'
+    + '<g fill="#7a7a9a" font-family="Plus Jakarta Sans" font-size="10" font-weight="600">' + xlabels + '</g>'
+    + '<defs><linearGradient id="gradGold" x1="0" x2="0" y1="0" y2="1">'
+    + '<stop offset="0%" stop-color="#C49A3C"/><stop offset="100%" stop-color="#C49A3C" stop-opacity="0"/>'
+    + '</linearGradient></defs></svg>';
+}
+
+// E3: accessible tabular alternative.
+function renderChartTable() {
+  var pts = (SERIES && SERIES.points) || [];
+  var html = '<table class="chart-table"><caption style="text-align:left;font-size:12px;color:var(--text-muted);margin-bottom:8px;">'
+    + 'Growth across your network, ' + esc(SERIES.range) + ' (' + esc(SERIES.step) + 'ly)</caption>'
+    + '<thead><tr><th scope="col">Date</th><th scope="col">Network size</th>'
+    + '<th scope="col">In formation</th><th scope="col">Completed journey</th></tr></thead><tbody>';
+  pts.forEach(function (p) {
+    html += '<tr><td>' + esc(p.date) + '</td><td>' + p.network_size + '</td><td>'
+      + p.in_formation + '</td><td>' + p.completed_journey + '</td></tr>';
+  });
+  return html + '</tbody></table>';
+}
+
+function setRange(range) {
+  if (range === currentRange) return;
+  currentRange = range;
+  var container = document.getElementById('chart-container');
+  if (container) container.classList.add('loading');
+  fetch('/api/partner/growth-series?range=' + range, { credentials: 'same-origin' })
+    .then(function (r) {
+      if (r.status === 401) { window.location.replace('/partner'); throw new Error('unauthenticated'); }
+      return r.json();
+    })
+    .then(function (s) { SERIES = s; render(); })
+    .catch(function () { render(); });
+}
+function toggleTable() { tableMode = !tableMode; render(); }
+
+// ─── User menu / logout (E1) ────────────────────────────────────────────────
+function toggleUserMenu(evt) {
+  evt.stopPropagation();
+  var existing = document.getElementById('user-menu');
+  if (existing) { existing.remove(); return; }
+  var pill = document.getElementById('user-pill');
+  pill.insertAdjacentHTML('beforeend',
+    '<div class="user-menu" id="user-menu"><button onclick="logout()">Log out</button></div>');
+}
+document.addEventListener('click', function () {
+  var m = document.getElementById('user-menu');
+  if (m) m.remove();
+});
+function logout() {
+  fetch('/api/partner/logout', { method: 'POST', credentials: 'same-origin' })
+    .finally(function () { window.location.replace('/partner'); });
+}
+
+boot();
+</script>
+
+</body>
+</html>

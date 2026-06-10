@@ -62,40 +62,69 @@ function sub(pid, name, opts) {
     specific_neighbor: opts.neighbors || [],
     specific_neighbor_other: null,
     invited_by: opts.invited_by || null,
+    referral_source: opts.referral_source || null,
+    zip: opts.zip || null,
     team_code: null, team_name: opts.team_name || null, team_role: opts.team_role || null,
     sense_of_calling: opts.calling || null,
     journal_share_team: !!opts.share,
+    // Sensitive fields exist in the table; partner queries must never read
+    // them. Present in fixtures so a leak would be caught by tests.
+    burning_question: 'FIXTURE-SENSITIVE-BQ', cant_shake_text: 'FIXTURE-SENSITIVE-CS',
+    journal_entry: 'FIXTURE-SENSITIVE-JE', impact_proximity: 2,
   }, {});
 }
 
+// v6 partner fixtures: Sarah's whole tree is attributed to crossroads-es
+// (root referral_source). A separate 3-person nalec network exercises the
+// < 10 threshold. The outsider stays unattributed.
 const DB = {
+  partners: [
+    { id: 'p1p1p1p1-0000-4000-8000-000000000001', slug: 'ccda',          organization_name: 'CCDA', full_legal_name: 'Christian Community Development Association', is_active: true,  onboarded_at: '2026-03-15T00:00:00Z', retired_at: null, notes: null },
+    { id: 'p1p1p1p1-0000-4000-8000-000000000002', slug: 'nalec',         organization_name: 'NaLEC', full_legal_name: 'National Latino Evangelical Coalition', is_active: true,  onboarded_at: '2026-05-20T00:00:00Z', retired_at: null, notes: null },
+    { id: 'p1p1p1p1-0000-4000-8000-000000000003', slug: 'worldrelief',   organization_name: 'World Relief', full_legal_name: 'World Relief', is_active: true,  onboarded_at: '2026-05-01T00:00:00Z', retired_at: null, notes: null },
+    { id: 'p1p1p1p1-0000-4000-8000-000000000004', slug: 'undivided',     organization_name: 'Undivided', full_legal_name: 'Undivided', is_active: false, onboarded_at: '2026-04-01T00:00:00Z', retired_at: '2026-06-01T00:00:00Z', notes: 'retired (fixture)' },
+    { id: 'p1p1p1p1-0000-4000-8000-000000000005', slug: 'crossroads-es', organization_name: 'Crossroads en Español', full_legal_name: 'Crossroads en Español, Cincinnati', is_active: true, onboarded_at: '2026-03-18T00:00:00Z', retired_at: null, notes: null },
+    { id: 'p1p1p1p1-0000-4000-8000-000000000006', slug: 'internal',      organization_name: 'Internal / staff', full_legal_name: 'Faithful Witness platform staff', is_active: true, onboarded_at: '2026-03-01T00:00:00Z', retired_at: null, notes: null },
+  ],
+  partner_users: [
+    { id: 'u1u1u1u1-0000-4000-8000-000000000001', partner_id: 'p1p1p1p1-0000-4000-8000-000000000005', email: 'victor.martinez@crossroads.net', full_name: 'Victor Martinez', role: 'admin', is_active: true, invited_at: '2026-06-01T00:00:00Z', last_login_at: null },
+    { id: 'u1u1u1u1-0000-4000-8000-000000000002', partner_id: 'p1p1p1p1-0000-4000-8000-000000000002', email: 'staff-nalec@faithfulwitness.us', full_name: 'Staff NaLEC View', role: 'viewer', is_active: true, invited_at: '2026-06-01T00:00:00Z', last_login_at: null },
+    { id: 'u1u1u1u1-0000-4000-8000-000000000003', partner_id: 'p1p1p1p1-0000-4000-8000-000000000001', email: 'inactive@faithfulwitness.us', full_name: 'Inactive User', role: 'viewer', is_active: false, invited_at: '2026-06-01T00:00:00Z', last_login_at: null },
+  ],
+  partner_sessions: [],
+  partner_access_log: [],
   submissions: [
     sub(P.sarah, 'Sarah Martinez', { profile: 'ready_responder', gifting: ['leading','advocacy'],
       neighbors: ['mixed_status_families'], team_name: 'Westside Welcome Team',
+      referral_source: 'crossroads-es', zip: '45202',
       calling: 'I am being asked to organize the welcome our church keeps talking about.', share: false }),
     sub(P.james, 'James Reyes', { profile: 'faithful_witness', gifting: ['leading','learning'],
-      neighbors: ['mixed_status_families','immigrant_churches_pastors'], invited_by: P.sarah, team_role: 'co-leader',
+      neighbors: ['mixed_status_families','immigrant_churches_pastors'], invited_by: P.sarah, team_role: 'co-leader', zip: '45205',
       calling: "I think we're being asked to be the bridge between our church and the families on our block.", share: true }),
     sub(P.mike, 'Mike Chen', { profile: 'thoughtful_learner', gifting: ['learning','relational'],
-      neighbors: ['mixed_status_families','immigrant_children_youth'], invited_by: P.sarah,
+      neighbors: ['mixed_status_families','immigrant_children_youth'], invited_by: P.sarah, zip: '45219',
       calling: 'I want to understand what real welcome looks like, not just speak about it.', share: true }),
     sub(P.rebecca, 'Rebecca Liu', { profile: 'careful_seeker', gifting: ['service','relational'],
-      neighbors: ['immigrant_children_youth'], invited_by: P.sarah,
+      neighbors: ['immigrant_children_youth'], invited_by: P.sarah, zip: '41011',
       calling: "I keep coming back to the kids in our schools. I don't have a plan yet, but I can't look away.", share: true }),
     sub(P.lisa, 'Lisa Park', { profile: 'open_explorer', gifting: ['relational','service'],
-      neighbors: ['immigrant_churches_pastors'], invited_by: P.sarah, s3c: null,
+      neighbors: ['immigrant_churches_pastors'], invited_by: P.sarah, s3c: null, zip: '45236',
       calling: 'Something is stirring but I cannot name it yet.', share: false }),   // NOT shared → must not appear
     // level 2
-    sub(P.john,   'John Howard',  { profile: 'open_explorer',      invited_by: P.mike }),
-    sub(P.emily,  'Emily Moss',   { profile: 'ready_responder',    invited_by: P.mike }),
-    sub(P.marcus, 'Marcus Kim',   { profile: 'thoughtful_learner', invited_by: P.mike }),
-    sub(P.maria,  'Maria Alvarez',{ profile: 'faithful_witness',   invited_by: P.james }),
-    sub(P.david,  'David Cho',    { profile: 'open_explorer',      invited_by: P.james }),
+    sub(P.john,   'John Howard',  { profile: 'open_explorer',      invited_by: P.mike,  gifting: ['relational'], neighbors: ['mixed_status_families'], zip: '45209' }),
+    sub(P.emily,  'Emily Moss',   { profile: 'ready_responder',    invited_by: P.mike,  gifting: ['advocacy'],   neighbors: ['mixed_status_families','immigrant_children_youth'], zip: '45040' }),
+    sub(P.marcus, 'Marcus Kim',   { profile: 'thoughtful_learner', invited_by: P.mike,  gifting: ['learning'],   neighbors: ['immigrant_children_youth'], zip: '43215' }),
+    sub(P.maria,  'Maria Alvarez',{ profile: 'faithful_witness',   invited_by: P.james, gifting: ['relational','service'], neighbors: ['mixed_status_families','immigrant_children_youth'], zip: '45011' }),
+    sub(P.david,  'David Cho',    { profile: 'open_explorer',      invited_by: P.james, gifting: ['service'],    neighbors: ['mixed_status_families'], zip: '60614' }),
     // level 3
-    sub(P.nina, 'Nina Patel',  { profile: 'thoughtful_learner', invited_by: P.john }),
-    sub(P.omar, 'Omar Reyes',  { profile: 'ready_responder',    invited_by: P.john }),
-    // outsider: no invites, no inviter
+    sub(P.nina, 'Nina Patel',  { profile: 'thoughtful_learner', invited_by: P.john, gifting: ['learning','relational'], neighbors: ['immigrant_children_youth'], zip: '45227' }),
+    sub(P.omar, 'Omar Reyes',  { profile: 'ready_responder',    invited_by: P.john, gifting: ['advocacy'], neighbors: ['mixed_status_families'], zip: '45014' }),
+    // outsider: no invites, no inviter, NO partner attribution
     sub(P.outsider, 'Olivia Outsider', { profile: 'careful_seeker' }),
+    // nalec mini-network (3 people) — exercises the < 10 threshold
+    sub('eeeeeee1-0000-4000-8000-00000000000e', 'Nadia Flores', { profile: 'ready_responder', referral_source: 'nalec', zip: '10025', neighbors: ['asylum_refugees'] }),
+    sub('eeeeeee2-0000-4000-8000-00000000000e', 'Pablo Ortiz',  { profile: 'open_explorer',   invited_by: 'eeeeeee1-0000-4000-8000-00000000000e', zip: '10456' }),
+    sub('eeeeeee3-0000-4000-8000-00000000000e', 'Carmen Soto',  { profile: 'careful_seeker',  invited_by: 'eeeeeee1-0000-4000-8000-00000000000e', s3c: null }),
   ],
   team_events: [],
   team_event_rsvps: [],
@@ -166,6 +195,46 @@ function applyQuery(rows, qs) {
   return out;
 }
 
+// Honor the select= projection like PostgREST: fields not requested are not
+// returned. This makes "exclusion by design" (Data Promise) actually testable.
+function project(rows, qs) {
+  const select = new URLSearchParams(qs).get('select');
+  if (!select || select === '*') return rows;
+  const cols = select.split(',').map((s) => s.trim()).filter(Boolean);
+  return rows.map((r) => {
+    const o = {};
+    for (const c of cols) if (c in r) o[c] = r[c];
+    return o;
+  });
+}
+
+// fw_network_members RPC emulation: latest row per pid; roots with the slug;
+// BFS down the invited_by chain (mirrors the SQL in v6 migration).
+function rpcNetworkMembers(slug) {
+  const latest = new Map();
+  for (const r of DB.submissions) {
+    if (!r.participant_id) continue;
+    const prev = latest.get(r.participant_id);
+    if (!prev || String(r.created_at) > String(prev.created_at)) latest.set(r.participant_id, r);
+  }
+  const members = [];
+  const queue = [];
+  for (const r of latest.values()) {
+    if (!r.invited_by && r.referral_source === slug) queue.push(r.participant_id);
+  }
+  const seen = new Set(queue);
+  while (queue.length) {
+    const pid = queue.shift();
+    members.push({ member_pid: pid });
+    for (const r of latest.values()) {
+      if (r.invited_by === pid && !seen.has(r.participant_id)) {
+        seen.add(r.participant_id); queue.push(r.participant_id);
+      }
+    }
+  }
+  return members;
+}
+
 let emailCounter = 0;
 const realFetch = global.fetch;
 global.fetch = async function mockFetch(url, opts) {
@@ -175,12 +244,28 @@ global.fetch = async function mockFetch(url, opts) {
   // Supabase
   if (url.startsWith(process.env.SUPABASE_URL)) {
     const u = new URL(url);
+
+    // RPC
+    if (u.pathname.startsWith('/rest/v1/rpc/')) {
+      const fn = u.pathname.replace('/rest/v1/rpc/', '');
+      const args = JSON.parse(opts.body || '{}');
+      if (fn === 'fw_network_members') {
+        return new Response(JSON.stringify(rpcNetworkMembers(args.p_slug)), { status: 200 });
+      }
+      return new Response(JSON.stringify({ message: 'no rpc ' + fn }), { status: 404 });
+    }
+
     const table = u.pathname.replace('/rest/v1/', '');
     const rows = DB[table];
     if (!rows) return new Response(JSON.stringify({ message: 'no table ' + table }), { status: 404 });
 
     if (!opts.method || opts.method === 'GET') {
-      return new Response(JSON.stringify(applyQuery(rows, u.search.slice(1))), { status: 200 });
+      return new Response(JSON.stringify(project(applyQuery(rows, u.search.slice(1)), u.search.slice(1))), { status: 200 });
+    }
+    if (opts.method === 'DELETE') {
+      const matched = applyQuery(rows, u.search.slice(1));
+      for (const m of matched) { const i = rows.indexOf(m); if (i >= 0) rows.splice(i, 1); }
+      return new Response('', { status: 204 });
     }
     if (opts.method === 'POST') {
       const body = JSON.parse(opts.body);
@@ -212,7 +297,9 @@ global.fetch = async function mockFetch(url, opts) {
     const body = JSON.parse(opts.body);
     emailCounter++;
     const safe = body.subject.replace(/[^a-z0-9]+/gi, '_').slice(0, 60);
-    const file = path.join(OUTBOX, String(emailCounter).padStart(2, '0') + '-' + safe + '.html');
+    // Timestamp prefix: strictly increasing across server boots, so "newest
+    // by filename" in the tests is always the genuinely newest email.
+    const file = path.join(OUTBOX, Date.now() + '-' + String(emailCounter).padStart(2, '0') + '-' + safe + '.html');
     fs.writeFileSync(file, '<!-- TO: ' + body.to.join(',') + ' -->\n' + body.html);
     console.log('  ✉  outbox:', path.basename(file), '→', body.to.join(','));
     return new Response(JSON.stringify({ id: 'mock-email-' + emailCounter }), { status: 200 });
@@ -230,9 +317,10 @@ global.fetch = async function mockFetch(url, opts) {
 };
 
 // ─── Load the real handlers (AFTER the fetch mock) ──────────────────────────
-const teamHandler = require(path.join(ROOT, 'api/team/[...path].js'));
-const ogHandler   = require(path.join(ROOT, 'api/og-fetch.js'));
-const cronHandler = require(path.join(ROOT, 'api/send-event-reminders.js'));
+const teamHandler    = require(path.join(ROOT, 'api/team/[...path].js'));
+const ogHandler      = require(path.join(ROOT, 'api/og-fetch.js'));
+const cronHandler    = require(path.join(ROOT, 'api/send-event-reminders.js'));
+const partnerHandler = require(path.join(ROOT, 'api/partner/[...path].js'));
 
 // ─── Minimal Vercel req/res shims ───────────────────────────────────────────
 function makeRes(res) {
@@ -266,6 +354,25 @@ const server = http.createServer(async (req, res) => {
     if (u.pathname === '/' || u.pathname === '/welcome-back') {
       res.setHeader('Content-Type', 'text/html');
       return res.end('<body style="font-family:sans-serif;padding:40px;"><h2>(' + u.pathname + ' — redirect target reached)</h2></body>');
+    }
+    if (u.pathname === '/partner' || u.pathname === '/partner.html') {
+      res.setHeader('Content-Type', 'text/html');
+      return res.end(fs.readFileSync(path.join(ROOT, 'partner.html')));
+    }
+    if (u.pathname === '/partner/dashboard') {
+      const f = path.join(ROOT, 'partner-dashboard.html');
+      res.setHeader('Content-Type', 'text/html');
+      if (fs.existsSync(f)) return res.end(fs.readFileSync(f));
+      return res.end('<body style="font-family:sans-serif;padding:40px;">partner-dashboard.html not built yet (waiting on mockup)</body>');
+    }
+    if (u.pathname === '/partner/login') {
+      const body = await collectBody(req);
+      return partnerHandler({ method: req.method, query: Object.assign({ path: ['login'] }, query), headers: req.headers, body }, makeRes(res));
+    }
+    if (u.pathname.startsWith('/api/partner/')) {
+      query.path = u.pathname.replace('/api/partner/', '').split('/').filter(Boolean);
+      const body = await collectBody(req);
+      return partnerHandler({ method: req.method, query, headers: req.headers, body }, makeRes(res));
     }
     if (u.pathname.startsWith('/api/team/')) {
       query.path = u.pathname.replace('/api/team/', '').split('/').filter(Boolean);
