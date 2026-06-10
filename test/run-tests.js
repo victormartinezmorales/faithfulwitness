@@ -151,7 +151,7 @@ async function call(method, path, pid, body) {
   console.log('\n── Cron (Part D) ──');
   raw = await fetch(BASE + '/api/send-event-reminders');
   let cron = await raw.json();
-  check('cron finds the 24h-out event', cron.summary.events_found === 1);
+  check('cron finds the event inside the 24-48h window', cron.summary.events_found === 1);
   check("reminder sent to all except 'cant' (4 of 5)", cron.summary.succeeded === 4);
   raw = await fetch(BASE + '/api/send-event-reminders');
   cron = await raw.json();

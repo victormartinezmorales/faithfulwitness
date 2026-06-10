@@ -6,14 +6,19 @@
 // untouched; this is a SECOND cron entry in vercel.json, every 4 hours.
 //
 // Selects team_events where:
-//   * event_datetime between 23 and 25 hours from now
+//   * event_datetime between 24 and 48 hours from now
 //   * reminder_sent_at IS NULL
 //   * is_removed = false
 // and sends the C2 reminder email to team members who RSVP'd 'going' or
 // 'maybe' OR have not RSVP'd at all. NOT sent to 'cant'. Updates
-// reminder_sent_at on success — re-runs are idempotent, and the 4-hour
-// cadence with a 2-hour-wide window guarantees exactly one reminder per
-// event even if a tick is delayed or missed.
+// reminder_sent_at on success — re-runs are idempotent.
+//
+// CADENCE NOTE: originally specced every 4 hours with a 23-25h window, but
+// Vercel Hobby limits crons to daily. Daily at 12:00 UTC with a 24-48h
+// lookahead still delivers exactly one reminder per event (the
+// reminder_sent_at check dedupes), arriving "the day before" rather than
+// precisely 24h out. If the project moves to Pro, restore 0 */4 * * * and
+// the 23-25h window for tighter timing.
 //
 // Env vars: SUPABASE_URL, SUPABASE_SERVICE_KEY, RESEND_API_KEY,
 // CRON_SECRET (optional bearer gate, same as the Stage 3 cron).
@@ -40,8 +45,8 @@ async function sendViaResend(to, subject, html) {
 }
 
 async function queryDueEvents(now) {
-  const from = new Date(now.getTime() + 23 * 3600 * 1000).toISOString();
-  const to   = new Date(now.getTime() + 25 * 3600 * 1000).toISOString();
+  const from = new Date(now.getTime() + 24 * 3600 * 1000).toISOString();
+  const to   = new Date(now.getTime() + 48 * 3600 * 1000).toISOString();
   return sbGet('team_events',
     'select=id,team_leader_id,added_by,title,description,event_datetime,location,' +
     'source_url,source_platform,og_image_url' +

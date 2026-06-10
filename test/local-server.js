@@ -130,8 +130,8 @@ const DB = {
   team_event_rsvps: [],
 };
 
-// Seed one event ~24h out (for the cron test) and one further out.
-const in24h = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
+// Seed one event ~36h out (inside the daily cron's 24-48h window) and one further out.
+const in24h = new Date(Date.now() + 36 * 3600 * 1000).toISOString();
 const in9d  = new Date(Date.now() + 9 * 86400000).toISOString();
 DB.team_events.push({
   id: 'e1e1e1e1-e1e1-4e1e-8e1e-e1e1e1e1e1e1', team_leader_id: P.sarah, added_by: P.james,
