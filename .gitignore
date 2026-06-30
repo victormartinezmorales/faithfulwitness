@@ -12,6 +12,13 @@
 Reshape and Funder-Readiness Memo.md
 Local Git and Vercel Workflow.md
 
+# Design system build artifacts (regenerated per sync)
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+
 # Build artifacts that don't belong in source control
 api/*.zip
 

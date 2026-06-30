@@ -1,0 +1,14 @@
+{
+  "projectId": "6a00c236-e5fa-4b73-9e2a-b191bce3f714",
+  "shape": "package",
+  "pkg": "@faithfulwitness/design-system",
+  "globalName": "FaithfulWitnessDS",
+  "buildCmd": "npm run build",
+  "srcDir": "src",
+  "cssEntry": "src/styles.css",
+  "runtimeFontPrefixes": ["Libre Baskerville", "Plus Jakarta Sans"],
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "StepIndicator": { "cardMode": "column" }
+  }
+}
